@@ -21,6 +21,10 @@ public enum CacheType {
 	/**
 	 * ehcache缓存
 	 */
-	EHCACHE
+	EHCACHE,
+	/**
+	 * J2CACHE缓存
+	 */
+	J2CACHE
 	
 }
