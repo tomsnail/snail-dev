@@ -14,9 +14,9 @@
  	<bean id="producer" class="com.aliyun.openservices.ons.api.bean.ProducerBean" init-method="start" destroy-method="shutdown">
         <property name="properties" > <!--生产者配置信息-->
             <props>
-                <prop key="ProducerId">PID_90aae0aa-451a-11e7-97e4-90b11c2f0682</prop> <!--请替换XXX-->
-                <prop key="AccessKey">LTAIkAtLfTVXEdcj</prop>
-                <prop key="SecretKey">oSTThzZiwR58XwNDoG3awbSW33OF7p</prop>
+                <prop key="ProducerId"></prop> <!--请替换XXX-->
+                <prop key="AccessKey"></prop>
+                <prop key="SecretKey"></prop>
             </props>
         </property>
     </bean>
@@ -30,9 +30,9 @@
     <bean id="consumer" class="com.aliyun.openservices.ons.api.bean.ConsumerBean" init-method="start" destroy-method="shutdown">
         <property name="properties" > <!--消费者配置信息-->
             <props>
-                <prop key="ConsumerId">CID_90aae0aa-451a-11e7-97e4-90b11c2f0682</prop> <!--请替换XXX-->
-                <prop key="AccessKey">LTAIkAtLfTVXEdcj</prop>
-                <prop key="SecretKey">oSTThzZiwR58XwNDoG3awbSW33OF7p</prop>
+                <prop key="ConsumerId"></prop> <!--请替换XXX-->
+                <prop key="AccessKey"></prop>
+                <prop key="SecretKey"></prop>
                 <!--将消费者线程数固定为50个
                 <prop key="ConsumeThreadNums">50</prop>
                 -->
