@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<services>
+	<service>
+		<name>pilotservice1</name>
+		<alias>pilotservice1_0</alias>
+		<node>192.168.1.2</node>
+		<startFile>/opt/yangsong/pilot/test/node1/pilotservice1/startup.sh</startFile>
+		<stopFile>/opt/yangsong/pilot/test/node1/pilotservice1/shutdown.sh</stopFile>
+		<command>1</command>
+	</service>
+	<service>
+		<name>pilotservice2</name>
+		<alias>pilotservice2_0</alias>
+		<node>192.168.1.2</node>
+		<startFile>/opt/yangsong/pilot/test/node1/pilotservice2/startup.sh</startFile>
+		<stopFile>/opt/yangsong/pilot/test/node1/pilotservice2/shutdown.sh</stopFile>
+		<command>1</command>
+	</service>
+	<service>
+		<name>pilotservice2</name>
+		<alias>pilotservice2_2</alias>
+		<node>192.168.1.3</node>
+		<startFile>/opt/yangsong/pilot/test/node2/pilotservice2/startup.sh</startFile>
+		<stopFile>/opt/yangsong/pilot/test/node2/pilotservice2/shutdown.sh</stopFile>
+		<command>1</command>
+	</service>
+	<service>
+		<name>pilotservice1</name>
+		<alias>pilotservice1_1</alias>
+		<node>192.168.1.3</node>
+		<startFile>/opt/yangsong/pilot/test/node2/pilotservice1/startup.sh</startFile>
+		<stopFile>/opt/yangsong/pilot/test/node2/pilotservice1/shutdown.sh</stopFile>
+		<command>1</command>
+	</service>
+</services>

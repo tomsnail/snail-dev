@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task" xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd"
+	default-lazy-init="true">
+
+	<bean id="ureport.htmlPreviewServletAction" class="cn.tomsnail.ureport.servlet.HtmlPreviewServletAction">
+		<property name="exportManager" ref="ureport.exportManager"></property>
+		<property name="reportBuilder" ref="ureport.reportBuilder"></property>
+		<property name="reportRender" ref="ureport.reportRender"></property>
+	</bean>
+	
+	
+	<bean id="ureport.exportWordServletAction" class="cn.tomsnail.ureport.servlet.ExportWordServletAction">
+		<property name="exportManager" ref="ureport.exportManager"></property>
+		<property name="reportBuilder" ref="ureport.reportBuilder"></property>
+	</bean>
+	
+	<bean id="ureport.exportPdfServletAction" class="cn.tomsnail.ureport.servlet.ExportPdfServletAction">
+		<property name="exportManager" ref="ureport.exportManager"></property>
+		<property name="reportBuilder" ref="ureport.reportBuilder"></property>
+		<property name="reportRender" ref="ureport.reportRender"></property>
+	</bean>
+	
+	<bean id="ureport.exportExcelServletAction" class="cn.tomsnail.ureport.servlet.ExportExcelServletAction">
+		<property name="exportManager" ref="ureport.exportManager"></property>
+		<property name="reportBuilder" ref="ureport.reportBuilder"></property>
+	</bean>
+	
+	<bean id="ureport.exportExcel97ServletAction" class="cn.tomsnail.ureport.servlet.ExportExcel97ServletAction">
+		<property name="exportManager" ref="ureport.exportManager"></property>
+		<property name="reportBuilder" ref="ureport.reportBuilder"></property>
+	</bean>
+	
+	<bean id="ureport.chartServletAction" class="cn.tomsnail.ureport.servlet.ChartServletAction"></bean>
+	
+	<bean id="maxFunction" class="cn.tomsnail.ureport.fun.MaxFunction"></bean>
+	
+	
+	
+</beans>

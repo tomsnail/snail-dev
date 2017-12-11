@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zkjd.ehua.system.dict.dao.DictAreaInfoDao">
+    
+	<sql id="dictAreaInfoColumns">
+		a.id AS "id",
+		a.area_name AS "areaName",
+		a.parent_id AS "parent.id",
+		a.parent_ids AS "parentIds",
+		a.area_sort AS "areaSort",
+		a.area_deep AS "areaDeep",
+		a.dept_code AS "deptCode",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.del_flag AS "delFlag",
+		a.remarks AS "remarks"
+	</sql>
+	
+	<sql id="dictAreaInfoJoins">
+	</sql>
+    
+	<select id="get" resultType="com.zkjd.ehua.system.dict.entity.DictAreaInfo">
+		SELECT 
+			<include refid="dictAreaInfoColumns"/>
+		FROM dict_area_info a
+		<include refid="dictAreaInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="com.zkjd.ehua.system.dict.entity.DictAreaInfo">
+		SELECT 
+			<include refid="dictAreaInfoColumns"/>
+		FROM dict_area_info a
+		<include refid="dictAreaInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="areaName != null and areaName != ''">
+				AND a.area_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{areaName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{areaName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{areaName},'%')</if>
+			</if>
+			<if test="parent != null and parent.id != null and parent.id != ''">
+				AND a.parent_id = #{parent.id}
+			</if>
+			<if test="parentIds != null and parentIds != ''">
+				AND a.parent_ids LIKE 
+					<if test="dbName == 'oracle'">'%'||#{parentIds}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{parentIds}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{parentIds},'%')</if>
+			</if>
+			<if test="deptCode != null and deptCode != ''">
+				AND a.dept_code LIKE 
+					<if test="dbName == 'oracle'">'%'||#{deptCode}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{deptCode}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{deptCode},'%')</if>
+			</if>
+		</where>
+	</select>
+	
+	<select id="findAllList" resultType="com.zkjd.ehua.system.dict.entity.DictAreaInfo">
+		SELECT 
+			<include refid="dictAreaInfoColumns"/>
+		FROM dict_area_info a
+		<include refid="dictAreaInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+	</select>
+	
+	<select id="findByParentIdsLike" resultType="com.zkjd.ehua.system.dict.entity.DictAreaInfo">
+		SELECT
+			a.id,
+			a.parent_id AS "parent.id",
+			a.parent_ids
+		FROM dict_area_info a
+		<include refid="dictAreaInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.parent_ids LIKE #{parentIds}
+		</where>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO dict_area_info(
+			id,
+			area_name,
+			parent_id,
+			parent_ids,
+			area_sort,
+			area_deep,
+			dept_code,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			del_flag,
+			remarks
+		) VALUES (
+			#{id},
+			#{areaName},
+			#{parent.id},
+			#{parentIds},
+			#{areaSort},
+			#{areaDeep},
+			#{deptCode},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{delFlag},
+			#{remarks}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE dict_area_info SET 	
+			area_name = #{areaName},
+			parent_id = #{parent.id},
+			parent_ids = #{parentIds},
+			area_sort = #{areaSort},
+			area_deep = #{areaDeep},
+			dept_code = #{deptCode},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateParentIds">
+		UPDATE dict_area_info SET 
+			parent_id = #{parent.id}, 
+			parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE dict_area_info SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id} OR parent_ids LIKE 
+					<if test="dbName == 'oracle'">'%,'||#{id}||',%'</if>
+					<if test="dbName == 'mssql'">'%,'+#{id}+',%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%,', #{id}, ',%')</if>
+	</update>
+	
+</mapper>

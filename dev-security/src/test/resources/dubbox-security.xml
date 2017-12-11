@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/jdbc
+    http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+   	   	
+   	   	<!-- 需要依据项目实现 -->
+   	   	<bean id="keyStore" class="cn.tomsnail.security.core.authentication.RedisKeyStore"></bean>
+   	   	
+   	   	<!-- 需要依据项目实现 -->
+   	   	<bean id="keyCreator" class="cn.tomsnail.security.core.authentication.request.DefaultTokenKeyCreator"></bean>
+   	   	
+   	   	<bean id="dubboxAuthenticationService" class="cn.tomsnail.security.core.authentication.DefaultAuthenticationService">
+   	   		<property name="keyStore" ref="keyStore"></property>
+   	   		<property name="keyCreator" ref="keyCreator"></property>
+   	   	</bean>
+   	   	
+   	   	<!-- 需要依据项目实现 -->
+   	   	<bean id="defaultCacheAuthService" class="cn.tomsnail.security.core.authorization.DefaultRedisCacheDaoImpl">
+   	   	</bean>
+   	   	
+   	   	<!-- 需要依据项目实现 -->
+   	   	<bean id="defaultAuthDaoImpl" class="cn.tomsnail.security.core.authorization.DefaultAuthDaoImpl">
+   	   		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+   	   	</bean>
+   	   	
+   	   	
+   	   	<!-- 需要依据项目实现 -->
+   	   	<bean id="defaultDatabaseAuthService" class="cn.tomsnail.security.core.authorization.DefaultDatabaseAuthService">
+   	   		<property name="authDao" ref="defaultAuthDaoImpl"></property>
+   	   		<!-- <property name="cacheDao" ref="defaultCacheAuthService"></property> -->
+   	   	</bean>
+   	   	
+   	   	<bean id="dubboxAuthorizationService" class="cn.tomsnail.security.core.authorization.DefaultAuthorizationService">
+   	   		<property name="authorizationServices">
+   	   			<list>
+   	   				<ref bean="defaultDatabaseAuthService"/>
+   	   			</list>
+   	   		</property>
+   	   </bean>
+   	   	
+   	   	<!-- 需要依据项目实现 -->
+   	   	<bean id="dubboxParamAdapter" class="cn.tomsnail.security.core.filter.dubbox.DefaultDubboxParamAdapter">
+   	   </bean>
+   	   	
+   	   	<bean id="urlFilter" class="cn.tomsnail.security.core.url.DefaultListadUrlFilter">
+   	   		<property name="urlFilters">
+   	   			<list>
+   	   				<bean class="cn.tomsnail.security.core.url.LocalUrlFilter"></bean>
+   	   			</list>
+   	   		</property>
+   	   	</bean>
+   	   	
+   	   <bean id="SecurityFilter" class="cn.tomsnail.security.core.filter.DefaultSecurityBasicFilter">
+   	   		<property name="authenticationService" ref="dubboxAuthenticationService"></property>
+   	   		<property name="authorizationService" ref="dubboxAuthorizationService"></property>
+   	   		<property name="paramAdapter" ref="dubboxParamAdapter"></property>
+   	   		<property name="urlFilter" ref="urlFilter"></property>
+   	   </bean>
+   	   
+</beans>

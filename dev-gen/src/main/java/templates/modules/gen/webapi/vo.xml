@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>vo</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/vo/${subModuleName}</filePath>
+	<fileName>TestVo.java</fileName>
+	<content><![CDATA[
+/**
+ * Copyright &copy; 2012-2016
+ */
+package ${packageName}.${moduleName}.vo<#if subModuleName != "">.${subModuleName}</#if>;
+
+import cn.tomsnail.obj.base.BaseVo;
+
+import com.tomsnail.test.model.TestModel;
+
+import cn.tomsnail.framwork.validator.RuleType;
+import cn.tomsnail.framwork.validator.annotation.BeanValidator;
+import cn.tomsnail.framwork.validator.annotation.FieldValidator;
+import cn.tomsnail.framwork.validator.annotation.ValidType;
+
+/**
+ * ${functionName} model
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+@BeanValidator(isAllValidator=true)
+public class TestVo  extends BaseVo<TestModel> {
+
+		@FieldValidator(onlyToBean=true,mapperName="",validTypes={ValidType.UPDATE,ValidType.DELETE})
+		private String id;		// 
+		
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
+
+}]]>
+	</content>
+</template>

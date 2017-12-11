@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zkjd.ehua.system.dict.dao.ExpressCompanyDao">
+    
+	<sql id="expressCompanyColumns">
+		a.id AS "id",
+		a.co_name AS "coName",
+		a.status AS "status",
+		a.num AS "num",
+		a.inl AS "inl",
+		a.sort_no AS "sortNo",
+		a.co_website AS "coWebsite",
+		a.icon_addr AS "iconAddr",
+		a.remarks AS "remarks",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="expressCompanyJoins">
+	</sql>
+    
+	<select id="get" resultType="com.zkjd.ehua.system.dict.entity.ExpressCompany">
+		SELECT 
+			<include refid="expressCompanyColumns"/>
+		FROM express_company a
+		<include refid="expressCompanyJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="com.zkjd.ehua.system.dict.entity.ExpressCompany">
+		SELECT 
+			<include refid="expressCompanyColumns"/>
+		FROM express_company a
+		<include refid="expressCompanyJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="coName != null and coName != ''">
+				AND a.co_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{coName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{coName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{coName},'%')</if>
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="num != null and num != ''">
+				AND a.num LIKE 
+					<if test="dbName == 'oracle'">'%'||#{num}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{num}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{num},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="com.zkjd.ehua.system.dict.entity.ExpressCompany">
+		SELECT 
+			<include refid="expressCompanyColumns"/>
+		FROM express_company a
+		<include refid="expressCompanyJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO express_company(
+			id,
+			co_name,
+			status,
+			num,
+			inl,
+			sort_no,
+			co_website,
+			icon_addr,
+			remarks,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			del_flag
+		) VALUES (
+			#{id},
+			#{coName},
+			#{status},
+			#{num},
+			#{inl},
+			#{sortNo},
+			#{coWebsite},
+			#{iconAddr},
+			#{remarks},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE express_company SET 	
+			co_name = #{coName},
+			status = #{status},
+			num = #{num},
+			inl = #{inl},
+			sort_no = #{sortNo},
+			co_website = #{coWebsite},
+			icon_addr = #{iconAddr},
+			remarks = #{remarks},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE express_company SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

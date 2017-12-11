@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>conf-dataSource</name>
+	<filePath>src/test/resources</filePath>
+	<fileName>conf-dataSource.properties</fileName>
+	<content><![CDATA[
+
+p.db0.jdbc.driver=${"$"}{p.db.jdbc.driver}
+p.db0.jdbc.url=${"$"}{p.db.jdbc.url}
+p.db0.jdbc.username=${"$"}{p.db.jdbc.username}
+p.db0.jdbc.password=${"$"}{p.db.jdbc.password}
+p.db0.ds.query=${"$"}{p.db.ds.query}
+p.db0.ds.initialSize=${"$"}{p.db.ds.initialSize}
+p.db0.ds.minIdle=${"$"}{p.db.ds.minIdle}
+p.db0.ds.maxActive=${"$"}{p.db.ds.maxActive}
+p.db0.ds.maxWait=${"$"}{p.db.ds.maxWait}
+p.db0.ds.timeBetweenEvictionRunsMillis=${"$"}{p.db.ds.timeBetweenEvictionRunsMillis}
+p.db0.ds.minEvictableIdleTimeMillis=${"$"}{p.db.ds.minEvictableIdleTimeMillis}
+
+
+]]>
+	</content>
+</template>

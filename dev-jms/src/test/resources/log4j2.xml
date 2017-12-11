@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<configuration status="DEBUG">  
+    <appenders>  
+        <Console name="consolePrint" target="SYSTEM_OUT">  
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />  
+        </Console>
+        <File name="File" fileName="logs/app.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </File>
+    </appenders>  
+    <loggers>  
+        <root level="info">  
+            <appender-ref ref="consolePrint" /> 
+            <appender-ref ref="File" /> 
+        </root>  
+    </loggers>  
+</configuration>

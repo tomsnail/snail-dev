@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tomsnail.objsql.db.mybatis.common.dao.CommonMapper" >
+	
+	<insert id="saveData" parameterType="java.util.HashMap">
+	
+		${sql}
+	
+	</insert>
+	
+	<delete id="deleteData" parameterType="java.util.HashMap">
+	
+		${sql}
+	
+	</delete>
+	
+	<update id="updateData" parameterType="java.util.HashMap">
+	
+		${sql}
+	
+	</update>
+	
+	<select id="searchData" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	
+		${sql}
+	
+	</select>
+	
+</mapper>

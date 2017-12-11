@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="${keywords}" />
+<title>${title}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<link rel="shortcut icon" href="https://pic.ehua.com.cn/logo.ico" />
+<link href="${domainUrl}/css/base.css" rel="stylesheet">
+<link href="${domainUrl}/css/bootstrap.css" rel="stylesheet">
+<link href="${domainUrl}/css/index.css" rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="${domainUrl}/css/jquery.dataTables.min.css">
+<style>
+.kf {
+	position: fixed;
+	left: 50%;
+	top: 624px;
+	margin-left: 605px;
+	width: 50px;
+	z-index: 10;
+	!
+	important;
+}
+
+.kf li {
+	position: relative;
+	float: right;
+	width: 48px;
+	height: 48px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	background: #fff;
+	cursor: pointer;
+	!
+	important;
+}
+
+.kf li .other {
+	position: absolute;
+	top: -1px;
+	right: 0;
+	margin-right: 49px;
+	height: 48px;
+	border: 1px solid #ddd;
+	line-height: 48px;
+	color: #089a2b;
+	font-size: 14px;
+	cursor: default;
+}
+
+.kf li .on {
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 7px 0;
+	width: 48px;
+	height: 48px;
+	background: #089a2b;
+	font-size: 14px;
+	color: #fff;
+	line-height: 17px;
+	text-align: center;
+}
+
+.kf li.one {
+	background: #fff url(${domainUrl}/images/index/kf.png) no-repeat 10px
+		-150px;
+}
+
+.kf li.two {
+	background: #fff url(${domainUrl}/images/index/kf.png) no-repeat 11px
+		-200px;
+}
+
+.kf li.three {
+	background: #fff url(${domainUrl}/images/index/kf.png) no-repeat 15px
+		-250px;
+}
+
+.kf li.four {
+	border-bottom: 1px solid #ddd;
+	background: #fff url(${domainUrl}/images/index/kf.png) no-repeat 13px
+		-300px;
+}
+
+.kf li.one .other {
+	padding-left: 34px;
+	width: 78px;
+	background: #fff url(${domainUrl}/images/index/kf.png) no-repeat 10px 0;
+}
+
+.kf li.two .other {
+	padding: 0 10px 0 30px;
+	background: #fff url(${domainUrl}/images/index/kf.png) no-repeat 10px
+		-50px;
+}
+
+.kf li.two .other a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #089a2b;
+}
+
+.kf li.two .other a:hover {
+	color: #ff7300;
+}
+
+.kf li.three .other {
+	padding-left: 39px;
+	width: 123px;
+	background: #fff url(${domainUrl}/images/index/kf.png) no-repeat 10px
+		-100px;
+}
+</style>
+
+<style type="text/css">
+body {
+	font-family: "Microsoft YaHei", "微软雅黑", Tahoma, Geneva, sans-serif;
+	color: #2b2b2b;
+}
+
+.container {
+	padding-left: 0px;
+}
+
+.aritcle_detail {
+	border: 1px solid #e8e8e8;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+.aritcle_detail_title {
+	padding: 10px 50px 0 50px;
+	text-align: center;
+}
+
+.hrd {
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.aritcle_detail_date {
+	font-size: 12px;
+	color: #9d9d9d;
+	padding-top: 10px;
+}
+
+h2 {
+	color: #d12610;
+}
+
+#aritcle_detail_content {
+	padding: 50px;
+}
+
+.aritcle_detail_footer {
+	margin-top: 10px;
+	line-height: 50px;
+	height: 50px;
+	border: 1px solid #e8e8e8;
+	font-size: 14px;
+}
+
+.aritcle_detail_footer_left {
+	background-color: rgba(255, 255, 255, 0.9);
+	float: left;
+	height: 50px;
+	width: 50%;
+}
+
+.aritcle_detail_footer_right {
+	background-color: rgba(255, 255, 255, 0.9);
+	float: right;
+	height: 50px;
+	width: 50%;
+	text-align: right;
+}
+
+.aritcle_detail_footer_left_right {
+	background-color: #fff;
+	height: 50px;
+	width: 1px;
+	float: right;
+}
+
+.aritcle_detail_footer_left_content {
+	padding-left: 30px;
+	float: left;
+}
+
+.aritcle_detail_footer_left_content a {
+	text-decoration: none;
+	color: #2b2b2b;
+}
+
+.aritcle_detail_footer_left_content a:hover {
+	color: #d12610;
+}
+
+.aritcle_detail_footer_right_content {
+	padding-right: 30px;
+}
+
+.aritcle_detail_footer_right_content a {
+	text-decoration: none;
+	color: #2b2b2b;
+}
+
+.aritcle_detail_footer_right_content a:hover {
+	color: #d12610;
+}
+</style>
+
+<style type="text/css">
+.aritcle_menu {
+	padding: 20px 10px 10px 10px;
+}
+
+.indexLink {
+	color: #000;
+	text-decoration: none;
+}
+
+.indexLink:hover {
+	text-decoration: none;
+	color: #d45e07;
+}
+
+.aritcle_menu_title {
+	color: #6B6B6B;
+}
+</style>
+</head>
+<body class="main-background">
+	 <header id="total_header">
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                        <ul class="header-left clearfix" id="headerLeftContext">
+                            <li class="kefu"><a href="${domainUrl}/user/login.html" target="_blank" rel="nofollow">请登录</a>
+                            </li>
+                            <li class="kefu"><a href="${domainUrl}/user/register.html" target="_blank"
+                                                rel="nofollow">免费注册</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-xs-6 clearfix">
+                        <ul class="header-right pull-right">
+                            <li class="kefu"><a href="${domainUrl}/user/purchaseOrder.html">我的采购</a></li>
+                            <li class="kefu"><a href="${domainUrl}/user/myQuotation.html">我的供应</a></li>
+                            <li class="kefu"><a href="${domainUrl}/user/groupsOrder.html">团购订单</a></li>
+                            <li class="kefu"><a href="${domainUrl}/user/favorite.html">我的关注</a></li>
+                            <li class="kefu"><a href="${domainUrl}/user/message.html">我的消息</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-content" id="logo_div">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                        <div class="row " style="margin-top: 22px">
+                            <div class="col-md-5 col-xs-5"><a href="${domainUrl}"><img class="logo"
+                                                                                           src="${domainUrl}/images/index/logo.png"
+                                                                                           alt="易化网logo" height="84"></a></div>
+                            <div class="col-md-7 col-xs-7"><img class="logo" src="${domainUrl}/images/index/mascot.png"
+                                                                alt="易化网logo" height="84" style="float:left"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                        <div class="search">
+                            <div class="sear_title"><span class="on" id="zxh">找现货</span> <span id="wxb">物性表</span></div>
+                            <div class="sear_cont">
+                                <div><input style="border:none" class="sear_inp" type="text" name="keyword"
+                                            placeholder="请输入品种/牌号/厂家/公司进行搜索"> <input type="text" style="display:none"> <input
+                                        class="sear_sub blue_button" type="button" value="找一找" onclick="findurl()"></div>
+                            </div>
+                            <div class="search_key" id="search_1"><span>热门搜索：</span></div>
+                            <div class="search_key" id="search_2" style="display:none"><span>热门搜索：</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="menu_nav" class="menu_border">
+        <div class="container" style="margin-top: 20px">
+            <div class="row">
+                <div class="col-md-12  col-xs-12">
+                    <div class="clearfix">
+                        <div class="nav-con">
+                            <ul class="clearfix" id="IndexMenu"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="kf">
+        <ul>
+            <li class="two">
+                <div class="on" style="display: none;">在线<br>客服</div>
+                <div class="other" style="display: none;"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1749075354&amp;site=qq&amp;menu=yes">1749075354</a></div>
+            </li>
+            <li class="three">
+                <div class="on" style="display: none;">客服<br>热线</div>
+                <div class="other" style="display: none;">4000050300</div>
+            </li>
+            <li class="one">
+                <div class="on" style="display: none;">服务<br>时间</div>
+                <div class="other" style="display: none;width: 126px">9:00-17:30</div>
+            </li>
+            <li class="four" id="up_top">
+                <div class="on" style="display: none;">返回<br>顶部</div>
+            </li>
+        </ul>
+    </div>
+	<div class="container">
+		<div class="aritcle_menu">
+			<!--href="markerCentet.html"-->
+			<span><a href="javascript:" class="indexLink" id="marketType">
+			</a></span><span> > </span> <span class="aritcle_menu_title"> </span>
+		</div>
+		<div id="containter_body">
+			<div class="container">
+				<div class="aritcle_detail">
+					<div class="aritcle_detail_title">
+						<h2 id="aritcle_title">${title}</h2>
+						<div class="hrd"></div>
+						<div class="aritcle_detail_date">
+							<span>时间：</span><span id="dateTime">${dataTime}</span> <span>
+								&nbsp;&nbsp;&nbsp;&nbsp;作者：</span><span class="author">${author}</span><span>
+								&nbsp;&nbsp;&nbsp;&nbsp;来源：${source}</span><span class="soure"></span>
+						</div>
+					</div>
+					<div id="aritcle_detail_content">${context}</div>
+				</div>
+				<div class="aritcle_detail_footer">
+					<div class="aritcle_detail_footer_left">
+						<div class="aritcle_detail_footer_left_content">
+							上一篇：<a href="#" id="upPosts">没有了</a>
+						</div>
+						<div class="aritcle_detail_footer_left_right"></div>
+					</div>
+					<div class="aritcle_detail_footer_right">
+						<div class="aritcle_detail_footer_right_content">
+							下一篇：<a href="#" id="nextPosts">没有了</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+        <div id="footer">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer">
+                        <div class="footer_d1"><img src="${domainUrl}/images/footer/downloads.png">
+                            <div class="footer_d1_green">海量客户资源</div>
+                            <div class="footer_d1_info">连通上下游</div>
+                        </div>
+                        <div class="footer_d1"><img src="${domainUrl}/images/footer/hqjy.png">
+                            <div class="footer_d1_green">行情、交易、物流</div>
+                            <div class="footer_d1_info">一站式服务</div>
+                        </div>
+                        <div class="footer_d1"><img src="${domainUrl}/images/footer/jiaoyiyuan.png">
+                            <div class="footer_d1_green">资深交易员</div>
+                            <div class="footer_d1_info">免费一对一服务</div>
+                        </div>
+                        <div class="footer_d1"><img src="${domainUrl}/images/footer/IT.png">
+                            <div class="footer_d1_green">高效IT系统</div>
+                            <div class="footer_d1_info">供求精准匹配</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer_2">
+                        <div class="footer_f1"><p><h4>我要买</h4></p><p><a
+                                href="${domainUrl}/helpSystem/helpCenter.html?typeName=entrustBuy">• 如何委托交易</a></p>
+                            <p><a href="${domainUrl}/helpSystem/helpCenter.html?typeName=myselfBuy">• 如何自己找货</a></p>
+                            <p><a href="${domainUrl}/helpSystem/helpCenter.html?typeName=myselfBuy">• 如何查看采购单状态</a></p></div>
+                        <div class="footer_f2"><p><h4>我要卖</h4></p><p><a
+                                href="${domainUrl}/helpSystem/helpCenter.html?typeName=moreQuotation">• 如何发布报价单</a></p>
+                            <p><a href="${domainUrl}/helpSystem/helpCenter.html?typeName=oneQuotation">• 如何单条发布报价</a></p>
+                            <p><a href="${domainUrl}/helpSystem/helpCenter.html?typeName=seePurchase">• 如何报价采购信息</a></p></div>
+                        <div class="footer_f3"><p><h4>常见问题</h4></p><p><a
+                                href="${domainUrl}/helpSystem/helpCenter.html?typeName=registerFlow">• 注册流程</a></p>
+                            <p><a href="${domainUrl}/helpSystem/helpCenter.html?typeName=forgetPwd">• 无法登陆/忘记密码</a></p>
+                            <p><a href="${domainUrl}/helpSystem/helpCenter.html?typeName=updateAccount">• 修改账户信息</a></p></div>
+                        <div class="footer_f4"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer_3">
+                        <div class="footer_middle"> 关于我们 | 交易规则 | 法律声明 | 联系我们 | 友情链接 | 意见反馈</div>
+                        <div class="footer_middle"> Copyright：2017 | 经营许可证：京ICP备14009807号-3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" charset="utf8" src="${domainUrl}/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/js/jqthumb.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/js/contant.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/js/jquery.vticker-min.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/plugin/waterwheelCarousel/jquery.waterwheelCarousel.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/js/html5shiv.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/js/respond.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/js/bootstrap.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/js/jquery.placeholder.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/js/jquery.cookie.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/plugin/validate/jquery.validate.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/plugin/validate/additional-methods.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/common/js/http.js"></script>
+	<script type="text/javascript" charset="utf8" src="${domainUrl}/common/js/url.js"></script>
+	<script>
+    $(function () {
+    	
+    	 	getIndexMenu();
+    	    //loadLoginInfo();
+    	    searchTab();
+    	    searchxh();
+    	    searchwxb();
+    	    setTimeout(chooseMenu,500);
+    	    $(".kf li").mouseover(function() {
+    	        $(this).children(".on").show();
+    	        $(this).children(".other").show();
+    	    }).mouseout(function() {
+    	        $(this).children(".on").hide();
+    	        $(this).children(".other").hide();
+    	    });
+    	    $("#up_top").click(function() {
+    	        $('body,html').animate({
+    	                    scrollTop: 0
+    	                },
+    	                600);
+    	    });
+    	
+        $("#marketType").text("${className}");
+        $("#marketType").click(function () {
+            window.location.href="https://www.ehua.com.cn/marketSystem/markerCentet.html?classification_id=${classification_id}";
+        })
+        $(".aritcle_menu_title").text("${title}");
+        $("#listbox-one").mouseover(function(){
+            $("#lblist1").css("display","block");
+        });
+        $("#listbox-one").mouseout(function(){
+            $("#lblist1").css("display","none");
+        });
+        $("#listbox-two").mouseover(function(){
+            $("#lblist2").css("display","block");
+        });
+        $("#listbox-two").mouseout(function(){
+            $("#lblist2").css("display","none");
+        });
+        $("#listbox-three").mouseover(function(){
+            $("#lblist3").css("display","block");
+        });
+        $("#listbox-three").mouseout(function(){
+            $("#lblist3").css("display","none");
+        });
+		
+        var data = '{"body":{"static_name":"'
+			+ '${staticName}'
+			+ '"},"command":"","fingerprint":"","sequenceID":"","version":""}';
+
+		$.ajax({
+				type : "POST",
+				url : "${apiUrl}/api/cms/getMarketRelation",
+				contentType : "application/json", //发送信息至服务器时内容编码类型。
+				dataType : "json", // 预期服务器返回的数据类型。如果不指定，jQuery 将自动根据 HTTP 包 MIME 信息来智能判断，比如XML MIME类型就被识别为XML。
+				data : data,
+				success : function(data) {
+					var result;
+					if (typeof data == 'object') {
+						result = data;
+					} else {
+						result = eval(data);
+					}
+					if (result.status == '0') {
+						var lstr = "";
+						var pstr = "";
+						if(result.body.latter_title=="没有了"){
+							
+						}else{
+							lstr = "&title="+escape(result.body.latter_title)+"&typeName="+escape("${className}");
+							$('#upPosts').attr('href',result.body.latter_link);
+
+						}
+						if(result.body.previous_title=="没有了"){
+							
+						}else{
+							pstr = "&title="+escape(result.body.previous_title)+"&typeName="+escape("${className}");
+							$('#nextPosts').attr('href',result.body.previous_link);
+						}
+						
+						$('#upPosts').text(result.body.latter_title);
+						$('#nextPosts').text(result.body.previous_title);
+					}
+
+				}
+			});
+		$('input, textarea').placeholder();
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>unitest</name>
+	<filePath>src/test/java/${packageName}</filePath>
+	<fileName>${ClassName}Test.java</fileName>
+	<content><![CDATA[
+/**
+ * Copyright &copy; 2016-2017 
+ * Author : tomsnail.cn
+ */
+package ${packageName};
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import cn.tomsnail.unit.test.BaseTest;
+
+<#list imports as i>
+import ${i};
+</#list>
+
+/**
+ * ${ClassName} Test
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+public class ${ClassName}Test extends BaseTest {
+	
+	@Autowired
+	private ${ClassName} ${className};
+	
+	
+	<#list methods as m>
+	@Test
+	public void test${m.uname}(){
+		${className}.${m.name}(<#if  m.genParamters??>${ m.genParamters}</#if>);
+	}
+	</#list>
+	
+	
+	
+	
+}]]>
+	</content>
+</template>

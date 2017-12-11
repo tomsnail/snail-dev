@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zkjd.ehua.system.msgtemp.dao.MsgTemplateDao">
+    
+	<sql id="msgTemplateColumns">
+		a.id AS "id",
+		a.templ_name AS "templName",
+		a.templ_desc AS "templDesc",
+		a.templ_code AS "templCode",
+		a.templ_type AS "templType",
+		a.templ_context AS "templContext",
+		a.templ_send_type AS "templSendType",
+		a.is_use AS "isUse",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="msgTemplateJoins">
+	</sql>
+    
+	<select id="get" resultType="com.zkjd.ehua.system.msgtemp.entity.MsgTemplate">
+		SELECT 
+			<include refid="msgTemplateColumns"/>
+		FROM msg_template a
+		<include refid="msgTemplateJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="com.zkjd.ehua.system.msgtemp.entity.MsgTemplate">
+		SELECT 
+			<include refid="msgTemplateColumns"/>
+		FROM msg_template a
+		<include refid="msgTemplateJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="templName != null and templName != ''">
+				AND a.templ_name = #{templName}
+			</if>
+			<if test="templCode != null and templCode != ''">
+				AND a.templ_code = #{templCode}
+			</if>
+			<if test="templType != null and templType != ''">
+				AND a.templ_type = #{templType}
+			</if>
+			<if test="templSendType != null and templSendType != ''">
+				AND a.templ_send_type = #{templSendType}
+			</if>
+			<if test="isUse != null and isUse != ''">
+				AND a.is_use = #{isUse}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="com.zkjd.ehua.system.msgtemp.entity.MsgTemplate">
+		SELECT 
+			<include refid="msgTemplateColumns"/>
+		FROM msg_template a
+		<include refid="msgTemplateJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO msg_template(
+			id,
+			templ_name,
+			templ_desc,
+			templ_code,
+			templ_type,
+			templ_context,
+			templ_send_type,
+			is_use,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{templName},
+			#{templDesc},
+			#{templCode},
+			#{templType},
+			#{templContext},
+			#{templSendType},
+			#{isUse},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE msg_template SET 	
+			templ_name = #{templName},
+			templ_desc = #{templDesc},
+			templ_code = #{templCode},
+			templ_type = #{templType},
+			templ_context = #{templContext},
+			templ_send_type = #{templSendType},
+			is_use = #{isUse},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE msg_template SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

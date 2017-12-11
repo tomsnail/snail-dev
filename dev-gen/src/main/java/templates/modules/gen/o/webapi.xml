@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>owebapi</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/webapi/${subModuleName}</filePath>
+	<fileName>${ClassName}FacadeImpl.java</fileName>
+	<content><![CDATA[
+package ${packageName}.${moduleName}.webapi<#if subModuleName != "">.${subModuleName}</#if>;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.alibaba.dubbo.config.annotation.Service;
+
+import cn.tomsnail.dao.plugins.pagination.Page;
+import cn.tomsnail.framwork.http.CommonMessage;
+import cn.tomsnail.framwork.http.RequestData;
+import cn.tomsnail.framwork.http.ResultData;
+import cn.tomsnail.framwork.validator.ValidatorFactory;
+import cn.tomsnail.framwork.validator.exception.ParamValidatorException;
+import cn.tomsnail.framwork.validator.annotation.ValidType;
+import cn.tomsnail.http.register.annotation.HttpRestService;
+import cn.tomsnail.obj.base.BaseWebApi;
+import cn.tomsnail.log.annotation.LogLevel;
+import cn.tomsnail.log.annotation.LogPoint;
+import cn.tomsnail.log.annotation.LogTarget;
+
+import ${packageName}.${moduleName}.model<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+import ${packageName}.${moduleName}.model<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Vo;
+import ${packageName}.${moduleName}.service<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Service;
+
+/**
+ * ${functionName}webapi实现类
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+@Service(filter="tomsnail")
+@Path("${className}")
+public class ${ClassName}FacadeImpl extends BaseWebApi implements ${ClassName}Facade  {
+
+	@Autowired
+	private ${ClassName}Service ${className}Service;
+	
+	
+	@Override
+	@POST
+	@Path("get")
+	@HttpRestService(serviceName="get",group="${className}")
+	@Produces({"application/json; charset=UTF-8"})
+	@Consumes({"application/json; charset=UTF-8"})
+	@LogPoint(desc = "get", level = LogLevel.INFO, target = LogTarget.LOG)
+	public ResultData<Map<String,Object>> get(RequestData<Map<String, Object>> requestData,@Context HttpServletRequest request,@Context HttpServletResponse response){
+		ResultData<Map<String, Object>> resultData = new ResultData<Map<String, Object>>();
+		${ClassName}Vo ${className}Vo = null;
+		try {
+			${className}Vo = (${ClassName}Vo) ValidatorFactory.getBeanValidator().getValidBean(requestData.getBody(), ${ClassName}Vo.class);
+		} catch (ParamValidatorException e) {
+			resultData.setStatus(CommonMessage.PARAMETER_ERROR);
+			resultData.setMsg(e.getMessage());
+			resultData.setBody(new HashMap<String, Object>());
+			return resultData;
+		}
+		
+		${ClassName} ${className} = ${className}Service.get(${className}Vo.getModel(${ClassName}.class));
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("${className}", new ${ClassName}Vo().getMap(${className}));
+		resultData.setBody(resultMap);
+		return resultData;	
+	}
+	
+	@Override
+	@POST
+	@Path("list")
+	@HttpRestService(serviceName="list",group="${className}")
+	@Produces({"application/json; charset=UTF-8"})
+	@Consumes({"application/json; charset=UTF-8"})
+	@LogPoint(desc = "list", level = LogLevel.INFO, target = LogTarget.LOG)
+	public ResultData<Map<String,Object>> list(RequestData<Map<String, Object>> requestData,@Context HttpServletRequest request,@Context HttpServletResponse response){
+		ResultData<Map<String, Object>> resultData = new ResultData<Map<String, Object>>();
+		${ClassName}Vo ${className}Vo = null;
+		try {
+			${className}Vo = (${ClassName}Vo) ValidatorFactory.getBeanValidator().getValidBean(requestData.getBody(), ${ClassName}Vo.class);
+		} catch (ParamValidatorException e) {
+			resultData.setStatus(CommonMessage.PARAMETER_ERROR);
+			resultData.setMsg(e.getMessage());
+			resultData.setBody(new HashMap<String, Object>());
+			return resultData;
+		}
+		
+		List<${ClassName}> ${className}List = ${className}Service.list(${className}Vo.getModel(${ClassName}.class));
+		List<Map<String,Object>> resultMapList = new ArrayList<Map<String,Object>>();
+		for(${ClassName} _${className}:${className}List){
+			resultMapList.add(new ${ClassName}Vo().getMap(_${className}));
+		}
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("${className}List", resultMapList);
+		resultData.setBody(resultMap);
+		return resultData;		
+	}
+
+	@Override
+	@POST
+	@Path("page")
+	@HttpRestService(serviceName="page",group="${className}")
+	@Produces({"application/json; charset=UTF-8"})
+	@Consumes({"application/json; charset=UTF-8"})
+	@LogPoint(desc = "page", level = LogLevel.INFO, target = LogTarget.LOG)
+	public ResultData<Map<String,Object>> page(RequestData<Map<String, Object>> requestData,@Context HttpServletRequest request,@Context HttpServletResponse response){
+		ResultData<Map<String, Object>> resultData = new ResultData<Map<String, Object>>();
+		${ClassName}Vo ${className}Vo = null;
+		try {
+			${className}Vo = (${ClassName}Vo) ValidatorFactory.getBeanValidator().getValidBean(requestData.getBody(), ${ClassName}Vo.class);
+		} catch (ParamValidatorException e) {
+			resultData.setStatus(CommonMessage.PARAMETER_ERROR);
+			resultData.setMsg(e.getMessage());
+			resultData.setBody(new HashMap<String, Object>());
+			return resultData;
+		}
+		
+		
+		Map<String,Object> resultMap = new HashMap<>();
+		${ClassName} _${ClassName} = ${className}Vo.getModel(${ClassName}.class);
+		Page<${ClassName}> page = ${className}Service.page(_${ClassName},Integer.valueOf(_${ClassName}.getStart()),Integer.valueOf(_${ClassName}.getLimit()));
+		List<${ClassName}> ${className}List =  page.getList();
+		List<Map<String,Object>> resultMapList = new ArrayList<Map<String,Object>>();
+		for(${ClassName} _${className}:${className}List){
+			resultMapList.add(new ${ClassName}Vo().getMap(_${className}));
+		}
+		resultMap.put("${className}List", resultMapList);
+		resultMap.put("count", page.getCount());
+		resultMap.put("start", page.getPageNo());
+		resultMap.put("limit", page.getPageSize());
+		resultData.setBody(resultMap);
+		return resultData;			
+	}
+	
+	@Override
+	@POST
+	@Path("save")
+	@HttpRestService(serviceName="save",group="${className}")
+	@Produces({"application/json; charset=UTF-8"})
+	@Consumes({"application/json; charset=UTF-8"})
+	@LogPoint(desc = "save", level = LogLevel.INFO, target = LogTarget.LOG)
+	public ResultData<Map<String,Object>> save(RequestData<Map<String, Object>> requestData,@Context HttpServletRequest request,@Context HttpServletResponse response){
+		ResultData<Map<String, Object>> resultData = new ResultData<Map<String, Object>>();
+		${ClassName}Vo ${className}Vo = null;
+		try {
+			${className}Vo = (${ClassName}Vo) ValidatorFactory.getBeanValidator().getValidBean(requestData.getBody(), ${ClassName}Vo.class,ValidType.SAVE);
+		} catch (ParamValidatorException e) {
+			resultData.setStatus(CommonMessage.PARAMETER_ERROR);
+			resultData.setMsg(e.getMessage());
+			resultData.setBody(new HashMap<String, Object>());
+			return resultData;
+		}
+		
+		int result = ${className}Service.save(${className}Vo.getModel(${ClassName}.class));
+		resultData.setBody(new HashMap<String, Object>());
+		if(result==1){
+			
+		}else{
+			resultData.setStatus(CommonMessage.FAILED);
+		}
+		return resultData;			
+	}
+	
+	@Override
+	@POST
+	@Path("delete")
+	@HttpRestService(serviceName="delete",group="${className}")
+	@Produces({"application/json; charset=UTF-8"})
+	@Consumes({"application/json; charset=UTF-8"})
+	@LogPoint(desc = "delete", level = LogLevel.INFO, target = LogTarget.LOG)
+	public ResultData<Map<String,Object>> delete(RequestData<Map<String, Object>> requestData,@Context HttpServletRequest request,@Context HttpServletResponse response){
+		ResultData<Map<String, Object>> resultData = new ResultData<Map<String, Object>>();
+		${ClassName}Vo ${className}Vo = null;
+		try {
+			${className}Vo = (${ClassName}Vo) ValidatorFactory.getBeanValidator().getValidBean(requestData.getBody(), ${ClassName}Vo.class,ValidType.DELETE);
+		} catch (ParamValidatorException e) {
+			resultData.setStatus(CommonMessage.PARAMETER_ERROR);
+			resultData.setMsg(e.getMessage());
+			resultData.setBody(new HashMap<String, Object>());
+			return resultData;
+		}
+		
+		int result = ${className}Service.delete(${className}Vo.getModel(${ClassName}.class));
+		resultData.setBody(new HashMap<String, Object>());
+		if(result==1){
+			
+		}else{
+			resultData.setStatus(CommonMessage.FAILED);
+		}
+		return resultData;		
+	}
+	
+	@Override
+	@POST
+	@Path("update")
+	@HttpRestService(serviceName="update",group="${className}")
+	@Produces({"application/json; charset=UTF-8"})
+	@Consumes({"application/json; charset=UTF-8"})
+	@LogPoint(desc = "update", level = LogLevel.INFO, target = LogTarget.LOG)
+	public ResultData<Map<String,Object>> update(RequestData<Map<String, Object>> requestData,@Context HttpServletRequest request,@Context HttpServletResponse response){
+		ResultData<Map<String, Object>> resultData = new ResultData<Map<String, Object>>();
+		${ClassName}Vo ${className}Vo = null;
+		try {
+			${className}Vo = (${ClassName}Vo) ValidatorFactory.getBeanValidator().getValidBean(requestData.getBody(), ${ClassName}Vo.class,ValidType.UPDATE);
+		} catch (ParamValidatorException e) {
+			resultData.setStatus(CommonMessage.PARAMETER_ERROR);
+			resultData.setMsg(e.getMessage());
+			resultData.setBody(new HashMap<String, Object>());
+			return resultData;
+		}
+		
+		int result = ${className}Service.update(${className}Vo.getModel(${ClassName}.class));
+		resultData.setBody(new HashMap<String, Object>());
+		if(result==1){
+			
+		}else{
+			resultData.setStatus(CommonMessage.FAILED);
+		}
+		return resultData;		
+	}
+
+}]]>
+	</content>
+</template>

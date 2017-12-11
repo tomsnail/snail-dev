@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>报价单统计</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
+    <style type="text/css">
+        .filter{
+            margin-top:30px;
+        }
+        .selectDate{
+            display: none;
+        }
+        .statistic{
+            padding-top:30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row filter">
+        <form  class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-2" style="text-align: right"> 选择时间：</label>
+                <div class="col-sm-2">
+                    <select class="form-control" id="selectTime">
+                        <option>今天</option>
+                        <option>昨天</option>
+                        <option>本周</option>
+                        <option>上周</option>
+                        <option>本月</option>
+                        <option>上月</option>
+                        <option>自定义</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 selectDate" >
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <input type="text" id="beginDate" readonly="true" class="form-control text-left form_datetime" placeholder="请选择起始日期"/>
+                        </div>
+                       <div class="col-sm-1" style="text-align: center">
+                           <p class="form-control-static">至</p>
+                       </div>
+                        <div class="col-sm-5">
+                            <input type="text" id="endDate" readonly="true" class="form-control text-left form_datetime" placeholder="请选择结束日期"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 selectDate">
+                    <button type="button" class="btn btn-primary">查询</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row statistic">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8" id="pieChart" style="height: 500px;"></div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+
+    </div>
+    <div class="row statistic">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-11" >
+            <div id="pieTendency" style="height: 500px;"></div>
+        </div>
+        <div ></div>
+    </div>
+</div>
+<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/respond.js"></script>
+<script type="text/javascript" src="../js/quotation.js"> </script>
+<script src="../js/bootstrap-datetimepicker.min.js"></script>
+<script src="../js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../js/echarts.js"></script>
+</body>
+</html>

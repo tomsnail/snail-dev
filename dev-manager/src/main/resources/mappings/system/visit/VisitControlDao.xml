@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zkjd.ehua.system.visit.dao.VisitControlDao">
+    
+	<sql id="visitControlColumns">
+		a.id AS "id",
+		a.visit_ip AS "visitIp",
+		a.is_limit AS "isLimit",
+		a.limit_time AS "limitTime",
+		a.remarks AS "remarks",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="visitControlJoins">
+	</sql>
+    
+	<select id="get" resultType="com.zkjd.ehua.system.visit.entity.VisitControl">
+		SELECT 
+			<include refid="visitControlColumns"/>
+		FROM visit_control a
+		<include refid="visitControlJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="com.zkjd.ehua.system.visit.entity.VisitControl">
+		SELECT 
+			<include refid="visitControlColumns"/>
+		FROM visit_control a
+		<include refid="visitControlJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="visitIp != null and visitIp != ''">
+				AND a.visit_ip = #{visitIp}
+			</if>
+			<if test="isLimit != null and isLimit != ''">
+				AND a.is_limit = #{isLimit}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="com.zkjd.ehua.system.visit.entity.VisitControl">
+		SELECT 
+			<include refid="visitControlColumns"/>
+		FROM visit_control a
+		<include refid="visitControlJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO visit_control(
+			id,
+			visit_ip,
+			is_limit,
+			limit_time,
+			remarks,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			del_flag
+		) VALUES (
+			#{id},
+			#{visitIp},
+			#{isLimit},
+			#{limitTime},
+			#{remarks},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE visit_control SET 	
+			visit_ip = #{visitIp},
+			is_limit = #{isLimit},
+			limit_time = #{limitTime},
+			remarks = #{remarks},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE visit_control SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

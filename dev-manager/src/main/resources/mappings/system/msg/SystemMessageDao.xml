@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zkjd.ehua.system.msg.dao.SystemMessageDao">
+    
+	<sql id="systemMessageColumns">
+		a.id AS "id",
+		a.msg_title AS "msgTitle",
+		a.msg_type AS "msgType",
+		a.msg_content AS "msgContent",
+		a.msg_url AS "msgUrl",
+		a.send_person AS "sendPerson",
+		a.receive_person AS "receivePerson",
+		a.msg_date AS "msgDate",
+		a.status AS "status",
+		a.read_user AS "readUser",
+		a.del_user AS "delUser",
+		a.is_msg_multi AS "isMsgMulti",
+		a.msg_sys AS "msgSys",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="systemMessageJoins">
+	</sql>
+    
+	<select id="get" resultType="com.zkjd.ehua.system.msg.entity.SystemMessage">
+		SELECT 
+			<include refid="systemMessageColumns"/>
+		FROM system_message a
+		<include refid="systemMessageJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="com.zkjd.ehua.system.msg.entity.SystemMessage">
+		SELECT 
+			<include refid="systemMessageColumns"/>
+		FROM system_message a
+		<include refid="systemMessageJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="msgTitle != null and msgTitle != ''">
+				AND a.msg_title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{msgTitle}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{msgTitle}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{msgTitle},'%')</if>
+			</if>
+			<if test="msgType != null and msgType != ''">
+				AND a.msg_type = #{msgType}
+			</if>
+			<if test="msgContent != null and msgContent != ''">
+				AND a.msg_content LIKE 
+					<if test="dbName == 'oracle'">'%'||#{msgContent}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{msgContent}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{msgContent},'%')</if>
+			</if>
+			<if test="isMsgMulti != null and isMsgMulti != ''">
+				AND a.is_msg_multi = #{isMsgMulti}
+			</if>
+			<if test="msgSys != null and msgSys != ''">
+				AND a.msg_sys LIKE 
+					<if test="dbName == 'oracle'">'%'||#{msgSys}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{msgSys}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{msgSys},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="com.zkjd.ehua.system.msg.entity.SystemMessage">
+		SELECT 
+			<include refid="systemMessageColumns"/>
+		FROM system_message a
+		<include refid="systemMessageJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO system_message(
+			id,
+			msg_title,
+			msg_type,
+			msg_content,
+			msg_url,
+			send_person,
+			receive_person,
+			msg_date,
+			status,
+			read_user,
+			del_user,
+			is_msg_multi,
+			msg_sys,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{msgTitle},
+			#{msgType},
+			#{msgContent},
+			#{msgUrl},
+			#{sendPerson},
+			#{receivePerson},
+			#{msgDate},
+			#{status},
+			#{readUser},
+			#{delUser},
+			#{isMsgMulti},
+			#{msgSys},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE system_message SET 	
+			msg_title = #{msgTitle},
+			msg_type = #{msgType},
+			msg_content = #{msgContent},
+			msg_url = #{msgUrl},
+			send_person = #{sendPerson},
+			receive_person = #{receivePerson},
+			msg_date = #{msgDate},
+			status = #{status},
+			read_user = #{readUser},
+			del_user = #{delUser},
+			is_msg_multi = #{isMsgMulti},
+			msg_sys = #{msgSys},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE system_message SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

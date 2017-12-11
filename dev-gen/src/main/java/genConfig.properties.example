@@ -1,0 +1,30 @@
+gen.jdbc_driver=com.mysql.jdbc.Driver
+gen.jdbc_url=jdbc:mysql://192.168.169.159:3306/ehua?user=ehua&password=ehua123&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+gen.jdbc_username=ehua
+gen.jdbc_password=ehua123
+gen.tables=goods
+gen.objects=Goods
+gen.packageName=com.tomsnail
+gen.moduleName=test
+gen.functionVersion=0.0.1-SNAPSHOT
+gen.functionAuthor=yangsong
+gen.groupId=com.tomsnail
+gen.artifactId=gentest
+gen.partifactId=gen-test
+gen.pomversion=0.0.1-SNAPSHOT
+#jdbc mybatis
+gen.jdbctype=mybatis
+#all   \u5b8c\u6574\u7684facade/service/dao
+#fall  \u5b8c\u6574\u7684facade/service
+#dao   \u53ea\u6709dao
+#daov  \u53ea\u6709dao and vo
+#odaov  \u53ea\u6709dao and vo
+#service
+#webapi
+#oservice 
+#owebapi
+gen.name=oservice
+#exec:java -Dexec.mainClass="cn.tomsnail.objsql.gen.GenMain"
+
+gen.unittest.backageName=com.tomsnail.test.service
+#exec:java -Dexec.mainClass="cn.tomsnail.unit.test.UnitMain"

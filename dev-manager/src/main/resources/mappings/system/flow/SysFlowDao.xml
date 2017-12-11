@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zkjd.ehua.system.flow.dao.SysFlowDao">
+    
+	<sql id="sysFlowColumns">
+		a.id AS "id",
+		a.start_flow_id AS "startFlowId",
+		a.next_flow_ids AS "nextFlowIds",
+		a.flow_desc AS "flowDesc",
+		a.flow_name AS "flowName",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="sysFlowJoins">
+	</sql>
+    
+	<select id="get" resultType="com.zkjd.ehua.system.flow.entity.SysFlow">
+		SELECT 
+			<include refid="sysFlowColumns"/>
+		FROM sys_flow a
+		<include refid="sysFlowJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="getFlow" resultType="com.zkjd.ehua.system.flow.entity.SysFlow">
+		SELECT 
+			<include refid="sysFlowColumns"/>
+		FROM sys_flow a
+		<include refid="sysFlowJoins"/>
+		WHERE a.start_flow_id = #{startFlowId}
+	</select>
+	
+	<select id="findList" resultType="com.zkjd.ehua.system.flow.entity.SysFlow">
+		SELECT 
+			<include refid="sysFlowColumns"/>
+		FROM sys_flow a
+		<include refid="sysFlowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="startFlowId != null and startFlowId != ''">
+				AND a.start_flow_id = #{startFlowId}
+			</if>
+			<if test="flowName != null and flowName != ''">
+				AND a.flow_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{flowName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{flowName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{flowName},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="com.zkjd.ehua.system.flow.entity.SysFlow">
+		SELECT 
+			<include refid="sysFlowColumns"/>
+		FROM sys_flow a
+		<include refid="sysFlowJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_flow(
+			id,
+			start_flow_id,
+			next_flow_ids,
+			flow_desc,
+			flow_name,
+			update_by,
+			update_date,
+			create_by,
+			create_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{startFlowId},
+			#{nextFlowIds},
+			#{flowDesc},
+			#{flowName},
+			#{updateBy.id},
+			#{updateDate},
+			#{createBy.id},
+			#{createDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_flow SET 	
+			start_flow_id = #{startFlowId},
+			next_flow_ids = #{nextFlowIds},
+			flow_desc = #{flowDesc},
+			flow_name = #{flowName},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sys_flow SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

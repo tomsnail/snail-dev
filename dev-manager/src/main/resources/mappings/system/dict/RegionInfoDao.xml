@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zkjd.ehua.system.dict.dao.RegionInfoDao">
+    
+	<sql id="regionInfoColumns">
+		a.id AS "id",
+		a.region_name AS "regionName",
+		a.parent_id AS "parent.id",
+		a.name AS "name",
+		a.parent_ids AS "parentIds",
+		a.area_name AS "areaName",
+		a.region_depth AS "regionDepth",
+		a.post_num AS "postNum",
+		a.admin_num AS "adminNum",
+		a.sort_no AS "sortNo",
+		a.remarks AS "remarks",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="regionInfoJoins">
+	</sql>
+    
+	<select id="get" resultType="com.zkjd.ehua.system.dict.entity.RegionInfo">
+		SELECT 
+			<include refid="regionInfoColumns"/>
+		FROM region_info a
+		<include refid="regionInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="com.zkjd.ehua.system.dict.entity.RegionInfo">
+		SELECT 
+			<include refid="regionInfoColumns"/>
+		FROM region_info a
+		<include refid="regionInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="regionName != null and regionName != ''">
+				AND a.region_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{regionName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{regionName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{regionName},'%')</if>
+			</if>
+			<if test="parent != null and parent.id != null and parent.id != ''">
+				AND a.parent_id = #{parent.id}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="parentIds != null and parentIds != ''">
+				AND a.parent_ids LIKE 
+					<if test="dbName == 'oracle'">'%'||#{parentIds}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{parentIds}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{parentIds},'%')</if>
+			</if>
+			<if test="areaName != null and areaName != ''">
+				AND a.area_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{areaName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{areaName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{areaName},'%')</if>
+			</if>
+			<if test="postNum != null and postNum != ''">
+				AND a.post_num = #{postNum}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findAllList" resultType="com.zkjd.ehua.system.dict.entity.RegionInfo">
+		SELECT 
+			<include refid="regionInfoColumns"/>
+		FROM region_info a
+		<include refid="regionInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+	</select>
+	
+	<select id="findByParentIdsLike" resultType="com.zkjd.ehua.system.dict.entity.RegionInfo">
+		SELECT
+			a.id,
+			a.parent_id AS "parent.id",
+			a.parent_ids
+		FROM region_info a
+		<include refid="regionInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.parent_ids LIKE #{parentIds}
+		</where>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO region_info(
+			region_name,
+			parent_id,
+			name,
+			parent_ids,
+			area_name,
+			region_depth,
+			post_num,
+			admin_num,
+			sort_no,
+			remarks,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			del_flag
+		) VALUES (
+			#{regionName},
+			#{parent.id},
+			#{name},
+			#{parentIds},
+			#{areaName},
+			#{regionDepth},
+			#{postNum},
+			#{adminNum},
+			#{sortNo},
+			#{remarks},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE region_info SET 	
+			region_name = #{regionName},
+			parent_id = #{parent.id},
+			name = #{name},
+			parent_ids = #{parentIds},
+			area_name = #{areaName},
+			region_depth = #{regionDepth},
+			post_num = #{postNum},
+			admin_num = #{adminNum},
+			sort_no = #{sortNo},
+			remarks = #{remarks},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateParentIds">
+		UPDATE region_info SET 
+			parent_id = #{parent.id}, 
+			parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE region_info SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id} OR parent_ids LIKE 
+					<if test="dbName == 'oracle'">'%,'||#{id}||',%'</if>
+					<if test="dbName == 'mssql'">'%,'+#{id}+',%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%,', #{id}, ',%')</if>
+	</update>
+	
+</mapper>

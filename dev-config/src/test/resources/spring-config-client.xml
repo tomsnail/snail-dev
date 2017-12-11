@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:util="http://www.springframework.org/schema/util" 
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+  
+	<!-- spring 配置扫描 ${}-->
+	<context:component-scan base-package="cn.tomsnail.config.client.plugin"/>
+	<!-- 静态类配置加载注解扫描 注解ConfigListener -->
+	<context:component-scan base-package="cn.tomsnail.config.client.spring"/>
+	<!-- 静态类扫描  各项目自定义 -->
+	<context:component-scan base-package="cn.tomsnail.config.client.annotation"/>
+	
+</beans>
