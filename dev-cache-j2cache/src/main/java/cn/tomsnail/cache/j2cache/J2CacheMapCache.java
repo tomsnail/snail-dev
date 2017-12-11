@@ -46,7 +46,7 @@ public class J2CacheMapCache implements ICache,IInitCache,IDestoryCache{
 
 	@Override
 	public void set(String key, Object value, long expire) {
-		cache.set(DEFAULT_REGIN,key, value);
+		cache.set(DEFAULT_REGIN,key, value,(int)expire/1000);
 		
 	}
 
