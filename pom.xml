@@ -53,7 +53,7 @@
             			<tag>
                 			<name>methodauthor</name>
                 			<placement>a</placement>
-                			<head>ä½œè??</head>
+                			<head>ä½œï¿½??</head>
             			</tag>
             			<tag>
                 			<name>methodversion</name>
@@ -68,7 +68,7 @@
             			<tag>
                 			<name>status</name>
                 			<placement>a</placement>
-                			<head>çŠ????</head>
+                			<head>ï¿½????</head>
             			</tag>
             			<tag>
                 			<name>version</name>
@@ -274,8 +274,7 @@
     	<module>dev-authority</module>
     	<module>dev-ehcache</module>
     	<module>dev-log-cat</module>
-    <module>dev-rap</module>
-    <module>dev-j2cache</module>
-    <module>dev-cache-j2cache</module>
+    	<module>dev-rap</module>
+    	<module>dev-j2cache</module>
   </modules>
 </project>
