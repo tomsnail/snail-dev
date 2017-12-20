@@ -49,6 +49,9 @@ public class FileConfigClient extends AConfigCilent{
 		return true;
 	}
 	
-	
+	@Override
+	protected String getName() {
+		return "file";
+	}
 
 }

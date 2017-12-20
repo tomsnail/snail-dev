@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import cn.tomsnail.starter.domain.spring.SpringBeanUtil;
-import cn.tomsnail.util.configfile.ConfigHelp;
 import cn.tomsnail.util.string.StringUtils;
 
 public class DbConfigClient extends AConfigCilent{
@@ -44,7 +43,7 @@ public class DbConfigClient extends AConfigCilent{
 		
 		List<Map<String,Object>> maps =  jdbcTemplate.queryForList(sql);
 		if(maps!=null&&maps.size()==1){
-			Map m = maps.get(0);
+			Map<String,Object> m = maps.get(0);
 			if(m!=null){
 				Object v = m.get("value");
 				if(v!=null){
@@ -56,14 +55,6 @@ public class DbConfigClient extends AConfigCilent{
 		return null;
 	}
 
-	@Override
-	protected boolean isDo() {
-		String iszkconfig = ConfigHelp.getInstance("config").getLocalConfig("system.dbconfig", "false");
-		if(iszkconfig.equals("true")){
-			return true;
-		}
-		return false;
-	}
 	
 	private void init(){
 		try {
@@ -72,6 +63,12 @@ public class DbConfigClient extends AConfigCilent{
 			e.printStackTrace();
 		}
 
+	}
+	
+	
+	@Override
+	protected String getName() {
+		return "mysql";
 	}
 
 }

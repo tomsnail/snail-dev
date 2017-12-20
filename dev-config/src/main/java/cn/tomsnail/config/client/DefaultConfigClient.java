@@ -29,4 +29,9 @@ public class DefaultConfigClient extends AConfigCilent{
 	protected boolean isDo() {
 		return true;
 	}
+	
+	@Override
+	protected String getName() {
+		return "default";
+	}
 }

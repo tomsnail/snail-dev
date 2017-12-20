@@ -7,7 +7,6 @@ import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkDataListener;
 
 import cn.tomsnail.config.ConfigInfo;
-import cn.tomsnail.util.configfile.ConfigHelp;
 import cn.tomsnail.zkclient.address.ZooKeeperAddress;
 import cn.tomsnail.framwork.zk.ZkHelper;
 
@@ -102,12 +101,10 @@ public class ZookeeperConfigClient extends AConfigCilent{
 		});
 	}
 
+	
+
 	@Override
-	protected boolean isDo() {
-		String iszkconfig = ConfigHelp.getInstance("config").getLocalConfig("system.iszkconfig", "false");
-		if(iszkconfig.equals("true")){
-			return true;
-		}
-		return false;
+	protected String getName() {
+		return "zookeeper";
 	}
 }

@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import cn.tomsnail.util.configfile.ConfigHelp;
+
 /**
  *        配置客户端，链式结构
  * @author yangsong
@@ -40,6 +42,9 @@ public abstract class AConfigCilent implements IConfigCilent{
 	
 	
 	protected abstract String getConfig(String key);
+	
+	
+	protected abstract String getName();
 	
 	/**
 	 *        获取配置，如果本地没有，则在configCilent中去获取
@@ -129,6 +134,12 @@ public abstract class AConfigCilent implements IConfigCilent{
 		}
 	}
 	
-	protected abstract boolean isDo();
+	protected boolean isDo() {
+		String config = ConfigHelp.getInstance("config").getLocalConfig("system.config", "");
+		if(config.equalsIgnoreCase(getName())){
+			return true;
+		}
+		return false;
+	}
 	
 }

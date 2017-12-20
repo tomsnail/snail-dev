@@ -4,12 +4,11 @@ import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import cn.tomsnail.starter.domain.spring.SpringBeanUtil;
-import cn.tomsnail.util.configfile.ConfigHelp;
 import cn.tomsnail.util.string.StringUtils;
 
 public class RedisConfigClient extends AConfigCilent{
 	
-	private RedisTemplate redisTemplate;
+	private RedisTemplate<String,String> redisTemplate;
 	
 	public RedisConfigClient(AConfigCilent configCilent){
 		this.configCilent = configCilent;
@@ -37,8 +36,8 @@ public class RedisConfigClient extends AConfigCilent{
 		if(key.indexOf(".")!=-1){
 			key = key.replace(".", ":");
 		}
-		
-		BoundValueOperations boundValueOperations =  redisTemplate.boundValueOps(key);
+				
+		BoundValueOperations<String,String> boundValueOperations =  redisTemplate.boundValueOps(key);
 		if(boundValueOperations!=null){
 			Object v =  boundValueOperations.get();
 			if(v!=null){
@@ -48,19 +47,13 @@ public class RedisConfigClient extends AConfigCilent{
 		return null;
 	}
 
-	@Override
-	protected boolean isDo() {
-		String iszkconfig = ConfigHelp.getInstance("config").getLocalConfig("system.redisconfig", "false");
-		if(iszkconfig.equals("true")){
-			return true;
-		}
-		return false;
-	}
 	
+	
+	@SuppressWarnings("unchecked")
 	private boolean init(){
 		try {
 			if(redisTemplate==null){
-				redisTemplate = (RedisTemplate) SpringBeanUtil.getBean(RedisTemplate.class);
+				redisTemplate = (RedisTemplate<String,String>) SpringBeanUtil.getBean(RedisTemplate.class);
 			}
 			return redisTemplate!=null;
 		} catch (Exception e) {
@@ -68,6 +61,9 @@ public class RedisConfigClient extends AConfigCilent{
 		}
 	}
 
-	
+	@Override
+	protected String getName() {
+		return "redis";
+	}
 	
 }

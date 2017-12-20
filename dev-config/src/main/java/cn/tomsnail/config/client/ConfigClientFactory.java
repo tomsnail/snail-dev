@@ -27,7 +27,7 @@ public class ConfigClientFactory {
 		return configCilent;
 	}
 	
-	public IConfigCilent getConfigClient(Class clazz){
+	public IConfigCilent getConfigClient(Class<? extends IConfigChangeListener> clazz){
 		configCilent.addListener(clazz);
 		return configCilent;
 	}

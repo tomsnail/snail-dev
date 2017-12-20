@@ -33,7 +33,7 @@ public class AnnotationConfigListener implements IConfigChangeListener{
 	}
 
 	public void setClassName(String className) {
-		this.className = className;
+		AnnotationConfigListener.className = className;
 		try {
 			init();
 		} catch (Exception e) {

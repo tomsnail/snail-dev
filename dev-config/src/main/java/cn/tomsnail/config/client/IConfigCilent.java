@@ -35,5 +35,5 @@ public interface IConfigCilent {
 	 * @status 正常
 	 * @exception no
 	 */
-	public void addListener(Class changeListener);	
+	public void addListener(Class<? extends IConfigChangeListener> changeListener);	
 }
