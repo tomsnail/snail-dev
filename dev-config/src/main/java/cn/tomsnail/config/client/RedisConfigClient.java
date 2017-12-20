@@ -26,13 +26,9 @@ public class RedisConfigClient extends AConfigCilent{
 		if(!isDo()){
 			return null;
 		}
-		if(redisTemplate==null){
-			init();
-			if(redisTemplate==null){
-				return null;
-			}
+		if(!init()){
+			return null;
 		}
-		
 		
 		if(StringUtils.isBlank(key)){
 			return null;
@@ -49,7 +45,6 @@ public class RedisConfigClient extends AConfigCilent{
 				return v.toString();
 			}
 		}
-		
 		return null;
 	}
 
@@ -62,8 +57,15 @@ public class RedisConfigClient extends AConfigCilent{
 		return false;
 	}
 	
-	private void init(){
-		redisTemplate = (RedisTemplate) SpringBeanUtil.getBean(RedisTemplate.class);
+	private boolean init(){
+		try {
+			if(redisTemplate==null){
+				redisTemplate = (RedisTemplate) SpringBeanUtil.getBean(RedisTemplate.class);
+			}
+			return redisTemplate!=null;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	

@@ -40,7 +40,7 @@ public class DbConfigClient extends AConfigCilent{
 			return null;
 		}
 		
-		String sql = "select value from sys_config where name = '"+key+"' and del_flag = '0' ";
+		String sql = "select value from ts_config where name = '"+key+"' and del_flag = '0' ";
 		
 		List<Map<String,Object>> maps =  jdbcTemplate.queryForList(sql);
 		if(maps!=null&&maps.size()==1){
