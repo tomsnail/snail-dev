@@ -1,9 +1,7 @@
 package cn.tomsnail.auth.token;
 
 import java.util.Date;
-import java.util.UUID;
 
-import cn.tomsnail.util.math.encrypt.MD5Util;
 
   
    /**

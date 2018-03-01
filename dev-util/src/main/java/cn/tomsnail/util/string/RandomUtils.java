@@ -64,7 +64,7 @@ public class RandomUtils {
 		* @exception no
 		*/
 	public static String getRandLetterAndNum(int size) {
-		Random random = new Random(System.currentTimeMillis());
+		Random random = new Random();
 		String sRand = "";
 		String codeList = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz0123456789";
 		for (int i = 0; i < size; i++) {
@@ -75,6 +75,30 @@ public class RandomUtils {
 		}
 		return sRand;
 	}
+	
+	   /**
+			*        
+			* @methodauthor yangsong
+			* @methodversion 0.0.1
+			* @date 2017年9月12日 下午4:23:24
+			* @see 
+			* @param                   
+			* @return               
+			* @status 正常
+			* @exception no
+			*/
+		public static String getRandLetterAndNum(int size,long seed) {
+			Random random = new Random(seed);
+			String sRand = "";
+			String codeList = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz0123456789";
+			for (int i = 0; i < size; i++) {
+				int a = random.nextInt(codeList.length() - 1);
+				String rand = codeList.substring(a, a + 1);
+				sRand += rand;
+
+			}
+			return sRand;
+		}
 	
 
 	

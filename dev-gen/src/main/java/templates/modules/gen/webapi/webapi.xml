@@ -97,16 +97,6 @@ public class TestFacadeImpl extends BaseWebApi implements TestFacade  {
 		
 		
 		Map<String,Object> resultMap = new HashMap<>();
-		//Page<Goods> page = ${className}Service.page(${className}Vo.getModel(${ClassName}.class));
-		//List<Goods> ${className}List =  page.getList();
-		//List<Map<String,Object>> resultMapList = new ArrayList<Map<String,Object>>();
-		//for(${ClassName} _${className}:${className}List){
-		//	resultMapList.add(new ${ClassName}Vo().getMap(_${className}));
-		//}
-		//resultMap.put("${className}List", resultMapList);
-		//resultMap.put("count", page.getCount());
-		//resultMap.put("start", page.getPageNo());
-		//resultMap.put("limit", page.getPageSize());
 		resultData.setBody(resultMap);
 		return resultData;			
 	}

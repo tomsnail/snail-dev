@@ -15,7 +15,6 @@ public class GenMain {
 		String[] tables = tableStr.split(",");
 		String[] objects = objectStr.split(",");
 		
-		
 		String scheme = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.name", "");
 		
 		if(StringUtils.isBlank(scheme)){

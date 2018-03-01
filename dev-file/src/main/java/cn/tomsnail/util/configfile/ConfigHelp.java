@@ -84,7 +84,6 @@ public class ConfigHelp {
 				File file = new File(path);
 				try {
 					if (file.exists()) {
-
 						url = file.toURI().toURL();
 					} else {
 						url = new URL(path);
