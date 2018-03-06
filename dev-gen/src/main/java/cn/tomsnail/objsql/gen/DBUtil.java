@@ -47,6 +47,7 @@ public class DBUtil {
 		String user = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbc_username", "");
 		String password = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbc_password", "");
 		String jdbctype = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbctype", "");
+		String feildtype = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.feild.type", "");//UPPER、LOWER、Hump
 
 		if(StringUtils.isBlank(driver)||StringUtils.isBlank(url)||StringUtils.isBlank(user)){
 			return null;
@@ -58,7 +59,11 @@ public class DBUtil {
 		else
 			System.err.println("connect filed");
 		Statement statement = conn.createStatement();
-		ResultSet resultSet = statement.executeQuery("select * from "+table+" limit 10,1");
+		String sql_table="select * from "+table+" limit 10,1";
+		if(driver.indexOf("oracle")>-1){	
+			sql_table="select * from "+table+" where rownum < 10";
+		}
+		ResultSet resultSet = statement.executeQuery(sql_table);
 		// 获取列名
 		ResultSetMetaData metaData = resultSet.getMetaData();
 		for (int i = 0; i < metaData.getColumnCount(); i++) {
@@ -84,7 +89,13 @@ public class DBUtil {
 			}
 			column.setComments("");
 			if(jdbctype.equals("mybatis")){
-				column.setJavaField(DBUtil.lineToHump(columnName));
+				if("UPPER".equalsIgnoreCase(feildtype)){
+					column.setJavaField(columnName.toUpperCase());
+				}else if("LOWER".equalsIgnoreCase(feildtype)){
+					column.setJavaField(columnName.toLowerCase());
+				}else{
+					column.setJavaField(DBUtil.lineToHump(columnName));
+				}
 			}else{
 				column.setJavaField(columnName);
 			}
