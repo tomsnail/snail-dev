@@ -35,7 +35,7 @@ public class SignUtil {
 	
 
 	public static void main(String[] args) {
-		System.out.println(validSign("583796cce3cad9ae1d45d0548bf5fcdd","152031568","1520315680","48d4c95c-0caa-4a6e-8fe0-637b28f5dc80"));
+		System.out.println(validSign("583796cce3cad9ae1d45d0548bf5fcdd","152031568","1520315680","bcb3ff58-2eec-4dff-b2c9-01a56c52e411"));
 	}
 
 }

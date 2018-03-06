@@ -22,7 +22,7 @@ import cn.tomsnail.auth.token.TokenFactory;
 import cn.tomsnail.dubbo.restful.filter.RestfulFilter;
 import cn.tomsnail.dubbo.restful.filter.RestfulFilterException;
 import cn.tomsnail.framwork.core.BaseContext;
-import cn.tomsnail.framwork.core.DevContextManager;
+import cn.tomsnail.framwork.core.BaseContextManager;
 import cn.tomsnail.util.math.SignUtil;
 import cn.tomsnail.util.math.encrypt.MD5Util;
 import cn.tomsnail.util.string.StringUtils;
@@ -102,7 +102,7 @@ public class SignFilter implements RestfulFilter{
 			if(r){
 				BaseContext baseContext = new BaseContext();
 				baseContext.setInfo(token.getInfo());
-				DevContextManager.LOCAL_CONTEXT.set(baseContext);;
+				BaseContextManager.LOCAL_CONTEXT.set(baseContext);
 			}
 			return r;
 		});	
