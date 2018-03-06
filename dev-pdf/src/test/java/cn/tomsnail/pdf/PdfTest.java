@@ -19,6 +19,8 @@ public class PdfTest {
 		
 		//testSign(testCompose());
 		//testSign3(testCompose3());
+		
+		testCompose3();
 	}
 	
 	
@@ -34,13 +36,11 @@ public class PdfTest {
 	 * @exception no
 	 */
 	public static FieldPosition testCompose3(){
-		ComposeModel composeModel = new ComposeModel("C:/Users/yangsong/Desktop/pdf/入网协议161101PDF.pdf", "C:/Users/yangsong/Desktop/pdf/入网协议161101PDF_DEMO.pdf");
+		ComposeModel composeModel = new ComposeModel("E:/02_workspace/35_npcmis/npc-dc/npc-dc-basic/npc-dc-basic-webapi/a5ae45fcb3fe805f8396469392cd55ae.pdf", "E:/02_workspace/35_npcmis/npc-dc/npc-dc-basic/npc-dc-basic-webapi/1.pdf");
 		TextModel tm = new TextModel(10);
-		composeModel.addValue("jiafang", new ValueModel("北京京东世纪信息技术有限公司",new TextModel()));
-		composeModel.addValue("dizhi", new ValueModel("北京市北京经济技术开发区科创十四街99号2号楼B168室",new TextModel()));
-		composeModel.addValue("lianxiren", new ValueModel("BJN157",new TextModel()));
-		composeModel.addValue("dianhua", new ValueModel("010-65559888",tm));
-		composeModel.addValue("chuanzheng", new ValueModel("010-65559888",tm));
+		composeModel.addValue("buy_ei_name", new ValueModel("北京京东世纪信息技术有限公司",new TextModel()));
+		composeModel.addValue("buy_address", new ValueModel("北京市北京经济技术开发区科创十四街99号2号楼B168室",new TextModel()));
+		composeModel.addValue("mark", new ValueModel("BJN157",new TextModel()));
 		composeModel.setEdited(false);
 		return new DefaultPdfComposeService().compose(composeModel);
 	}

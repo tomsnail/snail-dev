@@ -49,6 +49,13 @@ public class BaseReturnData<T> {
 		this.data = data;
 		this.status = status;
 	}
+	
+
+	public BaseReturnData(T data,int status,String errorDesc) {
+		this.data = data;
+		this.status = status;
+		this.errorDesc = errorDesc;
+	}
 
 	public static BaseReturnData<String> instance(String data){
 		return new BaseReturnData<String>(data);
@@ -60,6 +67,10 @@ public class BaseReturnData<T> {
 	
 	public static <T> BaseReturnData<T> instance(T data,int status){
 		return new BaseReturnData<T>(data,status);
+	}
+	
+	public static <T> BaseReturnData<T> error(T data,int status,String errorDesc){
+		return new BaseReturnData<T>(data,status,errorDesc);
 	}
 	
 	

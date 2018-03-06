@@ -18,13 +18,7 @@ public class AuthorityImpl implements Authority{
 
 	@Override
 	public void doAuthority(HttpServletRequest httpServletRequest,HttpServletResponse response, String info,int expire) {
-		CacheData cacheData = tokenFactory.createToken(info, expire);
-		response.addHeader("ts_ticket_uuid", cacheData.getTicket());
-		response.addHeader("ts_timestamp", "0");
-		response.addIntHeader("ts_expire", expire);
-		response.addHeader("ts_signature", cacheData.getSign());
-		response.addIntHeader("ts_signature_type", AuthoritySignatureTypePolicy.INIT_TIMEOUT);
-		response.addHeader("ts_token", cacheData.getToken());
+		this.doAuthority(httpServletRequest, response, info, expire,AuthoritySignatureTypePolicy.LONG_TIMEOUT);
 	}
 
 	@Override
@@ -36,6 +30,18 @@ public class AuthorityImpl implements Authority{
 		response.setHeader("ts_signature", "");
 		response.setHeader("ts_signature_type", "");
 		response.setHeader("ts_token", "");
+	}
+
+	@Override
+	public void doAuthority(HttpServletRequest httpServletRequest,HttpServletResponse response, String info, int expire,int authoritySignatureTypePolicy) {
+		CacheData cacheData = tokenFactory.createToken(info, expire);
+		response.addHeader("ts_ticket_uuid", cacheData.getTicket());
+		response.addHeader("ts_timestamp", "0");
+		response.addIntHeader("ts_expire", expire);
+		response.addHeader("ts_signature", cacheData.getSign());
+		response.addIntHeader("ts_signature_type",authoritySignatureTypePolicy);
+		response.addHeader("ts_token", cacheData.getToken());
+		
 	}
 
 }

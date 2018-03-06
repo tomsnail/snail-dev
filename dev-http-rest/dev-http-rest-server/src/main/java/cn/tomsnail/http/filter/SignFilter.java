@@ -2,18 +2,27 @@ package cn.tomsnail.http.filter;
 
 
 import java.util.Enumeration;
+import java.util.UUID;
+
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
+
+
 import cn.tomsnail.auth.authority.AuthoritySignatureTypePolicy;
 import cn.tomsnail.auth.token.TokenFactory;
 import cn.tomsnail.dubbo.restful.filter.RestfulFilter;
 import cn.tomsnail.dubbo.restful.filter.RestfulFilterException;
+import cn.tomsnail.framwork.core.BaseContext;
+import cn.tomsnail.framwork.core.DevContextManager;
 import cn.tomsnail.util.math.SignUtil;
 import cn.tomsnail.util.math.encrypt.MD5Util;
 import cn.tomsnail.util.string.StringUtils;
@@ -40,6 +49,7 @@ public class SignFilter implements RestfulFilter{
 		String timestamp = request.getHeader("ts_timestamp");
 		//int expire = request.getIntHeader("ts_expire");
 		String signature  = request.getHeader("ts_signature");
+		String noncestr  = request.getHeader("ts_noncestr");
 		int signatureType  = request.getIntHeader("ts_signature_type");//200 简单 300 一次一码  100  初始化
 		//String tokenStr  = request.getHeader("ts_token");
 		int signatureSize = 0;
@@ -47,14 +57,13 @@ public class SignFilter implements RestfulFilter{
 			return false;
 		}
 		
-		
 		if(signatureType==0){
 			return true;
 		}
 		if(signatureType>=AuthoritySignatureTypePolicy.EVENY_TIMEOUT){
-			signatureSize = 3;
+			signatureSize = 4;
 		}else if(signatureType>=AuthoritySignatureTypePolicy.LONG_TIMEOUT){
-			signatureSize = 2;
+			signatureSize = 3;
 		}
 		String[] _params = null;
 		boolean isAllParamValitor = !(signatureType==AuthoritySignatureTypePolicy.LONG_TIMEOUT||signatureType==AuthoritySignatureTypePolicy.EVENY_TIMEOUT);
@@ -78,17 +87,22 @@ public class SignFilter implements RestfulFilter{
 		return tokenFactory.validaToken(ticket, (token)->{
 			params[params.length-1] = token.getSign();
 			params[params.length-2] = timestamp;
+			params[params.length-3] = noncestr;
 			if(signatureType>=300){
-				params[params.length-3] = token.getToken();
+				params[params.length-4] = token.getToken();
 			}
 			boolean r = SignUtil.validSign(signature, params);
 			if(r&&signatureType>=AuthoritySignatureTypePolicy.EVENY_TIMEOUT){
 				token.setToken(MD5Util.md5Encode(token.getToken().toString()+System.currentTimeMillis()));
+				token.setSign(UUID.randomUUID().toString());
 				tokenFactory.updateToken(token);
 				response.setHeader("ts_token", token.getToken());
+				response.setHeader("ts_signature", token.getSign());
 			}
 			if(r){
-				request.setAttribute("tokenInfo", token.getToken());
+				BaseContext baseContext = new BaseContext();
+				baseContext.setInfo(token.getInfo());
+				DevContextManager.LOCAL_CONTEXT.set(baseContext);;
 			}
 			return r;
 		});	

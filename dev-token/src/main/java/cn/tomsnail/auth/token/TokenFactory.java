@@ -15,7 +15,7 @@ public class TokenFactory {
 	
 	private static int DEFAULT_EXPIRE = 7200;
 	private static TicketSum DEFAULT_SUM = null;
-	private static byte[] KEY = "TOKENFACTORY001".getBytes();
+	private static byte[] KEY = ("TOKENFACTORY001").getBytes();
 	
 	@CacheConfig(cachedType="${token.cachedType}",url="${token.url}",port="${token.port}",name="${token.name}",expire="${token.expire}",timeout="${token.timeout}",username="${token.username}",password="${token.password}")
 	private ICache cache;
@@ -57,7 +57,6 @@ public class TokenFactory {
 		token.setId(token.getTicket());
 		if(cache!=null&&expire>0){
 			cache.set(token.getTicket(), JSON.toJSONString(token), expire);
-
 		}
 		return token;
 	}

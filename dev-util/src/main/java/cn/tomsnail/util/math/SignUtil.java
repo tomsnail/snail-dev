@@ -22,6 +22,7 @@ public class SignUtil {
 		}
 		try {
 			String md5 = MD5Util.md5Encode(ps.toString().toUpperCase());
+			System.out.println(md5);
 			if (sign.equalsIgnoreCase(md5)) {
 				return true;
 			}
@@ -31,6 +32,10 @@ public class SignUtil {
 
 		return false;
 	}
+	
 
+	public static void main(String[] args) {
+		System.out.println(validSign("583796cce3cad9ae1d45d0548bf5fcdd","152031568","1520315680","48d4c95c-0caa-4a6e-8fe0-637b28f5dc80"));
+	}
 
 }

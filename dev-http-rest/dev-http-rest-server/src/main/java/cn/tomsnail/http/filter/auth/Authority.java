@@ -29,6 +29,7 @@ public interface Authority {
 	public void doAuthority(HttpServletRequest httpServletRequest,HttpServletResponse response,String info,int expire);
 	
 	  
+	public void doAuthority(HttpServletRequest httpServletRequest,HttpServletResponse response,String info,int expire,int authoritySignatureTypePolicy);
 	   /**
 		*        
 		* @methodauthor yangsong
