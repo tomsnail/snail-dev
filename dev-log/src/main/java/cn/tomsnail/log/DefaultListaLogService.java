@@ -39,7 +39,8 @@ public class DefaultListaLogService implements LogService,Runnable{
 	@Resource(name="centerLogService")
 	private LogService centerLogService;
 	
-	@Resource(name="catService")
+	@Autowired(required=false)
+	@Qualifier("catService")
 	private LogService catService;
 	
 	@Autowired(required=false)

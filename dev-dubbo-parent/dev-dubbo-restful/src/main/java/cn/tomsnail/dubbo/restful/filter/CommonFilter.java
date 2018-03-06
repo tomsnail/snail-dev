@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.tomsnail.framwork.core.BaseContextManager;
 import cn.tomsnail.starter.domain.spring.SpringBeanUtil;
 
 import com.alibaba.dubbo.rpc.Filter;
@@ -37,7 +38,10 @@ public class CommonFilter implements Filter{
 				 }
 	    	 }
 	     }
-	     return invoker.invoke(invocation);  
+	     
+	     Result r = invoker.invoke(invocation); 	     
+	     BaseContextManager.LOCAL_CONTEXT.remove();
+	     return  r;
 	}
 
 }
