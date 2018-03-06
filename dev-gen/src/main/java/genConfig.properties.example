@@ -14,6 +14,8 @@ gen.partifactId=gen-test
 gen.pomversion=0.0.1-SNAPSHOT
 #jdbc mybatis
 gen.jdbctype=mybatis
+#UPPER、LOWER、Hump
+gen.feild.type=   
 #all   \u5b8c\u6574\u7684facade/service/dao
 #fall  \u5b8c\u6574\u7684facade/service
 #dao   \u53ea\u6709dao
