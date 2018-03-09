@@ -1,23 +1,25 @@
 package cn.tomsnail.framwork.util;
 
-import java.io.StringWriter;
-import java.io.Writer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 public class JsonUtil {
 	
 	
 	public static String toJson(Object obj){
-			return JSONObject.fromObject(obj).toString();
+			return JSON.toJSONString(obj);
+	}
+	
+	public static <T> T getObject(String json,Class<T> clazz){
+		return JSON.parseObject(json, clazz);
 	}
 	
 	/***
@@ -30,8 +32,8 @@ public class JsonUtil {
 	 */
 	public static Map<String, Object> getMap(String str){
 		Map<String,Object> data = new HashMap<String,Object>();
-		JSONObject json = JSONObject.fromObject(str);
-		Iterator<?> it = json.keys();
+		JSONObject json = JSON.parseObject(str);
+		Iterator<?> it = json.entrySet().iterator();
 		while(it.hasNext()){
 			String key = String.valueOf(it.next());
 			String value = json.get(key).toString();
@@ -50,27 +52,15 @@ public class JsonUtil {
 	 */
 	public static  List<Object> getList(String jsons,String parameter){
 		List<Object> objs=new ArrayList<Object>();
-		JSONArray jsonarray = JSONArray.fromObject(jsons);  
-		Iterator it = jsonarray.iterator();  
+		JSONObject json = JSON.parseObject(jsons);
+		Iterator<?> it = json.entrySet().iterator();
         while(it.hasNext()){  
         	JSONObject p = (JSONObject)it.next();  
-            System.out.println(p);  
             Object a = p.get(parameter);
             objs.add(a);
         }  
         return objs;
 	}
 	// java对象转换成json字符串
-			public static String object2JSON(Object o) {
-				ObjectMapper om = new ObjectMapper();
-				Writer w = new StringWriter();
-				String json = null;
-				try {
-					om.writeValue(w, o);
-					json = w.toString();
-					w.close();
-				} catch (Exception e) {
-				}
-				return json;
-			}
+			
 }

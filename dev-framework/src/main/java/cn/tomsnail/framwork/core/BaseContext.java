@@ -1,5 +1,6 @@
 package cn.tomsnail.framwork.core;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,15 +10,20 @@ import java.util.Map;
  */
 public class BaseContext {
 	
+	public static final String USER_UUID = "USER_UUID";
+	
 	private String contextId;
 	
 	private String timestamp;
 	
-	private Map<String,String> context;
+	private Map<String,String> context = new HashMap<String,String>();
 	
 	private String info;
 
 	public Map<String, String> getContext() {
+		if(context==null){
+			context = new HashMap<String,String>();
+		}
 		return context;
 	}
 
@@ -47,5 +53,13 @@ public class BaseContext {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+	
+	public BaseContext addMapValue(String key,String value){
+		if(context==null){
+			context = new HashMap<String,String>();
+		}
+		context.put(key, value);
+		return this;
 	}
 }

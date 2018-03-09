@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -50,6 +51,11 @@ public class RedisFactory{
 				RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
 				redisTemplate.setConnectionFactory(connectionFactory);
 				redisTemplate.afterPropertiesSet();
+				redisTemplate.setStringSerializer(new StringRedisSerializer());
+				redisTemplate.setKeySerializer(new StringRedisSerializer());
+				redisTemplate.setValueSerializer(new StringRedisSerializer());
+				redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+				redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 				REDIS_MAP.put(redisConfig.getUrl(), redisTemplate);
 			}
 			return REDIS_MAP.get(redisConfig.getUrl());

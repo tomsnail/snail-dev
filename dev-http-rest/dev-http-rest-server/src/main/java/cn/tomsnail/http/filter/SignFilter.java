@@ -6,14 +6,18 @@ import java.util.UUID;
 
 
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
+
 
 
 
@@ -40,7 +44,8 @@ import cn.tomsnail.util.string.StringUtils;
 @ComponentScan(basePackages={"cn.tomsnail.dubbo.restful.filter","cn.tomsnail.http.filter.auth"})
 public class SignFilter implements RestfulFilter{
 	
-	@Autowired
+	@Autowired(required=false)
+	@Qualifier("tokenFactory")
 	private TokenFactory tokenFactory;
 
 	@Override
@@ -61,9 +66,9 @@ public class SignFilter implements RestfulFilter{
 			return true;
 		}
 		if(signatureType>=AuthoritySignatureTypePolicy.EVENY_TIMEOUT){
-			signatureSize = 4;
-		}else if(signatureType>=AuthoritySignatureTypePolicy.LONG_TIMEOUT){
 			signatureSize = 3;
+		}else if(signatureType>=AuthoritySignatureTypePolicy.LONG_TIMEOUT){
+			signatureSize = 2;
 		}
 		String[] _params = null;
 		boolean isAllParamValitor = !(signatureType==AuthoritySignatureTypePolicy.LONG_TIMEOUT||signatureType==AuthoritySignatureTypePolicy.EVENY_TIMEOUT);
@@ -85,13 +90,13 @@ public class SignFilter implements RestfulFilter{
 		}
 		String[] params = _params;
 		return tokenFactory.validaToken(ticket, (token)->{
-			params[params.length-1] = token.getSign();
-			params[params.length-2] = timestamp;
-			params[params.length-3] = noncestr;
+			//params[params.length-1] = token.getSign();
+			params[params.length-1] = timestamp;
+			params[params.length-2] = noncestr;
 			if(signatureType>=300){
-				params[params.length-4] = token.getToken();
+				params[params.length-3] = token.getToken();
 			}
-			boolean r = SignUtil.validSign(signature, params);
+			boolean r = SignUtil.validSignHmac(signature,token.getSign(), params);
 			if(r&&signatureType>=AuthoritySignatureTypePolicy.EVENY_TIMEOUT){
 				token.setToken(MD5Util.md5Encode(token.getToken().toString()+System.currentTimeMillis()));
 				token.setSign(UUID.randomUUID().toString());

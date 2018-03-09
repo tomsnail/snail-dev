@@ -39,6 +39,31 @@ public class OkhttpRequest {
 		return null;
 	}
 	
+	public static String get(String uri,long timeout){
+		Response response = null;
+		try {
+			OkHttpClient okHttpClient = OkhttpUtil.defaultPoolClient(timeout);
+			String url = uri;
+			Request request = new Request.Builder().url(url).build();
+			Call call = okHttpClient.newCall(request);
+			response = call.execute();
+			if (response.isSuccessful()) {
+				return response.body().string();
+			} else {
+				throw new IOException("Unexpected code " + response);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(response!=null){
+				response.close();
+			}
+		}
+		return null;
+	}
+	
 	public static String post(String uri, Map<String, String> paramsMap){
 		Response response = null;
 		try {

@@ -34,6 +34,15 @@ public class OkhttpUtil {
 				.build();
 	}
 	
+	
+	public static OkHttpClient defaultPoolClient(long timeout) {
+		return new OkHttpClient.Builder().connectionPool(connectionPool)// .cache(new
+																		// Cache(new
+																		// File("test"),
+																		// 100000))
+				.connectTimeout(timeout, TimeUnit.SECONDS).readTimeout(timeout, TimeUnit.SECONDS).writeTimeout(timeout, TimeUnit.SECONDS).build();
+	}
+	
 	public static OkHttpClient numPoolClient(int number) {
 		return new OkHttpClient.Builder().readTimeout(1, TimeUnit.MINUTES).connectionPool(new ConnectionPool(number,5, TimeUnit.MINUTES))// .cache(new
 																		// Cache(new
