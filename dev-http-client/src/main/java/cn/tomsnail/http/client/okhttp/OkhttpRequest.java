@@ -11,6 +11,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.Request.Builder;
+
+
 
 public class OkhttpRequest {
 
@@ -106,5 +109,49 @@ public class OkhttpRequest {
 		}
 		return null;
 	}
+	
+	public static String postHttps(String uri, String jsonStr,Map<String,String> headers){
+		Response response = null;
+		try {
+
+            //创建一个请求实体对象 RequestBody
+            RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonStr);
+            //创建一个请求
+			OkHttpClient okHttpClient = OkhttpUtil.defaultPoolClient();
+			
+			okHttpClient = OkhttpUtil.getSSLOkHttpClient(okHttpClient);
+
+			Builder builder = new Request.Builder();
+			
+			if(headers!=null&&!headers.isEmpty()){
+				 for (String key : headers.keySet()) {
+					 builder.addHeader(key, headers.get(key));
+		         }
+			}
+			
+            final Request request = builder.url(uri).post(body).build();
+            //创建一个Call
+            final Call call = okHttpClient.newCall(request);
+            //执行请求
+            response = call.execute();
+            //请求执行成功
+            if (response.isSuccessful()) {
+              return response.body().string();
+            }else{
+            	System.out.println(response.message());
+            }
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(response!=null){
+				response.close();
+			}
+		}
+		return null;
+	}
+	
+
 	
 }

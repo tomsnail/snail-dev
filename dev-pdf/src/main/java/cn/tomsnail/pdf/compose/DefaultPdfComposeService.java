@@ -3,9 +3,13 @@ package cn.tomsnail.pdf.compose;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+
+
+
 
 
 import com.itextpdf.text.BadElementException;
@@ -22,6 +26,8 @@ import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+import com.itextpdf.text.pdf.qrcode.EncodeHintType;
+import com.itextpdf.text.pdf.qrcode.ErrorCorrectionLevel;
 
 /**
  * 
@@ -319,7 +325,10 @@ public class DefaultPdfComposeService implements PdfComposeService {
 			throws BadElementException, DocumentException {
 		if(!StringUtils.isBlank(composeModel.getCodeContent())){
 			PdfContentByte over = stamper.getOverContent(1);
-			BarcodeQRCode qrcode = new BarcodeQRCode(composeModel.getCodeContent(), 10, 10, null);
+			Map<EncodeHintType,Object> hints=new HashMap<EncodeHintType,Object>();  
+	        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q);   
+	        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");   
+			BarcodeQRCode qrcode = new BarcodeQRCode(composeModel.getCodeContent(), 10, 10, hints);
 		    Image img = qrcode.getImage();
 		    img.setAlignment(1);
 		    img.scaleAbsolute(composeModel.getCcWitdh(), composeModel.getCcHeight());

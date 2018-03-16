@@ -12,6 +12,17 @@ import java.util.Map;
  * @see 
  */
 public class ComposeModel {
+	
+	
+	public static final String QRCODE_CONTEXT = "QRCODE_CONTEXT";
+	
+	public static final String QRCODE_WITDH = "QRCODE_WITDH";
+	
+	public static final String QRCODE_HEIGHT = "QRCODE_HEIGHT";
+	
+	public static final String QRCODE_X = "QRCODE_X";
+
+	public static final String QRCODE_Y = "QRCODE_Y";
 
 	
 	/**
@@ -47,19 +58,19 @@ public class ComposeModel {
 	/**
 	 * 二维码宽度
 	 */
-	private float ccWitdh;
+	private float ccWitdh = 72;
 	/**
 	 * 二维码高度
 	 */
-	private float ccHeight;
+	private float ccHeight = 72;
 	/**
 	 * 二维码X位置
 	 */
-	private float ccX;
+	private float ccX = 72;
 	/**
 	 * 二维码Y位置
 	 */
-	private float ccY;
+	private float ccY = 720;
 
 	public String getTemplate() {
 		return template;

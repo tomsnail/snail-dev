@@ -11,6 +11,11 @@ import cn.tomsnail.framwork.validator.annotation.FieldValidator;
 import cn.tomsnail.util.string.StringUtils;
 
 public class BaseModel {
+	
+	
+	public static final String DEL_YES = "1";
+	
+	public static final String DEL_NO = "0";
 
 	@FieldValidator(onlyToBean=true,mapperName="")
 	public String start;
