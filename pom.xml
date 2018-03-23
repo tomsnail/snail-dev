@@ -220,7 +220,7 @@
 		</plugins>
 	</reporting>
 	<distributionManagement>
-		<repository>
+		<!--  <repository>
 			<id>nexus-releases</id>
 			<name>Nexus Release Repository</name>
 			<url>http://192.168.169.156:9981/repository/maven-releases/</url>
@@ -229,6 +229,17 @@
 			<id>nexus-snapshots</id>
 			<name>Nexus Snapshot Repository</name>
 			<url>http://192.168.169.156:9981/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		-->
+		<repository>
+			<id>tomsnail-releases</id>
+			<name>Nexus Release Repository</name>
+			<url>http://nexus.tomsnail.cn/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>tomsnail-snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://nexus.tomsnail.cn/repository/maven-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 	<modules>
