@@ -5,7 +5,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>dev-component</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
   </parent>
   <artifactId>dev-util</artifactId>
   <name>dev-util</name>
@@ -49,6 +49,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <httpclient.version>4.1.2</httpclient.version>
+    <dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
   </properties>
   <dependencies>
 		<dependency>
@@ -65,12 +66,12 @@
 		<dependency>
   		 	<groupId>cn.tomsnail</groupId>
     	 	<artifactId>dev-validator</artifactId>
-    	 	<version>0.0.3-SNAPSHOT</version>
+    	 	<version>${dev.component.version}</version>
   		</dependency>
   		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-reflect</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 		</dependency>
   </dependencies>
 </project>

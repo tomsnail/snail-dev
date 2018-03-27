@@ -6,19 +6,20 @@
 	<parent>
 		<groupId>cn.tomsnail</groupId>
 		<artifactId>dev-component</artifactId>
-		<version>0.0.3-SNAPSHOT</version>
+		<version>0.0.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>dev-pdf</artifactId>
 	<name>dev-pdf</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-file</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>

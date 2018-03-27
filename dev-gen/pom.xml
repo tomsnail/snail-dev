@@ -5,7 +5,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>dev-component</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
   </parent>
   <artifactId>dev-gen</artifactId>
   <name>dev-gen</name>
@@ -38,6 +38,7 @@
 	<freemarker.version>2.3.20</freemarker.version>
 	<mysql.connector.version>5.1.30</mysql.connector.version>
 	<oracle.connector.version>10.2.0.3.0</oracle.connector.version>
+	<dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
   </properties>
   <dependencies>
 		<dependency>
@@ -63,12 +64,12 @@
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-file</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-reflect</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 		</dependency>
   </dependencies>
 </project>

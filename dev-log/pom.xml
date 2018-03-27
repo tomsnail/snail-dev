@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>cn.tomsnail</groupId>
 		<artifactId>dev-component</artifactId>
-		<version>0.0.3-SNAPSHOT</version>
+		<version>0.0.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>dev-log</artifactId>
 	<name>dev-log</name>
@@ -26,12 +26,13 @@
 	</build>
 	<properties>
 		<aspectj.version>1.8.10</aspectj.version>
+		<dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-config</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

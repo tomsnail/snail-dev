@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<dev.component.version>0.0.3-SNAPSHOT</dev.component.version>
+		<dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
 		<aspectj.version>1.8.10</aspectj.version>
 		<jackson.version>1.9.13</jackson.version>
 		<spring.version>4.2.3.RELEASE</spring.version>
@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>cn.tomsnail</groupId>
 		<artifactId>dev-component</artifactId>
-		<version>0.0.3-SNAPSHOT</version>
+		<version>0.0.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>dev-config</artifactId>
 	<name>dev-config</name>

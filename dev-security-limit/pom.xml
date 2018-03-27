@@ -5,16 +5,19 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>dev-component</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
   </parent>
   <artifactId>dev-security-limit</artifactId>
   <name>dev-security-limit</name>
   <url>http://maven.apache.org</url>
+  <properties>
+  	  	<dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
+  </properties>
   <dependencies>
    	<dependency>
    		 <groupId>cn.tomsnail</groupId>
     	<artifactId>dev-security</artifactId>
-    	<version>0.0.3-SNAPSHOT</version>
+    	<version>${dev.component.version}</version>
    	</dependency>
   </dependencies>
 </project>

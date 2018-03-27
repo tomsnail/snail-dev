@@ -5,49 +5,50 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>dev-component</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
   </parent>
   <artifactId>dev-framework</artifactId>
   <name>dev-framwork</name>
   <url>http://maven.apache.org</url>
    <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
   </properties>
   <dependencies>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-zkclient</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 			<type>jar</type>			
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-util</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 			<type>jar</type>			
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-http</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 			<type>jar</type>			
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-starter</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 			<type>jar</type>			
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-gen</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 			<type>jar</type>			
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-unit-test</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${dev.component.version}</version>
 			<type>jar</type>			
 		</dependency>
   </dependencies>
