@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>spring-dubbo</name>
+	<filePath>src/main/resources</filePath>
+	<fileName>spring-dubbo.xml</fileName>
+	<content><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <dubbo:application name="${packageName}.${moduleName}.webapi" owner="tomsnail" organization="tomsnail" />
+	
+    <dubbo:annotation package="${packageName}.${moduleName}.service" /> 
+    <dubbo:registry protocol="zookeeper" address="${"$"}{zookeeper}" id="dubbozk"/>
+    <dubbo:protocol name="dubbo" port="${"$"}{${packageName}.${moduleName}.service.port}" />  
+    
+    
+    <dubbo:annotation package="${packageName}.${moduleName}.webapi" /> 
+    <dubbo:registry address="httprest://zookeeper" />
+    <dubbo:protocol name="rest"  port="${"$"}{${packageName}.${moduleName}.webapi.port}" server="tomcat" />
+
+</beans>
+
+]]>
+	</content>
+</template>

@@ -167,42 +167,52 @@
 			<template>o/service.xml</template>
 		</category>
 		
+		
+		<category value="dubboservice"  label="dubboservice">
+			<template>dubbo/assembly.xml</template>
+			<template>dubbo/conf-application.xml</template>
+			<template>dubbo/conf-confdatasource.xml</template>
+			<template>dubbo/conf-config.xml</template>
+			<template>dubbo/conf-datasource.xml</template>
+			<template>dubbo/conf-log4j.xml</template>
+			<template>dubbo/conf-springdubbo.xml</template>
+			<template>dubbo/conf-zookeeper.xml</template>
+			<template>dubbo/conf-mybatisconfig.xml</template>
+			<template>dubbo/conf-springdatasource.xml</template>
+			<template>dubbo/shutdown.xml</template>
+			<template>dubbo/startup.xml</template>
+			<template>dubbo/test-localhost.xml</template>
+			<template>dubbo/test-online.xml</template>
+			<template>dubbo/test-ontest.xml</template>
+			<template>dubbo/conf-log4j2.xml</template>
+			<template>dubbo/vo.xml</template>
+			<template>dubbo/model.xml</template>
+			<template>dubbo/pom.xml</template>
+		</category>
+		
+		<category value="dubbowebapi"  label="dubbowebapi">
+			<template>dubbowebapi/assembly.xml</template>
+			<template>dubbowebapi/conf-application.xml</template>
+			<template>dubbowebapi/conf-confdatasource.xml</template>
+			<template>dubbowebapi/conf-config.xml</template>
+			<template>dubbowebapi/conf-datasource.xml</template>
+			<template>dubbowebapi/conf-log4j.xml</template>
+			<template>dubbowebapi/conf-springdubbo.xml</template>
+			<template>dubbowebapi/conf-zookeeper.xml</template>
+			<template>dubbowebapi/conf-mybatisconfig.xml</template>
+			<template>dubbowebapi/conf-springdatasource.xml</template>
+			<template>dubbowebapi/shutdown.xml</template>
+			<template>dubbowebapi/startup.xml</template>
+			<template>dubbowebapi/test-localhost.xml</template>
+			<template>dubbowebapi/test-online.xml</template>
+			<template>dubbowebapi/test-ontest.xml</template>
+			<template>dubbowebapi/conf-log4j2.xml</template>
+			<template>dubbowebapi/iwebapi.xml</template>
+			<template>dubbowebapi/webapi.xml</template>
+			<template>dubbowebapi/vo.xml</template>
+			<template>dubbowebapi/model.xml</template>
+			<template>dubbowebapi/pom.xml</template>
+		</category>
+		
 	</category>
-	<!-- java类型 -->
-	<javaType>
-		<dict value="String" label="String"/>
-		<dict value="Long" label="Long"/>
-		<dict value="Integer" label="Integer"/>
-		<dict value="Double" label="Double"/>
-		<dict value="java.util.Date" label="Date"/>
-		<dict value="This" label="ThisObj" description="生成当前对象"/>
-		<dict value="Custom" label="Custom" description="自定义对象，生成后手动设置"/>
-	</javaType>
-	<!-- 查询类型 -->
-	<queryType>
-		<dict value="=" label="="/>
-		<dict value="!=" label="!="/>
-		<dict value="&gt;" label="&gt;"/>
-		<dict value="&gt;=" label="&gt;="/>
-		<dict value="&lt;" label="&lt;"/>
-		<dict value="&lt;=" label="&lt;="/>
-		<dict value="between" label="Between"/>
-		<dict value="like" label="Like"/>
-		<dict value="left_like" label="Left Like"/>
-		<dict value="right_like" label="Right Like"/>
-	</queryType>
-	<!-- 字段显示类型 -->
-	<showType>
-		<dict value="input" label="单行文本"/>
-		<dict value="textarea" label="多行文本"/>
-		<dict value="select" label="下拉选项"/>
-		<dict value="radiobox" label="单选按钮"/>
-		<dict value="checkbox" label="复选框"/>
-		<dict value="dateselect" label="日期选择"/>
-		<dict value="userselect" label="人员选择"/>
-		<dict value="officeselect" label="部门选择"/>
-		<dict value="areaselect" label="区域选择"/>
-		<dict value="treeselect" label="树选择控件"/>
-		<dict value="fileselect" label="文件上传选择"/>
-	</showType>
 </config>

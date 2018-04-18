@@ -14,7 +14,7 @@ gen.partifactId=gen-test
 gen.pomversion=0.0.1-SNAPSHOT
 #jdbc mybatis
 gen.jdbctype=mybatis
-#UPPER、LOWER、Hump
+#UPPER\u3001LOWER\u3001Hump
 gen.feild.type=   
 #all   \u5b8c\u6574\u7684facade/service/dao
 #fall  \u5b8c\u6574\u7684facade/service
@@ -25,6 +25,8 @@ gen.feild.type=
 #webapi
 #oservice 
 #owebapi
+#dubboservice dubbo service
+#dubbowebapi dubbo webapi
 gen.name=oservice
 #exec:java -Dexec.mainClass="cn.tomsnail.objsql.gen.GenMain"
 
