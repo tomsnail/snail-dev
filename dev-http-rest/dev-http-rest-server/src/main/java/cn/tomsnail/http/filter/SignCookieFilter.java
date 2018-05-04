@@ -7,8 +7,13 @@ import java.util.UUID;
 
 
 
+
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 
 
 
@@ -21,6 +26,8 @@ import org.springframework.stereotype.Component;
 
 
 
+
+
 import cn.tomsnail.auth.authority.AuthoritySignatureTypePolicy;
 import cn.tomsnail.auth.token.TokenFactory;
 import cn.tomsnail.dubbo.restful.filter.RestfulFilter;
@@ -28,7 +35,6 @@ import cn.tomsnail.dubbo.restful.filter.RestfulFilterException;
 import cn.tomsnail.framwork.core.BaseContext;
 import cn.tomsnail.framwork.core.BaseContextManager;
 import cn.tomsnail.util.math.SignUtil;
-import cn.tomsnail.util.math.encrypt.MD5Util;
 import cn.tomsnail.util.string.StringUtils;
 
   
@@ -41,8 +47,8 @@ import cn.tomsnail.util.string.StringUtils;
 	* @see 
 	*/     
 @Component
-@ComponentScan(basePackages={"cn.tomsnail.dubbo.restful.filter","cn.tomsnail.http.filter.auth"})
-public class SignFilter implements RestfulFilter{
+@ComponentScan(basePackages={"cn.tomsnail.dubbo.restful.filter","cn.tomsnail.http.filter.auth.cookie"})
+public class SignCookieFilter implements RestfulFilter{
 	
 	@Autowired(required=false)
 	@Qualifier("tokenFactory")
@@ -50,13 +56,42 @@ public class SignFilter implements RestfulFilter{
 
 	@Override
 	public boolean filter(HttpServletRequest request,HttpServletResponse response,Object[] args) throws RestfulFilterException {
-		String ticket = request.getHeader("ts_ticket_uuid");		
-		String timestamp = request.getHeader("ts_timestamp");
-		//int expire = request.getIntHeader("ts_expire");
-		String signature  = request.getHeader("ts_signature");
-		String noncestr  = request.getHeader("ts_noncestr");
-		int signatureType  = request.getIntHeader("ts_signature_type");//200 简单 300 一次一码  100  初始化
-		//String tokenStr  = request.getHeader("ts_token");
+		
+		Cookie[] cookies = request.getCookies();
+		
+		if(cookies==null||cookies.length==0){
+			return false;
+		}
+		
+		String ticket = "";		
+		String timestamp = null;
+		String signature  = "";
+		String noncestr  = "";
+		int signatureType  = 200;//200 简单 300 一次一码  100  初始化 
+		
+		for(Cookie _cookie:cookies){
+			if(_cookie.getName().equals("ts_ticket_uuid")){
+				ticket = _cookie.getValue();
+			}
+			if(_cookie.getName().equals("ts_timestamp")){
+				timestamp = _cookie.getValue();
+			}
+			if(_cookie.getName().equals("ts_signature")){
+				signature = _cookie.getValue();
+			}
+			if(_cookie.getName().equals("ts_noncestr")){
+				noncestr = _cookie.getValue();
+			}
+			if(_cookie.getName().equals("ts_signature_type")){
+				try {
+					signatureType = Integer.valueOf(_cookie.getValue());
+				} catch (NumberFormatException e) {
+					//signatureType = 1;
+				}
+			}
+		}
+		
+		
 		int signatureSize = 0;
 		if(StringUtils.isBlank(ticket)||StringUtils.isBlank(signature)){
 			return false;
@@ -89,20 +124,23 @@ public class SignFilter implements RestfulFilter{
 			_params = new String[signatureSize];
 		}
 		String[] params = _params;
+		String _t = timestamp;
+		String _noncestr = noncestr;
+		int _signatureType = signatureType;
+		String _signature = signature;
 		return tokenFactory.validaToken(ticket, (token)->{
-			//params[params.length-1] = token.getSign();
-			params[params.length-1] = timestamp;
-			params[params.length-2] = noncestr;
-			if(signatureType>=300){
+			params[params.length-1] = _t;
+			params[params.length-2] = _noncestr;
+			if(_signatureType>=300){
 				params[params.length-3] = token.getToken();
 			}
-			boolean r = SignUtil.validSignHmac(signature,token.getSign(), params);
-			if(r&&signatureType>=AuthoritySignatureTypePolicy.EVENY_TIMEOUT){
-				token.setToken(MD5Util.md5Encode(token.getToken().toString()+System.currentTimeMillis()));
+			boolean r = SignUtil.validSignHmac(_signature,token.getSign(), params);
+			if(r&&_signatureType>=AuthoritySignatureTypePolicy.EVENY_TIMEOUT){
 				token.setSign(UUID.randomUUID().toString());
 				tokenFactory.updateToken(token);
-				response.setHeader("ts_token", token.getToken());
-				response.setHeader("ts_signature", token.getSign());
+				Cookie ts_signature = new Cookie("ts_signature", token.getSign());
+				ts_signature.setMaxAge(token.getExpire());
+				response.addCookie(ts_signature);
 			}
 			if(r){
 				BaseContext baseContext = new BaseContext();
