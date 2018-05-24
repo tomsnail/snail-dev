@@ -9,6 +9,8 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.serializer.ValueFilter;
 
 
 public class JsonUtil {
@@ -17,6 +19,24 @@ public class JsonUtil {
 	public static String toJson(Object obj){
 			return JSON.toJSONString(obj);
 	}
+	
+	public static String toNotNullObjectJson(Object obj){
+		return JSON.toJSONString(obj,SerializerFeature.WriteMapNullValue);
+	}
+	
+	public static String toNotNullMapJson(Object obj){
+		return JSON.toJSONString(obj,filter);
+	}
+	
+	
+	 private static ValueFilter filter = new ValueFilter() {
+	        @Override
+	        public Object process(Object obj, String s, Object v) {
+	            if (v == null)
+	                return "";
+	            return v;
+	        }
+	    };
 	
 	public static <T> T getObject(String json,Class<T> clazz){
 		return JSON.parseObject(json, clazz);

@@ -56,7 +56,8 @@ public class TokenFactory {
 		token.setExpire(expire);
 		token.setId(token.getTicket());
 		if(cache!=null&&expire>0){
-			cache.set(token.getTicket(), JSON.toJSONString(token), expire);
+			String jsonStr = JSON.toJSONString(token);
+			cache.set(token.getTicket(), jsonStr, expire);
 		}
 		return token;
 	}

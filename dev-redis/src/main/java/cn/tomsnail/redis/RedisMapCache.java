@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import cn.tomsnail.cache.core.CacheConfig;
 import cn.tomsnail.cache.core.ICache;
@@ -26,6 +28,11 @@ public class RedisMapCache  implements ICache,IInitCache,IDestoryCache {
 	private RedisTemplate	<String	, Object> redisTemplate = new RedisTemplate<String	, Object>();
 
 	public RedisMapCache(CacheConfig cacheConfig){
+		RedisSerializer stringSerializer = new StringRedisSerializer();
+	    redisTemplate.setKeySerializer(stringSerializer);
+	    redisTemplate.setValueSerializer(stringSerializer);
+	    redisTemplate.setHashKeySerializer(stringSerializer);
+	    redisTemplate.setHashValueSerializer(stringSerializer);
 		redisTemplate.setUrl(cacheConfig.getUrl());
 		redisTemplate.setPassword(cacheConfig.getPassword());
 		redisTemplate.setPort(cacheConfig.getPort());

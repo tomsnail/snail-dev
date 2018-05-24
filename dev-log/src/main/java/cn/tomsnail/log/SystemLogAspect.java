@@ -26,6 +26,8 @@ import java.lang.reflect.Method;
 
 
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.math.NumberUtils;
@@ -41,6 +43,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
 
 
 
@@ -138,6 +141,14 @@ public class SystemLogAspect {
 						log.setLevel(Log.ERROR);
 						log.setThrowable(ex);
 						isDebug = true;
+						ResultData<Map<String,Object>> _t = new ResultData<Map<String,Object>>();
+						if(logPoint.level().equals(LogLevel.DEBUG)){
+							//_t.setErrorMsg(ex.getMessage());
+							logger.error("",ex);
+						}
+						_t.setStatus(CommonMessage.FAILED);
+						t = _t;
+						
 					}
 					long endTime = System.currentTimeMillis();
 					log.addContent(runinfo.toString());

@@ -1,5 +1,6 @@
 package cn.tomsnail.util.date;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -211,13 +212,35 @@ public class Jdk8DateTimeUtil {
 		* @exception no
 		*/
 	public static Date getDate(String dtStr,DateTimeFormatter formart){
+		
+		if(YMD_FORMART==formart){
+			LocalDate localDate = LocalDate.parse(dtStr, formart);
+			return new Date(localDate.atTime(0, 0, 0).toInstant(ZoneOffset.UTC.ofHours(8)).toEpochMilli());
+		}
+		
 		LocalDateTime localDateTime = LocalDateTime.parse(dtStr, formart);
 		return new Date(localDateTime.toInstant(ZoneOffset.UTC.ofHours(8)).toEpochMilli());
+		
+	}
+	
+	public static Date getDate(String dtStr,String formart){
+		
+		DateTimeFormatter f = DateTimeFormatter.ofPattern(formart);
+		
+		if(formart.contains("H")||formart.contains("m")||formart.contains("s")||formart.contains("h")){
+			LocalDateTime localDateTime = LocalDateTime.parse(dtStr, f);
+			return new Date(localDateTime.toInstant(ZoneOffset.UTC.ofHours(8)).toEpochMilli());
+		}else{
+			LocalDate localDate = LocalDate.parse(dtStr, f);
+			return new Date(localDate.atTime(0, 0, 0).toInstant(ZoneOffset.UTC.ofHours(8)).toEpochMilli());
+		}
+
+		
 	}
 
 	public static void main(String[] args) {
 		System.out.println(ZoneOffset.UTC.ofHours(8));
-		System.out.println(getDate("2017-03-04 11:25:16",Jdk8DateTimeUtil.STANTD_FORMART));
+		System.out.println(getDate("2017-03-04 23:00","yyyy-MM-dd HH:mm"));
 	}
 	
 }

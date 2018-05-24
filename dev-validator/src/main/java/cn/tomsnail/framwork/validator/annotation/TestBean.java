@@ -4,10 +4,10 @@ import java.util.Date;
 
 import cn.tomsnail.framwork.validator.RuleType;
 
-@BeanValidator(isAllValidator=true)
+@BeanValidator(isAllValidator=false)
 public class TestBean {
 
-	@FieldValidator(onlyToBean=true)
+	@FieldValidator(onlyToBean=false,rules={RuleType.NotNullValue},values={""})
 	private String id;
 	
 	@FieldValidator(onlyToBean=true)

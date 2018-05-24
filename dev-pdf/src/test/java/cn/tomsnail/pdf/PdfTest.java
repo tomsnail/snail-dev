@@ -18,9 +18,9 @@ public class PdfTest {
 
 		
 		//testSign(testCompose());
-		//testSign3(testCompose3());
+		testSign3(testCompose3());
 		
-		testCompose3();
+		//testCompose3();
 	}
 	
 	
@@ -36,11 +36,9 @@ public class PdfTest {
 	 * @exception no
 	 */
 	public static FieldPosition testCompose3(){
-		ComposeModel composeModel = new ComposeModel("E:/02_workspace/35_npcmis/npc-dc/npc-dc-basic/npc-dc-basic-webapi/a5ae45fcb3fe805f8396469392cd55ae.pdf", "E:/02_workspace/35_npcmis/npc-dc/npc-dc-basic/npc-dc-basic-webapi/1.pdf");
+		ComposeModel composeModel = new ComposeModel("C:/Users/yangsong/Desktop/1.pdf", "C:/Users/yangsong/Desktop/11.pdf");
 		TextModel tm = new TextModel(10);
-		composeModel.addValue("buy_ei_name", new ValueModel("北京京东世纪信息技术有限公司",new TextModel()));
-		composeModel.addValue("buy_address", new ValueModel("北京市北京经济技术开发区科创十四街99号2号楼B168室",new TextModel()));
-		composeModel.addValue("mark", new ValueModel("BJN157",new TextModel()));
+		composeModel.addValue("TR_NO", new ValueModel("北京市朝阳区红军营南路15号瑞普大厦B座1102北京市朝阳区红军营南路15号瑞普大厦B座1102",tm));
 		composeModel.setEdited(false);
 		return new DefaultPdfComposeService().compose(composeModel);
 	}
@@ -48,13 +46,14 @@ public class PdfTest {
 	public static void testSign3(FieldPosition fieldPosition){
 		PdfSignService pdfServiceImpl = new DefaultPdfSignService();
 		SignModel signModel = new SignModel();
-		signModel.setTarget("C:/Users/yangsong/Desktop/pdf/入网协议161101PDF_SIGN.pdf");
-		signModel.setSrc("C:/Users/yangsong/Desktop/pdf/入网协议161101PDF_DEMO.pdf");
+		signModel.setTarget("C:/Users/yangsong/Desktop/111.pdf");
+		signModel.setSrc("C:/Users/yangsong/Desktop/11.pdf");
 		signModel.setFieldPosition(fieldPosition);
 		signModel.setKeyPass("123456zkrpf");
 		signModel.setKeyStorePass("123456zkrpf");
 		signModel.setImageurl("G:/QQFiles/files/hetong.png");
-		signModel.setPage(2);
+		signModel.setPage(1);
+		//signModel.setFieldName("STAMP");
 		pdfServiceImpl.signDataImage(signModel);
 	}
 	
@@ -70,7 +69,7 @@ public class PdfTest {
 	 * @exception no
 	 */
 	public static FieldPosition testCompose(){
-		ComposeModel composeModel = new ComposeModel("C:/Users/yangsong/Desktop/fptd.pdf", "C:/Users/yangsong/Desktop/FAPI_DEMO.pdf");
+		ComposeModel composeModel = new ComposeModel("C:/Users/yangsong/Desktop/1.pdf", "C:/Users/yangsong/Desktop/11.pdf");
 		TextModel tm = new TextModel(10);
 		composeModel.addValue("fpdm", new ValueModel("011001605111",tm));
 		composeModel.addValue("fphm", new ValueModel("52743717",tm));
@@ -126,9 +125,9 @@ public class PdfTest {
 	}
 	
 	public static void testComposeAndSign(){
-		ComposeModel composeModel = new ComposeModel("C:/Users/yangsong/Desktop/demo1.pdf", "C:/Users/yangsong/Desktop/demo1test.pdf");
+		ComposeModel composeModel = new ComposeModel("C:/Users/yangsong/Desktop/1.pdf", "C:/Users/yangsong/Desktop/11.pdf");
 		TextModel tm = new TextModel(null,null,8);
-		composeModel.addValue("fill_3", new ValueModel("北京市朝阳区红军营南路15号瑞普大厦B座1102北京市朝阳区红军营南路15号瑞普大厦B座1102",tm));
+		composeModel.addValue("TR_NO", new ValueModel("北京市朝阳区红军营南路15号瑞普大厦B座1102北京市朝阳区红军营南路15号瑞普大厦B座1102",tm));
 		composeModel.setEdited(false);
 		SignModel signModel = new SignModel();
 		signModel.setFieldName("sign2");
