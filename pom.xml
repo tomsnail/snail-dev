@@ -68,7 +68,7 @@
             			<tag>
                 			<name>status</name>
                 			<placement>a</placement>
-                			<head>ï¿½????</head>
+                			<head>ï¿?????</head>
             			</tag>
             			<tag>
                 			<name>version</name>
@@ -276,5 +276,6 @@
     	<module>dev-log-cat</module>
     	<module>dev-rap</module>
     	<module>dev-j2cache</module>
+    <module>dev-fastdfs</module>
   </modules>
 </project>
