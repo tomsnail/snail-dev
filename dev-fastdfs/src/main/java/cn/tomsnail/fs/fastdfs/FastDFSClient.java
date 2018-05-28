@@ -71,6 +71,10 @@ public class FastDFSClient {
 		 return storePath.getFullPath();
 	 }
 	 
+	 public static void delete(String path){
+		 storageClient.deleteFile(path);
+	 }
+	 
 	 public static void main(String[] args) {
 		 try {
 			 InputStream input = new FileInputStream(new File("E:/02_workspace/35_npcmis/npc-dc/npc-dc-basic/npc-dc-basic-webapi/sign/293196195522586.pdf"));
