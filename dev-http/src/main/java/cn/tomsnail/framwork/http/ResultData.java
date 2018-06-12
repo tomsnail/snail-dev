@@ -120,4 +120,15 @@ public class ResultData<T> implements java.io.Serializable {
 		map.put(key, v);
 		return (ResultData<Map<String, Object>>) this;
 	}
+	
+	public void putBody(String key,Object value){
+		Map<String,Object> map = null;
+		if(body==null){
+			map = new HashMap<String,Object>();
+			body = (T) map;
+		}else{
+			map = (Map<String, Object>) body;
+		}
+		map.put(key, value);
+	}
 }

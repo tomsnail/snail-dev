@@ -23,7 +23,7 @@ public class AppService extends Thread {
 	
 	private ApplicationContext applicationContext;
 	
-	private long sleepTime = 10000l;
+	private long sleepTime = 30000l;
 	
 	public AppService(ApplicationContext applicationContext){
 		this.applicationContext = applicationContext;

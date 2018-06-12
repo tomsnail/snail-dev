@@ -37,6 +37,13 @@ public class RedisMapCache  implements ICache,IInitCache,IDestoryCache {
 		redisTemplate.setPassword(cacheConfig.getPassword());
 		redisTemplate.setPort(cacheConfig.getPort());
 		redisTemplate.afterPropertiesSet();
+		redisTemplate.afterPropertiesSet();
+		redisTemplate.setStringSerializer(new StringRedisSerializer());
+		redisTemplate.setKeySerializer(new StringRedisSerializer());
+		redisTemplate.setValueSerializer(new StringRedisSerializer());
+		redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+		
 	}
 	
 	@Override

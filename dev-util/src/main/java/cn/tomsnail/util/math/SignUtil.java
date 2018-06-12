@@ -47,7 +47,9 @@ public class SignUtil {
 			ps.append(param);
 		}
 		try {
+			System.out.println(ps);
 			String _sign = HmacSha1Util.getSoureSignature(ps.toString().getBytes(), ts_sign.getBytes());
+			System.out.println(_sign);
 			if (sign.equalsIgnoreCase(_sign)) {
 				return true;
 			}
@@ -60,20 +62,22 @@ public class SignUtil {
 	
 
 	public static void main(String[] args) {
-		//System.out.println(validSign("583796cce3cad9ae1d45d0548bf5fcdd","152031568","1520315680","984fa615-3774-4cfe-8937-642aef86aeb8"));
-		System.out.println(HmacSha1Util.getSoureSignature
-				(
-						(
-						"1519974653478"
-						+
-						"{'O_CODE':'100001','O_NAME':'test','PARENT_CODE':'100000'}"  //当IS_SIGN为0时不加入body内容
-						+
-						"1519974653"
-						) .getBytes()
-						,
-						"13dd2177a209aaeb1c5c6f88ebd267a0d3bffb8ebb50f13c55e83917fa3cc19a".getBytes()
-						,HmacSha1Util.HMAC_SHA256)
-);
+//		System.out.println(HmacSha1Util.getSoureSignature("29838526391527749295146".getBytes(), "b4e2cf20-697d-4ddc-bc33-9734867ecf15".getBytes()));
+//		System.out.println("618c94509a7aadbaf10ff7399f3efdc2e68124c7".equals("618c94509a7aadbaf10ff7399f3efdc2e68124c7"));
+//		System.out.println(validSignHmac("618c94509a7aadbaf10ff7399f3efdc2e68124c7","b4e2cf20-697d-4ddc-bc33-9734867ecf15","2983852639","1527749295146"));
+//		System.out.println(HmacSha1Util.getSoureSignature
+//				(
+//						(
+//						"1519974653478"
+//						+
+//						"{'O_CODE':'100001','O_NAME':'test','PARENT_CODE':'100000'}"  //当IS_SIGN为0时不加入body内容
+//						+
+//						"1519974653"
+//						) .getBytes()
+//						,
+//						"13dd2177a209aaeb1c5c6f88ebd267a0d3bffb8ebb50f13c55e83917fa3cc19a".getBytes()
+//						,HmacSha1Util.HMAC_SHA256)
+//);
 	}
 
 }

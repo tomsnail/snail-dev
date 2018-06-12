@@ -50,7 +50,7 @@ public class TokenFactory {
 			tokenSum = (i)->(HmacSha1Util.getSignature(info.getBytes(), KEY));
 		}
 		CacheData token = sum(info,tokenSum);
-		String sign = UUID.randomUUID().toString();
+		String sign = UUID.randomUUID().toString().replace("-", "");
 		token.setToken(MD5Util.md5Encode(sign+info));
 		token.setSign(sign);
 		token.setExpire(expire);
