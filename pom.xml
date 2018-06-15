@@ -277,5 +277,6 @@
     	<module>dev-rap</module>
     	<module>dev-j2cache</module>
     <module>dev-fastdfs</module>
+    <module>dev-rabbitmq</module>
   </modules>
 </project>
