@@ -1,21 +1,13 @@
 package cn.tomsnail.mq.rabbitmq;
 
 
-import javax.annotation.PostConstruct;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
-
+import org.springframework.stereotype.Component;
 
 import cn.tomsnail.config.client.ConfigClientFactory;
 
-
-public abstract class AbstractRabbitMQCustomer implements RabbitMQCustomer{
+@Component
+public class RabbitMQSender {
 	
-	
-	private static final Logger logger = LoggerFactory.getLogger(AbstractRabbitMQCustomer.class);
 	
 	protected RabbitmqObject rabbitmqObject = new RabbitmqObject();
 	
@@ -55,19 +47,11 @@ public abstract class AbstractRabbitMQCustomer implements RabbitMQCustomer{
 
 	}
 	
-	@PostConstruct
-	public void init() throws Exception {
-		
-		if(rabbitmqObject==null){
-			return;
-		}
-		initProps();
+	
+	
+	public void send(String msg) throws Exception{
 		RabbitmqClient rabbitmqClient = RabbitmqFactory.get(rabbitmqObject);
-		if(rabbitmqClient!=null){
-			rabbitmqClient.register(this);
-		}
-		
-        logger.info("rabbitmq init success!");
+		rabbitmqClient.send(msg);
 	}
 
 }
