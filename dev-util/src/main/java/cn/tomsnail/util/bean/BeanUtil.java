@@ -1,11 +1,22 @@
 package cn.tomsnail.util.bean;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.cglib.beans.BeanMap;
+import org.apache.commons.beanutils.BeanMap;
+import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+
 
 public class BeanUtil {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(BeanUtil.class);
 
 	/**
 	 * 将对象装换为map
@@ -16,12 +27,80 @@ public class BeanUtil {
 	public static <T> Map<String, Object> beanToMap(T bean) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (bean != null) {
-			BeanMap beanMap = BeanMap.create(bean);
+			net.sf.cglib.beans.BeanMap beanMap = net.sf.cglib.beans.BeanMap.create(bean);
 			for (Object key : beanMap.keySet()) {
 				Object value = beanMap.get(key);
 				map.put(key + "", value == null ? "" : value + "");
 			}
 		}
 		return map;
+	}
+	
+	public static <T> Map<?,?> getMapFromBean(T bean){
+		
+		if(bean!=null){
+			try {
+				return new BeanMap(bean);
+			} catch (Exception e) {
+			} 
+		}
+		return null;
+		
+	}
+	
+	public static <T> T getBeanFromMap(Map<String,?> map,Class<T> beanClass){
+		
+		if(map!=null){
+			try {
+				T obj = beanClass.newInstance();  
+				BeanUtils.populate(obj, map);
+				return obj;
+			} catch (IllegalAccessException | InvocationTargetException  | InstantiationException e) {
+			} 
+			
+		}
+		
+		return null;
+	}
+	
+	
+	public static <T,E> void mergeBean(T src,E dest){
+		
+		if(src==null||dest==null){
+			return;
+		}
+		try {
+			BeanUtils.copyProperties(dest, src);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			LOGGER.error("", e);
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T> T cloneBean(T bean){
+		
+		if(bean!=null){
+			try {
+				return (T) BeanUtils.cloneBean(bean);
+			} catch (IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
+				LOGGER.error("", e);
+			}
+		}
+		
+		return null;
+	}
+	
+	public static <T> String getBeanInfo(T bean){
+		
+		if(bean!=null){
+			try {
+				return JSON.toJSONString(BeanUtils.describe(bean),SerializerFeature.WriteMapNullValue);
+			} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+				LOGGER.error("", e);
+			}
+		}
+		
+		return null;
 	}
 }
