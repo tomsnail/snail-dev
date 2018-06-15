@@ -4,6 +4,7 @@ package cn.tomsnail.mq.rabbitmq;
 import org.springframework.stereotype.Component;
 
 import cn.tomsnail.config.client.ConfigClientFactory;
+import cn.tomsnail.util.string.StringUtils;
 
 @Component
 public class RabbitMQSender {
@@ -50,8 +51,9 @@ public class RabbitMQSender {
 	
 	
 	public void send(String msg) throws Exception{
+		if(StringUtils.isBlank(msg)) return;
 		RabbitmqClient rabbitmqClient = RabbitmqFactory.get(rabbitmqObject);
-		rabbitmqClient.send(msg);
+		if(rabbitmqClient!=null) rabbitmqClient.send(msg);
 	}
 
 }
