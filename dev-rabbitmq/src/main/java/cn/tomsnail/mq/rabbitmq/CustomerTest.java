@@ -11,7 +11,7 @@ import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 import com.rabbitmq.client.AMQP;
 
-public class Customer {
+public class CustomerTest {
 	
 	
 	private final static String QUEUE_NAME = "rabbitMQ.test";
