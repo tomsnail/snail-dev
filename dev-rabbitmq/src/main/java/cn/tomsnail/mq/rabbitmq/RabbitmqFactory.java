@@ -13,7 +13,7 @@ public class RabbitmqFactory {
 	
 	private static final Map<String,RabbitmqClient> MAP = new ConcurrentHashMap<String, RabbitmqClient>();
 	
-	public static RabbitmqClient get(RabbitmqObject rabbitmqObject){
+	public static synchronized RabbitmqClient get(RabbitmqObject rabbitmqObject){
 		
 		String uuid = rabbitmqObject.getUUID();
 		

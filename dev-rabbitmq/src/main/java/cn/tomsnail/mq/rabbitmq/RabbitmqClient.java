@@ -1,7 +1,6 @@
 package cn.tomsnail.mq.rabbitmq;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -44,7 +43,7 @@ public class RabbitmqClient implements Runnable{
 	public boolean init(RabbitmqObject ro) throws Exception{
 		
 		
-		if(ro==null||StringUtils.isAnyBlank(ro.exchangeName,ro.queueName,ro.vHost,ro.ip,ro.username,ro.password)){
+		if(ro==null||StringUtils.isAnyBlank(ro.ip,ro.username,ro.password)){
 			return false;
 		}
 		
@@ -57,8 +56,8 @@ public class RabbitmqClient implements Runnable{
         factory.setPassword(ro.password);
         factory.setPort(ro.port);
         
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
+        connection = factory.newConnection();
+        channel = connection.createChannel();
         channel.exchangeDeclare(ro.exchangeName, ro.type, ro.eDurable, ro.eAutoDelete, null);
         channel.queueDeclare(ro.queueName, ro.qDurable, ro.qExclusive, ro.qAutoDelete, null);
         channel.queueBind(ro.queueName, ro.exchangeName, ro.routeKey, null);

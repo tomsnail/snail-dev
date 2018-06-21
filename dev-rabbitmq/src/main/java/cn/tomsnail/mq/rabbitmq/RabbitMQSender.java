@@ -1,6 +1,8 @@
 package cn.tomsnail.mq.rabbitmq;
 
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Component;
 
 import cn.tomsnail.config.client.ConfigClientFactory;
@@ -12,8 +14,8 @@ public class RabbitMQSender {
 	
 	protected RabbitmqObject rabbitmqObject = new RabbitmqObject();
 	
-	
-	protected void initProps() throws Exception{
+	@PostConstruct
+	public void initProps() throws Exception{
 		
 		rabbitmqObject.exchangeName = ConfigClientFactory.getConfig("rabbitmq.exchange.name", "");
 		

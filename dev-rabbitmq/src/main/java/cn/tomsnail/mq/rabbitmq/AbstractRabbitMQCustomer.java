@@ -15,7 +15,7 @@ import cn.tomsnail.config.client.ConfigClientFactory;
 public abstract class AbstractRabbitMQCustomer implements RabbitMQCustomer{
 	
 	
-	private static final Logger logger = LoggerFactory.getLogger(AbstractRabbitMQCustomer.class);
+	protected static final Logger logger = LoggerFactory.getLogger(AbstractRabbitMQCustomer.class);
 	
 	protected RabbitmqObject rabbitmqObject = new RabbitmqObject();
 	
