@@ -2,7 +2,6 @@ package cn.tomsnail.fs.fastdfs;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -73,14 +72,24 @@ public class FastDFSClient {
 		 storageClient.deleteFile(path);
 	 }
 	 
+	 public static void delete(String groupName,String path){
+		 storageClient.deleteFile(groupName,path);
+	 }
+	 
+	 public static void deleteAutoGroup(String path){
+		 String _groupName = path.split("/")[0];
+		 String _path = path.replace(_groupName+"/", "");
+		 storageClient.deleteFile(_groupName,_path);
+	 }
+	 
 	 public static void main(String[] args) {
 		 try {
-			 InputStream input = new FileInputStream(new File("E:/02_workspace/35_npcmis/npc-dc/npc-dc-basic/npc-dc-basic-webapi/sign/293196195522586.pdf"));
-
-			 byte[] byt = new byte[input.available()];
-
-			 input.read(byt);
-			System.out.println(upload(byt,"pdf","234324325"));
+			 String path = "npc0/M00/00/00/wKgKAlsyZN6AVbLxAALKsKEINVk34.jpeg";
+			 
+			 String _groupName = path.split("/")[0];
+			 String _path = path.replace(_groupName+"/", "");
+			 System.out.println(_groupName);
+			 System.out.println(_path);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
