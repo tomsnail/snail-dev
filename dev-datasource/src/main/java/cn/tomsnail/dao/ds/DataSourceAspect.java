@@ -29,33 +29,30 @@ public class DataSourceAspect {
          
          Object target = point.getTarget();  
          String method = point.getSignature().getName();  
+         
+        
+         
          Class<?>[] classz = target.getClass().getInterfaces();  
          if(classz==null||classz.length==0){
         	 return;
          }
          DataSource data = null;
          for(Class<?> clazz:classz){
-        	 System.out.println(clazz.getName());
         	 if(clazz.getName().contains("PageDao")||clazz.getName().contains("BaseDao")){
         		 continue;
         	 }
         	
              try {  
             	 if(clazz.isAnnotationPresent(DataSource.class)){
-            		 
             		 data = clazz.getAnnotation(DataSource.class);
-            		 System.out.println("Class:"+data.value());
             	 }
             	 Class<?>[] parameterTypes = ((MethodSignature) point.getSignature())  
                          .getMethod().getParameterTypes();  
                  Method m = clazz.getMethod(method, parameterTypes);  
                  if (m != null && m.isAnnotationPresent(DataSource.class)) {  
                      data = m.getAnnotation(DataSource.class);  
-                     System.out.println("Method:"+data.value());
                  }   
                  if(data!=null){
-                	 System.out.println("data:"+data.value());
-                	 HandleDataSource.putDataSource(data.value());
                 	 break;
                  }
              } catch (Exception e) {  
@@ -64,7 +61,19 @@ public class DataSourceAspect {
          }
          
          if(data==null){
+        	 if(RountingDataSource.ROUTE_AUTO_WR.equals(RountingDataSource.routeType)){
+            	 if(method.startsWith("find")||method.startsWith("get")||method.startsWith("query")||method.startsWith("count")||method.startsWith("page")){
+            		 HandleDataSource.putDataSource("read");
+            		 return;
+            	 }
+            	 if(method.startsWith("save")||method.startsWith("insert")||method.startsWith("delete")||method.startsWith("del")||method.startsWith("update")){
+            		 HandleDataSource.putDataSource("write");
+            		 return;
+            	 }
+             }
         	 HandleDataSource.putDataSource("default");
+         }else{
+        	 HandleDataSource.putDataSource(data.value());
          }
         
     }  

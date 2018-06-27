@@ -8,13 +8,15 @@ public class RountingDataSource extends AbstractRoutingDataSource{
 	
 	public static final String ROUTE_WR = "WR";
 	
+	public static final String ROUTE_AUTO_WR = "AUTO_WR";
+	
 	public static final String ROUTE_MS = "MS";
 	
 	public static final String ROUTE_MULTI_TYPE_DB = "MULTI_TYPE_DB";
 	
 	public static final String ROUTE_GROUP_MS = "GROUP_MS";	
 	
-	private String routeType = null;
+	static String routeType = null;
 
 	@Override
 	protected Object determineCurrentLookupKey() {
