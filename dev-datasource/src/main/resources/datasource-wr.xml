@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:aop="http://www.springframework.org/schema/aop"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd    
+                        http://www.springframework.org/schema/tx  
+                        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd  
+                        http://www.springframework.org/schema/aop   
+                        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd  
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">  
+  
+ 
+  
+    <bean id="readDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">     
+    <!-- 基本属性 url、user、password -->  
+      <property name="url" value="jdbc:mysql://localhost:3306/dbr" />  
+      <property name="username" value="root" />  
+      <property name="password" value="123456" />  
+  
+      <!-- 配置初始化大小、最小、最大 -->  
+      <property name="initialSize" value="1" />  
+      <property name="minIdle" value="1" />   
+      <property name="maxActive" value="20" />  
+  
+      <!-- 配置获取连接等待超时的时间 -->  
+      <property name="maxWait" value="60000" />  
+  
+      <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->  
+      <property name="timeBetweenEvictionRunsMillis" value="60000" />  
+  
+      <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->  
+      <property name="minEvictableIdleTimeMillis" value="300000" />  
+  
+      <property name="validationQuery" value="SELECT 'x'" />  
+      <property name="testWhileIdle" value="true" />  
+      <property name="testOnBorrow" value="false" />  
+      <property name="testOnReturn" value="false" />  
+  
+      <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->  
+      <property name="poolPreparedStatements" value="true" />  
+      <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />  
+  
+      <!-- 配置监控统计拦截的filters -->  
+      <property name="filters" value="stat" />   
+    </bean>  
+      
+    <bean id="writeDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">    
+    <!-- 基本属性 url、user、password -->  
+      <property name="url" value="jdbc:mysql://localhost:3306/dbw" />  
+      <property name="username" value="root" />  
+      <property name="password" value="123456" />  
+  
+      <!-- 配置初始化大小、最小、最大 -->  
+      <property name="initialSize" value="1" />  
+      <property name="minIdle" value="1" />   
+      <property name="maxActive" value="20" />  
+  
+      <!-- 配置获取连接等待超时的时间 -->  
+      <property name="maxWait" value="60000" />  
+  
+      <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->  
+      <property name="timeBetweenEvictionRunsMillis" value="60000" />  
+  
+      <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->  
+      <property name="minEvictableIdleTimeMillis" value="300000" />  
+  
+      <property name="validationQuery" value="SELECT 'x'" />  
+      <property name="testWhileIdle" value="true" />  
+      <property name="testOnBorrow" value="false" />  
+      <property name="testOnReturn" value="false" />  
+  
+      <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->  
+      <property name="poolPreparedStatements" value="true" />  
+      <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />  
+  
+      <!-- 配置监控统计拦截的filters -->  
+      <property name="filters" value="stat" />   
+    </bean>  
+  
+    <bean id="dataSource" class="cn.tomsnail.dao.ds.RountingDataSource">  
+        <property name="targetDataSources">      
+          <map key-type="java.lang.String">      
+              <!-- write -->    
+             <entry key="write" value-ref="writeDataSource"/>      
+             <!-- read -->    
+             <entry key="read" value-ref="readDataSource"/>      
+          </map>               
+        </property>   
+        <property name="defaultTargetDataSource" ref="readDataSource"/>      
+      
+    </bean>  
+  
+  
+  
+  
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />  
+        <!-- 自动扫描mapping.xml文件 -->  
+        <property name="mapperLocations" value="classpath:com/xxxx/xxxx/dao/*.xml"></property>  
+    </bean>  
+  
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="com.xxxx.xxxx.dao" />  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
+    </bean>  
+  
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->  
+    <bean id="transactionManager"  
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource" />  
+    </bean>  
+      
+      
+     <!-- 为业务逻辑层的方法解析@DataSource注解  为当前线程的routeholder注入数据源key -->   
+    <bean id="dataSourceAspect" class="cn.tomsnail.dao.ds.DataSourceAspect" />    
+    <aop:config proxy-target-class="true">    
+        <aop:aspect id="dataSourceAspect" ref="dataSourceAspect" order="1">    
+            <aop:pointcut id="tx" expression="execution(* com.xxxx.xxxx.service..*.*(..)) "/>    
+            <aop:before pointcut-ref="tx" method="before" />                
+        </aop:aspect>    
+    </aop:config>  
+      
+      
+  
+  
+  
+  
+  
+  
+</beans>  
