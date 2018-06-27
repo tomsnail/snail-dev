@@ -22,6 +22,9 @@
     
     <!-- 引入配置文件--> 
     <context:property-placeholder location="classpath*:conf-dataSource.properties" ignore-unresolvable="true"/>
+    
+    <context:component-scan base-package="cn.tomsnail.dao.ds"/>
+    
 
 	 <!-- 配置使Spring采用CGLIB代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
