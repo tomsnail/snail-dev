@@ -1,6 +1,7 @@
 package cn.tomsnail.dao.ds;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -9,13 +10,24 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
+
+import cn.tomsnail.dao.ds.router.DataSourceRoute;
 
 @Aspect
 @Component
+@ComponentScan(basePackages="cn.tomsnail.dao.ds.router")
 public class DataSourceAspect {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
+	
+	
+
+	
+	@Autowired(required=false)
+	private List<DataSourceRoute> dataSourceRoutes;
 	
 	
 	@Pointcut("execution(public * com..*.dao..*.*(..))")
@@ -37,11 +49,13 @@ public class DataSourceAspect {
         	 return;
          }
          DataSource data = null;
+         
+         DataSourceName annotationDataSourceName = null;
+         
          for(Class<?> clazz:classz){
         	 if(clazz.getName().contains("PageDao")||clazz.getName().contains("BaseDao")){
         		 continue;
         	 }
-        	
              try {  
             	 if(clazz.isAnnotationPresent(DataSource.class)){
             		 data = clazz.getAnnotation(DataSource.class);
@@ -53,6 +67,7 @@ public class DataSourceAspect {
                      data = m.getAnnotation(DataSource.class);  
                  }   
                  if(data!=null){
+                	 annotationDataSourceName = new DataSourceName(data.value(), data.weight());
                 	 break;
                  }
              } catch (Exception e) {  
@@ -60,22 +75,37 @@ public class DataSourceAspect {
              }  
          }
          
-         if(data==null){
-        	 if(RountingDataSource.ROUTE_AUTO_WR.equals(RountingDataSource.routeType)){
-            	 if(method.startsWith("find")||method.startsWith("get")||method.startsWith("query")||method.startsWith("count")||method.startsWith("page")){
-            		 HandleDataSource.putDataSource("read");
-            		 return;
-            	 }
-            	 if(method.startsWith("save")||method.startsWith("insert")||method.startsWith("delete")||method.startsWith("del")||method.startsWith("update")){
-            		 HandleDataSource.putDataSource("write");
-            		 return;
-            	 }
-             }
-        	 HandleDataSource.putDataSource("default");
-         }else{
-        	 HandleDataSource.putDataSource(data.value());
+         DataSourceName dataSourceName = annotationDataSourceName;
+         if(dataSourceName==null){
+        	 dataSourceName = new DataSourceName(RountingDataSource.DEFAULT_DSN,0);
          }
+         if(dataSourceRoutes!=null&&!dataSourceRoutes.isEmpty()){
+    		 for(DataSourceRoute dsr:dataSourceRoutes){
+    			 try {
+    				DataSourceName _dataSourceName = dsr.route(point, RountingDataSource.routeType,annotationDataSourceName);
+    				if(_dataSourceName==null){
+    					continue;
+    				}
+    				if(dataSourceName.lt(_dataSourceName)){
+    					dataSourceName = _dataSourceName;
+    				}
+				} catch (Exception e) {
+					logger.error("", e);
+				}
+    		 }
+    	 }
+         HandleDataSource.putDataSource(dataSourceName.getName());
         
-    }  
+    }
+
+	public List<DataSourceRoute> getDataSourceRoutes() {
+		return dataSourceRoutes;
+	}
+
+	public void setDataSourceRoutes(List<DataSourceRoute> dataSourceRoutes) {
+		this.dataSourceRoutes = dataSourceRoutes;
+	}  
+	
+	
 	
 }

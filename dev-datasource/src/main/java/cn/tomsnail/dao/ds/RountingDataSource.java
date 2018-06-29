@@ -1,5 +1,6 @@
 package cn.tomsnail.dao.ds;
 
+
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -16,6 +17,9 @@ public class RountingDataSource extends AbstractRoutingDataSource{
 	
 	public static final String ROUTE_GROUP_MS = "GROUP_MS";	
 	
+	
+	public static final String DEFAULT_DSN = "default";
+		
 	static String routeType = null;
 
 	@Override
@@ -30,18 +34,18 @@ public class RountingDataSource extends AbstractRoutingDataSource{
 	
 	@Override
 	public void afterPropertiesSet(){
-		if(routeType==null||routeType.equals("")){
-			routeType = "ROUTE_WR";
-		}
 		super.afterPropertiesSet();
 	}
 
 	public String getRouteType() {
-		return routeType;
+		if(RountingDataSource.routeType==null||RountingDataSource.routeType.equals("")){
+			RountingDataSource.routeType = RountingDataSource.ROUTE_WR;
+		}
+		return RountingDataSource.routeType;
 	}
 
 	public void setRouteType(String routeType) {
-		this.routeType = routeType;
+		RountingDataSource.routeType = routeType;
 	}
 	
 	

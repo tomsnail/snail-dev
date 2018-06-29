@@ -278,5 +278,6 @@
     	<module>dev-j2cache</module>
     <module>dev-fastdfs</module>
     <module>dev-rabbitmq</module>
+    <module>dev-task-elastic-job</module>
   </modules>
 </project>
