@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+    xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.dangdang.com/schema/ddframe/reg
+                        http://www.dangdang.com/schema/ddframe/reg/reg.xsd
+                        http://www.dangdang.com/schema/ddframe/job
+                        http://www.dangdang.com/schema/ddframe/job/job.xsd
+                        ">
+                        
+                        
+    <bean id="elasticJobLog" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.169.156:3306/elasticjob"/>
+        <property name="username" value="chenwx"/>
+        <property name="password" value="chenwx"/>
+    </bean>
+    <!--配置作业注册中心 -->
+    <reg:zookeeper id="regCenter" server-lists="192.168.169.170:2181" namespace="dd-job1" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
+    
+    <!-- 配置作业-->
+    <job:simple id="oneOffElasticJob" class="cn.tomsnail.task.elastic.job.test.MyElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="1" overwrite="true" event-trace-rdb-data-source="elasticJobLog"/>	
+	
+
+</beans>

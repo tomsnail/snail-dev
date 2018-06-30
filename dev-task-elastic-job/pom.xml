@@ -7,20 +7,41 @@
     <artifactId>dev-component</artifactId>
     <version>0.0.4-SNAPSHOT</version>
   </parent>
-  <groupId>cn.tomsnail</groupId>
   <artifactId>dev-task-elastic-job</artifactId>
-  <version>0.0.4-SNAPSHOT</version>
   <name>dev-task-elastic-job</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <elastic.job.lite.core.version>2.1.5</elastic.job.lite.core.version>
+    <elastic.job.lite.spring.version>2.1.5</elastic.job.lite.spring.version>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+   	<dependency>
+    	<groupId>com.dangdang</groupId>
+    	<artifactId>elastic-job-lite-core</artifactId>
+    	<version>${elastic.job.lite.core.version}</version>
+	</dependency>
+
+	<!-- 使用springframework自定义命名空间时引入 -->
+	<dependency>
+    	<groupId>com.dangdang</groupId>
+    	<artifactId>elastic-job-lite-spring</artifactId>
+    	<version>${elastic.job.lite.spring.version}</version>
+	</dependency>
+	<dependency>
+    	<groupId>commons-dbcp</groupId>
+    	<artifactId>commons-dbcp</artifactId>
+    	<version>1.4</version>
+	</dependency>
+	<dependency>
+    	<groupId>commons-dbcp</groupId>
+    	<artifactId>commons-dbcp</artifactId>
+    	<version>1.4</version>
+	</dependency>
+	<dependency>
+    	<groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    	<version>5.1.32</version>
+	</dependency>
   </dependencies>
 </project>
