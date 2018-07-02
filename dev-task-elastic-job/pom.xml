@@ -12,8 +12,8 @@
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <elastic.job.lite.core.version>2.1.5</elastic.job.lite.core.version>
-    <elastic.job.lite.spring.version>2.1.5</elastic.job.lite.spring.version>
+    <elastic.job.lite.core.version>2.1.5-ts-SNAPSHOT</elastic.job.lite.core.version>
+    <elastic.job.lite.spring.version>2.1.5-ts-SNAPSHOT</elastic.job.lite.spring.version>
   </properties>
   <dependencies>
    	<dependency>
