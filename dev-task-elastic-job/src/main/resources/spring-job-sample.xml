@@ -14,15 +14,15 @@
                         
     <bean id="elasticJobLog" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://192.168.169.156:3306/elasticjob"/>
-        <property name="username" value="chenwx"/>
-        <property name="password" value="chenwx"/>
+        <property name="url" value="jdbc:mysql://mysql.tomsnail.cn:3306/ts-console"/>
+        <property name="username" value="tomsnail"/>
+        <property name="password" value=""/>
     </bean>
     <!--配置作业注册中心 -->
     <reg:zookeeper id="regCenter" server-lists="192.168.169.170:2181" namespace="dd-job1" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
     
     <!-- 配置作业-->
-    <job:simple id="oneOffElasticJob" class="cn.tomsnail.task.elastic.job.test.MyElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="1" overwrite="true" event-trace-rdb-data-source="elasticJobLog"/>	
+    <job:simple id="oneOffElasticJob" job-ref="MyElasticJob" registry-center-ref="regCenter" cron="0/20 * * * * ?" sharding-total-count="1" overwrite="true" event-trace-rdb-data-source="elasticJobLog"/>	
 	
 
 </beans>

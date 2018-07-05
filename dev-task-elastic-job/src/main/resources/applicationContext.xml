@@ -24,6 +24,8 @@
     http://www.springframework.org/schema/util/spring-util.xsd">
    	
    	
+   	<context:component-scan base-package="cn.tomsnail.task.elastic.job.test"></context:component-scan>
+   	
     <import resource="spring-job-sample.xml"/>
    
     

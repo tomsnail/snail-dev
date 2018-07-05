@@ -1,9 +1,12 @@
 package cn.tomsnail.task.elastic.job.test;
 
 
+import org.springframework.stereotype.Service;
+
 import com.dangdang.ddframe.job.api.ExecutionContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 
+@Service("MyElasticJob")
 public class MyElasticJob implements SimpleJob{
 	
 
