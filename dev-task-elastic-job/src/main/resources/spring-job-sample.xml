@@ -18,11 +18,15 @@
         <property name="username" value="tomsnail"/>
         <property name="password" value=""/>
     </bean>
+    
+    <bean id="elasticJobMQ" class="cn.tomsnail.task.elastic.job.test.EventMQSener" >
+      
+    </bean>
     <!--配置作业注册中心 -->
     <reg:zookeeper id="regCenter" server-lists="192.168.169.170:2181" namespace="dd-job1" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
     
-    <!-- 配置作业-->
-    <job:simple id="oneOffElasticJob" job-ref="MyElasticJob" registry-center-ref="regCenter" cron="0/20 * * * * ?" sharding-total-count="1" overwrite="true" event-trace-rdb-data-source="elasticJobLog"/>	
+    <!-- 配置作业 event-trace-rdb-data-source="elasticJobLog"-->
+    <job:simple id="oneOffElasticJob" job-ref="MyElasticJob" registry-center-ref="regCenter" cron="0/20 * * * * ?" sharding-total-count="1" overwrite="true"  event-trace-mq="elasticJobMQ"/>	
 	
 
 </beans>
