@@ -4,7 +4,8 @@
 package cn.tomsnail.obj.base;
 
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -12,9 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
  * Service基类
  */
 @Transactional(readOnly = true)
-public abstract class BaseService extends BaseComponent{
+public abstract class BaseComponent {
 	
-	
+	/**
+	 * 日志对象
+	 */
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 
 
