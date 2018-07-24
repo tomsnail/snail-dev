@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Service基类
  */
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public abstract class BaseService extends BaseComponent{
 	
 	

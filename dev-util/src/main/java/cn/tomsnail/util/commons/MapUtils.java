@@ -17,7 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 	* @date 2017年9月12日 下午3:59:57
 	* @see 
 	*/     
-public class MapUtils {
+public class MapUtils extends org.apache.commons.collections.MapUtils{
 
 	  
 	   /**
