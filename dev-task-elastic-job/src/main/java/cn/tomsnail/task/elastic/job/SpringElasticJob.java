@@ -33,5 +33,9 @@ public @interface SpringElasticJob {
 	
 	String daoMethod() default "";
 	
+	JobType type() default JobType.single; 
+	
+	String params() default "";
+	
 	
 }

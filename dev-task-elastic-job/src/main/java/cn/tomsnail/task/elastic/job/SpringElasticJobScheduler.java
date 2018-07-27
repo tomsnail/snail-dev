@@ -50,14 +50,93 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 		
 		for(SpringElasticJobM springElasticJobM:ELASTIC_JOBS){
 			try {
-				createSpringElasticJob(springElasticJobM);
+				
+				JobType jobType = springElasticJobM.getJobType();
+				
+				if(jobType == JobType.single){
+					createSingleSpringElasticJob(springElasticJobM);
+				}else{
+					createMultipleSpringElasticJob(springElasticJobM);
+				}
+				
+				
 			} catch (Exception e) {
 				logger.error("", e);
 			}
 		}
 	}
 	
-	private void createSpringElasticJob(SpringElasticJobM springElasticJobM){
+	
+	private void createMultipleSpringElasticJob(SpringElasticJobM springElasticJobM){
+		
+		
+
+		if(springElasticJobM==null){
+			throw new NullPointerException("springElasticJobM is null");
+		}
+		
+		
+		
+		List<SpringElasticJobM> elasticJobMs = null;
+		try {
+			elasticJobMs = getMultipleSpringElasticJob(springElasticJobM);
+		} catch (SQLException e) {
+			logger.error("",e);
+		}
+		
+		if(CollectionUtils.isEmpty(elasticJobMs)){
+			throw new NullPointerException("elasticJobMs is null");
+		}
+		
+		for(SpringElasticJobM elasticJobM:elasticJobMs){
+			elasticJobM.setRegistryCenter(springElasticJobM.getRegistryCenter());
+			elasticJobM.setShardingTotalCount(springElasticJobM.getShardingTotalCount());
+			createSingleSpringElasticJob(elasticJobM);
+		}
+	}
+	
+	
+	private List<SpringElasticJobM> getMultipleSpringElasticJob(SpringElasticJobM springElasticJobM) throws SQLException{
+		if(springElasticJobM==null||springElasticJobM.getElasticJob()==null){
+			logger.error("{}", "springElasticJobM is null");
+			return null;
+		}
+		
+		String _jobDataSource = springElasticJobM.getJobDataSource();
+		
+		String _jobSQL = springElasticJobM.getJobSQL();
+		
+		if(StringUtils.isAnyBlank(_jobSQL,_jobDataSource)){
+			logger.error("{}", "_jobDataSource is null");
+			return null;
+		}
+		DataSource dataSource = applicationContext.getBean(_jobDataSource, DataSource.class);
+		Connection connection = dataSource.getConnection();
+		Statement statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(_jobSQL);
+		List<SpringElasticJobM> elasticJobMs = new ArrayList<SpringElasticJobM>();
+		while(rs.next()){    
+			String cron = rs.getString("CRON");
+			if(StringUtils.isBlank(cron)){
+				cron = rs.getString("cron");
+			}
+			String jobName = rs.getString("JOB_NAME");
+			if(StringUtils.isBlank(jobName)){
+				jobName = rs.getString("job_name");
+			}
+			if(StringUtils.isBlank(jobName)){
+				jobName = "job-"+System.currentTimeMillis();
+			}
+			String params = rs.getString("PARAMS");
+			if(StringUtils.isBlank(params)){
+				params = rs.getString("params");
+			}
+			elasticJobMs.add(new SpringElasticJobM(jobName, cron, params, springElasticJobM.elasticJob));
+	     }    
+		return elasticJobMs;
+	}
+	
+	private void createSingleSpringElasticJob(SpringElasticJobM springElasticJobM){
 		
 		if(springElasticJobM==null){
 			throw new NullPointerException("springElasticJobM is null");
@@ -97,6 +176,7 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 	private LiteJobConfiguration getLiteJobConfiguration(SpringElasticJobM springElasticJobM){
 		
 		if(springElasticJobM==null||springElasticJobM.getElasticJob()==null||StringUtils.isBlank( springElasticJobM.getJobName())){
+			logger.error("{}", "springElasticJobM is null");
 			return null;
 		}
 		
@@ -104,8 +184,8 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 		
 		String _className = springElasticJobM.getElasticJob().getClass().getCanonicalName();
 		
-		String _cron = springElasticJobM.getCron();
-		
+		String jobParmas = springElasticJobM.getParams();
+				
 		String sdi = springElasticJobM.getShardingTotalCount();
 		
 		int shardingTotalCount = 1;
@@ -115,10 +195,24 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 		} catch (NumberFormatException e) {
 			logger.error("", e);
 		}
+		String _cron = getCron(springElasticJobM);
+		
+		if(StringUtils.isBlank(_cron)){
+			logger.error("{}", "_cron is null");
+			return null;
+		}
 		
 		if(StringUtils.isNotBlank(_cron)){
-			return LiteJobConfiguration.newBuilder(new SimpleJobConfiguration(JobCoreConfiguration.newBuilder(_jobName, _cron, shardingTotalCount).build(), _className)).overwrite(springElasticJobM.overwrite).build();
+			return LiteJobConfiguration.newBuilder(new SimpleJobConfiguration(JobCoreConfiguration.newBuilder(_jobName, _cron, shardingTotalCount).jobParameter(jobParmas).build(), _className)).overwrite(springElasticJobM.overwrite).build();
 		}
+		
+		return null;
+	}
+
+	private String getCron(SpringElasticJobM springElasticJobM) {
+		
+		String _cron = springElasticJobM.getCron();
+		
 		String _jobDataSource = springElasticJobM.getJobDataSource();
 		
 		String _jobSQL = springElasticJobM.getJobSQL();
@@ -130,9 +224,7 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 			} catch (SQLException e) {
 				logger.error("", e);
 			}
-			if(StringUtils.isNotBlank(_cron)){
-				return LiteJobConfiguration.newBuilder(new SimpleJobConfiguration(JobCoreConfiguration.newBuilder(_jobName, _cron, shardingTotalCount).build(), _className)).overwrite(springElasticJobM.overwrite).build();
-			}
+			
 		}
 		
 		String _dao = springElasticJobM.getDao();
@@ -146,12 +238,9 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 			} catch (Exception e) {
 				logger.error("", e);
 			}
-			if(StringUtils.isNotBlank(_cron)){
-				return LiteJobConfiguration.newBuilder(new SimpleJobConfiguration(JobCoreConfiguration.newBuilder(_jobName, _cron, shardingTotalCount).build(), _className)).overwrite(springElasticJobM.overwrite).build();
-			}
+			
 		}
-		
-		return null;
+		return _cron;
 	}
 	
 	private String getCronSQL(String dataSourceStr,String sql) throws SQLException{
@@ -182,5 +271,7 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 		
 		return null;
 	}
+	
+	
 
 }

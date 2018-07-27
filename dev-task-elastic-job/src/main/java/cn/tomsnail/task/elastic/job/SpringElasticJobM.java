@@ -24,7 +24,11 @@ public class SpringElasticJobM {
 	
 	String daoMethod;
 	
+	JobType jobType;
+	
 	ElasticJob elasticJob;
+	
+	String params;
 
 	public String getJobName() {
 		return jobName;
@@ -106,15 +110,28 @@ public class SpringElasticJobM {
 		this.daoMethod = daoMethod;
 	}
 	
-	
-	
-	
+	public JobType getJobType() {
+		return jobType;
+	}
+
+	public void setJobType(JobType jobType) {
+		this.jobType = jobType;
+	}
+
 	public ElasticJob getElasticJob() {
 		return elasticJob;
 	}
 
 	public void setElasticJob(ElasticJob elasticJob) {
 		this.elasticJob = elasticJob;
+	}
+	
+	public String getParams() {
+		return params;
+	}
+
+	public void setParams(String params) {
+		this.params = params;
 	}
 
 	public SpringElasticJobM(){
@@ -133,6 +150,16 @@ public class SpringElasticJobM {
 		this.registryCenter = springElasticJob.registryCenter();
 		this.shardingTotalCount = springElasticJob.shardingTotalCount();
 		this.elasticJob = elasticJob;
+		this.jobType = springElasticJob.type();
+		this.params = springElasticJob.params();
 	} 
+	
+	public  SpringElasticJobM (String jobName,String cron,String params,ElasticJob elasticJob){
+		this.jobName = jobName;
+		this.cron = cron;
+		this.params = params;
+		this.elasticJob = elasticJob;
+		this.overwrite = true;
+	}
 	
 }
