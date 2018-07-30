@@ -18,6 +18,9 @@ public class AdditionalFilter implements RestfulFilter{
 	public boolean filter( HttpServletRequest request,HttpServletResponse response,Object[] args) throws RestfulFilterException{
 		String USER_UUID = request.getParameter(BaseContext.USER_UUID);
 		BaseContextManager.LOCAL_CONTEXT.set(new BaseContext().addMapValue(BaseContext.USER_UUID, USER_UUID));
+		
+		String SYSTEM_CODE = request.getParameter(BaseContext.SYSTEM_CODE);
+		BaseContextManager.LOCAL_CONTEXT.set(new BaseContext().addMapValue(BaseContext.SYSTEM_CODE, SYSTEM_CODE));
 		return true;
 	}
 	

@@ -12,6 +12,8 @@ public class BaseContext {
 	
 	public static final String USER_UUID = "USER_UUID";
 	
+	public static final String SYSTEM_CODE = "SYSTEM_CODE";
+	
 	private String contextId;
 	
 	private String timestamp;

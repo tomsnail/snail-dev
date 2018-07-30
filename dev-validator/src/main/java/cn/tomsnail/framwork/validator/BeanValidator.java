@@ -198,6 +198,146 @@ public class BeanValidator {
 		}
 	}
 	
+	
+	public boolean valid(Object obj) throws ParamValidatorException{
+		
+		if(obj==null){
+			throw new ParamValidatorException("对象为空");
+		}
+		
+		Class clazz = obj.getClass();
+		
+		
+		boolean isAllValidator = false;
+		StringBuffer sb = new StringBuffer();
+		boolean isHasError = false;
+		if(!clazz.isAnnotationPresent(cn.tomsnail.framwork.validator.annotation.BeanValidator.class)){
+			
+		}else{
+			cn.tomsnail.framwork.validator.annotation.BeanValidator bv = (cn.tomsnail.framwork.validator.annotation.BeanValidator) clazz.getAnnotation(cn.tomsnail.framwork.validator.annotation.BeanValidator.class);
+			isAllValidator = bv.isAllValidator();
+		}
+		List<Field> fs = new ArrayList<Field>();
+		Field[] fs0 = clazz.getDeclaredFields();
+		for(Field f:fs0){
+			fs.add(f);
+		}
+		if(clazz.getSuperclass()!=null){
+			Field[] fs1 = clazz.getSuperclass().getDeclaredFields();
+			for(Field f:fs1){
+				fs.add(f);
+			}
+			if(clazz.getSuperclass().getSuperclass()!=null){
+				Field[] fs2 = clazz.getSuperclass().getSuperclass().getDeclaredFields();
+				for(Field f:fs2){
+					fs.add(f);
+				}
+			}
+		}
+		
+		if(fs!=null&&fs.size()>0){
+			try {
+				for(Field f:fs){
+					f.setAccessible(true);
+					String fieldName = f.getName();
+					Class fcalzz = f.getClass();
+					Object value = f.get(obj);
+					FieldValidator fv = null;
+					if(f.isAnnotationPresent(FieldValidator.class)){
+						fv = f.getAnnotation(FieldValidator.class);
+						
+					}else{
+						continue;
+					}
+					
+					String fclazzName = f.getType().getName();
+					if(fv!=null&&!fv.onlyToBean()){
+						String[] validTypes = fv.validTypes();
+						boolean isDoValid = false;
+						if((validTypes==null||validTypes.length==0)){
+							isDoValid = true;
+						}
+						Object _value = value;
+						if(isDoValid){
+							RuleType[] rules = fv.rules();
+							String[] values = fv.values();
+							AValidator v = null;
+							
+							if(_value==null){
+								v = ValidatorFactory.getStringValidator();
+							}
+							
+							if(v==null&&fclazzName.equals("java.lang.String")){
+								v = ValidatorFactory.getStringValidator();
+							}
+							if(v==null&&fclazzName.equals("java.lang.Long")||fclazzName.equals("long")){
+								v = ValidatorFactory.getLongValidator();
+							}
+							if(v==null&&fclazzName.equals("java.lang.Integer")||fclazzName.equals("int")){
+								v = ValidatorFactory.getIntegerValidator();
+							}
+							if(v==null&&fclazzName.equals("java.lang.Float")||fclazzName.equals("float")){
+								v = ValidatorFactory.getStringValidator();
+							}
+							if(v == null && value instanceof Object){
+								BeanValidator beanValidator = ValidatorFactory.getBeanValidator();
+								if(isAllValidator){
+									try {
+										beanValidator.valid(value);
+									} catch (ParamValidatorException e) {
+										sb.append(e.getMessage()).append(";");
+										isHasError = true;
+									}
+								}else{
+									beanValidator.valid(value);
+								}
+								
+								
+															}
+							if(v==null||rules==null||values==null||rules.length!=values.length){
+							}else{
+								Map<RuleType,String> errorMap = new HashMap<RuleType, String>();
+								String[] es = fv.errorMsg();
+								for(int i=0;i<rules.length;i++){
+									if(StringUtils.isBlank(values[i])){
+										v.add(rules[i]);
+									}else{
+										v.add(rules[i], values[i]);
+									}
+									if(i<es.length){
+										errorMap.put(rules[i], es[i]);
+									}else{
+										errorMap.put(rules[i], "");
+									}
+								}
+								if(isAllValidator){
+									try {
+										v.getBeanValidatorValue(fieldName, _value, errorMap);
+									} catch (ParamValidatorException e) {
+										sb.append(e.getMessage()).append(";");
+										isHasError = true;
+									}
+								}else{
+									v.getBeanValidatorValue(fieldName, _value, errorMap);
+								}
+							}
+						}
+					}
+				}
+				if(isHasError){
+					throw new ParamValidatorException(sb.toString());
+				}
+				return true;
+			} catch (ParamValidatorException e) {
+				throw e;
+			}catch (Exception e) {
+				throw new ParamValidatorException(ValidateUtil.getValidFaildMsg("", "初始化参数对象错误"));
+			}
+		}else{
+			throw new ParamValidatorException(ValidateUtil.getValidFaildMsg("", "bean对象属性不可读"));
+		}
+	}
+	
 	public static void main(String[] args) {
 		Map<String,Object> t = new HashMap<String,Object>();
 		t.put("email", "123@xx.com");
