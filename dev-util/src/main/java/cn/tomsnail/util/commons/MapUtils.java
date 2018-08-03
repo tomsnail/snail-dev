@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import cn.tomsnail.util.string.StringUtils;
+
 import com.alibaba.fastjson.JSONObject;
 
   
@@ -43,6 +45,28 @@ public class MapUtils extends org.apache.commons.collections.MapUtils{
 			jsonObject.put(s, map.get(s));
 		}
 		return jsonObject.toJSONString();
+	}
+	
+	
+	public static <T> T getMapValue(Map<String,Object> map,String name,Class<T> clazz){
+		if(map==null||StringUtils.isBlank(name)||clazz==null){
+			return null;
+		}
+		if(map.containsKey(name)){
+			Object t = map.get(name);
+			if(t!=null){
+				if(clazz.getCanonicalName().equals("java.lang.String")){
+					return (T) t.toString();
+				}else{
+					return (T) t;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public static String getMapValue(Map<String,Object> map,String name){
+		return getMapValue(map,name,String.class);
 	}
 	
 }
