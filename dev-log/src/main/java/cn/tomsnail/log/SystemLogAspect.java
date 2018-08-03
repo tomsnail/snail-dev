@@ -143,10 +143,11 @@ public class SystemLogAspect {
 						isDebug = true;
 						ResultData<Map<String,Object>> _t = new ResultData<Map<String,Object>>();
 						if(logPoint.level().equals(LogLevel.DEBUG)){
-							//_t.setErrorMsg(ex.getMessage());
 							logger.error("",ex);
 						}
 						_t.setStatus(CommonMessage.FAILED);
+						_t.setMsg("application error");
+						_t.setErrorMsg(ex.getMessage());
 						t = _t;
 						
 					}
