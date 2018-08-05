@@ -1,5 +1,7 @@
 package cn.tomsnail.framwork.validator;
 
+import cn.tomsnail.framwork.validator.handler.BizValidator;
+
 /**
  *        简单验证工程,获得数据
  * @author yangsong
@@ -55,6 +57,10 @@ public class ValidatorFactory{
 	
 	public static BeanValidator getBeanValidator(){
 		return new BeanValidator();
+	}
+	
+	public static BizValidator getBizValidator(){
+		return new BizValidator();
 	}
 	
 }

@@ -8,7 +8,7 @@ package cn.tomsnail.framwork.validator.exception;
  * @date 2016年9月21日 下午4:04:01
  * @see 
  */
-public class ParamValidatorException extends Exception{
+public class ParamValidatorException extends RuntimeException{
 
 	/**
 	 * 
