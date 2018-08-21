@@ -13,9 +13,16 @@ public class BizValidator {
 	
 	private List<BizValidParam> bizValidParams = new ArrayList<BizValidParam>();
 	
+	private List<FValidHandler> validHandlers = new ArrayList<FValidHandler>();
+	
 	
 	public BizValidator add(Object obj,ValidHandler validHandler){
 		bizValidParams.add(new BizValidParam(validHandler, obj));
+		return this;
+	}
+	
+	public BizValidator add(FValidHandler validHandler){
+		validHandlers.add(validHandler);
 		return this;
 	}
 	
@@ -32,6 +39,32 @@ public class BizValidator {
 	public ValidResult doValid(){
 		
 		boolean success = true;
+		StringBuffer errorDesc = new StringBuffer();
+		if(CollectionUtils.isNotEmpty(validHandlers)){
+			
+			for(FValidHandler validHandler:validHandlers){
+				ValidResult validResult = null;
+				try{
+					validResult = validHandler.validate();
+				}catch(Throwable e){
+				}
+				if(validResult==null){
+					validResult = ValidResult.ERROR;
+				}
+				
+				if(!validResult.isSuccess()){
+					errorDesc.append("[")
+					 .append("")
+					 .append(":")
+					 .append(validResult.getErrorDesc())
+					 .append("]")
+					 .append(" ");
+				}
+				if(isFastFail&&!validResult.isSuccess()){
+					return validResult;
+				}
+			}
+		}
 		
 		if(CollectionUtils.isNotEmpty(bizValidParams)){
 			for(BizValidParam bizValidParam:bizValidParams){
@@ -55,7 +88,6 @@ public class BizValidator {
 			
 			
 			if(!success){
-				StringBuffer errorDesc = new StringBuffer();
 				for(BizValidParam bizValidParam:bizValidParams){
 					if(!bizValidParam.getValidResult().isSuccess()){
 						errorDesc.append("[")

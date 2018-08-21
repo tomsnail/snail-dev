@@ -12,11 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import cn.tomsnail.dao.ds.router.DataSourceRoute;
 
 @Aspect
+@Order(1)
 @Component
 @ComponentScan(basePackages="cn.tomsnail.dao.ds.router")
 public class DataSourceAspect {
@@ -74,8 +76,9 @@ public class DataSourceAspect {
             	 logger.error("", e);
              }  
          }
-         
          DataSourceName dataSourceName = annotationDataSourceName;
+         
+
          if(dataSourceName==null){
         	 dataSourceName = new DataSourceName(RountingDataSource.DEFAULT_DSN,0);
          }

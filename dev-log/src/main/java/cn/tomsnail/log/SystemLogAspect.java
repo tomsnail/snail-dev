@@ -125,18 +125,18 @@ public class SystemLogAspect {
 							if(StringUtils.isNotBlank(resultData.getStatus())){
 								if(resultData.getStatus().equals(CommonMessage.FAILED)){
 									log.setLevel(Log.ERROR);
-									log.setThrowable(new Exception(resultData.getErrorMsg()));
-									log.setResults(new StringBuffer(resultData.getMsg()));
+									log.setThrowable(new Exception(resultData.getErrorMsg()+""));
+									log.setResults(new StringBuffer(resultData.getMsg()+""));
 									resultData.setErrorMsg("");
 								}else if(!resultData.getStatus().equals(CommonMessage.SUCCESS)){
 									log.setLevel(Log.B_ERROR);
-									log.setResults(new StringBuffer(resultData.getMsg()));
+									log.setResults(new StringBuffer(resultData.getMsg()+""));
 								}
 							}
 							
 						}
 					} catch (Throwable ex) {
-						runinfo.append(ex.getMessage());
+						runinfo.append(ex.getMessage()+"");
 						logger.info(runinfo.toString());
 						log.setLevel(Log.ERROR);
 						log.setThrowable(ex);
@@ -147,7 +147,7 @@ public class SystemLogAspect {
 						}
 						_t.setStatus(CommonMessage.FAILED);
 						_t.setMsg("application error");
-						_t.setErrorMsg(ex.getMessage());
+						_t.setErrorMsg(ex.getMessage()+"");
 						t = _t;
 						
 					}

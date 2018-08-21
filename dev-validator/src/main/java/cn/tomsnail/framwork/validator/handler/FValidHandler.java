@@ -1,8 +1,8 @@
 package cn.tomsnail.framwork.validator.handler;
 
 @FunctionalInterface
-public interface ValidHandler<T> {
+public interface FValidHandler {
 
-	public ValidResult validate(T t);
+	public ValidResult validate();
 	
 }
