@@ -1,7 +1,11 @@
 package cn.tomsnail.obj.base;
 
-public class BaseReturnData<T> {
+import java.io.Serializable;
+
+public class BaseReturnData<T> implements Serializable{
 	
+	
+
 	protected int status = 0;
 	
 	protected T data;
@@ -73,6 +77,16 @@ public class BaseReturnData<T> {
 		return new BaseReturnData<T>(data,status,errorDesc);
 	}
 	
+	public static boolean normal(BaseReturnData baseReturnData){
+		return baseReturnData!=null&&baseReturnData.isNormal();
+	}
+	
+	public static String errorDesc(BaseReturnData baseReturnData){
+		if(baseReturnData==null){
+			return null;
+		}
+		return baseReturnData.getErrorDesc();
+	}
 	
 
 }

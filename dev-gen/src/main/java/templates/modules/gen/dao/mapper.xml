@@ -23,7 +23,7 @@ ${columnField?substring(0, columnField?last_index_of(","))}
 	<sql id="${className}Joins">
 	</sql>
     
-	<select id="get" resultType="${packageName}.${moduleName}.model.${ClassName}">
+	<select id="get" resultType="${packageName}.${moduleName}.model.${ClassName}Dto">
 		SELECT 
 			<include refid="${className}Columns"/>
 		FROM ${tableName} a
@@ -31,7 +31,7 @@ ${columnField?substring(0, columnField?last_index_of(","))}
 		WHERE a.id = ${"#"}{id}
 	</select>
 	
-	<select id="findList" resultType="${packageName}.${moduleName}.model.${ClassName}">
+	<select id="findList" resultType="${packageName}.${moduleName}.model.${ClassName}Dto">
 		SELECT 
 			<include refid="${className}Columns"/>
 		FROM ${tableName} a
@@ -144,7 +144,7 @@ ${columnField?substring(0, columnField?last_index_of(","))}
 		</choose>
 	</select>
 	
-	<select id="findAllList" resultType="${packageName}.${moduleName}.model.${ClassName}">
+	<select id="findAllList" resultType="${packageName}.${moduleName}.model.${ClassName}Dto">
 		SELECT 
 			<include refid="${className}Columns"/>
 		FROM ${tableName} a

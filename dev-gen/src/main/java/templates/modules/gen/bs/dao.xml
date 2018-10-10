@@ -11,9 +11,9 @@ package ${packageName}.${moduleName}.dao<#if subModuleName != "">.${subModuleNam
 
 import java.util.List;
 
-import cn.tomsnail.dao.plugins.pagination.PageDao;
+import ${packageName}.${moduleName}.model<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Dto;
 
-import ${packageName}.${moduleName}.model<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+import cn.tomsnail.dao.plugins.pagination.PageDao;
 
 /**
  * ${functionName}DAO接口
@@ -22,19 +22,19 @@ import ${packageName}.${moduleName}.model<#if subModuleName != "">.${subModuleNa
  */
 public interface ${ClassName}Dao extends PageDao<${ClassName}Dto> {
 	
-	public List<${ClassName}Dto> findList(${ClassName}Dto ${className});
+	public List<${ClassName}Dto> findList(${ClassName}Dto ${className}Dto);
 	
 	public List<${ClassName}Dto> findAllList();
 	
 	public ${ClassName}Dto get(String id);
 	
-	public int findPageCount(${ClassName}Dto ${className});
+	public int findPageCount(${ClassName}Dto ${className}Dto);
 	
-	public int insert(${ClassName}Dto ${className});
+	public int insert(${ClassName}Dto ${className}Dto);
 	
 	public int delete(String id);
 	
-	public int update(${ClassName}Dto ${className});
+	public int update(${ClassName}Dto ${className}Dto);
 	
 }]]>
 	</content>

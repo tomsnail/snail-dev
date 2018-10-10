@@ -26,6 +26,7 @@ public class GenTableColumn  {
 	private String jdbcType;	// JDBC类型
 	private String javaType;	// JAVA类型
 	private String javaField;	// JAVA字段名
+	private String javaField4Dto;	// JAVA字段名
 	private String isPk = "0";		// 是否主键（1：主键）
 	private String isNull;		// 是否可为空（1：可为空；0：不为空）
 	private String isInsert;	// 是否为插入字段（1：插入字段）
@@ -225,15 +226,21 @@ public class GenTableColumn  {
 	 * @return
 	 */
 	public String getSimpleJavaField(){
+		return StringUtils.substringBefore(getJavaField4Dto(), ".");
+	}
+	
+	public String getCsimpleJavaField(){
 		return StringUtils.substringBefore(getJavaField(), ".");
 	}
+	
+	
 	
 	/**
 	 * 获取Java字段，如果是对象，则获取对象.附加属性1
 	 * @return
 	 */
 	public String getJavaFieldId(){
-		return StringUtils.substringBefore(getJavaField(), "|");
+		return StringUtils.substringBefore(getJavaField4Dto(), "|");
 	}
 	
 	/**
@@ -342,6 +349,14 @@ public class GenTableColumn  {
 	
 	public Boolean getIsPK(){
 		return Boolean.valueOf(this.isPk.equals("1"));
+	}
+
+	public String getJavaField4Dto() {
+		return javaField4Dto;
+	}
+
+	public void setJavaField4Dto(String javaField4Dto) {
+		this.javaField4Dto = javaField4Dto;
 	}
 	
 	

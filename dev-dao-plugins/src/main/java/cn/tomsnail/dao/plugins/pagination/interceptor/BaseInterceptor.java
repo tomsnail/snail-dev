@@ -20,8 +20,10 @@ import org.apache.ibatis.plugin.Interceptor;
 
 
 
+
 import cn.tomsnail.dao.dialect.Dialect;
 import cn.tomsnail.dao.dialect.MySQLDialect;
+import cn.tomsnail.dao.dialect.OracleDialect;
 import cn.tomsnail.dao.plugins.pagination.Page;
 import cn.tomsnail.reflect.Reflections;
 
@@ -80,7 +82,7 @@ public abstract class BaseInterceptor implements Interceptor, Serializable {
      * @param p 属性
      */
     protected void initProperties(Properties p) {
-    	Dialect dialect = new MySQLDialect();
+    	Dialect dialect = new OracleDialect();
         if (dialect == null) {
             throw new RuntimeException("mybatis dialect error.");
         }

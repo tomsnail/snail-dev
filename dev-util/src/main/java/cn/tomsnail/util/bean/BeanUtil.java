@@ -2,6 +2,7 @@ package cn.tomsnail.util.bean;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanMap;
@@ -17,6 +18,27 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 public class BeanUtil {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(BeanUtil.class);
+	
+	
+	public static <T> void changeListToBean(List<Map<String,Object>> datalist,List<T> beanList,Class<T> beanClass){
+		
+		if(beanList==null){
+			throw new NullPointerException("beanList is null");
+		}
+		
+		if(datalist==null){
+			throw new NullPointerException("datalist is null");
+		}
+		
+		for (Map<String,Object> map : datalist) {
+			try {
+				T bean = (T) getBeanFromMap(map,beanClass );
+				beanList.add(bean);
+			} catch (Exception e) {
+				LOGGER.error("",e);
+			}
+		}
+	}
 
 	/**
 	 * 将对象装换为map
@@ -56,6 +78,7 @@ public class BeanUtil {
 				BeanUtils.populate(obj, map);
 				return obj;
 			} catch (IllegalAccessException | InvocationTargetException  | InstantiationException e) {
+				throw new RuntimeException(e.getMessage());
 			} 
 			
 		}

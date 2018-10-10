@@ -13,7 +13,7 @@
 		</category>
 		
 		<category value="all"  label="all">
-			<template>csd/model.xml</template>
+			<template>csd/dto.xml</template>
 			<template>csd/dao.xml</template>
 			<template>csd/mapper.xml</template>
 			<template>csd/iservice.xml</template>
@@ -41,8 +41,20 @@
 		</category>
 		
 		
+		<category value="baseservice"  label="baseservice">
+			<template>bs/dto.xml</template>
+			<template>bs/dao.xml</template>
+			<template>bs/mapper.xml</template>
+			<template>bs/api.xml</template>
+			<template>bs/model.xml</template>
+			<template>bs/convert.xml</template>
+			<template>bs/service.xml</template>
+			<template>bs/pom.xml</template>
+		</category>
+		
+		
 		<category value="oall"  label="oall">
-			<template>csd/model.xml</template>
+			<template>csd/dto.xml</template>
 			<template>csd/dao.xml</template>
 			<template>csd/mapper.xml</template>
 			<template>csd/iservice.xml</template>
@@ -92,13 +104,13 @@
 		</category>
 		
 		<category value="dao"  label="dao">
-			<template>dao/model.xml</template>
+			<template>dao/dto.xml</template>
 			<template>dao/dao.xml</template>
 			<template>dao/mapper.xml</template>
 		</category>
 		
 		<category value="daov"  label="dao">
-			<template>dao/model.xml</template>
+			<template>dao/dto.xml</template>
 			<template>dao/dao.xml</template>
 			<template>dao/mapper.xml</template>
 			<template>dao/vo.xml</template>
@@ -106,7 +118,7 @@
 		</category>
 		
 		<category value="odaov"  label="dao">
-			<template>dao/model.xml</template>
+			<template>dao/dto.xml</template>
 			<template>dao/dao.xml</template>
 			<template>dao/mapper.xml</template>
 			<template>dao/vo.xml</template>

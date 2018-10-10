@@ -136,9 +136,9 @@ public class Page<T> {
 	 */
 	public void setCount(long count) {
 		this.count = count;
-		if (pageSize >= count){
-			pageNo = 1;
-		}
+//		if (pageSize >= count){
+//			pageNo = 1;
+//		}
 	}
 	
 	/**
@@ -284,9 +284,9 @@ public class Page<T> {
 	 */
 	public int getFirstResult(){
 		int firstResult = (getPageNo() - 1) * getPageSize();
-		if (firstResult >= getCount()) {
-			firstResult = 0;
-		}
+//		if (firstResult >= getCount()) {
+//			firstResult = 0;
+//		}
 		return firstResult;
 	}
 	/**

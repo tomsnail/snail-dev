@@ -2,7 +2,31 @@ package cn.tomsnail.pdf;
 
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.Signature;
+import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
+import java.util.HashMap;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.AcroFields.FieldPosition;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfSignatureAppearance.RenderingMode;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfSignatureAppearance;
+import com.itextpdf.text.pdf.PdfStamper;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import cn.tomsnail.pdf.compose.ComposeModel;
 import cn.tomsnail.pdf.compose.DefaultPdfComposeService;
@@ -18,8 +42,8 @@ public class PdfTest {
 
 		
 		//testSign(testCompose());
-		testSign3(testCompose3());
-		
+		//testSign3(testCompose3());
+		testComposeAndSign();
 		//testCompose3();
 	}
 	
@@ -125,14 +149,135 @@ public class PdfTest {
 	}
 	
 	public static void testComposeAndSign(){
-		ComposeModel composeModel = new ComposeModel("C:/Users/yangsong/Desktop/1.pdf", "C:/Users/yangsong/Desktop/11.pdf");
+		ComposeModel composeModel = new ComposeModel("C:/Users/yangsong/Desktop/1.pdf", "C:/Users/yangsong/Desktop/111.pdf");
 		TextModel tm = new TextModel(null,null,8);
-		composeModel.addValue("TR_NO", new ValueModel("北京市朝阳区红军营南路15号瑞普大厦B座1102北京市朝阳区红军营南路15号瑞普大厦B座1102",tm));
+		composeModel.addValue("LICENSE_NO", new ValueModel("1232",tm));
 		composeModel.setEdited(false);
-		SignModel signModel = new SignModel();
-		signModel.setFieldName("sign2");
 		
-		new DefaultPdfComposeService().compose(composeModel);
+		
+		FieldPosition fieldPosition = new DefaultPdfComposeService().compose(composeModel);
+		
+		
+		SignModel signModel = new SignModel();
+		signModel.setX(180);
+		signModel.setY(480);
+		signModel.setWidth(120);
+		signModel.setHeight(120);
+		
+		
+		signModel.setTarget("C:/Users/yangsong/Desktop/1111.pdf");
+		signModel.setSrc("C:/Users/yangsong/Desktop/111.pdf");
+		signModel.setFieldPosition(fieldPosition);
+		signModel.setKeyPass("123456");
+		signModel.setKeyStorePass("123456");
+		signModel.setPage(1);
+		
+		File file = new File("G:/QQFiles/files/1.png");
+		signDataImage(signModel,file);
+		
+		
+		
+	}
+	
+	
+	public static String signDataImage(SignModel signModel,File file) {
+		
+		if(signModel==null||!signModel.isVliad()){
+			return null;
+		}
+		
+		if(file==null||!file.exists()){
+			return null;
+		}
+		
+		PdfReader reader = null;
+		FileOutputStream os = null;
+		FileInputStream is = null;
+		try {
+			String alias ="zkrpf";
+			String dest = signModel.getTarget() ;
+			KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
+			is = new FileInputStream("C:/Users/yangsong/tomcat.keystore");
+			ks.load(is, signModel.getKeyStorePass().toCharArray());
+			if (alias == null || alias.length() == 0)
+				alias = (String) ks.aliases().nextElement();
+			Certificate[] chain = ks.getCertificateChain(alias);
+			PrivateKey key = (PrivateKey) ks.getKey(alias,
+					signModel.getKeyPass().toCharArray());
+
+			X509Certificate cert = (X509Certificate) ks.getCertificate(alias);
+			Signature s = Signature.getInstance("SHA1withRSA");
+			s.initVerify(ks.getCertificate(alias));
+			try {
+				cert.checkValidity();
+			} catch (Exception e) {
+				return null;
+			}
+			reader = new PdfReader(signModel.getSrc());
+			os = new FileOutputStream(dest);
+			PdfStamper stamper = PdfStamper.createSignature(reader, os, '\0');
+			addImage(stamper);
+//			stamper.setEncryption(true, null, null,
+//							  PdfWriter.ALLOW_PRINTING
+//							| PdfWriter.ALLOW_COPY);
+			HashMap<String, String> info = reader.getInfo();
+			info.put("Creator","1" );
+			stamper.setMoreInfo(info);
+			PdfSignatureAppearance appearance = stamper.getSignatureAppearance();
+			appearance.setReason("2");
+			appearance.setLocation("3");
+			appearance.setContact("4");
+			appearance.setCrypto(key, chain, null,PdfSignatureAppearance.SELF_SIGNED);
+			Image image = Image.getInstance(IOUtils.toByteArray(new FileInputStream(file)));
+			//appearance.setImage(image);
+			appearance.setSignatureGraphic(image);
+			appearance.setAcro6Layers(true);
+			appearance.setRenderingMode(RenderingMode.GRAPHIC);//APSHandler PPKLiteHandler
+			if(StringUtils.isBlank(signModel.getFieldName())){
+				appearance.setVisibleSignature(new Rectangle(signModel.getX(), signModel.getY(), signModel.getX()+signModel.getWidth(), signModel.getY()+signModel.getHeight()),signModel.getPage(), "ImageZkr"); // 300和600 是对应x轴和y轴坐标
+			}else{
+				appearance.setVisibleSignature(signModel.getFieldName());
+			}
+			stamper.close();
+			
+			File srcdf = new File(signModel.getTarget()); 
+		    File mydest = new File(dest); 
+		    if(mydest.renameTo(srcdf)){
+		    	
+		    }
+		    return dest;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(os!=null)
+					os.close();
+				if(reader!=null)
+					reader.close();
+				if(is!=null)
+					is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	protected static void addImage(PdfStamper stamper)
+			throws BadElementException, DocumentException {
+		try {
+			Image image = Image.getInstance("E:/02_workspace/35_npcmis/npc-dc/npc-dc-basic/npc-dc-basic-webapi/stamp/cec98faa4f4c679619f6965cf87f80b9.png");
+			 // 获取操作的页面
+	        PdfContentByte under = stamper.getOverContent(1);
+	        // 根据域的大小缩放图片
+	        image.scaleToFit(100, 100);
+	       
+	        // 添加图片
+	        image.setAbsolutePosition(180, 480);
+	        under.addImage(image);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

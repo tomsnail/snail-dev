@@ -105,7 +105,7 @@ public class ThreeDESUtil {
     public static void main(String[] args) throws Exception {
         byte[] key = "6C4E60E55552386C759569836DC0F83869836DC0F838C0F7".getBytes();
         byte[] keyiv = { 1, 2, 3, 4, 5, 6, 7, 8 };
-        byte[] data = "amigoxie".getBytes("UTF-8");
+        byte[] data = "DSFSDF".getBytes("UTF-8");
         System.out.println("data.length=" + data.length);
         System.out.println("CBC加密解密");
         byte[] str5 = des3EncodeCBC(key, keyiv, data);

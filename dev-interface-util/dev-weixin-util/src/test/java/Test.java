@@ -16,6 +16,8 @@ public class Test {
 	
 	public static void main(String[] args) {
 		testqrc();
+		
+		//https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd95afbe2b1103ec&redirect_uri=http%3A%2F%2Fwxtest.yzdhxp.com%2Fwx%2Findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
 	}
 	
 }

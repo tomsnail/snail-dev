@@ -60,6 +60,9 @@ public class EhcacheMapCache implements ICache,IInitCache,IDestoryCache{
 
 	@Override
 	public long getExpire(String key) {
+		if(!cacheMap.containsKey(cacheConfig.getName())){
+			return 0l;
+		}
 		Element element = cacheMap.get(cacheConfig.getName()).get(key);
 		if(element==null){
 			return -1l;
@@ -70,6 +73,9 @@ public class EhcacheMapCache implements ICache,IInitCache,IDestoryCache{
 
 	@Override
 	public Object get(String key) {
+		if(!cacheMap.containsKey(cacheConfig.getName())){
+			return null;
+		}
 		Element element = cacheMap.get(cacheConfig.getName()).get(key);
 		if(element==null){
 			return null;
@@ -89,12 +95,18 @@ public class EhcacheMapCache implements ICache,IInitCache,IDestoryCache{
 
 	@Override
 	public boolean isExits(String key) {
+		if(!cacheMap.containsKey(cacheConfig.getName())){
+			return false;
+		}
 		return cacheMap.get(cacheConfig.getName()).isElementInMemory(key)?true: cacheMap.get(cacheConfig.getName()).isElementOnDisk(key);
 
 	}
 
 	@Override
 	public void destory() {
+		if(!cacheMap.containsKey(cacheConfig.getName())){
+			return;
+		}
 		cacheMap.get(cacheConfig.getName()).removeAll();
 		cacheConfig = null;
 	}

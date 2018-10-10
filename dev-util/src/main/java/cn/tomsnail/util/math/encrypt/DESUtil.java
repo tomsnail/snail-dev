@@ -26,7 +26,7 @@ public class DESUtil {
     public static final String KEY_ALGORITHM = "DES";
     //算法名称/加密模式/填充方式 
     //DES共有四种工作模式-->>ECB：电子密码本模式、CBC：加密分组链接模式、CFB：加密反馈模式、OFB：输出反馈模式
-    public static final String CIPHER_ALGORITHM = "DES/ECB/NoPadding";
+    public static final String CIPHER_ALGORITHM = "DES/ECB/PKCS5Padding";
 
     /**
      *   
@@ -104,7 +104,7 @@ public class DESUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        String source = "amigoxie";
+        String source = "amigoxie12";
         System.out.println("原文: " + source);
         String key = "A1B2C3D4E5F60708";
         String encryptData = encrypt(source, key);

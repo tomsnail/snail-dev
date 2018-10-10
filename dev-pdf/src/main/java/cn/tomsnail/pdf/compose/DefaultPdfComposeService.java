@@ -236,8 +236,8 @@ public class DefaultPdfComposeService implements PdfComposeService {
 	 */
 	protected FieldPosition createSign(AcroFields form) {
 		FieldPosition fieldPosition = null;
-		if( form.getFieldPositions("Signature")!=null){
-			fieldPosition = form.getFieldPositions("Signature").get(0);
+		if( form.getFieldPositions("SignPoint")!=null){
+			fieldPosition = form.getFieldPositions("SignPoint").get(0);
 		}
 		if(fieldPosition==null){
 			fieldPosition = new FieldPosition();
@@ -336,6 +336,8 @@ public class DefaultPdfComposeService implements PdfComposeService {
 		    over.addImage(img);
 		}
 	}
+	
+	
 
 	
 }

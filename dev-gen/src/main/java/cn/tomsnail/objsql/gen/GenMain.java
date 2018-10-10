@@ -21,7 +21,7 @@ public class GenMain {
 			System.out.println("gen.name is null , exit !");
 			return;
 		}
-		if(scheme.equals("all")||scheme.equals("dao")||scheme.equals("daov")||scheme.equals("odaov")||scheme.equals("oservice")||scheme.equals("owebapi")){
+		if(scheme.equals("all")||scheme.equals("dao")||scheme.equals("daov")||scheme.equals("odaov")||scheme.equals("oservice")||scheme.equals("owebapi")||scheme.equals("baseservice")){
 			if(tables!=null&&tables.length>0){
 				GenScheme genScheme = getScheme(scheme);
 				GenConfig config = GenUtils.getConfig();
@@ -52,7 +52,7 @@ public class GenMain {
 				GenUtils.generateToFile(tpl, model, genScheme.getReplaceFile());
 			}
 		}else{
-			System.out.println("scheme is not define : +"+scheme+"!");
+			System.out.println("scheme is not define : "+scheme+"!");
 		}
 		
 		

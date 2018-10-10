@@ -68,6 +68,7 @@ public class DBUtil {
 		ResultSetMetaData metaData = resultSet.getMetaData();
 		for (int i = 0; i < metaData.getColumnCount(); i++) {
 			GenTableColumn column = new GenTableColumn();
+			column.setGenTable(genTable);
 			String columnName = metaData.getColumnName(i + 1);
 			int type = metaData.getColumnType(i + 1);
 			if(columnName.equalsIgnoreCase("id")){
@@ -90,12 +91,13 @@ public class DBUtil {
 			column.setComments("");
 			if(jdbctype.equals("mybatis")){
 				if("UPPER".equalsIgnoreCase(feildtype)){
-					column.setJavaField(columnName.toUpperCase());
+					column.setJavaField4Dto(columnName.toUpperCase());
 				}else if("LOWER".equalsIgnoreCase(feildtype)){
-					column.setJavaField(columnName.toLowerCase());
+					column.setJavaField4Dto(columnName.toLowerCase());
 				}else{
-					column.setJavaField(DBUtil.lineToHump(columnName));
+					column.setJavaField4Dto(DBUtil.lineToHump(columnName));
 				}
+				column.setJavaField(DBUtil.lineToHump(columnName));
 			}else{
 				column.setJavaField(columnName);
 			}
