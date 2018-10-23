@@ -2,10 +2,15 @@ package cn.tomsnail.obj.base;
 
 import java.io.Serializable;
 
+import org.apache.commons.collections.map.LRUMap;
+
+import cn.tomsnail.framwork.http.ResultData;
+import cn.tomsnail.util.configfile.ConfigHelp;
+
 public class BaseReturnData<T> implements Serializable{
 	
+	private static final LRUMap LRU_MAP  = new LRUMap(256);
 	
-
 	protected int status = 0;
 	
 	protected T data;
@@ -77,6 +82,27 @@ public class BaseReturnData<T> implements Serializable{
 		return new BaseReturnData<T>(data,status,errorDesc);
 	}
 	
+	public static <T> BaseReturnData<T> error(int status,String errorDesc){
+		return error(null,status,errorDesc);
+	}
+	
+	public static <T> BaseReturnData<T> error(String key){
+				
+		if(!LRU_MAP.containsKey(key)){
+			int status = -1;
+			try {
+				status = Integer.valueOf(ConfigHelp.getInstance("message").getLocalConfig(key+".status", "-1"));
+			} catch (NumberFormatException e) {
+			}
+			String errorDesc = ConfigHelp.getInstance("message").getLocalConfig(key+".message", "");
+			BaseReturnData returnData =  error(null,status,errorDesc);
+			LRU_MAP.put(key, returnData);
+		}
+		
+		return (BaseReturnData) LRU_MAP.get(key);
+		
+	}
+	
 	public static boolean normal(BaseReturnData baseReturnData){
 		return baseReturnData!=null&&baseReturnData.isNormal();
 	}
@@ -88,5 +114,12 @@ public class BaseReturnData<T> implements Serializable{
 		return baseReturnData.getErrorDesc();
 	}
 	
+	 public ResultData getResultData(){
+		 ResultData resultData = new ResultData();
+		 resultData.setBody(this.getData());
+		 resultData.setStatus(this.getStatus()+"");
+		 resultData.setErrorMsg(this.getErrorDesc());
+	     return resultData;
+	 }
 
 }

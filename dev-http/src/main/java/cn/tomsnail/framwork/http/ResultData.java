@@ -3,6 +3,8 @@ package cn.tomsnail.framwork.http;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 封装返回数据对象
  * Title: ResultData.java    
@@ -130,5 +132,19 @@ public class ResultData<T> implements java.io.Serializable {
 			map = (Map<String, Object>) body;
 		}
 		map.put(key, value);
+	}
+	
+	
+	public void putBody(Object obj,Class<T> clazz){
+		
+		if(obj==null||clazz==null){
+			return;
+		}
+		this.body = JSON.parseObject(JSON.toJSONString(obj),clazz);
+	}
+	
+	public static Class<Map<String,Object>> getMapClass(){
+		Map<String,Object> map = new HashMap<>();
+		return (Class<Map<String, Object>>) map.getClass();
 	}
 }

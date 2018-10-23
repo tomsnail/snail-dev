@@ -68,7 +68,7 @@
             			<tag>
                 			<name>status</name>
                 			<placement>a</placement>
-                			<head>ï¿?????</head>
+                			<head>ï¿½?????</head>
             			</tag>
             			<tag>
                 			<name>version</name>
@@ -279,5 +279,6 @@
     <module>dev-fastdfs</module>
     <module>dev-rabbitmq</module>
     <module>dev-task-elastic-job</module>
-  </modules>
+    <module>dev-ocr</module>
+	</modules>
 </project>

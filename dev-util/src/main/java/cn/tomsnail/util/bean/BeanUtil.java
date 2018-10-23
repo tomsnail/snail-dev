@@ -1,5 +1,6 @@
 package cn.tomsnail.util.bean;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,6 @@ import org.apache.commons.beanutils.BeanMap;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -125,5 +125,28 @@ public class BeanUtil {
 		}
 		
 		return null;
+	}
+	
+	public static boolean isAllFieldNull(Object obj) {
+		if(obj==null){
+			return false;
+		}
+		Class stuCla = (Class)obj.getClass();
+		Field[] fs = stuCla.getDeclaredFields();
+		boolean flag = true;
+		for (Field f : fs) {
+		    f.setAccessible(true);
+			Object val;
+			try {
+				val = f.get(obj);
+				if(val!=null) {
+					 flag = false;
+					 break;
+					 }
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				
+			}
+		}
+		return flag;
 	}
 }

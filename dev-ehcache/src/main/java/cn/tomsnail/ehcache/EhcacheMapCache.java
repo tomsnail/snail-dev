@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheException;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import cn.tomsnail.cache.core.CacheConfig;
@@ -117,10 +118,13 @@ public class EhcacheMapCache implements ICache,IInitCache,IDestoryCache{
 			synchronized (cacheConfig) {
 				if(manager==null){
 					if(cacheConfig.getUrl()!=null){
-						manager = new CacheManager(cacheConfig.getUrl());
-					}else{
-						manager = CacheManager.create();
+						try {
+							manager = new CacheManager(cacheConfig.getUrl());
+							return;
+						} catch (CacheException e) {
+						}
 					}
+					manager = CacheManager.create();
 				}
 			}
 		}		

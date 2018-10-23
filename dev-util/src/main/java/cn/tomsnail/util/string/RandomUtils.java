@@ -99,7 +99,4 @@ public class RandomUtils {
 			}
 			return sRand;
 		}
-	
-
-	
 }
