@@ -5,12 +5,11 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>dev-component</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
   </parent>
   <artifactId>dev-gen</artifactId>
   <name>dev-gen</name>
   <packaging>jar</packaging>
-  <version>0.0.4-SNAPSHOT</version>
   <url>http://maven.apache.org</url>
   <build>
 		<plugins>

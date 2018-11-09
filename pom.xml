@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.tomsnail</groupId>
 	<artifactId>dev-component</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>dev-component</name>
 	<url>http://maven.apache.org</url>
@@ -276,9 +276,9 @@
     	<module>dev-log-cat</module>
     	<module>dev-rap</module>
     	<module>dev-j2cache</module>
-    <module>dev-fastdfs</module>
-    <module>dev-rabbitmq</module>
-    <module>dev-task-elastic-job</module>
-    <module>dev-ocr</module>
+    	<module>dev-fastdfs</module>
+    	<module>dev-rabbitmq</module>
+    	<module>dev-task-elastic-job</module>
+    	<module>dev-ocr</module>
 	</modules>
 </project>

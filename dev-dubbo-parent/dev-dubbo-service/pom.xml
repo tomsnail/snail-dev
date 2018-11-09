@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>cn.tomsnail</groupId>
 		<artifactId>dev-dubbo-parent</artifactId>
-		<version>0.0.4-SNAPSHOT</version>
+		<version>0.0.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>dev-dubbo-service</artifactId>
 	<name>dev-dubbo-service</name>

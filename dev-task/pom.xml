@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>cn.tomsnail</groupId>
 		<artifactId>dev-component</artifactId>
-		<version>0.0.4-SNAPSHOT</version>
+		<version>0.0.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>dev-task</artifactId>
 	<name>dev-task</name>
