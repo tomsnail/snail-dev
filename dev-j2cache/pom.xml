@@ -26,7 +26,7 @@
 	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
+		<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
 	</properties>
 	<dependencies>
   		<dependency>

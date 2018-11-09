@@ -36,7 +36,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>4.11</junit.version>
     <spring.version>4.2.3.RELEASE</spring.version>
-    <dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
+    <dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
   </properties>
   <dependencies>
 		<dependency>

@@ -62,7 +62,7 @@
 	<freemarker.version>2.3.20</freemarker.version>
 	<mysql.connector.version>5.1.40</mysql.connector.version>
 	<oracle.connector.version>10.2.0.3.0</oracle.connector.version>
-	<dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
+	<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
   </properties>
   <dependencies>
 		<dependency>
@@ -97,15 +97,10 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
-			<artifactId>dev-dao-plugins</artifactId>
+			<artifactId>dev-datasource</artifactId>
 			<version>${dev.component.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>cn.tomsnail</groupId>
-			<artifactId>dev-uuid</artifactId>
-			<version>${dev.component.version}</version>
-			<scope>provided</scope>
-		</dependency>
+		
   </dependencies>
 </project>

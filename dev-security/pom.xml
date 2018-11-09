@@ -11,7 +11,7 @@
   <name>dev-security</name>
   <url>http://maven.apache.org</url>
   <properties>
-  	<dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
+  	<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
   </properties>
   <dependencies>
   		<dependency>

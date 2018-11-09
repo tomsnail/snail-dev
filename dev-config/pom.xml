@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<dev.component.version>0.0.4-SNAPSHOT</dev.component.version>
+		<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
 		<aspectj.version>1.8.10</aspectj.version>
 		<jackson.version>1.9.13</jackson.version>
 		<spring.version>4.2.3.RELEASE</spring.version>
