@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    
+    
+   <bean id="npcTokenFatory" class="com.zkjd.npc.dc.us.client.DefaultTokenFactory">
+   		<property name="usModel">
+     		<bean class="com.zkjd.npc.dc.us.client.BasicUsModel">
+     			<property name="appId" value="${npc.appId}"></property>
+   				<property name="userName" value="${npc.userName}"></property>
+   				<property name="userSecret" value="${npc.userSecret}"></property>
+   				<property name="url" value="${npc.url}"></property>
+   				<property name="refreshUrl" value="${npc.refreshUrl}"></property>
+     		</bean>
+     	</property>  
+   </bean>
+   
+    <bean id="npcOper" class="com.zkjd.npc.dc.us.client.DefaultNpcOper">
+    	<property name="tokenFatory" ref="npcTokenFatory"/>
+    </bean>
+    
+    
+    <bean id="usFactory" class="com.zkjd.npc.dc.us.client.UsFactory">
+    	<property name="operMap">
+    		<map>
+        		<entry key="NPCDC" value-ref="npcOper"/>
+    		</map>
+    	</property>
+    </bean>
+    
+    
+    
+</beans>

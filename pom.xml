@@ -17,6 +17,7 @@
 					<includes>
 						<include>**/*.class</include>
 						<include>dev-*.properties</include>
+						<include>META-INF/**/*</include>
 					</includes>
 					<excludes>
 						<exclude>*.xml</exclude>
@@ -268,12 +269,12 @@
     	<module>dev-token</module>
     	<module>dev-authority</module>
     	<module>dev-ehcache</module>
-    	<module>dev-log-cat</module>
     	<module>dev-rap</module>
     	<module>dev-j2cache</module>
     	<module>dev-fastdfs</module>
     	<module>dev-rabbitmq</module>
     	<module>dev-task-elastic-job</module>
     	<module>dev-ocr</module>
+    	<module>dev-test</module>
 	</modules>
 </project>
