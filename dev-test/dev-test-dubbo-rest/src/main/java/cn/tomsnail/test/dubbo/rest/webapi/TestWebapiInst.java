@@ -17,7 +17,7 @@ import cn.tomsnail.test.dubbo.rest.mo.RequestData;
 import cn.tomsnail.test.dubbo.rest.mo.ResponseData;
 
 @Path("test")
-@Service(filter={"tomsnail"})
+@Service(filter={"tomsnail"},listener={"zkexport"})
 public class TestWebapiInst implements TestWebapi{
 
 	@GET
