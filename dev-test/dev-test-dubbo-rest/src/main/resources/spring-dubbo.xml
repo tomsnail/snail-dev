@@ -10,7 +10,7 @@
   
   	<dubbo:annotation package="cn.tomsnail.test.dubbo.rest.webapi" /> 
   	
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry address="zk://127.0.0.1:2181"/>
     <dubbo:protocol name="rest"  port="9090" server="tomcat"/>
     
 
