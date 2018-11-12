@@ -54,7 +54,7 @@
             			<tag>
                 			<name>methodauthor</name>
                 			<placement>a</placement>
-                			<head>作�??</head>
+                			<head>作者</head>
             			</tag>
             			<tag>
                 			<name>methodversion</name>
@@ -69,7 +69,7 @@
             			<tag>
                 			<name>status</name>
                 			<placement>a</placement>
-                			<head>�?????</head>
+                			<head>状态</head>
             			</tag>
             			<tag>
                 			<name>version</name>
