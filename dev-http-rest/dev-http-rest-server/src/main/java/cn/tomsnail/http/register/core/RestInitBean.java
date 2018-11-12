@@ -1,4 +1,4 @@
-package cn.tomsnail.http.register.springmvc;
+package cn.tomsnail.http.register.core;
 
 import java.util.Map;
 
@@ -14,8 +14,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import cn.tomsnail.framwork.spi.DefaultSpiCoreContextHolder;
 import cn.tomsnail.framwork.spi.SpiCoreContextHolder;
-import cn.tomsnail.http.register.core.IRegister;
-import cn.tomsnail.http.register.core.IRegisterFactory;
+import cn.tomsnail.http.register.springmvc.Address;
+import cn.tomsnail.http.register.springmvc.IAnnoToObject;
 
 /**
  *       springmvc下的注册，通过RequestMappingHandlerMapping获得url映射信息

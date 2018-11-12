@@ -270,7 +270,6 @@
     	<module>dev-token</module>
     	<module>dev-authority</module>
     	<module>dev-ehcache</module>
-    	<module>dev-log-cat</module>
     	<module>dev-rap</module>
     	<module>dev-j2cache</module>
     	<module>dev-fastdfs</module>

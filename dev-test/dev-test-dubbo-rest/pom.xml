@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+   	<groupId>cn.tomsnail</groupId>
+    <artifactId>dev-test</artifactId>
+    <version>0.0.5-SNAPSHOT</version>
+  </parent>
+  <artifactId>dev-test-dubbo-rest</artifactId>
+  <build>
+		<finalName>dev-test-dubbo-rest</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>log4j2.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/spring-*</include>
+					<include>**/*.xml</include>
+					<include>*.xml</include>
+					<include>**/data-source/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+	<properties>
+		<!-- base setting -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.locales>zh_CN</project.build.locales>
+		<project.build.jdk>1.8</project.build.jdk>
+		<!-- plugin versions -->
+		<plugin.maven-compiler>3.1</plugin.maven-compiler>
+		<!-- lib versions -->
+		<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
+		
+    	
+	</properties>
+	<dependencies>
+		<dependency>
+            <groupId>cn.tomsnail</groupId>
+            <artifactId>dev-obj-sql</artifactId>
+            <version>${dev.component.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>cn.tomsnail</groupId>
+			<artifactId>dev-log</artifactId>
+			<version>${dev.component.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.tomsnail</groupId>
+			<artifactId>dev-http-rest-server</artifactId>
+			<version>${dev.component.version}</version>
+		</dependency>
+	</dependencies>
+</project>
