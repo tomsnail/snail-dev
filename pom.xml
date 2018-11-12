@@ -26,21 +26,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>  
-                <artifactId>maven-source-plugin</artifactId>  
-                <version>2.1</version>  
-                <configuration>  
-                    <attach>true</attach>  
-                </configuration>  
-                <executions>  
-                    <execution>  
-                        <phase>compile</phase>  
-                        <goals>  
-                            <goal>jar</goal>  
-                        </goals>  
-                    </execution>  
-                </executions>  
-            </plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -54,7 +40,7 @@
             			<tag>
                 			<name>methodauthor</name>
                 			<placement>a</placement>
-                			<head>作�??</head>
+                			<head>作者</head>
             			</tag>
             			<tag>
                 			<name>methodversion</name>
@@ -69,7 +55,7 @@
             			<tag>
                 			<name>status</name>
                 			<placement>a</placement>
-                			<head>�?????</head>
+                			<head>状态</head>
             			</tag>
             			<tag>
                 			<name>version</name>
@@ -108,6 +94,7 @@
 		<log4j2.version>2.6.2</log4j2.version>
 		<spring.version>4.2.3.RELEASE</spring.version>
 		<cglib.version>3.1</cglib.version>
+		<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
 	</properties>
 	<dependencies>
 		
@@ -276,5 +263,6 @@
     	<module>dev-task-elastic-job</module>
     	<module>dev-ocr</module>
     	<module>dev-test</module>
+    	<module>dev-all</module>
 	</modules>
 </project>

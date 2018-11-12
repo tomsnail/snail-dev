@@ -13,14 +13,12 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<dev.http.rest.core.version>0.0.5-SNAPSHOT</dev.http.rest.core.version>
-		<dev.http.rest.server.version>0.0.5-SNAPSHOT</dev.http.rest.server.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-http-rest-server</artifactId>
-			<version>${dev.http.rest.server.version}</version>
+			<version>${dev.component.version}</version>
 		</dependency>
 	</dependencies>
 </project>

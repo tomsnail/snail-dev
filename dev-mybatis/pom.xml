@@ -13,7 +13,6 @@
  	<properties>
 		<mybatis.version>3.2.2</mybatis.version>
 		<mybatis.spring.version>1.2.2</mybatis.spring.version>
-		<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
 	</properties>
 	<dependencies>
 		<dependency>
