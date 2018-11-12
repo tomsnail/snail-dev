@@ -25,12 +25,9 @@
 </plugins>
 	</build>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
+
 	</properties>
 	<dependencies>
-		
-  		
   		<dependency>
   			 <groupId>cn.tomsnail</groupId>
     		<artifactId>dev-config</artifactId>

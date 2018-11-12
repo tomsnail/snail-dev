@@ -14,7 +14,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <httpclient.version>4.1.2</httpclient.version>
-        <dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
 	</properties>
 	
 	<dependencies>

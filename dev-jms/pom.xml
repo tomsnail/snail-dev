@@ -13,7 +13,6 @@
   <properties>
   	<avtivemq.version>5.11.1</avtivemq.version>
   	<commons-pool.version>1.6</commons-pool.version>
-  	<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
   </properties>
   <dependencies>
   

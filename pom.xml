@@ -17,6 +17,7 @@
 					<includes>
 						<include>**/*.class</include>
 						<include>dev-*.properties</include>
+						<include>META-INF/**/*</include>
 					</includes>
 					<excludes>
 						<exclude>*.xml</exclude>
@@ -107,6 +108,7 @@
 		<log4j2.version>2.6.2</log4j2.version>
 		<spring.version>4.2.3.RELEASE</spring.version>
 		<cglib.version>3.1</cglib.version>
+		<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
 	</properties>
 	<dependencies>
 		
@@ -275,5 +277,6 @@
     	<module>dev-rabbitmq</module>
     	<module>dev-task-elastic-job</module>
     	<module>dev-ocr</module>
+    	<module>dev-test</module>
 	</modules>
 </project>

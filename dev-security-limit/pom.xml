@@ -11,7 +11,6 @@
   <name>dev-security-limit</name>
   <url>http://maven.apache.org</url>
   <properties>
-  	  	<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
   </properties>
   <dependencies>
    	<dependency>
