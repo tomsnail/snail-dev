@@ -112,7 +112,7 @@
 		<!-- plugin versions -->
 		<plugin.maven-compiler>3.1</plugin.maven-compiler>
 		<!-- lib versions -->
-		<dev.component.version>0.0.3-SNAPSHOT</dev.component.version>
+		<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
 	</properties>
 	<dependencies>
 		<dependency>

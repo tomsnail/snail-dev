@@ -81,6 +81,7 @@ public class GenMain {
 		genScheme.setJdbcUsername(ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbc_username", ""));
 		genScheme.setJdbcUrl(ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbc_url", ""));
 		genScheme.setJdbcPassword(ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbc_password", ""));
+		genScheme.setDbType(ConfigHelp.getInstance("genConfig").getLocalConfig("gen.db.type", "mysql"));
 		return genScheme;
 	}
 	

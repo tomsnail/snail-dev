@@ -12,6 +12,8 @@ package ${packageName}.${moduleName}.model<#if subModuleName != "">.${subModuleN
 
 
 import cn.tomsnail.dao.plugins.pagination.PageModel;
+import java.sql.Timestamp;
+import java.math.BigDecimal;
 
 /**
  * ${functionName} model

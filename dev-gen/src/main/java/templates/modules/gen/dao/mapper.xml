@@ -28,7 +28,12 @@ ${columnField?substring(0, columnField?last_index_of(","))}
 			<include refid="${className}Columns"/>
 		FROM ${tableName} a
 		<include refid="${className}Joins"/>
+		<#if table.dbType=="mysql">
 		WHERE a.id = ${"#"}{id}
+		<#else>
+		WHERE a.id = ${"#"}{ID}
+		</#if>
+		
 	</select>
 	
 	<select id="findList" resultType="${packageName}.${moduleName}.model.${ClassName}Dto">
@@ -172,28 +177,31 @@ ${columnField?substring(0, columnField?last_index_of(","))}
 	
 	<insert id="insert">
 		INSERT INTO ${tableName}(
-		<#assign insertField>
+		<trim suffixOverrides=",">
 			<#list table.columnList as c>
 				<#if c.isInsert?? && c.isInsert == "1">
+			<if test="${c.simpleJavaField} != null<#if c.simpleJavaField != c.javaFieldId> and ${c.javaFieldId} != null</#if> and ${c.javaFieldId} != ''">
 			${c.name},
+			</if>
 				</#if>
 			</#list>
-		</#assign>
-${insertField?substring(0, insertField?last_index_of(","))}
+		</trim>
 		) VALUES (
-		<#assign insertJavaField>
+		<trim suffixOverrides=",">
 			<#list table.columnList as c>
 				<#if c.isInsert?? && c.isInsert == "1">
+			<if test="${c.simpleJavaField} != null<#if c.simpleJavaField != c.javaFieldId> and ${c.javaFieldId} != null</#if> and ${c.javaFieldId} != ''">
 			${"#"}{${c.javaFieldId}},
+			</if>
 				</#if>
 			</#list>
-		</#assign>
-${insertJavaField?substring(0, insertJavaField?last_index_of(","))}
+		</trim>
 		)
 	</insert>
 	
 	<update id="update">
-		UPDATE ${tableName} SET 	
+		UPDATE ${tableName} SET
+			<trim suffixOverrides=",">	
 				<#list table.columnList as c>
 					<#if c.isEdit?? && c.isEdit == "1">
 					
@@ -202,8 +210,12 @@ ${insertJavaField?substring(0, insertJavaField?last_index_of(","))}
 					</if>
 					</#if>
 				</#list>
-			del_flag = '0'
-		WHERE id = ${"#"}{id}
+			</trim>
+		<#if table.dbType=="mysql">
+		WHERE a.id = ${"#"}{id}
+		<#else>
+		WHERE a.id = ${"#"}{ID}
+		</#if>
 	</update>
 	
 	<update id="delete">
@@ -226,8 +238,12 @@ ${insertJavaField?substring(0, insertJavaField?last_index_of(","))}
 		</choose>
 			</#if>
 		</#list>
-	<#else>
-		WHERE id = ${"#"}{id}
+	<#else>		
+		<#if table.dbType=="mysql">
+		WHERE a.id = ${"#"}{id}
+		<#else>
+		WHERE a.id = ${"#"}{ID}
+		</#if>
 	</#if>
 	</update>
 	

@@ -1,21 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<template>
-	<name>pom</name>
-	<filePath>./</filePath>
-	<fileName>pom.xml</fileName>
-	<content><![CDATA[
-
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-      <groupId>${groupId}</groupId>
-      <artifactId>${partifactId}</artifactId>
-      <version>${pomversion}</version>
+      <groupId>com.zkjd</groupId>
+      <artifactId>npc-bc-basic-user</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>${artifactId}</artifactId>
+	<artifactId>npc-bc-basic-user-dao</artifactId>
 	<packaging>jar</packaging>
-	<name>${artifactId}</name>
+	<name>npc-bc-basic-user-dao</name>
 	<url>http://maven.apache.org</url>
 	<build>
     <plugins>
@@ -51,12 +44,13 @@
         <dependency>
             <groupId>cn.tomsnail</groupId>
             <artifactId>dev-dao-plugins</artifactId>
-            <version>${"$"}{dev.component.version}</version>
+            <version>${dev.component.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.tomsnail</groupId>
+            <artifactId>dev-uuid</artifactId>
+            <version>${dev.component.version}</version>
         </dependency>
   </dependencies>
 	
 </project>
-
-]]>
-	</content>
-</template>

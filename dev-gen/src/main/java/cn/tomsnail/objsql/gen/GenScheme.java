@@ -32,6 +32,7 @@ public class GenScheme  {
 	private String jdbcPassword;
 	private GenTable genTable;		// 业务表名
 	private GenClass genClass;
+	private String dbType;
 	
 	private String flag; 	// 0：保存方案； 1：保存方案并生成代码
 	
@@ -209,7 +210,13 @@ public class GenScheme  {
 		this.genClass = genClass;
 	}
 	
+	public String getDbType() {
+		return this.dbType;
+	}
 	
+	public void setDbType(String dbType) {
+		this.dbType = dbType;
+	}
 	
 }
 
