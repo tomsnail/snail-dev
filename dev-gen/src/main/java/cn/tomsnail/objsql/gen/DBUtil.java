@@ -1,5 +1,6 @@
 package cn.tomsnail.objsql.gen;
 
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -48,6 +49,17 @@ public class DBUtil {
 		String password = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbc_password", "");
 		String jdbctype = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbctype", "");
 		String feildtype = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.feild.type", "");//UPPER、LOWER、Hump
+		String dbType = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.db.type", "");//mysql、oracle
+		if(StringUtils.isNotBlank(dbType)) {
+			genTable.setDbType(dbType);
+		}else {
+			if("UPPER".equals(feildtype)) {
+				genTable.setDbType("oracle");
+			}else {
+				genTable.setDbType("mysql");
+			}
+		}
+		
 
 		if(StringUtils.isBlank(driver)||StringUtils.isBlank(url)||StringUtils.isBlank(user)){
 			return null;
@@ -81,13 +93,35 @@ public class DBUtil {
 			
 			String jdbcType = "";
 			String javaType = "";
-			if (Types.INTEGER == type) {
-				jdbcType = "integer";
-				javaType = "String";
-			} else{
+			if (Types.INTEGER == type|| type == Types.SMALLINT || type == Types.TINYINT) {
+				jdbcType = "varchar";
+				javaType = "Integer";
+			}else if (Types.BIGINT == type) {
+				jdbcType = "varchar";
+				javaType = "Long";
+			}else if (Types.NUMERIC == type) {
+				jdbcType = "varchar";
+				javaType = "BigDecimal";
+			}else if (Types.DECIMAL == type) {
+				jdbcType = "varchar";
+				javaType = "BigDecimal";
+			}else if (Types.FLOAT == type) {
+				jdbcType = "varchar";
+				javaType = "Double";
+			}else if (Types.DOUBLE == type) {
+				jdbcType = "varchar";
+				javaType = "Double";
+			} else if(type == Types.DATE || type == Types.TIME ||type == Types.TIMESTAMP) {
+				jdbcType = "varchar";
+				javaType = "Timestamp"; 
+			}else if(type == Types.CLOB || type == Types.BLOB) {
+				jdbcType = "varchar";
+				javaType = "byte[]"; 
+			}else{
 				jdbcType = "varchar";
 				javaType = "String";
 			}
+			System.out.println(type+":"+columnName);
 			column.setComments("");
 			if(jdbctype.equals("mybatis")){
 				if("UPPER".equalsIgnoreCase(feildtype)){

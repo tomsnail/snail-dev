@@ -36,6 +36,8 @@ public class GenTable {
 	private GenTable parent;	// 父表对象
 	private List<GenTable> childList = new ArrayList<GenTable>();	// 子表列表
 	
+	private String dbType;
+	
 	public GenTable() {
 		super();
 	}
@@ -122,6 +124,14 @@ public class GenTable {
 
 	public void setChildList(List<GenTable> childList) {
 		this.childList = childList;
+	}
+	
+	public String getDbType() {
+		return this.dbType;
+	}
+	
+	public void setDbType(String dbType) {
+		this.dbType = dbType;
 	}
 	
 	/**

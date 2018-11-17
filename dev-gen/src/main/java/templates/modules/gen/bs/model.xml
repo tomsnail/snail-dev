@@ -11,6 +11,9 @@ package ${packageName}.${moduleName}.model<#if subModuleName != "">.${subModuleN
 
 import java.io.Serializable;
 
+import java.sql.Timestamp;
+import java.math.BigDecimal;
+
 
 /**
  * ${functionName} model

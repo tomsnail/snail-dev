@@ -16,6 +16,9 @@ import cn.tomsnail.framwork.validator.annotation.BeanValidator;
 import cn.tomsnail.framwork.validator.annotation.FieldValidator;
 import cn.tomsnail.framwork.validator.annotation.ValidType;
 
+import java.sql.Timestamp;
+import java.math.BigDecimal;
+
 /**
  * ${functionName} model
  * @author ${functionAuthor}

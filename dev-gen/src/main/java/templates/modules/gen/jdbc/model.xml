@@ -12,6 +12,9 @@ package ${packageName}.${moduleName}.model<#if subModuleName != "">.${subModuleN
 
 import cn.tomsnail.objsql.annotation.ObjectSQL;
 
+import java.sql.Timestamp;
+import java.math.BigDecimal;
+
 /**
  * ${functionName}
  * @author ${functionAuthor}
