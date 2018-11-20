@@ -260,7 +260,6 @@
     	<module>dev-j2cache</module>
     	<module>dev-fastdfs</module>
     	<module>dev-rabbitmq</module>
-    	<module>dev-task-elastic-job</module>
     	<module>dev-ocr</module>
     	<module>dev-test</module>
     	<module>dev-all</module>

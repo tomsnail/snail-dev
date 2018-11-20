@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>cn.tomsnail</groupId>
-    <artifactId>dev-component</artifactId>
+    <artifactId>dev-task</artifactId>
     <version>0.0.5-SNAPSHOT</version>
   </parent>
   <artifactId>dev-task-elastic-job</artifactId>

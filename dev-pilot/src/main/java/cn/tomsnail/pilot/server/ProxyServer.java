@@ -41,7 +41,7 @@ public class ProxyServer extends ZkServer implements ICallback{
 
 	}
 	
-	@Override
+	
 	public void init() {
 		this.handler = new ProxyListenerHandler(this);
 		this.source = ConfigSourceFactory.instance().getDefaultSource();
@@ -120,28 +120,28 @@ public class ProxyServer extends ZkServer implements ICallback{
 		return (proxy!=null&&!_proxy.equals(proxy))||_proxy.equals("servernode");
 	}
 
-	@Override
+	
 	public void start() {
 		change(null,null,false);
 	}
 
-	@Override
+	
 	public void stop() {
 		
 	}
 
-	@Override
+	
 	public void notifly(String path, int type) {
 		if(type==NotifType.NOTHING) return;
 		change(null,CommandType.START,false);
 	}
 
-	@Override
+	
 	public List<ServiceProcess> getService(String node, String service) {
 		return serviceServer.getService(node, service);
 	}
 
-	@Override
+	
 	public void call(Object obj) {
 		String path;
 		if(obj==null){

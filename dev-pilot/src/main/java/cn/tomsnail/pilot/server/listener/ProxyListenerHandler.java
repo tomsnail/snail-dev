@@ -27,7 +27,7 @@ public class ProxyListenerHandler extends  AListenerHandler{
 		return NotifType.PROXY_CHANGE;
 	}
 
-	@Override
+	
 	public void close() {
 		
 	}

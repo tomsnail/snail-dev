@@ -44,7 +44,7 @@ public class SmartProxyServer extends ZkServer{
 		this.serviceKeeper = serviceKeeper;
 	}
 	
-	@Override
+	
 	public void init() {
 		this.handler = new ProxyListenerHandler(this);
 		this.source = ConfigSourceFactory.instance().getDefaultSource();
@@ -136,24 +136,24 @@ public class SmartProxyServer extends ZkServer{
 		return (proxy!=null&&!_proxy.equals(proxy))||_proxy.equals("servernode");
 	}
 
-	@Override
+	
 	public void start() {
 		change(null,null);
 		if(serviceKeeper!=null) serviceKeeper.start();
 	}
 
-	@Override
+	
 	public void stop() {
 		
 	}
 
-	@Override
+	
 	public void notifly(String path, int type) {
 		if(type==NotifType.NOTHING) return;
 		change(null,CommandType.START);
 	}
 
-	@Override
+	
 	public List<ServiceProcess> getService(String node, String service) {
 		return serviceServer.getService(node, service);
 	}

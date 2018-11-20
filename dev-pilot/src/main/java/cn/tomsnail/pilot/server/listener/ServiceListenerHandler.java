@@ -24,8 +24,8 @@ public class ServiceListenerHandler extends  AListenerHandler{
 		if(currentChilds==null) return NotifType.NOTHING;
 		return NotifType.SERVICE_CHANGE;
 	}
-
-	@Override
+	
+	
 	public void close() {
 		
 	}

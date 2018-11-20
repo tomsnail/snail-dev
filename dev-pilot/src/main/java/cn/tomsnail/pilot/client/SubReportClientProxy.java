@@ -32,14 +32,13 @@ public class SubReportClientProxy extends ReportClient implements ISubProxy{
 		t.start();
 	}
 
-	@Override
+	
 	public int startProxy(int clientType,String name) {
 		if(subProxy==null) return 0;
 		return this.subProxy.startProxy(clientType,name);
 	}
 
 	@SuppressWarnings("static-access")
-	@Override
 	public void run() {
 		init();
 		ServiceProcess serviceProcess = getClientInfo();

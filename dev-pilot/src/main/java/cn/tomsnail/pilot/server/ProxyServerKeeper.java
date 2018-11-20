@@ -27,13 +27,12 @@ public class ProxyServerKeeper implements IServer{
 	
 	private static final ZkHelper zkHelper =  ZkHelper.getInstance(ZooKeeperAddress.ZK_ADDRESS);
 
-	@Override
+	
 	public List<ServiceProcess> getService(String node, String service) {
 		return null;
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public void init() {
 		Document doc;
 		SAXReader reader = new SAXReader();
@@ -79,7 +78,7 @@ public class ProxyServerKeeper implements IServer{
 		
 	}
 
-	@Override
+	
 	public void start() {
 		init();
 		for(ServiceKeeper serviceKeeper:this.keepers){
@@ -93,17 +92,17 @@ public class ProxyServerKeeper implements IServer{
 		}
 	}
 
-	@Override
+	
 	public void stop() {
 		
 	}
 
-	@Override
+	
 	public void notifly(String path, int type) {
 		
 	}
 
-	@Override
+	
 	public void addCallback(ICallback callback) {
 		
 	}

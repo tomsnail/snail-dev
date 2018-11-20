@@ -39,7 +39,7 @@ public class NodeChangeListener implements IZkChildListener{
 	}
 	private static final Logger LOGGER = LoggerFactory.getLogger(NodeChangeListener.class);
 
-	@Override
+	
 	public void handleChildChange(String parentPath, List<String> currentChilds) throws Exception {
 		LOGGER.info(Consts.ZK_ROOT+"/"+serviceIP+" Change : start");
 		SmartProxyInfo proxyInfo = (SmartProxyInfo) zkHelper.readNode(Consts.ZK_ROOT+"/"+serviceIP);

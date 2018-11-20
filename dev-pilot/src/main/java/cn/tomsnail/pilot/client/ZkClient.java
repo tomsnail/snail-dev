@@ -47,7 +47,7 @@ public class ZkClient implements IClient{
 	}
 	
 
-	@Override
+	
 	public void init() {
 		ConfigHelp.initPath(this.getClass());
 		zkHelper = ZkHelper.getInstance(ConfigHelp.getInstance("zookeeper").getLocalConfig("zk.address", ""));
@@ -71,7 +71,7 @@ public class ZkClient implements IClient{
 		
 	}
 
-	@Override
+	
 	public void register(Object info) {
 		if(zkHelper==null) return;
 		if(!zkHelper.isExtisPath(Consts.ZK_ROOT)){
@@ -92,29 +92,29 @@ public class ZkClient implements IClient{
 	}
 
 	
-	@Override
+	
 	public void start() {
 		
 	}
 
-	@Override
+	
 	public void stop() {
 		
 	}
 
-	@Override
+	
 	public void destory() {
 		
 	}
 
-	@Override
+	
 	public void send(Object info) {
 		if(zkHelper==null) return;
 		if(!zkHelper.isExtisPath(servicePath)) return;
 		zkHelper.writeNode(servicePath, info);
 	}
 
-	@Override
+	
 	public ServiceProcess getClientInfo() {
 		ServiceProcess serviceProcess = new ServiceProcess();
 		serviceProcess.setName(serviceName);

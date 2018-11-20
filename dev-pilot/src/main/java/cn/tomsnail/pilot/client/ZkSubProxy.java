@@ -31,7 +31,7 @@ public class ZkSubProxy extends ASubProxy{
 	
 	private IZkChildListener rootChildListener;
 			
-	@Override
+	
 	public int init() {
 		initListener();
 		initZk();
@@ -41,7 +41,7 @@ public class ZkSubProxy extends ASubProxy{
 	
 	private void initListener(){
 		rootChildListener = new IZkChildListener(){
-			@Override
+			
 			public void handleChildChange(String parentPath,List<String> currentChilds) throws Exception {
 				sendCommand(proxyInfo);
 			}
@@ -81,17 +81,17 @@ public class ZkSubProxy extends ASubProxy{
 		return Consts.ZK_PROXY+"/"+serviceIP;
 	}
 
-	@Override
+	
 	public void start() {
 		
 	}
 
-	@Override
+	
 	public void stop() {
 		
 	}
 
-	@Override
+	
 	public void listener() {
 		//如果发现变化，自己抢占proxy，如果抢占成功则判断服务节点信息，如果不存在则重启
 		//并接受服务端指令，启动、停止、重启指定模块
@@ -109,7 +109,7 @@ public class ZkSubProxy extends ASubProxy{
 	
 	private void listenerProxyPath(){
 		zkHelper.getZkClient().subscribeChildChanges(getProxyPath(), new IZkChildListener() {
-			@Override
+			
 			public void handleChildChange(String parentPath, List<String> currentChilds)
 					throws Exception {
 				if(isProxyDeleted(currentChilds)){
@@ -128,10 +128,10 @@ public class ZkSubProxy extends ASubProxy{
 	
 	private void listenerProxyNode(){
 		zkHelper.getZkClient().subscribeDataChanges(getProxyPath(), new IZkDataListener() {
-			@Override
+			
 			public void handleDataDeleted(String dataPath) throws Exception {
 			}
-			@Override
+			
 			public void handleDataChange(String dataPath, Object data) throws Exception {
 				ProxyInfo proxyInfo = (ProxyInfo) data;
 				sendCommand(proxyInfo);
@@ -144,7 +144,7 @@ public class ZkSubProxy extends ASubProxy{
 			resetNodeService();
 		}
 		zkHelper.getZkClient().subscribeChildChanges(Consts.ZK_PROXY_SERVER, new IZkChildListener() {
-			@Override
+			
 			public void handleChildChange(String parentPath, List<String> currentChilds)
 					throws Exception {
 				if(currentChilds==null){//服务端停止

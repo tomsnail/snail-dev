@@ -51,7 +51,7 @@ public class SmartZkSubProxy extends ASubProxy{
 		this.serviceIP = serviceIP;
 	}
 				
-	@Override
+	
 	public int init() {
 		zkHelper = ZkHelper.getInstance(ConfigHelp.getInstance("zookeeper").getLocalConfig("zk.address", ""));
 		policy = new SimpleVotePolicy(zkHelper);
@@ -95,17 +95,17 @@ public class SmartZkSubProxy extends ASubProxy{
 		return Consts.ZK_PROXY+"/"+serviceIP;
 	}
 
-	@Override
+	
 	public void start() {
 		
 	}
 
-	@Override
+	
 	public void stop() {
 		
 	}
 
-	@Override
+	
 	public void listener() {
 		//如果发现变化，自己抢占proxy，如果抢占成功则判断服务节点信息，如果不存在则重启
 		//并接受服务端指令，启动、停止、重启指定模块
@@ -140,7 +140,7 @@ public class SmartZkSubProxy extends ASubProxy{
 	
 	private void listenerSelfProxyChange(){
 		zkHelper.getZkClient().subscribeChildChanges(getProxyPath(), new IZkChildListener() {
-			@Override
+			
 			public void handleChildChange(String parentPath, List<String> currentChilds)
 					throws Exception {
 				if(isProxyDeleted(currentChilds)){
@@ -159,10 +159,10 @@ public class SmartZkSubProxy extends ASubProxy{
 	
 	private void listenerNodeDataChange(){
 		zkHelper.getZkClient().subscribeDataChanges(Consts.ZK_ROOT+"/"+serviceIP, new IZkDataListener() {
-			@Override
+			
 			public void handleDataDeleted(String dataPath) throws Exception {
 			}
-			@Override
+			
 			public void handleDataChange(String dataPath, Object data) throws Exception {
 				SmartProxyInfo smartProxyInfo = (SmartProxyInfo) data;
 				sendCommand(smartProxyInfo);

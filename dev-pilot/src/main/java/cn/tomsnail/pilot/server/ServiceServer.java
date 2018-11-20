@@ -22,22 +22,22 @@ public class ServiceServer extends ZkServer {
 	private static final Map<String,List<String>> serviceNodeSet = new ConcurrentHashMap<String, List<String>>();
 	private static final Map<String,List<String>> tempNodeServiceSet= new ConcurrentHashMap<String, List<String>>();
 
-	@Override
+	
 	public void init() {
 		
 	}
 
-	@Override
+	
 	public void start() {
 		
 	}
 
-	@Override
+	
 	public void stop() {
 		
 	}
 
-	@Override
+	
 	public void notifly(String path, int type) {
 		if(type==NotifType.NOTHING) return;
 		path = getStandPath(path);

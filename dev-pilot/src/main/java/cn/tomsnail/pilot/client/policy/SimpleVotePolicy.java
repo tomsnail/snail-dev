@@ -34,7 +34,7 @@ public class SimpleVotePolicy implements IVotePolicy{
 		this.zkHelper = zkHelper;
 	}
 
-	@Override
+	
 	public String getNodePath(ServiceProcess serviceProcess) {
 		ServiceProcess process = this.getNextServiceProcess(serviceProcess);
 		if(process==null){
@@ -93,7 +93,7 @@ public class SimpleVotePolicy implements IVotePolicy{
 	}
 
 
-	@Override
+	
 	public boolean canStart(ServiceProcess serviceProcess) {
 		LOGGER.info("canStart " +serviceProcess.getNode()+" "+serviceProcess.getName());
 		boolean s = false;

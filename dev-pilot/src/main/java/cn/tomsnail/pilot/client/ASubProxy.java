@@ -34,7 +34,7 @@ public abstract class ASubProxy implements ISubProxy,IServiceManager{
 		return init();
 	}
 	
-	@Override
+	
 	public void restart() {
 		stop();
 		start();

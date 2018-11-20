@@ -23,7 +23,7 @@ public abstract class ZkServer extends AServer{
 	
 	protected void listenerHandler(String path,final IListenerHandler handler){
 		zkHelper.getZkClient().subscribeChildChanges(path, new IZkChildListener() {
-			@Override
+			
 			public void handleChildChange(String parentPath, List<String> currentChilds) throws Exception {
 				if(handler!=null) handler.handler(parentPath, currentChilds);
 			}
@@ -64,7 +64,7 @@ public abstract class ZkServer extends AServer{
 	
 	protected IZkChildListener registerChildListener(String path,final IListenerHandler handler){
 		IZkChildListener childListener = new IZkChildListener() {
-			@Override
+			
 			public void handleChildChange(String parentPath, List<String> currentChilds)
 					throws Exception {
 				handler.handler(parentPath, currentChilds);

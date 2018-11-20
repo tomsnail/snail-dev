@@ -16,7 +16,7 @@ import org.apache.logging.log4j.core.layout.PatternLayout;
 
 public final class Log4j2RollingFileSystem implements LogSystem{
 	
-	private static final AtomicInteger LEVEL = new AtomicInteger(500);
+	private static final AtomicInteger LEVEL = new AtomicInteger(320);
 
 	
 	private Logger logger;
@@ -39,16 +39,21 @@ public final class Log4j2RollingFileSystem implements LogSystem{
 	
 	private void init(String path,String fileName) {
 		Level level = Level.forName(fileName, LEVEL.incrementAndGet());
-		LoggerContext ctx = (LoggerContext) LogManager.getContext(true);
+		LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
 		Configuration config = ctx.getConfiguration();
-		PatternLayout layout = PatternLayout.createLayout("%d{yyyy-MM-dd HH:mm:ss} [%t] (%F:%L)  - %m%n", null, config,null, Charset.forName("UTF-8"), true, false, null, null);
-		Appender appender = RollingFileAppender.createAppender(path+File.pathSeparator+fileName+".log", path+"/$${date:yyyy-MM}/"+fileName+"-%d{yyyy-MM-dd}-%i.log.gz", "true", fileName, null, null, null, level.intLevel()+"",SizeBasedTriggeringPolicy.createPolicy("60M"), DefaultRolloverStrategy.createStrategy("30", null, null, null, null, true, config), layout, null, null, null, null, config);
+		PatternLayout layout = PatternLayout.createLayout("[%d] [%t] (%F:%L) - %m%n", null, config,null, Charset.forName("UTF-8"), true, false, null, null);
+		Appender appender = RollingFileAppender.createAppender(path+File.separator+fileName+".log", path+"/$${date:yyyy-MM}/"+fileName+"-%d{yyyy-MM-dd}-%i.log.gz", "true", fileName, null, null, null, level.intLevel()+"",SizeBasedTriggeringPolicy.createPolicy("60M"), DefaultRolloverStrategy.createStrategy("30", null, null, null, null, true, config), layout, null, null, null, null, config);
 		appender.start();
 		config.addAppender(appender);
 		config.getLoggerConfig("ROOT").addAppender(appender, level, null);
 		ctx.updateLoggers(config);
 		logger = LogManager.getLogger(fileName);
 		this.level = level;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(LEVEL.incrementAndGet());
+		System.out.println(LEVEL.incrementAndGet());
 	}
 
 	

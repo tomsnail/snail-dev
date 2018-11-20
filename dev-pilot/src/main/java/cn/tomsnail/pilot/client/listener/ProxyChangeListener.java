@@ -37,7 +37,7 @@ public class ProxyChangeListener implements IZkChildListener {
 		this.policy = policy;
 	}
 
-	@Override
+	
 	public void handleChildChange(String parentPath, List<String> currentChilds) throws Exception {
 		LOGGER.info(Consts.ZK_PROXY + " Change : start");
 		// 谁先接收到谁处理

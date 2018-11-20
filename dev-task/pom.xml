@@ -11,13 +11,11 @@
 	<artifactId>dev-task</artifactId>
 	<name>dev-task</name>
 	<url>http://maven.apache.org</url>
-	<properties>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>cn.tomsnail</groupId>
-			<artifactId>dev-config</artifactId>
-			<version>${dev.component.version}</version>
-		</dependency>
-	</dependencies>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>dev-task-snail</module>
+		<module>dev-task-elastic-job</module>
+		<module>dev-task-spring</module>
+	</modules>
 </project>

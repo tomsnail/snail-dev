@@ -68,7 +68,6 @@ public class RollingFileAppender extends AbstractOutputStreamAppender<RollingFil
      */
     @Override
     public void append(final LogEvent event) {
-    	
     	if(event.getLevel().intLevel()!=level) {
     		return;
     	}
