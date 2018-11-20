@@ -64,7 +64,7 @@ public abstract class AbstractRabbitMQCustomer implements RabbitMQCustomer{
 		initProps();
 		RabbitmqClient rabbitmqClient = RabbitmqFactory.get(rabbitmqObject);
 		if(rabbitmqClient!=null){
-			rabbitmqClient.register(this);
+			rabbitmqClient.register(this,false);
 		}
 		
         logger.info("rabbitmq init success!");
