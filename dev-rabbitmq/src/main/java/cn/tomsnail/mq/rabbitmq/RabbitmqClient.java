@@ -64,7 +64,7 @@ public class RabbitmqClient implements Runnable{
   
         
         
-        new Thread(this).start();
+        run();
         
         return initd = true;
 	}
@@ -132,42 +132,49 @@ public class RabbitmqClient implements Runnable{
 
 	@Override
 	public void run() {
-		while(ro.isRun){
-			
-			try {
-				Thread.currentThread().sleep(20000l);
-			} catch (InterruptedException e) {
-				logger.error("", e);
-			}
-			logger.debug("rabbitmq check start");
-			if(ro.isReconnect&&initd){
-				logger.debug("rabbitmq is inited");
-				if(connection==null||channel==null){
-					logger.debug("rabbitmq is not connect");
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(true){
 					try {
-						close();
-						registerAll();
-					} catch (Exception e) {
+						Thread.currentThread().sleep(20000l);
+					} catch (InterruptedException e) {
 						logger.error("", e);
 					}
-				}else{
-					logger.debug("rabbitmq has connected");
-					if(connection.isOpen()&&channel.isOpen()){
-						logger.debug("rabbitmq open now");
-					}else{
-						logger.debug("rabbitmq has colse");
-						try {
-							close();
-							registerAll();
-						} catch (Exception e) {
-							logger.error("", e);
+					logger.debug("rabbitmq check start");
+					if(ro.isReconnect&&initd){
+						logger.debug("rabbitmq is inited");
+						if(connection==null||channel==null){
+							logger.debug("rabbitmq is not connect");
+							try {
+								close();
+								registerAll();
+							} catch (Exception e) {
+								logger.error("", e);
+							}
+						}else{
+							logger.debug("rabbitmq has connected");
+							if(connection.isOpen()&&channel.isOpen()){
+								logger.debug("rabbitmq open now");
+							}else{
+								logger.debug("rabbitmq has colse");
+								try {
+									close();
+									registerAll();
+								} catch (Exception e) {
+									logger.error("", e);
+								}
+							}
 						}
 					}
+					logger.debug("rabbitmq check end");
+					
 				}
+				
 			}
-			logger.debug("rabbitmq check end");
-			
-		}
+		}).start();
+		
 	}
 	
 	public void close(){

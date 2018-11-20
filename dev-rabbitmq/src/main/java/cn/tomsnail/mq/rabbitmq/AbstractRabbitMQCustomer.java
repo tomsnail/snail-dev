@@ -58,16 +58,20 @@ public abstract class AbstractRabbitMQCustomer implements RabbitMQCustomer{
 	@PostConstruct
 	public void init() throws Exception {
 		
-		if(rabbitmqObject==null){
-			return;
+		try {
+			if(rabbitmqObject==null){
+				return;
+			}
+			initProps();
+			RabbitmqClient rabbitmqClient = RabbitmqFactory.get(rabbitmqObject);
+			if(rabbitmqClient!=null){
+				rabbitmqClient.register(this,false);
+			}
+			
+			logger.info("rabbitmq init success!");
+		} catch (Exception e) {
+			logger.error("", e);
 		}
-		initProps();
-		RabbitmqClient rabbitmqClient = RabbitmqFactory.get(rabbitmqObject);
-		if(rabbitmqClient!=null){
-			rabbitmqClient.register(this,false);
-		}
-		
-        logger.info("rabbitmq init success!");
 	}
 
 }
