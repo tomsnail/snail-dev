@@ -72,48 +72,55 @@ public class RabbitmqClient implements Runnable{
 	
 	
 	
-	public boolean register(RabbitMQCustomer rabbitMQCustomer) throws Exception{
-		
+	public boolean register(RabbitMQCustomer rabbitMQCustomer,boolean reConeect) throws Exception{
+		logger.debug("rabbitmq register start");
 		
 		if(rabbitMQCustomer==null){
 			return false;
 		}
 		
-		if(!initd){
-			return false;
+		if(!reConeect) {
+			if(!initd){
+				return false;
+			}
+			
+			if(rabbitMQCustomers.contains(rabbitMQCustomer)){
+				return true;
+			}
+			
+			rabbitMQCustomers.add(rabbitMQCustomer);
 		}
 		
-		if(rabbitMQCustomers.contains(rabbitMQCustomer)){
-			return true;
-		}
-		
-		rabbitMQCustomers.add(rabbitMQCustomer);
 		
 		
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body)throws IOException {
                 String message = new String(body, "UTF-8");
-                logger.info("rabbitmq msg is : {}",message);
+                logger.debug("rabbitmq msg is : {}",message);
                 rabbitMQCustomer.handler(message);
             }
         };
         channel.basicConsume(ro.queueName, ro.autoAck, consumer);
+        logger.debug("rabbitmq register end");
         return true;
 	}
 	
 	protected void registerAll(){
+		logger.debug("rabbitmq register start");
 		if(rabbitMQCustomers==null||rabbitMQCustomers.isEmpty()){
+			logger.debug("rabbitmq rabbitMQCustomers is null");
 			return;
 		}
 		
 		for(RabbitMQCustomer rabbitMQCustomer:rabbitMQCustomers){
 			try {
-				register(rabbitMQCustomer);
+				register(rabbitMQCustomer,true);
 			} catch (Exception e) {
 				logger.error("", e);
 			}
 		}
+		logger.debug("rabbitmq register end");
 		
 	}
 	
@@ -126,13 +133,17 @@ public class RabbitmqClient implements Runnable{
 	@Override
 	public void run() {
 		while(ro.isRun){
+			
 			try {
 				Thread.currentThread().sleep(20000l);
 			} catch (InterruptedException e) {
 				logger.error("", e);
 			}
+			logger.debug("rabbitmq check start");
 			if(ro.isReconnect&&initd){
+				logger.debug("rabbitmq is inited");
 				if(connection==null||channel==null){
+					logger.debug("rabbitmq is not connect");
 					try {
 						close();
 						registerAll();
@@ -140,9 +151,11 @@ public class RabbitmqClient implements Runnable{
 						logger.error("", e);
 					}
 				}else{
+					logger.debug("rabbitmq has connected");
 					if(connection.isOpen()&&channel.isOpen()){
-						
+						logger.debug("rabbitmq open now");
 					}else{
+						logger.debug("rabbitmq has colse");
 						try {
 							close();
 							registerAll();
@@ -152,11 +165,13 @@ public class RabbitmqClient implements Runnable{
 					}
 				}
 			}
+			logger.debug("rabbitmq check end");
 			
 		}
 	}
 	
 	public void close(){
+		logger.debug("rabbitmq colse start");
 		if(channel!=null){
 			try {
 				channel.close();
@@ -171,7 +186,7 @@ public class RabbitmqClient implements Runnable{
 				logger.error("", e);
 			}
 		}
-		initd = false;
+		logger.debug("rabbitmq colse end");
 	}
 
 }
