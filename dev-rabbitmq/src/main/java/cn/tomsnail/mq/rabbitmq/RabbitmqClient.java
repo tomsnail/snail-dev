@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,10 @@ import com.rabbitmq.client.AMQP.BasicProperties;
 
 public class RabbitmqClient implements Runnable{
 	
+	private static final int CHECK_COUNT = 15;
+
+	private static final long SLEEP_TIME = 20000L;
+
 	private static final Logger logger = LoggerFactory.getLogger(RabbitmqClient.class);
 
 	Connection connection = null;
@@ -28,12 +33,11 @@ public class RabbitmqClient implements Runnable{
 	
 	List<RabbitMQCustomer> rabbitMQCustomers = new ArrayList<RabbitMQCustomer>();
 	
-	
+	private static final AtomicInteger COUNT = new AtomicInteger(0);
 	
 	
 	protected boolean initd = true;
 	
-
 	
 	RabbitmqObject ro = null;
 	
@@ -64,7 +68,7 @@ public class RabbitmqClient implements Runnable{
   
         
         
-        run();
+        new Thread(this).start();
         
         return initd = true;
 	}
@@ -98,7 +102,11 @@ public class RabbitmqClient implements Runnable{
             public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body)throws IOException {
                 String message = new String(body, "UTF-8");
                 logger.debug("rabbitmq msg is : {}",message);
-                rabbitMQCustomer.handler(message);
+                try {
+					rabbitMQCustomer.handler(message);
+				} catch (Exception e) {
+					logger.error("", e);
+				}
             }
         };
         channel.basicConsume(ro.queueName, ro.autoAck, consumer);
@@ -133,48 +141,61 @@ public class RabbitmqClient implements Runnable{
 	@Override
 	public void run() {
 		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				while(true){
+		while(ro.isRun){
+			try {
+				Thread.currentThread().sleep(SLEEP_TIME);
+			} catch (InterruptedException e) {
+				logger.error("", e);
+			}
+			logger.debug("rabbitmq check start");
+			if(ro.isReconnect&&initd){
+				logger.debug("rabbitmq is inited");
+				if(connection==null||channel==null){
+					logger.debug("rabbitmq is not connect");
 					try {
-						Thread.currentThread().sleep(20000l);
-					} catch (InterruptedException e) {
+						close();
+						registerAll();
+					} catch (Exception e) {
 						logger.error("", e);
 					}
-					logger.debug("rabbitmq check start");
-					if(ro.isReconnect&&initd){
-						logger.debug("rabbitmq is inited");
-						if(connection==null||channel==null){
-							logger.debug("rabbitmq is not connect");
+				}else{
+					logger.debug("rabbitmq has connected");
+					if(connection.isOpen()&&channel.isOpen()){
+						logger.debug("rabbitmq open now:{}",COUNT.get());
+						if(COUNT.incrementAndGet()==CHECK_COUNT) {
 							try {
-								close();
-								registerAll();
+								long cc = channel.consumerCount(ro.queueName);
+								logger.debug("{} has consumer count is {}",ro.queueName,cc);
+								COUNT.set(0);
 							} catch (Exception e) {
 								logger.error("", e);
 							}
-						}else{
-							logger.debug("rabbitmq has connected");
-							if(connection.isOpen()&&channel.isOpen()){
-								logger.debug("rabbitmq open now");
-							}else{
-								logger.debug("rabbitmq has colse");
-								try {
-									close();
-									registerAll();
-								} catch (Exception e) {
-									logger.error("", e);
-								}
-							}
+						}
+					}else{
+						logger.debug("rabbitmq has colse");
+						try {
+							close();
+							registerAll();
+						} catch (Exception e) {
+							logger.error("", e);
 						}
 					}
-					logger.debug("rabbitmq check end");
-					
 				}
-				
 			}
-		}).start();
+			logger.debug("rabbitmq check end");
+			
+		}
 		
+	}
+	
+	public static void main(String[] args) {
+		while(true) {
+			if(COUNT.incrementAndGet()==CHECK_COUNT) {
+				System.out.println(COUNT.get());
+
+				return;
+			}
+		}
 	}
 	
 	public void close(){
