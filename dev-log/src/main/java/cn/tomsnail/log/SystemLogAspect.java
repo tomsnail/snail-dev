@@ -54,7 +54,9 @@ import cn.tomsnail.framwork.http.RequestData;
 import cn.tomsnail.framwork.http.ResultData;
 import cn.tomsnail.log.annotation.LogLevel;
 import cn.tomsnail.log.annotation.LogPoint;
+import cn.tomsnail.log.ls.ExceptionUtil;
 import cn.tomsnail.starter.domain.AppMain;
+import cn.tomsnail.util.ex.Exceptions;
 import cn.tomsnail.util.string.StringUtils;
 
 /**
@@ -136,8 +138,8 @@ public class SystemLogAspect {
 							
 						}
 					} catch (Throwable ex) {
-						runinfo.append(ex.getMessage()+"");
-						logger.info(runinfo.toString());
+						runinfo.append(Exceptions.getStackTraceAsString(ex));
+						logger.error(runinfo.toString());
 						log.setLevel(Log.ERROR);
 						log.setThrowable(ex);
 						isDebug = true;
@@ -147,7 +149,12 @@ public class SystemLogAspect {
 						}
 						_t.setStatus(CommonMessage.FAILED);
 						_t.setMsg("application error");
-						_t.setErrorMsg(ex.getMessage()+"");
+						String em = ex.getMessage();
+						if(em!=null&&(em.contains("SQL")||em.contains("Exception"))) {
+							_t.setErrorMsg("Exception");
+						}else {
+							_t.setErrorMsg(em);
+						}
 						t = _t;
 						
 					}
@@ -160,7 +167,7 @@ public class SystemLogAspect {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("", e);
+			ExceptionUtil.log(e);
 		}
 		return t;
 	}
@@ -194,6 +201,7 @@ public class SystemLogAspect {
 			log.addParams(parmsb.toString());
 			log.addResult(mapper.writeValueAsString(t));
 			log.setLevel(Log.DEBUG);
+			ExceptionUtil.log("params:{},result:{},exception:{}",log.getParams(),log.getResults(),log.getContent());
 		}
 		
 		log.setDesc(new String(logPoint.desc().getBytes(),"UTF-8"));

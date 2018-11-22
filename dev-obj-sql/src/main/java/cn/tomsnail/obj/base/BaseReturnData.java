@@ -16,6 +16,8 @@ public class BaseReturnData<T> implements Serializable{
 	protected T data;
 	
 	protected String errorDesc;
+	
+	protected String desc;
 
 	public int getStatus() {
 		return status;
@@ -45,6 +47,14 @@ public class BaseReturnData<T> implements Serializable{
 		this.errorDesc = errorDesc;
 	}
 	
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	
 	
 	
 	public BaseReturnData() {
@@ -52,6 +62,11 @@ public class BaseReturnData<T> implements Serializable{
 
 	public BaseReturnData(T data) {
 		this.data = data;
+	}
+	
+	public BaseReturnData(T data,String desc) {
+		this.data = data;
+		this.desc = desc;
 	}
 	
 	public BaseReturnData(T data,int status) {
@@ -68,6 +83,10 @@ public class BaseReturnData<T> implements Serializable{
 
 	public static BaseReturnData<String> instance(String data){
 		return new BaseReturnData<String>(data);
+	}
+	
+	public static <T> BaseReturnData<T> instance(T data,String desc){
+		return new BaseReturnData<T>(data,desc);
 	}
 	
 	public static <T> BaseReturnData<T> instance(T data){

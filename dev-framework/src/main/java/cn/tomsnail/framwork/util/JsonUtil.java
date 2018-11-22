@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -17,7 +18,10 @@ public class JsonUtil {
 	
 	
 	public static String toJson(Object obj){
-			return JSON.toJSONString(obj);
+		if(Objects.isNull(obj)) {
+			obj = new Object();
+		}
+		return JSON.toJSONString(obj);
 	}
 	
 	public static String toNotNullObjectJson(Object obj){
