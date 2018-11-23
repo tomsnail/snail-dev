@@ -34,22 +34,26 @@ public class FileLogFactory {
 	}
 	
 	public  LogSystem create(String path,String fileName) {
+		return create(path, fileName, null);
+	}
+	
+	public  LogSystem create(String path,String fileName,String format) {
 		
 		LOCK.lock();
 		if(!LS_MAP.containsKey(fileName)) {
-			LS_MAP.put(fileName, initLogSystem(path,fileName));
+			LS_MAP.put(fileName, initLogSystem(path,fileName,format));
 		}
 		LOCK.unlock();
 		
 		return LS_MAP.get(fileName);
 	}
 	
-	private LogSystem initLogSystem(String path,String fileName) {
+	private LogSystem initLogSystem(String path,String fileName,String format) {
 		
 		if(StringUtils.isAnyBlank(path,fileName)) {
 			return null;
 		}
-		return new Log4j2RollingFileSystem(path, fileName);
+		return new Log4j2RollingFileSystem(path, fileName,format);
 		
 	}
 	
