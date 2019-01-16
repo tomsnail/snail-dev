@@ -9,6 +9,5 @@
   <packaging>pom</packaging>
   <modules>
   	<module>dev-test-dubbo-rest</module>
-  	<module>dev-test-gen</module>
   </modules>
 </project>

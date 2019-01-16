@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 import cn.tomsnail.util.configfile.ConfigHelp;
 
@@ -136,7 +137,7 @@ public class UuidUtil {
 		* @exception no
 		*/
 	public static String uuid(int size) {  
-	    Random random = new Random();  
+		ThreadLocalRandom random =  ThreadLocalRandom.current(); 
 	    char[] cs = new char[size];  
 	    for (int i = 0; i < cs.length; i++) {  
 	        cs[i] = digits[random.nextInt(digits.length)];  

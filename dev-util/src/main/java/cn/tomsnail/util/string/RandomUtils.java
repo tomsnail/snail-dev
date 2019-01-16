@@ -1,6 +1,6 @@
 package cn.tomsnail.util.string;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 生成随机数
@@ -9,10 +9,10 @@ import java.util.Random;
  */
 public class RandomUtils {
 
-	private static char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q',
+	private static final char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q',
 			'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
-	private static char[] numSequence = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	private static final char[] numSequence = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 	/**
 	 * 
@@ -24,7 +24,7 @@ public class RandomUtils {
 	 */
 	public static String getRandSeq(int size) {
 		StringBuffer randSB = new StringBuffer();
-		Random random = new Random();
+		ThreadLocalRandom random = ThreadLocalRandom.current();
 		for (int i = 0; i < size; i++) {
 			randSB.append(String.valueOf(codeSequence[random.nextInt(34)]));
 		}
@@ -41,7 +41,7 @@ public class RandomUtils {
 	 */
 	public static String getRandNum(int size) {
 		StringBuffer randSB = new StringBuffer();
-		Random random = new Random();
+		ThreadLocalRandom random = ThreadLocalRandom.current();
 		for (int i = 0; i < size; i++) {
 			randSB.append(String.valueOf(numSequence[random.nextInt(9)]));
 		}
@@ -64,7 +64,7 @@ public class RandomUtils {
 		* @exception no
 		*/
 	public static String getRandLetterAndNum(int size) {
-		Random random = new Random();
+		ThreadLocalRandom random = ThreadLocalRandom.current();
 		String sRand = "";
 		String codeList = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz0123456789";
 		for (int i = 0; i < size; i++) {
@@ -88,7 +88,8 @@ public class RandomUtils {
 			* @exception no
 			*/
 		public static String getRandLetterAndNum(int size,long seed) {
-			Random random = new Random(seed);
+			ThreadLocalRandom random = ThreadLocalRandom.current();
+			random.setSeed(seed);
 			String sRand = "";
 			String codeList = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz0123456789";
 			for (int i = 0; i < size; i++) {

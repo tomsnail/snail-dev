@@ -212,9 +212,9 @@ ${columnField?substring(0, columnField?last_index_of(","))}
 				</#list>
 			</trim>
 		<#if table.dbType=="mysql">
-		WHERE a.id = ${"#"}{id}
+		WHERE id = ${"#"}{id}
 		<#else>
-		WHERE a.id = ${"#"}{ID}
+		WHERE id = ${"#"}{ID}
 		</#if>
 	</update>
 	
@@ -240,9 +240,9 @@ ${columnField?substring(0, columnField?last_index_of(","))}
 		</#list>
 	<#else>		
 		<#if table.dbType=="mysql">
-		WHERE a.id = ${"#"}{id}
+		WHERE id = ${"#"}{id}
 		<#else>
-		WHERE a.id = ${"#"}{ID}
+		WHERE id = ${"#"}{ID}
 		</#if>
 	</#if>
 	</update>

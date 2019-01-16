@@ -2,6 +2,7 @@ package cn.tomsnail.weixin.util.common;
 
 import java.security.MessageDigest;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SecUtil {
 
@@ -10,7 +11,7 @@ public class SecUtil {
 	}
 	
 	public static String getNonceStr(){
-		Random random = new Random();
+		ThreadLocalRandom random =  ThreadLocalRandom.current();
 		return MD5Encode(String.valueOf(random.nextInt(10000)), "UTF-8");
 	}
 	

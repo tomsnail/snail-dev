@@ -65,7 +65,7 @@ public final class Log4j2RollingFileSystem implements LogSystem{
 		LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
 		Configuration config = ctx.getConfiguration();
 		PatternLayout layout = PatternLayout.createLayout(format, null, config,null, Charset.forName("UTF-8"), true, false, null, null);
-		Appender appender = RollingRandomAccessFileAppender.createAppender(path+File.separator+fileName+".log", path+"/$${date:yyyy-MM}/"+fileName+"-%d{yyyy-MM-dd}-%i.log.gz", "true", fileName, null, null, CompositeTriggeringPolicy.createPolicy(TimeBasedTriggeringPolicy.createPolicy(null, null),SizeBasedTriggeringPolicy.createPolicy("30M")), DefaultRolloverStrategy.createStrategy("30", null, null, null, null, false, config), layout, null, null, null, null, config,String.valueOf(level.intLevel()));
+		Appender appender = RollingRandomAccessFileAppender.createAppender(path+File.separator+fileName+".log", path+"/%d{yyyy-MM}/"+fileName+"-%d{yyyy-MM-dd}-%i.log.gz", "true", fileName, null, null, CompositeTriggeringPolicy.createPolicy(TimeBasedTriggeringPolicy.createPolicy(null, null),SizeBasedTriggeringPolicy.createPolicy("30M")), DefaultRolloverStrategy.createStrategy("30", null, null, null, null, false, config), layout, null, null, null, null, config,String.valueOf(level.intLevel()));
 		appender.start();
 		config.addAppender(appender);
 		config.getLoggerConfig("ROOT").addAppender(appender, level, null);

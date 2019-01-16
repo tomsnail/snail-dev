@@ -1,12 +1,15 @@
 package cn.tomsnail.ehcache;
 
+import java.io.File;
+import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheException;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
+import net.sf.ehcache.Status;
 import cn.tomsnail.cache.core.CacheConfig;
 import cn.tomsnail.cache.core.ICache;
 import cn.tomsnail.cache.core.IDestoryCache;
@@ -28,6 +31,8 @@ public class EhcacheMapCache implements ICache,IInitCache,IDestoryCache{
 	
 	private static final Map<String,Cache> cacheMap = new ConcurrentHashMap<String, Cache>();
 	
+	private ReentrantReadWriteLock LOCK = new ReentrantReadWriteLock();
+	
 	public EhcacheMapCache(CacheConfig cacheConfig){
 		this.cacheConfig = cacheConfig;
 		init();
@@ -35,72 +40,104 @@ public class EhcacheMapCache implements ICache,IInitCache,IDestoryCache{
 	
 	@Override
 	public void set(String key, Object value) {
-		set(key,value,1000l*60*60*24*7);
+		set(key,value,1000L*60*60*24*7);
 	}
 
 	@Override
 	public void set(String key, Object value, long expire) {
 		if(expire<=0){
-			expire = 3600*6;
+			expire = 3600L*6;
 		}
 		setValue(cacheConfig.getName(),key,value,false,(int)expire,0);
 	}
 	
-	private void setValue(String name, String key, Object value, boolean eternal,int liveTime,int idleTime){
-		Element element = new Element(key, value);
-		element.setEternal(eternal);
-		element.setTimeToIdle(idleTime);
-		element.setTimeToLive(liveTime);
-		if(!cacheMap.containsKey(name)){
-			 Cache cache=new Cache(name, 1, true, true, liveTime, idleTime); 
-			 cacheMap.put(name, cache);
-			 manager.addCache(cache);
+	private  void setValue(String name, String key, Object value, boolean eternal,int liveTime,int idleTime){
+		LOCK.writeLock().lock();
+		try {
+			Element element = new Element(key, value);
+			element.setEternal(eternal);
+			element.setTimeToIdle(idleTime);
+			element.setTimeToLive(liveTime);
+			if(!cacheMap.containsKey(name)){
+				 Cache cache=new Cache(name, 1, true, true, liveTime, idleTime); 
+				 cacheMap.put(name, cache);
+				 manager.addCache(cache);
+			}
+			cacheMap.get(name).put(element);
+		} catch (RuntimeException e) {
+			throw e;
+		}finally {
+			LOCK.writeLock().unlock();
 		}
-		cacheMap.get(name).put(element);
+		
 	}
 
 	@Override
 	public long getExpire(String key) {
-		if(!cacheMap.containsKey(cacheConfig.getName())){
-			return 0l;
-		}
-		Element element = cacheMap.get(cacheConfig.getName()).get(key);
+		Element element = getElement(key);
 		if(element==null){
-			return -1l;
+			return -1L;
 		}else{
-			return cacheMap.get(cacheConfig.getName()).get(key).getTimeToLive();
+			return element.getTimeToLive();
 		}
 	}
 
 	@Override
 	public Object get(String key) {
-		if(!cacheMap.containsKey(cacheConfig.getName())){
-			return null;
+		Element element = getElement(key);
+		if(element!=null){
+			return element.getObjectValue();
 		}
-		Element element = cacheMap.get(cacheConfig.getName()).get(key);
-		if(element==null){
-			return null;
-		}else{
-			return cacheMap.get(cacheConfig.getName()).get(key).getObjectValue();
+		return null;
+	}
+	
+	private Element getElement(String key) {
+		LOCK.readLock().lock();
+		try {
+			if(!cacheMap.containsKey(cacheConfig.getName())){
+				return null;
+			}
+			Element element = null;
+			Cache cache = cacheMap.get(cacheConfig.getName());
+			if(cache!=null&&cache.getStatus().equals(Status.STATUS_ALIVE)) {
+				element = cache.get(key);
+			}
+			return element;
+		} catch (RuntimeException e) {
+			throw e;
+		}finally {
+			LOCK.readLock().unlock();
 		}
 	}
 
 	@Override
 	public Object remove(String key) {
-		Object obj = get(key);
-		if(cacheMap.get(cacheConfig.getName()).remove(key)){
-			return obj;
-		}
-		return null;
+		Element element = getElement(key);
+		if(element==null) return null;
+		Object obj =  element.getObjectValue();
+		Cache cache = cacheMap.get(cacheConfig.getName());
+		if(cache==null) return null;
+		cache.remove(key);
+		return obj;
 	}
 
 	@Override
 	public boolean isExits(String key) {
-		if(!cacheMap.containsKey(cacheConfig.getName())){
+		LOCK.readLock().lock();
+		try {
+			if(!cacheMap.containsKey(cacheConfig.getName())){
+				return false;
+			}
+			Cache cache = cacheMap.get(cacheConfig.getName());
+			if(cache!=null&&cache.getStatus().equals(Status.STATUS_ALIVE)) {
+				return cache.isElementInMemory(key)||cache.isElementOnDisk(key);
+			}
 			return false;
+		} catch (RuntimeException e) {
+			throw e;
+		}finally {
+			LOCK.readLock().unlock();
 		}
-		return cacheMap.get(cacheConfig.getName()).isElementInMemory(key)?true: cacheMap.get(cacheConfig.getName()).isElementOnDisk(key);
-
 	}
 
 	@Override
@@ -119,9 +156,19 @@ public class EhcacheMapCache implements ICache,IInitCache,IDestoryCache{
 				if(manager==null){
 					if(cacheConfig.getUrl()!=null){
 						try {
-							manager = new CacheManager(cacheConfig.getUrl());
+							File file = new File(cacheConfig.getUrl());
+							if(file.exists()&&file.isFile()) {
+								manager = new CacheManager(cacheConfig.getUrl());
+							}else {
+								URL url = ClassLoader.getSystemClassLoader().getResource(cacheConfig.getUrl());
+								if(url!=null) {
+									manager = new CacheManager(url);
+								}else {
+									manager = CacheManager.create();
+								}
+							}
 							return;
-						} catch (CacheException e) {
+						} catch (Exception e) {
 						}
 					}
 					manager = CacheManager.create();

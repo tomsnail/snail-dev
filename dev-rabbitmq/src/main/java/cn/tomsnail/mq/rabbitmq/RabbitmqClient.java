@@ -45,6 +45,15 @@ public class RabbitmqClient implements Runnable{
 	
 	
 	public boolean init(RabbitmqObject ro) throws Exception{
+		boolean initResult = init0(ro);
+		if(initResult) {
+	        new Thread(this).start();
+		}
+		return initResult;
+        
+	}
+	
+	private boolean init0(RabbitmqObject ro) throws Exception{
 		
 		
 		if(ro==null||StringUtils.isAnyBlank(ro.ip,ro.username,ro.password)){
@@ -59,17 +68,14 @@ public class RabbitmqClient implements Runnable{
         factory.setVirtualHost(ro.vHost);
         factory.setPassword(ro.password);
         factory.setPort(ro.port);
-        
+        close();
         connection = factory.newConnection();
         channel = connection.createChannel();
         channel.exchangeDeclare(ro.exchangeName, ro.type, ro.eDurable, ro.eAutoDelete, null);
         channel.queueDeclare(ro.queueName, ro.qDurable, ro.qExclusive, ro.qAutoDelete, null);
         channel.queueBind(ro.queueName, ro.exchangeName, ro.routeKey, null);
   
-        
-        
-        new Thread(this).start();
-        
+                
         return initd = true;
 	}
 	
@@ -153,8 +159,9 @@ public class RabbitmqClient implements Runnable{
 				if(connection==null||channel==null){
 					logger.debug("rabbitmq is not connect");
 					try {
-						close();
-						registerAll();
+						if(init0(this.ro)) {
+							registerAll();
+						}
 					} catch (Exception e) {
 						logger.error("", e);
 					}
@@ -174,10 +181,12 @@ public class RabbitmqClient implements Runnable{
 					}else{
 						logger.debug("rabbitmq has colse");
 						try {
-							close();
-							registerAll();
+							if(init0(this.ro)) {
+								registerAll();
+							}
 						} catch (Exception e) {
 							logger.error("", e);
+							
 						}
 					}
 				}
@@ -188,33 +197,30 @@ public class RabbitmqClient implements Runnable{
 		
 	}
 	
-	public static void main(String[] args) {
-		while(true) {
-			if(COUNT.incrementAndGet()==CHECK_COUNT) {
-				System.out.println(COUNT.get());
-
-				return;
-			}
-		}
-	}
-	
-	public void close(){
+	public boolean close(){
 		logger.debug("rabbitmq colse start");
 		if(channel!=null){
 			try {
 				channel.close();
-			} catch (IOException | TimeoutException e) {
+				channel = null;
+			} catch (Exception e) {
 				logger.error("", e);
+				channel = null;
+				return false;
 			}
 		}
 		if(connection!=null){
 			try {
 				connection.close();
-			} catch (IOException e) {
+				connection = null;
+			} catch (Exception e) {
 				logger.error("", e);
+				connection = null;
+				return false;
 			}
 		}
 		logger.debug("rabbitmq colse end");
+		return true;
 	}
 
 }
