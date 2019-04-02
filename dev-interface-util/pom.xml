@@ -27,5 +27,6 @@
     	<module>dev-tb-util</module>
     	<module>dev-qiniu-util</module>
     	<module>dev-aliyun-mq</module>
+    	<module>dev-dingding-util</module>
   </modules>
 </project>

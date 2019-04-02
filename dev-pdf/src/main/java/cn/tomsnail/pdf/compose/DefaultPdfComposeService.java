@@ -1,16 +1,18 @@
 package cn.tomsnail.pdf.compose;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.lang.StringUtils;
-
-
-
-
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
@@ -336,6 +338,30 @@ public class DefaultPdfComposeService implements PdfComposeService {
 		    over.addImage(img);
 		}
 	}
+
+	@Override
+	public void pdf2Image(String src,String distFile) {
+        // 将pdf装图片 并且自定义图片得格式大小
+        File file = new File(src);
+        PDDocument doc = null;
+        try {
+        	doc = PDDocument.load(file);
+            PDFRenderer renderer = new PDFRenderer(doc);
+            BufferedImage image = renderer.renderImageWithDPI(0, 300); // Windows native DPI
+            ImageIO.write(image, "jpg", new File(distFile));
+            
+        } catch (IOException e) {
+           e.printStackTrace();
+        }finally {
+			if(doc!=null) {
+				try {
+					doc.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+    }
 	
 	
 

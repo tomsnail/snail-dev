@@ -176,11 +176,6 @@
 		</dependency>
 		<!-- end cglib -->
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.2.21</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.6</version>
@@ -277,5 +272,6 @@
 		<module>dev-ocr</module>
 		<module>dev-test</module>
 		<module>dev-all</module>
+		<module>dev-aliyun-canal</module>
 	</modules>
 </project>

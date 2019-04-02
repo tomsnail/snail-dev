@@ -173,6 +173,7 @@ public class RabbitmqClient implements Runnable{
 							try {
 								long cc = channel.consumerCount(ro.queueName);
 								logger.debug("{} has consumer count is {}",ro.queueName,cc);
+								logger.debug("{} has message count is {}",ro.queueName,channel.messageCount(ro.queueName));
 								COUNT.set(0);
 							} catch (Exception e) {
 								logger.error("", e);

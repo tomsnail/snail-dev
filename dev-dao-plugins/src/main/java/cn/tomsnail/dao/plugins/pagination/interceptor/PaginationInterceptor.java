@@ -66,9 +66,25 @@ public class PaginationInterceptor extends BaseInterceptor {
                     return null;
                 }
                 String originalSql = boundSql.getSql().trim();
+              //得到总记录数
+                try {
+                	if(mappedStatement.getConfiguration().getMappedStatementNames().contains(mappedStatement.getId()+"AutoCount")) {
+                		MappedStatement mappedStatementCount = mappedStatement.getConfiguration().getMappedStatement(mappedStatement.getId()+"AutoCount",false);
+    					
+    					if(mappedStatementCount!=null) {
+    						BoundSql boundSqlAC = mappedStatementCount.getBoundSql(parameter);
+    						page.setCount(SQLHelper.getCount(boundSqlAC.getSql().trim(), null, mappedStatementCount, parameterObject, boundSqlAC, log));
+    					}else {
+    						page.setCount(SQLHelper.getCount(originalSql, null, mappedStatement, parameterObject, boundSql, log));
+    					}
+                	}else {
+                		page.setCount(SQLHelper.getCount(originalSql, null, mappedStatement, parameterObject, boundSql, log));
+                	}
+				} catch (Exception e) {
+					log.error("", e);
+					page.setCount(SQLHelper.getCount(originalSql, null, mappedStatement, parameterObject, boundSql, log));
+				}
             	
-                //得到总记录数
-                page.setCount(SQLHelper.getCount(originalSql, null, mappedStatement, parameterObject, boundSql, log));
 
                 //分页查询 本地化对象 修改数据库注意修改实现
                 String pageSql = SQLHelper.generatePageSql(originalSql, page, DIALECT);

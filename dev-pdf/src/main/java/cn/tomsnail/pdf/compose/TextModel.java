@@ -50,7 +50,7 @@ public class TextModel {
 	 */
 	public TextModel(){
 		try {
-			bf = BaseFont.createFont();
+			bf = BaseFont.createFont("STSong-Light","UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -33,21 +33,22 @@ public class KafkaConsumer  extends Thread {
 	         KafkaStream<byte[], byte[]> stream = messageStreams.get(topic).get(0);// 获取每次接收到的这个数据  
 	         ConsumerIterator<byte[], byte[]> iterator =  stream.iterator();  
 	         while(iterator.hasNext()){  
-	             String message = new String(iterator.next().message());  
-	             System.out.println(topic+"接收到: " + message);  
+	             String message = new String(iterator.next().message()); 
+	             System.out.println(topic+"接收到: " + System.currentTimeMillis());  
+	             System.out.println(message);  
 	         }  
 	    }  
 	  
 	    private static ConsumerConnector createConsumer() {  
 	        Properties properties = new Properties();  
-	        properties.put("zookeeper.connect", "192.168.169.150:2181");//声明zk  
+	        properties.put("zookeeper.connect", "192.168.169.170:2181");//声明zk  
 	        properties.put("group.id", "group"+System.currentTimeMillis());// 必须要使用别的组名称， 如果生产者和消费者都在同一组，则不能访问同一组内的topic数据  
 	        return Consumer.createJavaConsumerConnector(new ConsumerConfig(properties));  
 	     }  
 	      
 	      
 	    public static void main(String[] args) {  
-	        new KafkaConsumer("test").start();// 使用kafka集群中创建好的主题 test   
+	        new KafkaConsumer("zkjd").start();// 使用kafka集群中创建好的主题 test   
 	          
 	    }  
 	

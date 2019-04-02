@@ -61,5 +61,8 @@ public interface PdfComposeService {
 	 */
 	public FieldPosition compose(ComposeModel composeModel);
 	
+	
+	public void pdf2Image(String src,String distFile) ;
+	
 
 }
