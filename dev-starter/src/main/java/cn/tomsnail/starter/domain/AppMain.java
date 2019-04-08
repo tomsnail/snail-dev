@@ -1,9 +1,11 @@
 package cn.tomsnail.starter.domain;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.tomsnail.starter.domain.spring.SpringBeanUtil;
+import cn.tomsnail.util.configfile.ConfigHelp;
 
 /**
  * 主启动类
@@ -14,6 +16,8 @@ import cn.tomsnail.starter.domain.spring.SpringBeanUtil;
 public class AppMain {
 	
 	public static volatile String AppName = cn.tomsnail.host.AppName.AppName;
+	
+	private static final String SPRING_CONTEXT_XML = ConfigHelp.getInstance("config").getLocalConfig("framework.spring.xml", "");
 
 	/**
 	 * 
@@ -28,6 +32,11 @@ public class AppMain {
 		}else{
 			applicationContextXml = args[0]; 
 		}
+		
+		
+		if(StringUtils.isNotBlank(SPRING_CONTEXT_XML)) {
+			applicationContextXml = SPRING_CONTEXT_XML;
+		}		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:"+applicationContextXml);
 		context.start();
 		SpringBeanUtil.init(context);

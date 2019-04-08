@@ -18,5 +18,10 @@
     	 <artifactId>dev-host</artifactId>
     	 <version>${dev.component.version}</version>
   	</dependency>
+  	<dependency>
+  		 <groupId>cn.tomsnail</groupId>
+    	 <artifactId>dev-file</artifactId>
+    	 <version>${dev.component.version}</version>
+  	</dependency>
   </dependencies>
 </project>
