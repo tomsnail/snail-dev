@@ -36,14 +36,14 @@ import cn.tomsnail.util.string.StringUtils;
 @Component("centerLogService")
 public class DefaultCenterLogService implements LogService{
 	
-	private static final String LOG_NAME  = ConfigHelp.getInstance("dev-log").getLocalConfig("CenterLogService.LOG_NAME", "DefaultCenterLogService");
+	private static final String LOG_NAME  = ConfigHelp.getInstance("config").getLocalConfig("CenterLogService.LOG_NAME", "DefaultCenterLogService");
 	
-	private static final String LAYOUT = ConfigHelp.getInstance("dev-log").getLocalConfig("CenterLogService.LAYOUT", "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n");
+	private static final String LAYOUT = ConfigHelp.getInstance("config").getLocalConfig("CenterLogService.LAYOUT", "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n");
 	
 	
 	@Autowired(required=false) 
 	@Qualifier("CenterLogAddress")
-	private  static String address = ConfigHelp.getInstance("dev-log").getLocalConfig("CenterLogService.address", "192.168.169.170:8457");
+	private  static String address = ConfigHelp.getInstance("config").getLocalConfig("CenterLogService.address", "192.168.169.170:8457");
 	
 	public DefaultCenterLogService(){
 		
@@ -99,10 +99,10 @@ public class DefaultCenterLogService implements LogService{
 				final Configuration config = ctx.getConfiguration();
 				Layout layout = PatternLayout.createLayout(LAYOUT, null, config, null, null, true, false, null, null);
 				Property[] properties = new Property[1];
-				String _address = ConfigClientFactory.getInstance().getConfigClient().getConfig("zkjd_config_log_address", address);
+				String _address = ConfigClientFactory.getInstance().getConfigClient().getConfig("CenterLogService.LogAddress", address);
 				Property property =  Property.createProperty("bootstrap.servers",_address );
 				properties[0] = property;
-				Appender appender = KafkaAppender.createAppender(layout, null, ConfigHelp.getInstance("dev-log").getLocalConfig("CenterLogService.AppenderName", "kafka"), false, ConfigHelp.getInstance("dev-log").getLocalConfig("CenterLogService.topic", "LOG_CENTER"), properties);
+				Appender appender = KafkaAppender.createAppender(layout, null, ConfigHelp.getInstance("config").getLocalConfig("CenterLogService.AppenderName", "kafka"), false, ConfigHelp.getInstance("dev-log").getLocalConfig("CenterLogService.topic", "LOG_CENTER"), properties);
 				appender.start();
 				config.addAppender(appender);
 				AppenderRef ref = AppenderRef.createAppenderRef(LOG_NAME, null, null);

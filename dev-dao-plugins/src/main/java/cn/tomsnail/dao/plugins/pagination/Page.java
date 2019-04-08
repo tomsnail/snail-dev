@@ -15,6 +15,9 @@ import java.util.List;
  */
 public class Page<T> {
 	
+	public static int DEFAULT_PAGE_MODE = 1;
+	public static int NO_PAGE_MODE = 0;
+	
 	private int pageNo = 1; // 当前页码
 	private int pageSize = Integer.valueOf("30"); // 页面大小，设置为“-1”表示不进行分页（分页无效）
 	
@@ -29,7 +32,7 @@ public class Page<T> {
 	
 	private List<T> list = new ArrayList<T>();
 	
-	
+	private int pageMode = DEFAULT_PAGE_MODE;
 	
 	private String addData = "";
 
@@ -303,5 +306,13 @@ public class Page<T> {
 	public void setAddData(String addData) {
 		this.addData = addData;
 	}
+	public int getPageMode() {
+		return pageMode;
+	}
+	public void setPageMode(int pageMode) {
+		this.pageMode = pageMode;
+	}
+	
+	
 	
 }

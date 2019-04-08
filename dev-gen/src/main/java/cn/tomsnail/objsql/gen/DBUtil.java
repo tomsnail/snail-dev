@@ -11,10 +11,8 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
 
 import cn.tomsnail.util.configfile.ConfigHelp;
 
@@ -25,16 +23,8 @@ public class DBUtil {
 
 	private static Pattern linePattern = Pattern.compile("_(\\w)"); 
 	
-	 public static String lineToHump(String str){  
-         str = str.toLowerCase();  
-         Matcher matcher = linePattern.matcher(str);  
-         StringBuffer sb = new StringBuffer();  
-         while(matcher.find()){  
-             matcher.appendReplacement(sb, matcher.group(1).toUpperCase());  
-         }  
-         matcher.appendTail(sb);  
-         return sb.toString();  
-     }  
+
+	 
 	
 	public static GenTable getTableInfo(String table) throws Exception {
 
@@ -121,7 +111,6 @@ public class DBUtil {
 				jdbcType = "varchar";
 				javaType = "String";
 			}
-			System.out.println(type+":"+columnName);
 			column.setComments("");
 			if(jdbctype.equals("mybatis")){
 				if("UPPER".equalsIgnoreCase(feildtype)){
@@ -129,9 +118,9 @@ public class DBUtil {
 				}else if("LOWER".equalsIgnoreCase(feildtype)){
 					column.setJavaField4Dto(columnName.toLowerCase());
 				}else{
-					column.setJavaField4Dto(DBUtil.lineToHump(columnName));
+					column.setJavaField4Dto(StringUtils.lineToHump(linePattern,columnName));
 				}
-				column.setJavaField(DBUtil.lineToHump(columnName));
+				column.setJavaField(StringUtils.lineToHump(linePattern,columnName));
 			}else{
 				column.setJavaField(columnName);
 			}
@@ -172,42 +161,62 @@ public class DBUtil {
 		return dbUser;
 	}
 
-	private static void getTables(Connection conn) throws SQLException {
-		DatabaseMetaData dbMetData = conn.getMetaData();
-		// mysql convertDatabaseCharsetType null
-		ResultSet rs = dbMetData.getTables(null,
-				convertDatabaseCharsetType("root", "mysql"), null,
-				new String[] { "TABLE", "VIEW" });
-
-		while (rs.next()) {
-			if (rs.getString(4) != null
-					&& (rs.getString(4).equalsIgnoreCase("TABLE") || rs
-							.getString(4).equalsIgnoreCase("VIEW"))) {
-				String tableName = rs.getString(3).toLowerCase();
-				System.out.print(tableName + "\t");
-				// 根据表名提前表里面信息：
-				ResultSet colRet = dbMetData.getColumns(null, "%", tableName,
-						"%");
-				while (colRet.next()) {
-					String columnName = colRet.getString("COLUMN_NAME");
-					String columnType = colRet.getString("TYPE_NAME");
-					int datasize = colRet.getInt("COLUMN_SIZE");
-					int digits = colRet.getInt("DECIMAL_DIGITS");
-					int nullable = colRet.getInt("NULLABLE");
-					// System.out.println(columnName + " " + columnType + " "+
-					// datasize + " " + digits + " " + nullable);
-				}
-
+	public static List<String> getTables() {
+		
+		String url = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbc_url", "");
+		String user = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbc_username", "");
+		String password = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbc_password", "");
+		
+		List<String> tables = new ArrayList<String>();
+		try {
+			Connection conn = DriverManager.getConnection(url, user, password);
+			if (!conn.isClosed())
+				System.out.println("Succeeded connecting to the Database!");
+			else {
+				System.err.println("connect filed");
+				return tables;
 			}
+				
+				
+			
+			DatabaseMetaData dbMetData = conn.getMetaData();
+			ResultSet rs = dbMetData.getTables(null,
+					convertDatabaseCharsetType("root", "mysql"), null,
+					new String[] { "TABLE", "VIEW" });
+			
+			while (rs.next()) {
+				if (rs.getString(4) != null
+						&& (rs.getString(4).equalsIgnoreCase("TABLE") || rs
+								.getString(4).equalsIgnoreCase("VIEW"))) {
+					String tableName = rs.getString(3).toLowerCase();
+					System.out.println(tableName);
+					tables.add(tableName);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		System.out.println();
+		
+		return tables;
 	}
 	public static void main(String[] args) {
 		try {
 			//getTableInfo("wx_user");
-			System.out.println(DBUtil.lineToHump("goods_name_id"));
+			String[] tables = "*".split(",");
+			String[] objects = "".split(",");
+			List<String> tableList = new ArrayList<String>();
+			tableList.add("sys_file_all");
+			
+			if(tables.length==1&&tables[0].equals("*")) {
+				tableList.toArray(tables);
+				for(int i=0;i<tables.length;i++) {
+					objects[i] = StringUtils.toUpperCaseFirstOne(StringUtils.lineToHump(linePattern,tables[i]));
+				}
+			}
+			System.out.println(tables[0]);
+			System.out.println(objects[0]);
+			System.out.println(StringUtils.toUpperCaseFirstOne(StringUtils.lineToHump(linePattern,"sys_file_all")));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

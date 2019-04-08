@@ -52,7 +52,7 @@ public class PaginationInterceptor extends BaseInterceptor {
             Object parameter = invocation.getArgs()[1];
             BoundSql boundSql = mappedStatement.getBoundSql(parameter);
             Object parameterObject = boundSql.getParameterObject();
-
+            
             //获取分页参数对象
             Page<Object> page = null;
             if (parameterObject != null) {
@@ -61,6 +61,10 @@ public class PaginationInterceptor extends BaseInterceptor {
 
             //如果设置了分页对象，则进行分页
             if (page != null && page.getPageSize() != -1) {
+            	
+            	if(page.getPageMode()==Page.NO_PAGE_MODE) {
+            		return invocation.proceed();
+            	}
 
             	if (StringUtils.isBlank(boundSql.getSql())){
                     return null;

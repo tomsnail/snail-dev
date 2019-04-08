@@ -2,12 +2,14 @@ package cn.tomsnail.objsql.gen;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
 
 import cn.tomsnail.util.configfile.ConfigHelp;
 
 public class GenMain {
+	
+	private static Pattern linePattern = Pattern.compile("_(\\w)"); 
 
 	public static void main(String[] args) {
 		String tableStr = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.tables", "");
@@ -26,6 +28,14 @@ public class GenMain {
 				GenScheme genScheme = getScheme(scheme);
 				GenConfig config = GenUtils.getConfig();
 				List<GenTemplate> templateList = GenUtils.getTemplateList(config, genScheme.getCategory(), false);
+				
+				if(tables.length==1&&tables[0].equals("*")) {
+					tables = DBUtil.getTables().toArray(tables);
+					objects = new String[tables.length];
+					for(int i=0;i<tables.length;i++) {
+						objects[i] = StringUtils.toUpperCaseFirstOne(StringUtils.lineToHump(linePattern,tables[i]));
+					}
+				}
 				for(int i=0;i<tables.length;i++){
 					if(!StringUtils.isBlank(tables[i])&&!StringUtils.isBlank(objects[i])){
 						GenTable genTable = getTable(tables[i]);

@@ -110,10 +110,10 @@ public class BaseReturnData<T> implements Serializable{
 		if(!LRU_MAP.containsKey(key)){
 			int status = -1;
 			try {
-				status = Integer.valueOf(ConfigHelp.getInstance("message").getLocalConfig(key+".status", "-1"));
+				status = Integer.valueOf(ConfigHelp.getInstance("config").getLocalConfig("message."+key+".status", "-1"));
 			} catch (NumberFormatException e) {
 			}
-			String errorDesc = ConfigHelp.getInstance("message").getLocalConfig(key+".message", "");
+			String errorDesc = ConfigHelp.getInstance("config").getLocalConfig("message."+key+".message", "");
 			BaseReturnData returnData =  error(null,status,errorDesc);
 			LRU_MAP.put(key, returnData);
 		}

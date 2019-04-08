@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <dubbo:application name="xxxxx" owner="tomsnail" organization="tomsnail" >
+    	<dubbo:parameter key="qos.enable" value="false"/>
+    	<dubbo:parameter key="qos.accept.foreign.ip" value="false"/>
+    </dubbo:application>
+	<dubbo:annotation package="xxxxx.webapi" /> 
+    <dubbo:registry protocol="zk" address="${zookeeper}" />
+    <dubbo:protocol name="rest"  port="${tomcat.port}" server="tomcat" />
+    
+    
+    <dubbo:registry id="dubbo_zk" protocol="zookeeper" address="${zookeeper}" />
+	<dubbo:reference id="xxxxxxService" interface="xxxxxxService" protocol="dubbo" registry="dubbo_zk" check="true" version="0.0.1"/>
+
+</beans>

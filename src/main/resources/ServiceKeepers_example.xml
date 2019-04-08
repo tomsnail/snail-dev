@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<services>
+	<service>
+		<name>pilotservice1</name>
+		<limitNumber>1</limitNumber>
+	</service>
+	<service>
+		<name>pilotservice2</name>
+		<limitNumber>2</limitNumber>
+	</service>
+</services>

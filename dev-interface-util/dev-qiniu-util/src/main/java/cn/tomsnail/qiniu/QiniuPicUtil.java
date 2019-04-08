@@ -41,11 +41,11 @@ public class QiniuPicUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(QiniuPicUtil.class);
 
-	private static String ACCESS_KEY = ConfigHelp.getInstance("qiniu").getLocalConfig("qiniu.ACCESS_KEY", "CFJGWKLIt6zw7HudQgrpvzhpW1oPdwniI4ECnqxe");
+	private static String ACCESS_KEY = ConfigHelp.getInstance("config").getLocalConfig("qiniu.ACCESS_KEY", "CFJGWKLIt6zw7HudQgrpvzhpW1oPdwniI4ECnqxe");
 
-	private static String SECRET_KEY = ConfigHelp.getInstance("qiniu").getLocalConfig("qiniu.SECRET_KEY", "GsPv0Dt4izT2-Gqkti8kIHKFEmGvq09HK5C_3kOw");
+	private static String SECRET_KEY = ConfigHelp.getInstance("config").getLocalConfig("qiniu.SECRET_KEY", "GsPv0Dt4izT2-Gqkti8kIHKFEmGvq09HK5C_3kOw");
 
-	private static final String defaultBucket = ConfigHelp.getInstance("qiniu").getLocalConfig("qiniu.defaultBucket", "cunctao");
+	private static final String defaultBucket = ConfigHelp.getInstance("config").getLocalConfig("qiniu.defaultBucket", "cunctao");
 
 	private static final Configuration cfg = new Configuration(Zone.autoZone());
 	

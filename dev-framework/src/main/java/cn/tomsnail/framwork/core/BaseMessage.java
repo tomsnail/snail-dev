@@ -30,7 +30,7 @@ public class BaseMessage implements Serializable{
 	}
 	
 	public static BaseMessage build(int status,String key,String defaultValue){
-		return new BaseMessage(status, ConfigHelp.getInstance("message").getLocalConfig(key, defaultValue));
+		return new BaseMessage(status, ConfigHelp.getInstance("config").getLocalConfig("message."+key, defaultValue));
 	}
 	
 	public static BaseMessage build(int status,String msg){

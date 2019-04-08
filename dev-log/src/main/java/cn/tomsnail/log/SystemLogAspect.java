@@ -237,7 +237,7 @@ public class SystemLogAspect {
 			 System.err.println(e.getMessage());
 		 }
 		 int level =  Log.INFO;
-		 if(!StringUtils.isBlank(levelStr)&&NumberUtils.isNumber(levelStr)){
+		 if(StringUtils.isNotBlank(levelStr)&&NumberUtils.isNumber(levelStr)){
 			 level = Integer.parseInt(levelStr);
 		 }else{
 				levelStr = logPoint.level();
