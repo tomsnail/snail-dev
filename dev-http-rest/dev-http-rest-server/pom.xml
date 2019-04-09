@@ -20,12 +20,12 @@
 			<artifactId>dev-http-rest-core</artifactId>
 			<version>${dev.component.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>dev-authority</artifactId>
 			<version>${dev.component.version}</version>
 		</dependency>
+		
 	</dependencies>
 
 </project>

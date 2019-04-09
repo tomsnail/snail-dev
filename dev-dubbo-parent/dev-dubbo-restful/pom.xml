@@ -11,7 +11,7 @@
   <name>dev-dubbo-restful</name>
   <url>http://maven.apache.org</url>
  <properties>
-		<dubbo.version>2.6.4</dubbo.version>
+		<dubbo.version>2.6.6</dubbo.version>
 		<io.netty.version>4.0.18.Final</io.netty.version>
 		<org.jboss.netty.version>3.2.5.Final</org.jboss.netty.version>
 		<org.javassist.version>3.20.0-GA</org.javassist.version>

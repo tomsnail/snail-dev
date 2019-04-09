@@ -63,5 +63,10 @@
 			<artifactId>dev-http-rest-server</artifactId>
 			<version>${dev.component.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.tomsnail</groupId>
+			<artifactId>dev-http-rest-springboot</artifactId>
+			<version>${dev.component.version}</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -22,21 +22,10 @@
    	   
    	
    	<context:component-scan base-package="cn.tomsnail.log"/>
-   	
    	<context:component-scan base-package="cn.tomsnail.test.dubbo.rest"/>
-   	
-   	<context:component-scan base-package="cn.tomsnail.dubbo.restful.filter"/>   
-
     <aop:aspectj-autoproxy proxy-target-class="true"/>
    	
-   	
-    
-    <import resource="spring-dubbo.xml"></import>
-    
-    
-    
-    
-    <bean class="cn.tomsnail.dubbo.restful.filter.TestFilter"></bean>
+	<import resource="spring-dubbo.xml"></import>
 
 
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">

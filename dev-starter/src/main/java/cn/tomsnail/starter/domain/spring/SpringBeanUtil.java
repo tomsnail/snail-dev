@@ -1,6 +1,6 @@
 package cn.tomsnail.starter.domain.spring;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.ApplicationContext;
 
   
    /**
@@ -13,9 +13,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 	*/     
 public class SpringBeanUtil {
 
-	private static ClassPathXmlApplicationContext context;
+	private static ApplicationContext context;
 	
-	public static void init(ClassPathXmlApplicationContext context){
+	public static void init(ApplicationContext context){
 		SpringBeanUtil.context = context;
 	}
 	

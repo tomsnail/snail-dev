@@ -46,6 +46,7 @@
   	<module>../dev-http-rest-core</module>
   	<module>../dev-http-rest-server</module>
   	<module>../dev-http-rest-client</module>
+  	<module>dev-http-rest-springboot</module>
   </modules>
  
 </project>
