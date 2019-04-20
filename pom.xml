@@ -104,11 +104,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.locales>zh_CN</project.build.locales>
+		<java_source_version>1.8</java_source_version>
+        <java_target_version>1.8</java_target_version>
 		<junit.version>4.11</junit.version>
 		<log4j2.version>2.6.2</log4j2.version>
 		<spring.version>4.2.3.RELEASE</spring.version>
 		<cglib.version>3.1</cglib.version>
-		<snail.version>0.0.5-SNAPSHOT</snail.version>
+		<snail.version>0.0.6-SNAPSHOT</snail.version>
 	</properties>
 	<dependencies>
 

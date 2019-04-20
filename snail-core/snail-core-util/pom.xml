@@ -2,18 +2,18 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>cn.tomsnail</groupId>
-    <artifactId>snail-parent</artifactId>
+    <artifactId>snail-core</artifactId>
     <version>${snail.version}</version>
   </parent>
-  <artifactId>snail-core</artifactId>
+  <artifactId>snail-core-util</artifactId>
   <packaging>pom</packaging>
   <modules>
-  	<module>snail-core-ds</module>
-  	<module>snail-core-framework</module>
-  	<module>snail-core-start</module>
-  	<module>snail-core-util</module>
-  	<module>snail-core-config</module>
-  	<module>snail-core-log</module>
-  	<module>snail-core-gener</module>
+  	<module>snail-core-util-helper</module>
+  	<module>snail-core-util-validator</module>
+  	<module>snail-core-util-uuid</module>
+  	<module>snail-core-util-file</module>
+  	<module>snail-core-util-zkclient</module>
+  	<module>snail-core-util-reflect</module>
+  	<module>snail-core-util-host</module>
   </modules>
 </project>
