@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.tomsnail</groupId>
 	<artifactId>dev-component</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.6-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>dev-component</name>
 	<url>http://maven.apache.org</url>
@@ -30,7 +30,7 @@
 				<configuration>
 					<includes>
 						<include>**/*.class</include>
-						<include>dev-*.properties</include>
+						<include>*_example.properties</include>
 						<include>META-INF/**/*</include>
 					</includes>
 					<excludes>
@@ -40,7 +40,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -102,16 +101,21 @@
 		</plugins>
 	</build>
 	<properties>
+		<dev.component.version>0.0.6-SNAPSHOT</dev.component.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.locales>zh_CN</project.build.locales>
 		<junit.version>4.11</junit.version>
 		<log4j2.version>2.6.2</log4j2.version>
 		<spring.version>4.2.3.RELEASE</spring.version>
 		<cglib.version>3.1</cglib.version>
-		<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
+		<fastjson.version>1.2.21</fastjson.version>
+		<commons-net.version>3.3</commons-net.version>
+		<commons-collections.version>3.2.1</commons-collections.version>
+		<commons-lang.version>2.6</commons-lang.version>
+		<commons-io.version>2.2</commons-io.version>
+		<commons-lang3.version>3.6</commons-lang3.version>
 	</properties>
 	<dependencies>
-
 		<!-- spring start -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -123,14 +127,12 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
 		<!-- spring end -->
 		<!-- log4j2 start -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.21</version>
-
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -148,26 +150,33 @@
 			<version>${log4j2.version}</version>
 		</dependency>
 		<!-- log4j2 end -->
+		<!-- apache commons start -->
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
-			<version>3.3</version>
+			<version>${commons-net.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.2.1</version>
+			<version>${commons-collections.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
+			<version>${commons-lang.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.2</version>
+			<version>${commons-io.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+		<!-- apache commons end -->
 		<!-- start cglib -->
 		<dependency>
 			<groupId>cglib</groupId>
@@ -176,15 +185,9 @@
 		</dependency>
 		<!-- end cglib -->
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.6</version>
-		</dependency>
-		
-		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.21</version>
+			<version>${fastjson.version}</version>
 		</dependency>
 
 	</dependencies>
@@ -230,54 +233,6 @@
 		</snapshotRepository>
 	</distributionManagement>
 	<modules>
-		<module>dev-web</module>
-		<module>dev-jms</module>
-		<module>dev-mybatis</module>
-		<module>dev-cache</module>
-		<module>dev-log</module>
-		<module>dev-datasource</module>
-		<module>dev-framework</module>
-		<module>dev-redis</module>
-		<module>dev-starter</module>
-		<module>dev-lucene</module>
-		<module>dev-quartz</module>
-		<module>dev-util</module>
-		<module>dev-validator</module>
-		<module>dev-task</module>
-		<module>dev-config</module>
-		<module>dev-pilot</module>
-		<module>dev-mongodb</module>
-		<module>dev-zkclient</module>
-		<module>dev-security</module>
-		<module>dev-security-limit</module>
-		<module>dev-interface</module>
-		<module>dev-lock</module>
-		<module>dev-uuid</module>
-		<module>dev-host</module>
-		<module>dev-pdf</module>
-		<module>dev-batch-insert</module>
-		<module>dev-obj-sql</module>
-		<module>dev-hot-load</module>
-		<module>dev-http-client</module>
-		<module>dev-interface-util</module>
-		<module>dev-gen</module>
-		<module>dev-http</module>
-		<module>dev-file</module>
-		<module>dev-dubbo-parent</module>
-		<module>dev-http-rest/dev-http-rest-parent</module>
-		<module>dev-unit-test</module>
-		<module>dev-reflect</module>
-		<module>dev-dao-plugins</module>
-		<module>dev-token</module>
-		<module>dev-authority</module>
-		<module>dev-ehcache</module>
-		<module>dev-rap</module>
-		<module>dev-j2cache</module>
-		<module>dev-fastdfs</module>
-		<module>dev-rabbitmq</module>
-		<module>dev-ocr</module>
-		<module>dev-test</module>
-		<module>dev-all</module>
-		<module>dev-aliyun-canal</module>
+		
 	</modules>
 </project>

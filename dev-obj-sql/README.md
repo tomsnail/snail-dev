@@ -1,2 +1,0 @@
-# dev-obj-sql
-
