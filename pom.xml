@@ -229,4 +229,12 @@
 			<url>http://nexus.tomsnail.cn/repository/maven-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
+	<modules>
+		<module>snail-core</module>
+		<module>snail-extends</module>
+		<module>snail-third-extends</module>
+		<module>snail-test</module>
+		<module>snail-research</module>
+		<module>snail-example</module>
+	</modules>
 </project>
