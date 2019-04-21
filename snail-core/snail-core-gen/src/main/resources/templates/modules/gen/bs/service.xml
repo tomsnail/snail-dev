@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>service</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/service/${subModuleName}</filePath>
+	<fileName>${ClassName}ServiceImpl.java</fileName>
+	<content><![CDATA[
+package ${packageName}.${moduleName}.service<#if subModuleName != "">.${subModuleName}</#if>;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.tomsnail.snail.core.page.Page;
+import ${packageName}.${moduleName}.dao.${ClassName}Dao;
+import ${packageName}.${moduleName}.model.${ClassName}Convert;
+import ${packageName}.${moduleName}.model.${ClassName}Dto;
+import ${packageName}.${moduleName}.model.${ClassName}Mo;
+import cn.tomsnail.snail.core.util.string.StringUtils;
+import cn.tomsnail.snail.core.util.uuid.UuidUtil;
+
+@Service("${className}Service")
+public class ${ClassName}ServiceImpl implements ${ClassName}Service{
+	
+	@Autowired
+	private ${ClassName}Dao ${className}Dao;
+
+	@Override
+	public List<${ClassName}Mo> findList(${ClassName}Mo ${className}) {
+		
+		
+		if(${className}==null){
+			return null;
+		}
+		
+		
+		List<${ClassName}Mo> ${className}Mos = new ArrayList<${ClassName}Mo>();
+		
+		List<${ClassName}Dto> ${className}Dtos = ${className}Dao.findList(${ClassName}Convert.convert(${className}));
+		
+		for(${ClassName}Dto ${className}Dto:${className}Dtos){
+			${className}Mos.add(${ClassName}Convert.convert(${className}Dto));
+		}
+		
+		return ${className}Mos;
+	}
+
+	@Override
+	public ${ClassName}Mo get(String id) {
+		
+		if(StringUtils.isBlank(id)){
+			return null;
+		}
+		
+		${ClassName}Dto ${className}Dto = ${className}Dao.get(id);
+		
+		if(${className}Dto==null){
+			return null;
+		}
+		
+		return ${ClassName}Convert.convert(${className}Dto);
+	}
+
+	@Override
+	public int findPageCount(${ClassName}Mo ${className}) {
+		
+		if(${className}==null){
+			return 0;
+		}
+		
+		return ${className}Dao.findPageCount(${ClassName}Convert.convert(${className}));
+	}
+	
+	
+	@Override
+	public List<${ClassName}Mo> findPage(${ClassName}Mo ${className},Page page) {
+		
+		if(${className}==null){
+			return null;
+		}
+		
+		if(page==null){
+			return this.findList(${className});
+		}
+		
+		${ClassName}Dto ${className}Dto = ${ClassName}Convert.convert(${className});
+		${className}Dto.setOrderBy(${ClassName}Convert.orderByStr(page.getOrderBys()));
+
+		
+		${className}Dto.setPage(new cn.tomsnail.dao.plugins.pagination.Page(page.getPageNo(), page.getPageSize()));
+		
+		List<${ClassName}Mo> ${className}Mos = new ArrayList<${ClassName}Mo>();
+		
+		List<${ClassName}Dto> ${className}Dtos = ${className}Dao.findList(${className}Dto);
+		
+		for(${ClassName}Dto _${className}Dto:${className}Dtos){
+			${className}Mos.add(${ClassName}Convert.convert(_${className}Dto));
+		}
+		
+		return ${className}Mos;
+	}
+	
+	
+
+	@Override
+	public boolean save(${ClassName}Mo ${className}) {
+		
+		if(${className}==null){
+			return false;
+		}
+		
+		if(StringUtils.isBlank(${className}.getId())){
+			${className}.setId(UuidUtil.getNUUID());
+		}
+		
+		return ${className}Dao.insert(${ClassName}Convert.convert(${className}))==1;
+	}
+
+	@Override
+	public boolean saveBatch(List<${ClassName}Mo> ${className}s) {
+		return false;
+	}
+
+	@Override
+	public boolean delete(String id) {
+		
+		if(StringUtils.isBlank(id)){
+			return false;
+		}
+		
+		return ${className}Dao.delete(id)==1;
+	}
+
+	@Override
+	public boolean deleteBatch(List<String> ids) {
+		return false;
+	}
+
+	@Override
+	public boolean update(${ClassName}Mo ${className}) {
+		
+		if(${className}==null){
+			return false;
+		}
+		
+		return ${className}Dao.update(${ClassName}Convert.convert(${className}))==1;
+	}
+
+	@Override
+	public boolean updateBatch(List<${ClassName}Mo> ${className}s) {
+		return false;
+	}
+
+
+
+}
+]]>
+	</content>
+</template>

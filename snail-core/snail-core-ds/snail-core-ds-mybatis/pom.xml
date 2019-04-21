@@ -6,4 +6,27 @@
     <version>${snail.version}</version>
   </parent>
   <artifactId>snail-core-ds-mybatis</artifactId>
+  <properties>
+		<mybatis.version>3.2.2</mybatis.version>
+		<mybatis.spring.version>1.2.2</mybatis.spring.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			 <groupId>cn.tomsnail</groupId>
+    		 <artifactId>snail-core-ds-datasource</artifactId>
+             <version>${snail.version}</version>
+		</dependency>
+		<!-- mybatis start -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis.spring.version}</version>
+		</dependency>
+		<!--mybatis end -->
+	</dependencies>
 </project>

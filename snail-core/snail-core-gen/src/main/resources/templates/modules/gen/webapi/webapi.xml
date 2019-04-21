@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>webapi</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/webapi/${subModuleName}</filePath>
+	<fileName>TestFacadeImpl.java</fileName>
+	<content><![CDATA[
+package ${packageName}.${moduleName}.webapi<#if subModuleName != "">.${subModuleName}</#if>;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.alibaba.dubbo.config.annotation.Service;
+
+import cn.tomsnail.framwork.http.CommonMessage;
+import cn.tomsnail.framwork.http.RequestData;
+import cn.tomsnail.framwork.http.ResultData;
+import cn.tomsnail.framwork.validator.ValidatorFactory;
+import cn.tomsnail.framwork.validator.exception.ParamValidatorException;
+import cn.tomsnail.framwork.validator.annotation.ValidType;
+import cn.tomsnail.http.register.annotation.HttpRestService;
+import cn.tomsnail.obj.base.BaseWebApi;
+import cn.tomsnail.log.annotation.LogLevel;
+import cn.tomsnail.log.annotation.LogPoint;
+import cn.tomsnail.log.annotation.LogTarget;
+
+import ${packageName}.${moduleName}.model<#if subModuleName != "">.${subModuleName}</#if>.TestModel;
+import ${packageName}.${moduleName}.vo<#if subModuleName != "">.${subModuleName}</#if>.TestVo;
+
+/**
+ * ${functionName}webapi实现类
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+@Service(filter="tomsnail")
+@Path("test")
+public class TestFacadeImpl extends BaseWebApi implements TestFacade  {
+
+
+	
+	@Override
+	@POST
+	@Path("get")
+	@HttpRestService(serviceName="get",group="test")
+	@Produces({"application/json; charset=UTF-8"})
+	@Consumes({"application/json; charset=UTF-8"})
+	@LogPoint(desc = "get", level = LogLevel.INFO, target = LogTarget.LOG)
+	public ResultData<Map<String,Object>> get(RequestData<Map<String, Object>> requestData,@Context HttpServletRequest request,@Context HttpServletResponse response){
+		ResultData<Map<String, Object>> resultData = new ResultData<Map<String, Object>>();
+		TestVo testVo = null;
+		try {
+			testVo = (TestVo) ValidatorFactory.getBeanValidator().getValidBean(requestData.getBody(), TestVo.class);
+		} catch (ParamValidatorException e) {
+			resultData.setStatus(CommonMessage.PARAMETER_ERROR);
+			resultData.setMsg(e.getMessage());
+			resultData.setBody(new HashMap<String, Object>());
+			return resultData;
+		}
+		
+		//TestModel testModel = TestService.get(TestVo.getModel(TestModel.class));
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		//resultMap.put("testModel", new TestVo().getMap(testModel));
+		//resultData.setBody(resultMap);
+		return resultData;	
+	}
+	
+	
+	@Override
+	@POST
+	@Path("page")
+	@HttpRestService(serviceName="page",group="test")
+	@Produces({"application/json; charset=UTF-8"})
+	@Consumes({"application/json; charset=UTF-8"})
+	@LogPoint(desc = "page", level = LogLevel.INFO, target = LogTarget.LOG)
+	public ResultData<Map<String,Object>> page(RequestData<Map<String, Object>> requestData,@Context HttpServletRequest request,@Context HttpServletResponse response){
+		ResultData<Map<String, Object>> resultData = new ResultData<Map<String, Object>>();
+		TestVo testVo = null;
+		try {
+			testVo = (TestVo) ValidatorFactory.getBeanValidator().getValidBean(requestData.getBody(), TestVo.class);
+		} catch (ParamValidatorException e) {
+			resultData.setStatus(CommonMessage.PARAMETER_ERROR);
+			resultData.setMsg(e.getMessage());
+			resultData.setBody(new HashMap<String, Object>());
+			return resultData;
+		}
+		
+		
+		Map<String,Object> resultMap = new HashMap<>();
+		resultData.setBody(resultMap);
+		return resultData;			
+	}
+	
+	
+}]]>
+	</content>
+</template>

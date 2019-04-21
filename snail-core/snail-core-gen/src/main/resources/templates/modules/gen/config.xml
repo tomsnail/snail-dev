@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<!-- 生成分类 -->
+	<category>
+		<category value="jdbc"  label="JDBC">
+			<template>dao/model.xml</template>
+			<template>dao/dao.xml</template>
+			<template>dao/daoimpl.xml</template>
+		</category>
+		
+		<category value="unitest"  label="unitest">
+			<template>unitest/unitest.xml</template>
+		</category>
+		
+		<category value="all"  label="all">
+			<template>csd/dto.xml</template>
+			<template>csd/dao.xml</template>
+			<template>csd/mapper.xml</template>
+			<template>csd/iservice.xml</template>
+			<template>csd/service.xml</template>
+			<template>csd/iwebapi.xml</template>
+			<template>csd/webapi.xml</template>
+			<template>csd/vo.xml</template>
+			<template>csd/assembly.xml</template>
+			<template>csd/conf-application.xml</template>
+			<template>csd/conf-confdatasource.xml</template>
+			<template>csd/conf-config.xml</template>
+			<template>csd/conf-datasource.xml</template>
+			<template>csd/conf-log4j.xml</template>
+			<template>csd/conf-springdubbo.xml</template>
+			<template>csd/conf-zookeeper.xml</template>
+			<template>csd/conf-mybatisconfig.xml</template>
+			<template>csd/conf-springdatasource.xml</template>
+			<template>csd/shutdown.xml</template>
+			<template>csd/startup.xml</template>
+			<template>csd/test-localhost.xml</template>
+			<template>csd/test-online.xml</template>
+			<template>csd/test-ontest.xml</template>
+			<template>csd/conf-log4j2.xml</template>
+			<template>csd/pom.xml</template>
+		</category>
+		
+		
+		<category value="baseservice"  label="baseservice">
+			<template>bs/dto.xml</template>
+			<template>bs/dao.xml</template>
+			<template>bs/mapper.xml</template>
+			<template>bs/api.xml</template>
+			<template>bs/model.xml</template>
+			<template>bs/convert.xml</template>
+			<template>bs/service.xml</template>
+			<template>bs/pom.xml</template>
+		</category>
+		
+		
+		<category value="oall"  label="oall">
+			<template>csd/dto.xml</template>
+			<template>csd/dao.xml</template>
+			<template>csd/mapper.xml</template>
+			<template>csd/iservice.xml</template>
+			<template>csd/service.xml</template>
+			<template>csd/iwebapi.xml</template>
+			<template>csd/webapi.xml</template>
+			<template>csd/vo.xml</template>			
+		</category>
+		
+		
+		<category value="fall"  label="fall">
+			<template>service/iservice.xml</template>
+			<template>service/service.xml</template>
+			<template>service/conf-application.xml</template>
+			<template>service/conf-confdatasource.xml</template>
+			<template>service/conf-config.xml</template>
+			<template>service/conf-datasource.xml</template>
+			<template>service/conf-log4j.xml</template>
+			<template>service/conf-springdubbo.xml</template>
+			<template>service/conf-zookeeper.xml</template>
+			<template>service/conf-springdatasource.xml</template>
+			<template>service/shutdown.xml</template>
+			<template>service/startup.xml</template>
+			<template>service/test-localhost.xml</template>
+			<template>service/conf-log4j2.xml</template>
+			<template>webapi/assembly.xml</template>
+			<template>webapi/conf-application.xml</template>
+			<template>webapi/conf-confdatasource.xml</template>
+			<template>webapi/conf-mybatisconfig.xml</template>
+			<template>webapi/conf-springdatasource.xml</template>
+			<template>webapi/conf-config.xml</template>
+			<template>webapi/conf-datasource.xml</template>
+			<template>webapi/conf-log4j.xml</template>
+			<template>webapi/conf-springdubbo.xml</template>
+			<template>webapi/conf-zookeeper.xml</template>
+			<template>webapi/shutdown.xml</template>
+			<template>webapi/startup.xml</template>
+			<template>webapi/test-localhost.xml</template>
+			<template>webapi/test-online.xml</template>
+			<template>webapi/test-ontest.xml</template>
+			<template>webapi/conf-log4j2.xml</template>
+			<template>webapi/iwebapi.xml</template>
+			<template>webapi/webapi.xml</template>
+			<template>webapi/vo.xml</template>
+			<template>webapi/model.xml</template>
+			<template>csd/pom.xml</template>
+		</category>
+		
+		<category value="dao"  label="dao">
+			<template>dao/dto.xml</template>
+			<template>dao/dao.xml</template>
+			<template>dao/mapper.xml</template>
+		</category>
+		
+		<category value="daov"  label="dao">
+			<template>dao/dto.xml</template>
+			<template>dao/dao.xml</template>
+			<template>dao/mapper.xml</template>
+			<template>dao/vo.xml</template>
+			<template>dao/pom.xml</template>
+		</category>
+		
+		<category value="odaov"  label="dao">
+			<template>dao/dto.xml</template>
+			<template>dao/dao.xml</template>
+			<template>dao/mapper.xml</template>
+			<template>dao/vo.xml</template>
+		</category>
+		
+		
+		<category value="webapi"  label="webapi">
+			<template>webapi/assembly.xml</template>
+			<template>webapi/conf-application.xml</template>
+			<template>webapi/conf-confdatasource.xml</template>
+			<template>webapi/conf-config.xml</template>
+			<template>webapi/conf-datasource.xml</template>
+			<template>webapi/conf-log4j.xml</template>
+			<template>webapi/conf-springdubbo.xml</template>
+			<template>webapi/conf-zookeeper.xml</template>
+			<template>webapi/conf-mybatisconfig.xml</template>
+			<template>webapi/conf-springdatasource.xml</template>
+			<template>webapi/shutdown.xml</template>
+			<template>webapi/startup.xml</template>
+			<template>webapi/test-localhost.xml</template>
+			<template>webapi/test-online.xml</template>
+			<template>webapi/test-ontest.xml</template>
+			<template>webapi/conf-log4j2.xml</template>
+			<template>webapi/iwebapi.xml</template>
+			<template>webapi/webapi.xml</template>
+			<template>webapi/vo.xml</template>
+			<template>webapi/model.xml</template>
+			<template>webapi/pom.xml</template>
+		</category>
+		
+		<category value="owebapi"  label="owebapi">
+			<template>o/iwebapi.xml</template>
+			<template>o/webapi.xml</template>
+
+		</category>
+		
+		<category value="service"  label="service">
+			<template>service/iservice.xml</template>
+			<template>service/service.xml</template>
+			<template>service/conf-application.xml</template>
+			<template>service/conf-confdatasource.xml</template>
+			<template>service/conf-config.xml</template>
+			<template>service/conf-datasource.xml</template>
+			<template>service/conf-log4j.xml</template>
+			<template>service/conf-springdubbo.xml</template>
+			<template>service/conf-zookeeper.xml</template>
+			<template>service/conf-springdatasource.xml</template>
+			<template>service/conf-mybatisconfig.xml</template>
+			<template>service/shutdown.xml</template>
+			<template>service/startup.xml</template>
+			<template>service/test-localhost.xml</template>
+			<template>service/conf-log4j2.xml</template>
+			<template>service/pom.xml</template>
+		</category>
+		
+		<category value="oservice"  label="oservice">
+			<template>o/iservice.xml</template>
+			<template>o/service.xml</template>
+		</category>
+		
+		
+		<category value="dubboservice"  label="dubboservice">
+			<template>dubbo/assembly.xml</template>
+			<template>dubbo/conf-application.xml</template>
+			<template>dubbo/conf-confdatasource.xml</template>
+			<template>dubbo/conf-config.xml</template>
+			<template>dubbo/conf-datasource.xml</template>
+			<template>dubbo/conf-log4j.xml</template>
+			<template>dubbo/conf-springdubbo.xml</template>
+			<template>dubbo/conf-zookeeper.xml</template>
+			<template>dubbo/conf-mybatisconfig.xml</template>
+			<template>dubbo/conf-springdatasource.xml</template>
+			<template>dubbo/shutdown.xml</template>
+			<template>dubbo/startup.xml</template>
+			<template>dubbo/test-localhost.xml</template>
+			<template>dubbo/test-online.xml</template>
+			<template>dubbo/test-ontest.xml</template>
+			<template>dubbo/conf-log4j2.xml</template>
+			<template>dubbo/vo.xml</template>
+			<template>dubbo/model.xml</template>
+			<template>dubbo/pom.xml</template>
+		</category>
+		
+		<category value="dubbowebapi"  label="dubbowebapi">
+			<template>dubbowebapi/assembly.xml</template>
+			<template>dubbowebapi/conf-application.xml</template>
+			<template>dubbowebapi/conf-confdatasource.xml</template>
+			<template>dubbowebapi/conf-config.xml</template>
+			<template>dubbowebapi/conf-datasource.xml</template>
+			<template>dubbowebapi/conf-log4j.xml</template>
+			<template>dubbowebapi/conf-springdubbo.xml</template>
+			<template>dubbowebapi/conf-zookeeper.xml</template>
+			<template>dubbowebapi/conf-mybatisconfig.xml</template>
+			<template>dubbowebapi/conf-springdatasource.xml</template>
+			<template>dubbowebapi/shutdown.xml</template>
+			<template>dubbowebapi/startup.xml</template>
+			<template>dubbowebapi/test-localhost.xml</template>
+			<template>dubbowebapi/test-online.xml</template>
+			<template>dubbowebapi/test-ontest.xml</template>
+			<template>dubbowebapi/conf-log4j2.xml</template>
+			<template>dubbowebapi/iwebapi.xml</template>
+			<template>dubbowebapi/webapi.xml</template>
+			<template>dubbowebapi/vo.xml</template>
+			<template>dubbowebapi/model.xml</template>
+			<template>dubbowebapi/pom.xml</template>
+		</category>
+		
+	</category>
+</config>

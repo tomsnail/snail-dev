@@ -6,4 +6,37 @@
     <version>${snail.version}</version>
   </parent>
   <artifactId>snail-core-util-helper</artifactId>
+   <properties>
+    <bcprov-jdk15.version>140</bcprov-jdk15.version>
+    <commons-codec.version>1.9</commons-codec.version>
+    <commons-beanutils.version>1.9.3</commons-beanutils.version>
+    <dom4j.version>1.6.1</dom4j.version>
+  </properties>
+  <dependencies>
+		<dependency>
+			<groupId>bouncycastle</groupId>
+			<artifactId>bcprov-jdk15</artifactId>
+			<version>${bcprov-jdk15.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec.version}</version>
+		</dependency>
+		<dependency>
+    		<groupId>commons-beanutils</groupId>
+    		<artifactId>commons-beanutils</artifactId>
+    		<version>${commons-beanutils.version}</version>
+		</dependency>
+		<dependency>
+  		 	<groupId>cn.tomsnail</groupId>
+    	 	<artifactId>snail-core-util-validator</artifactId>
+    	 	<version>${snail.version}</version>
+  		</dependency>
+		<dependency>
+    		<groupId>dom4j</groupId>
+    		<artifactId>dom4j</artifactId>
+    		<version>${dom4j.version}</version>
+		</dependency>
+  </dependencies>
 </project>

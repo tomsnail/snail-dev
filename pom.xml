@@ -111,6 +111,11 @@
 		<spring.version>4.2.3.RELEASE</spring.version>
 		<cglib.version>3.1</cglib.version>
 		<snail.version>1.0-SNAPSHOT</snail.version>
+		<springboot.version>1.3.3.RELEASE</springboot.version>
+		<kafka.version>0.10.0.1</kafka.version>
+		<jedis.version>2.6.2</jedis.version>
+		<spring-data-redis.verion>1.5.0.RELEASE</spring-data-redis.verion>
+		<dubbo.version>2.6.4</dubbo.version>
 	</properties>
 	<dependencies>
 

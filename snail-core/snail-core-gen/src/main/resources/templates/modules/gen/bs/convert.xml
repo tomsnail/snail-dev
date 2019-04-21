@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>convert</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/model/${subModuleName}</filePath>
+	<fileName>${ClassName}Convert.java</fileName>
+	<content><![CDATA[
+/**
+ * Copyright &copy; 2012-2016
+ */
+package ${packageName}.${moduleName}.model<#if subModuleName != "">.${subModuleName}</#if>;
+
+import java.util.List;
+
+
+import cn.tomsnail.snail.core.page.OrderBy;
+import cn.tomsnail.snail.core.util.commons.CollectionUtils;
+import cn.tomsnail.snail.core.util.string.StringUtils;
+
+
+/**
+ * ${functionName} Convert
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+public class ${ClassName}Convert   {
+	
+	
+	public static ${ClassName}Mo convert(${ClassName}Dto ${className}Dto){
+		
+		if(${className}Dto==null){
+			return null;
+		}
+		
+		 ${ClassName}Mo  ${className}Mo = new  ${ClassName}Mo();
+		 
+		 <#list table.columnList as c>
+		 ${className}Mo.set${c.csimpleJavaField?cap_first}(${className}Dto.get${c.simpleJavaField?cap_first}());				
+		 </#list>
+		 
+		 return ${className}Mo;
+	}
+	
+	
+	public static ${ClassName}Dto convert(${ClassName}Mo ${className}Mo){
+		
+		if(${className}Mo==null){
+			return null;
+		}
+		
+		 ${ClassName}Dto  ${className}Dto = new  ${ClassName}Dto();
+		 
+		 <#list table.columnList as c>
+		 ${className}Dto.set${c.simpleJavaField?cap_first}(${className}Mo.get${c.csimpleJavaField?cap_first}());				
+		 </#list>
+		 
+		 return ${className}Dto;
+	}
+	
+	
+	public static String getDtoFiledName(String moFiledName){
+		
+		if(StringUtils.isBlank(moFiledName)){
+			return "id";
+		}
+		
+		
+		<#list table.columnList as c>
+		if("${c.csimpleJavaField}".equals(moFiledName)){
+			return "${c.simpleJavaField?cap_first}";
+		}
+		</#list>
+		
+		
+		
+		return "id";
+	}
+	
+	
+	public static String orderByStr(List<OrderBy> orderBys){
+		
+		if(CollectionUtils.isEmpty(orderBys)){
+			return null;
+		}
+		
+		StringBuffer stringBuffer = new StringBuffer();
+		
+		for(OrderBy orderBy:orderBys){
+			stringBuffer.append(" ").append(getDtoFiledName(orderBy.getOrderName())).append(" ").append(orderBy.getOrderType()).append(",");
+		}
+		stringBuffer.append(" ").append("id").append(" ");
+		
+		return stringBuffer.toString();
+	}
+	
+}]]>
+	</content>
+</template>

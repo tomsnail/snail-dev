@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>log4j2</name>
+	<filePath>src/main/resources</filePath>
+	<fileName>log4j2.xml</fileName>
+	<content><![CDATA[
+
+<?xml version="1.0" encoding="UTF-8"?>  
+<Configuration status="info" monitorInterval="10">  
+  
+    <properties>  
+        <property name="LOG_HOME">logs</property>  
+        <property name="FILE_NAME">malone</property>  
+    </properties>  
+  
+    <Appenders>  
+        <!-- 控制台日志输出 -->  
+        <Console name="Console" target="SYSTEM_OUT">  
+            <PatternLayout pattern="[${"%"}-5p] ${"%"}d ${"%"}c - ${"%"}m${"%"}n" />  
+        </Console>  
+        <!-- 循环文件日志输出 -->  
+        <RollingRandomAccessFile name="running-log"  
+            fileName="${"$"}{LOG_HOME}/${"$"}{FILE_NAME}.log" filePattern="${"$"}{LOG_HOME}/${"$"}${"$"}{date:yyyy-MM}/${"$"}{FILE_NAME}-${"%"}d{yyyy-MM-dd}-${"%"}i.log.gz">  
+            <PatternLayout  
+                pattern="[${"%"}-5p] ${"%"}d ${"%"}c - ${"%"}m${"%"}n" />  
+            <Policies>  
+                <TimeBasedTriggeringPolicy />  
+                <SizeBasedTriggeringPolicy size="60 MB" />  
+            </Policies>  
+            <DefaultRolloverStrategy max="20" />  
+        </RollingRandomAccessFile>
+    </Appenders>  
+      
+    <Loggers>  
+        <Root level="info">  
+            <AppenderRef ref="Console" />  
+            <AppenderRef ref="running-log" />
+        </Root>  
+    </Loggers>  
+    
+</Configuration>  
+
+]]>
+	</content>
+</template>

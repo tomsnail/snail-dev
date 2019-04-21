@@ -10,5 +10,6 @@
   <modules>
   	<module>snail-core-ds-datasource</module>
   	<module>snail-core-ds-mybatis</module>
+  	<module>snail-core-ds-obj-sql</module>
   </modules>
 </project>
