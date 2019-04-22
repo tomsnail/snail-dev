@@ -108,6 +108,7 @@
 		<log4j2.version>2.6.2</log4j2.version>
 		<spring.version>4.2.3.RELEASE</spring.version>
 		<cglib.version>3.1</cglib.version>
+		<hibernate.validator.version>5.1.1.Final</hibernate.validator.version>
 		<dev.component.version>0.0.5-SNAPSHOT</dev.component.version>
 	</properties>
 	<dependencies>
