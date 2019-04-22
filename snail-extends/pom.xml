@@ -7,4 +7,13 @@
   </parent>
   <artifactId>snail-extends</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>snail-extends-security</module>
+  	<module>snail-extends-cache</module>
+  	<module>snail-extends-pilot</module>
+  	<module>snail-extends-db</module>
+  	<module>snail-extends-lock</module>
+  	<module>snail-extends-task</module>
+  	<module>snail-extends-web</module>
+  </modules>
 </project>

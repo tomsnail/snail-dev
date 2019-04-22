@@ -7,4 +7,8 @@
   </parent>
   <artifactId>snail-third-extends</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>snail-e3-cache</module>
+  	<module>snail-e3-task</module>
+  </modules>
 </project>
