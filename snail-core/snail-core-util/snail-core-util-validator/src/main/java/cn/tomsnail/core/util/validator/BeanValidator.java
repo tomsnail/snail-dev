@@ -21,7 +21,7 @@ import cn.tomsnail.core.util.validator.exception.ParamValidatorException;
 	* @date 2017年4月17日 上午9:25:59
 	* @see 
 	*/     
-public class BeanValidator {
+public class BeanValidator implements IObjectValidator{
 
 	
 	public Object getValidBean(Map<String, Object> valueMap,Class clazz) throws ParamValidatorException{

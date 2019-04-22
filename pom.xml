@@ -116,6 +116,7 @@
 		<jedis.version>2.6.2</jedis.version>
 		<spring-data-redis.verion>1.5.0.RELEASE</spring-data-redis.verion>
 		<dubbo.version>2.6.4</dubbo.version>
+		<hibernate.validator.version>5.1.1.Final</hibernate.validator.version>
 	</properties>
 	<dependencies>
 
