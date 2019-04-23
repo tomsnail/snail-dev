@@ -13,7 +13,8 @@
 /*    */   {
 /* 20 */     return MSPageHepler.getCountString(sql);
 /*    */   }
-/*    */ }
+/*    */
+}
 
 /* Location:           E:\02_workspace\11_maven\repository\com\gymf\gymfcore\1.0\gymfcore-1.0.jar
  * Qualified Name:     com.gymf.core.orm.dialect.MSDialect

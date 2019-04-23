@@ -7,4 +7,8 @@
   </parent>
   <artifactId>snail-extends-db</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>snail-extends-db-batch-insert</module>
+  	<module>snail-extends-db-dao-plugins</module>
+  </modules>
 </project>

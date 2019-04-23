@@ -7,4 +7,8 @@
   </parent>
   <artifactId>snail-extends-pilot</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>snail-extends-pilot-core</module>
+  	<module>snail-extends-pilot-hot-reload</module>
+  </modules>
 </project>

@@ -7,4 +7,7 @@
   </parent>
   <artifactId>snail-extends-lock</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>snail-extends-lock-core</module>
+  </modules>
 </project>

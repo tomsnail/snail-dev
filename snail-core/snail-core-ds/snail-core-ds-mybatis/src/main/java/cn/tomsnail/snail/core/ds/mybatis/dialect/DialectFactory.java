@@ -1,8 +1,7 @@
 /*    */ package cn.tomsnail.snail.core.ds.mybatis.dialect;
 /*    */ 
-/*    */ import java.io.PrintStream;
-/*    */ import java.util.Properties;
 /*    */ import org.apache.ibatis.session.Configuration;
+
 /*    */ 
 /*    */ public class DialectFactory
 /*    */ {
