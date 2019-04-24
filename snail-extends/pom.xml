@@ -15,5 +15,6 @@
   	<module>snail-extends-lock</module>
   	<module>snail-extends-task</module>
   	<module>snail-extends-web</module>
+  	<module>snail-extends-mq</module>
   </modules>
 </project>

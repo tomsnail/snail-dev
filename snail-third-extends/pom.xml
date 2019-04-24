@@ -10,5 +10,12 @@
   <modules>
   	<module>snail-e3-cache</module>
   	<module>snail-e3-task</module>
+  	<module>snail-e3-mq</module>
+  	<module>snail-e3-log</module>
+  	<module>snail-e3-dfs</module>
+  	<module>snail-e3-db</module>
+  	<module>snail-e3-aliyun</module>
+  	<module>snail-e3-tx</module>
+  	<module>snail-e3-util</module>
   </modules>
 </project>

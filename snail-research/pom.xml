@@ -7,4 +7,7 @@
   </parent>
   <artifactId>snail-research</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>snail-research-canal</module>
+  </modules>
 </project>

@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.tomsnail</groupId>
+    <artifactId>snail-extends-mq</artifactId>
+    <version>${snail.version}</version>
+  </parent>
+  <artifactId>snail-extends-mq-core</artifactId>
+  <properties>
+  	<avtivemq.version>5.11.1</avtivemq.version>
+  	<commons-pool.version>1.6</commons-pool.version>
+  </properties>
+  <dependencies>
+  
+		<dependency>
+  			 <groupId>cn.tomsnail</groupId>
+    		<artifactId>snail-core-config</artifactId>
+    		<version>${snail.version}</version>
+  		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>${avtivemq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>${commons-pool.version}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+    		<groupId>org.apache.kafka</groupId>
+    		<artifactId>kafka_2.10</artifactId>
+    		<version>0.10.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+  </dependencies>
+</project>
