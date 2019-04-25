@@ -169,7 +169,7 @@ public class RabbitmqClient implements Runnable{
 					logger.debug("rabbitmq has connected");
 					if(connection.isOpen()&&channel.isOpen()){
 						logger.debug("rabbitmq open now:{}",COUNT.get());
-						if(COUNT.incrementAndGet()==CHECK_COUNT) {
+						if(COUNT.incrementAndGet()>=CHECK_COUNT) {
 							try {
 								long cc = channel.consumerCount(ro.queueName);
 								logger.debug("{} has consumer count is {}",ro.queueName,cc);
