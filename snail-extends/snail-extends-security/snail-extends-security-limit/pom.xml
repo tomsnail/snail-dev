@@ -11,7 +11,7 @@
   <dependencies>
   		<dependency>
 			<groupId>cn.tomsnail</groupId>
-    		<artifactId>snail-core-framework</artifactId>
+    		<artifactId>snail-core-framework-dubbox</artifactId>
     		<version>${snail.version}</version>
     		<scope>provided</scope>
 		</dependency>

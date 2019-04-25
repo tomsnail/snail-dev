@@ -8,41 +8,14 @@
 		<version>${snail.version}</version>
 	</parent>
 	<artifactId>snail-core-framework</artifactId>
-	<dependencies>
-		<dependency>
-			<groupId>cn.tomsnail</groupId>
-			<artifactId>snail-core-config</artifactId>
-			<version>${snail.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.tomsnail</groupId>
-			<artifactId>snail-core-log</artifactId>
-			<version>${snail.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.tomsnail</groupId>
-			<artifactId>snail-core-gen</artifactId>
-			<version>${snail.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.tomsnail</groupId>
-			<artifactId>snail-core-starter</artifactId>
-			<version>${snail.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.tomsnail</groupId>
-			<artifactId>snail-core-ds-mybatis</artifactId>
-			<version>${snail.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.tomsnail</groupId>
-			<artifactId>snail-core-service-dubbo-restful</artifactId>
-			<version>${snail.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.tomsnail</groupId>
-			<artifactId>snail-core-service-http-dubbo</artifactId>
-			<version>${snail.version}</version>
-		</dependency>
-	</dependencies>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>snail-core-framework-core</module>
+		<module>snail-core-framework-dubbo</module>
+		<module>snail-core-framework-dubbox</module>
+		<module>snail-core-framework-springboot</module>
+		<module>snail-core-framework-dubbo-springboot</module>
+		<module>snail-core-framework-dao</module>
+	</modules>
 </project>
