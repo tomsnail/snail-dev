@@ -11,6 +11,7 @@
   	<module>snail-core-service-http-client</module>
   	<module>snail-core-service-http-core</module>
   	<module>snail-core-service-http-dubbo</module>
+  	<module>snail-core-service-http-springboot</module>
   </modules>
      <properties>
     <httpclient.version>4.1.2</httpclient.version>

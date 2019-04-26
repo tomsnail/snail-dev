@@ -10,10 +10,7 @@
   <modules>
   	<module>snail-core-util-helper</module>
   	<module>snail-core-util-validator</module>
-  	<module>snail-core-util-uuid</module>
-  	<module>snail-core-util-file</module>
   	<module>snail-core-util-zkclient</module>
-  	<module>snail-core-util-host</module>
   	<module>snail-core-util-http</module>
   </modules>
 </project>

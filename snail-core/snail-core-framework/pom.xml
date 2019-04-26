@@ -9,7 +9,6 @@
 	</parent>
 	<artifactId>snail-core-framework</artifactId>
 	<packaging>pom</packaging>
-	
 	<modules>
 		<module>snail-core-framework-core</module>
 		<module>snail-core-framework-dubbo</module>

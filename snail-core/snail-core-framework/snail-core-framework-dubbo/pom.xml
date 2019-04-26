@@ -18,25 +18,21 @@
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-config</artifactId>
 			<version>${snail.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-log</artifactId>
 			<version>${snail.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-starter</artifactId>
 			<version>${snail.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-service-dubbo-service</artifactId>
 			<version>${snail.version}</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
