@@ -9,5 +9,7 @@
   <packaging>pom</packaging>
   <modules>
   	<module>snail-example-core-framework-dubbo</module>
+      <module>snail-example-core-framework-dubbox</module>
+      <module>snail-example-core-framework-springboot</module>
   </modules>
 </project>

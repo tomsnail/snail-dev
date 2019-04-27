@@ -12,6 +12,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
+			<artifactId>snail-core-service-dubbo-restful</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-service-http-core</artifactId>
 			<version>${revision}</version>
 		</dependency>

@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.tomsnail.snail.core.starter.spring.SpringBeanUtil;
@@ -20,6 +21,7 @@ import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
  */
 @SpringBootApplication
 @ImportResource(locations= {"classpath:applicationContext.xml"})
+@PropertySource("classpath:config.properties")
 public class AppMain {
 	
 	public static volatile String AppName = cn.tomsnail.snail.core.util.host.AppName.AppName;

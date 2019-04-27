@@ -44,10 +44,5 @@
       <artifactId>snail-core-framework-dubbo</artifactId>
       <version>${revision}</version>
     </dependency>
-    <dependency>
-      <groupId>cn.tomsnail</groupId>
-      <artifactId>snail-e3-util-zookeeper</artifactId>
-      <version>${revision}</version>
-    </dependency>
   </dependencies>
 </project>
