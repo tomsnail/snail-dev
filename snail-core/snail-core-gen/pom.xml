@@ -3,7 +3,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-core</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-core-gen</artifactId>
   <build>
@@ -82,12 +82,12 @@
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-util-helper</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-ds-datasource</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 			<scope>provided</scope>
 		</dependency>
 		

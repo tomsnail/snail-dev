@@ -3,7 +3,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-core-ds</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-core-ds-obj-sql</artifactId>
   <properties>
@@ -33,22 +33,22 @@
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-model</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-ds-mybatis</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-util-helper</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-util-validator</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
     		<groupId>javax.servlet</groupId>

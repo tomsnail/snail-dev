@@ -3,14 +3,14 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-extends-db</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-extends-db-dao-plugins</artifactId>
   <dependencies>
 		<dependency>
 			 <groupId>cn.tomsnail</groupId>
     		 <artifactId>snail-core-ds-obj-sql</artifactId>
-             <version>${snail.version}</version>
+             <version>${revision}</version>
 		</dependency>
 	</dependencies>
 </project>

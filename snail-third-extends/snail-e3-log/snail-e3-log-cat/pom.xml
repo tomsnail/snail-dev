@@ -3,15 +3,16 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-e3-log</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-e3-log-cat</artifactId>
   <dependencies>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-log</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>com.dianping.cat</groupId>
 			<artifactId>cat-core</artifactId>
@@ -62,5 +63,6 @@
 			<artifactId>gson</artifactId>
 			<version>1.6</version>
 		</dependency>
+		 -->
 	</dependencies>
 </project>

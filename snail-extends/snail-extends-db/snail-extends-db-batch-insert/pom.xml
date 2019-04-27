@@ -3,19 +3,19 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-extends-db</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-extends-db-batch-insert</artifactId>
   <dependencies>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-util-helper</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-ds-datasource</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 	</dependencies>
 </project>

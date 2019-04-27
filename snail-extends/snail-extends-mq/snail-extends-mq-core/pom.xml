@@ -3,7 +3,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-extends-mq</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-extends-mq-core</artifactId>
   <properties>
@@ -15,7 +15,7 @@
 		<dependency>
   			 <groupId>cn.tomsnail</groupId>
     		<artifactId>snail-core-config</artifactId>
-    		<version>${snail.version}</version>
+    		<version>${revision}</version>
   		</dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>

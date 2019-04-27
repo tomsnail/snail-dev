@@ -3,7 +3,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-core-service</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-core-service-http-parent</artifactId>
   <packaging>pom</packaging>
@@ -20,7 +20,7 @@
   		<dependency>
   		 	<groupId>cn.tomsnail</groupId>
     	 	<artifactId>snail-core-service-dubbo-restful</artifactId>
-    	 	<version>${snail.version}</version>
+    	 	<version>${revision}</version>
   		</dependency>
   		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>

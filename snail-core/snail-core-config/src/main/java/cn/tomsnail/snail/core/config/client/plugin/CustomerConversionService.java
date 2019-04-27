@@ -3,14 +3,24 @@ package cn.tomsnail.snail.core.config.client.plugin;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.convert.support.ConversionServiceFactory;
+import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.stereotype.Component;
 
-@Component("conversionService")
-public class CustomerConversionService extends ConversionServiceFactoryBean{
+import javax.annotation.PostConstruct;
 
-	public CustomerConversionService(){
+@Component
+@Configuration
+public class CustomerConversionService{
+
+
+	@Bean(name="conversionService")
+	public ConversionServiceFactoryBean init(){
+		ConversionServiceFactoryBean conversionServiceFactoryBean = new ConversionServiceFactoryBean();
 		BooleanSpringConverter booleanSpringConverter = new BooleanSpringConverter();
 		IntegerSpringConverter integerSpringConverter = new IntegerSpringConverter();
 		LongSpringConverter longSpringConverter = new LongSpringConverter();
@@ -20,7 +30,12 @@ public class CustomerConversionService extends ConversionServiceFactoryBean{
 		converters.add(longSpringConverter);
 		converters.add(integerSpringConverter);
 		converters.add(booleanSpringConverter);
-		setConverters(converters);
+		conversionServiceFactoryBean.setConverters(converters);
+		return conversionServiceFactoryBean;
 	}
+
+
+
+
 	
 }

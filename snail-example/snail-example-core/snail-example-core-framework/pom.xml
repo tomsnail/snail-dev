@@ -3,16 +3,11 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-example-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-example-core-framework</artifactId>
   <packaging>pom</packaging>
   <modules>
-  	<module>snail-example-core-framework-dao-dubbo</module>
-  	<module>snail-example-core-framework-dao-dubbox</module>
-  	<module>snail-example-core-framework-dao-springboot</module>
-  	<module>snail-example-core-framework-dubbo-springboot</module>
   	<module>snail-example-core-framework-dubbo</module>
-  	<module>snail-example-core-framework-springboot</module>
   </modules>
 </project>

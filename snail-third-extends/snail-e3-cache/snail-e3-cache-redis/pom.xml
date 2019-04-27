@@ -3,7 +3,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-e3-cache</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-e3-cache-redis</artifactId>
   <properties>
@@ -13,7 +13,7 @@
   		<dependency>
   			 <groupId>cn.tomsnail</groupId>
     		<artifactId>snail-extends-cache-core</artifactId>
-    		<version>${snail.version}</version>
+    		<version>${revision}</version>
   		</dependency>
 		<!-- redis begin -->
 		<dependency>

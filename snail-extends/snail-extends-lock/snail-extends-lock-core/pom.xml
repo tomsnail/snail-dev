@@ -3,14 +3,14 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-extends-lock</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-extends-lock-core</artifactId>
   <dependencies>
   		<dependency>
   			<groupId>cn.tomsnail</groupId>
     		<artifactId>snail-e3-cache-redis</artifactId>
-    		<version>${snail.version}</version>
+    		<version>${revision}</version>
     		<scope>provided</scope>
   		</dependency>
   </dependencies>

@@ -3,19 +3,19 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-extends-security</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-extends-security-authority</artifactId>
   <dependencies>
   		<dependency>
   			<groupId>cn.tomsnail</groupId>
     		<artifactId>snail-extends-security-token</artifactId>
-    		<version>${snail.version}</version>
+    		<version>${revision}</version>
   		</dependency>
   		<dependency>
 			<groupId>cn.tomsnail</groupId>
     		<artifactId>snail-core-framework-dubbox</artifactId>
-    		<version>${snail.version}</version>
+    		<version>${revision}</version>
     		<scope>provided</scope>
 		</dependency>
   </dependencies>

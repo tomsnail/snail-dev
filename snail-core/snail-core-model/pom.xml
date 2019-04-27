@@ -3,26 +3,26 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-core</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-core-model</artifactId>
   <dependencies>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-util-zkclient</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 			<type>jar</type>			
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-util-helper</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 			<type>jar</type>			
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-starter</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 			<type>jar</type>			
 		</dependency>
 		

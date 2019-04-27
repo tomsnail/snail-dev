@@ -3,7 +3,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-extends-cache</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-extends-cache-core</artifactId>
   <dependencies>
@@ -11,7 +11,7 @@
   	<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-config</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
   
   </dependencies>

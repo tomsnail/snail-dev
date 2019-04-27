@@ -3,19 +3,19 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-core-framework</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-core-framework-dubbo-springboot</artifactId>
   <dependencies>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-framework-dubbo</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-framework-springboot</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 	</dependencies>
 </project>

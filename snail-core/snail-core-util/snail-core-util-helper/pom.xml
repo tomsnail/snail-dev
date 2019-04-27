@@ -3,7 +3,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-core-util</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-core-util-helper</artifactId>
    <properties>
@@ -31,7 +31,7 @@
 		<dependency>
   		 	<groupId>cn.tomsnail</groupId>
     	 	<artifactId>snail-core-util-validator</artifactId>
-    	 	<version>${snail.version}</version>
+    	 	<version>${revision}</version>
   		</dependency>
 		<dependency>
     		<groupId>dom4j</groupId>

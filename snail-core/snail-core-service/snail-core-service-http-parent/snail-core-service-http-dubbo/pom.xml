@@ -3,7 +3,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-core-service-http-parent</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-core-service-http-dubbo</artifactId>
   	<properties>
@@ -13,32 +13,32 @@
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-service-http-core</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-util-helper</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-config</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-util-http</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-util-zkclient</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-model</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 	</dependencies>
 </project>

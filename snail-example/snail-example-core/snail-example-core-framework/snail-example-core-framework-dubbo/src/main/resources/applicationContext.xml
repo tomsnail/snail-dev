@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:util="http://www.springframework.org/schema/util" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-       xmlns:task="http://www.springframework.org/schema/task"
-       xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd
@@ -14,27 +10,25 @@
     http://www.springframework.org/schema/tx/spring-tx.xsd
     http://www.springframework.org/schema/jdbc
     http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-    http://www.springframework.org/schema/task
-    http://www.springframework.org/schema/task/spring-task.xsd
     http://www.springframework.org/schema/cache
     http://www.springframework.org/schema/cache/spring-cache.xsd
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop.xsd
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util.xsd">
-   	<!-- spring扫描注解类路径 -->
-   	<context:component-scan base-package="cn.tomsnail.snail.example.core.framework.dubbo"/>
+
+	<!-- 日志记录插件，须开启动态代理 -->
    	<context:component-scan base-package="cn.tomsnail.snail.core.log"/>
-   	<!-- 通过aop命名空间的<aop:aspectj-autoproxy />声明自动为spring容器中那些配置@aspectJ切面的bean创建代理，织入切面 -->
-    <aop:aspectj-autoproxy proxy-target-class="true" /> 
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+
+
+	<context:component-scan base-package="cn.tomsnail.snail.example.core.framework.dubbo"/>
+
+
+	<import resource="spring-dubbo.xml"></import>
 
 
 
-
-    <import resource="spring-dubbo.xml"></import>
-
-    
-    
-    
-
+  	
+  	
 </beans>

@@ -3,14 +3,14 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-e3-mq</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-e3-mq-rabbitmq</artifactId>
     <dependencies>
   		<dependency>
   			 <groupId>cn.tomsnail</groupId>
     		<artifactId>snail-core-config</artifactId>
-    		<version>${snail.version}</version>
+    		<version>${revision}</version>
   		</dependency>
     	<dependency>
             <groupId>com.rabbitmq</groupId>

@@ -33,7 +33,7 @@ public @interface LogPoint {
 	 * @status 正常
 	 * @exception no
 	 */
-	String level() default "${zkjd_config_log_level}";
+	String level() default LogLevel.INFO;
 	/**
 	 *        目标
 	 * @methodauthor yangsong

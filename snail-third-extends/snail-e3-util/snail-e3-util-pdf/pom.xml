@@ -3,14 +3,14 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-e3-util</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-e3-util-pdf</artifactId>
   <dependencies>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
 			<artifactId>snail-core-util-helper</artifactId>
-			<version>${snail.version}</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>

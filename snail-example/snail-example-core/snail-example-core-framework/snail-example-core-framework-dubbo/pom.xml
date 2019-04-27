@@ -3,16 +3,51 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-example-core-framework</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-example-core-framework-dubbo</artifactId>
-  <properties>
-  </properties>
+  <packaging>jar</packaging>
+  <build>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>log4j2.xml</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/spring-*</include>
+          <include>**/*.xml</include>
+          <include>*.xml</include>
+          <include>**/data-source/*.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+    </resources>
+
+  </build>
   <dependencies>
-  		<dependency>
-			<groupId>cn.tomsnail</groupId>
-			<artifactId>snail-core-framework-dubbo</artifactId>
-			<version>${snail.version}</version>
-		</dependency>
+
+    <dependency>
+      <groupId>cn.tomsnail</groupId>
+      <artifactId>snail-core-framework-dubbo</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.tomsnail</groupId>
+      <artifactId>snail-e3-util-zookeeper</artifactId>
+      <version>${revision}</version>
+    </dependency>
   </dependencies>
 </project>

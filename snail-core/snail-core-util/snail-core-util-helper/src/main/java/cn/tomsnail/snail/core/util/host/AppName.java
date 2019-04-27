@@ -53,8 +53,8 @@ public class AppName {
 			}
 			isr.close();
 			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+
 		}
 		return appName;
 

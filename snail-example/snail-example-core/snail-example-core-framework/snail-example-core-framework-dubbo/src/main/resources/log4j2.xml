@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>  
-<Configuration status="off" monitorInterval="10">  
+<Configuration status="info" monitorInterval="10">  
   
     <properties>  
-        <property name="LOG_HOME">${p.log.home}</property>  
-        <property name="FILE_NAME">${p.log.filename}</property>   
+        <property name="LOG_HOME">./logs</property>
+        <property name="FILE_NAME">info.log</property>
     </properties>  
   
     <Appenders>  
@@ -18,17 +18,17 @@
                 pattern="[%-5p] %d %c - %m%n" />  
             <Policies>  
                 <TimeBasedTriggeringPolicy />  
-                <SizeBasedTriggeringPolicy size="30 MB" />  
+                <SizeBasedTriggeringPolicy size="60 MB" />  
             </Policies>  
             <DefaultRolloverStrategy max="20" />  
-        </RollingRandomAccessFile>  
+        </RollingRandomAccessFile>
     </Appenders>  
       
     <Loggers>  
-        <Root level="${p.log.level}">  
-            <AppenderRef ref="Console" />
-           <AppenderRef ref="running-log" />
+        <Root level="debug">
+            <AppenderRef ref="Console" />  
+            <AppenderRef ref="running-log" />
         </Root>  
     </Loggers>  
-      
-</Configuration>  
+    
+</Configuration>

@@ -3,7 +3,7 @@
   <parent>
     <groupId>cn.tomsnail</groupId>
     <artifactId>snail-core-ds</artifactId>
-    <version>${snail.version}</version>
+    <version>${revision}</version>
   </parent>
   <artifactId>snail-core-ds-mybatis</artifactId>
   <properties>
@@ -14,7 +14,7 @@
 		<dependency>
 			 <groupId>cn.tomsnail</groupId>
     		 <artifactId>snail-core-ds-datasource</artifactId>
-             <version>${snail.version}</version>
+             <version>${revision}</version>
 		</dependency>
 		<!-- mybatis start -->
 		<dependency>
