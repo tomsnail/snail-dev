@@ -9,8 +9,7 @@
 	</parent>
 	<artifactId>snail-core-log</artifactId>
 	<properties>
-		<aspectj.version>1.8.10</aspectj.version>
-		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+		
 	</properties>
 	<dependencies>
 		<dependency>
@@ -50,7 +49,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
-			<artifactId>kafka_2.10</artifactId>
+			<artifactId>kafka_2.12</artifactId>
 			<version>${kafka.version}</version>
 			<scope>provided</scope>
 		</dependency>

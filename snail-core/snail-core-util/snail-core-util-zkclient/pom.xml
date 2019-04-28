@@ -7,11 +7,7 @@
   </parent>
   <artifactId>snail-core-util-zkclient</artifactId>
   <properties>
-  	<curator-framework.version>4.0.0</curator-framework.version>
-  	<zkclient.version>0.1</zkclient.version>
-  	<zookeeper.version>3.4.8</zookeeper.version>
-  	<assertj-core.version>2.0.0</assertj-core.version>
-  	<mockito-core.version>1.8.0</mockito-core.version>
+  	
   </properties>
   <dependencies>
   	<dependency>

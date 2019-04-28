@@ -29,7 +29,7 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.tomsnail</groupId>
-			<artifactId>snail-core-ds-mybatis</artifactId>
+			<artifactId>snail-core-ds-dao-plugins</artifactId>
 			<version>${revision}</version>
 		</dependency>
 	</dependencies>

@@ -7,10 +7,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import cn.tomsnail.snail.ext.mq.core.IJmsSender;
 import cn.tomsnail.snail.ext.mq.core.MQConfig;
-import kafka.javaapi.producer.Producer;
-import kafka.producer.KeyedMessage;
-import kafka.producer.ProducerConfig;
-import kafka.serializer.StringEncoder;
+//import kafka.javaapi.producer.Producer;
+//import kafka.producer.KeyedMessage;
+//import kafka.producer.ProducerConfig;
+//import kafka.serializer.StringEncoder;
 
 
 /**
@@ -27,11 +27,11 @@ public class KafkaProducer implements IJmsSender, Runnable {
 
 	private MQConfig kafkaMQConfig;
 
-	Producer producer;
+//	Producer producer;
 
 	public KafkaProducer(MQConfig kafkaMQConfig) {
 		this.kafkaMQConfig = kafkaMQConfig;
-		producer = createProducer();
+//		producer = createProducer();
 	}
 
 	public KafkaProducer() {
@@ -45,22 +45,22 @@ public class KafkaProducer implements IJmsSender, Runnable {
 
 	@Override
 	public void send(String topic, Serializable obj) {
-		if (producer != null)
-			try {
-				producer.send(new KeyedMessage<String, String>(topic, System.currentTimeMillis() + "", objectMapper.writeValueAsString(obj)));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+//		if (producer != null)
+//			try {
+//				producer.send(new KeyedMessage<String, String>(topic, System.currentTimeMillis() + "", objectMapper.writeValueAsString(obj)));
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
 	}
 
 	@Override
 	public void send(String topic, String msg) {
-		if (producer != null)
-			try {
-				producer.send(new KeyedMessage<String, String>(topic, System.currentTimeMillis() + "", msg));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+//		if (producer != null)
+//			try {
+//				producer.send(new KeyedMessage<String, String>(topic, System.currentTimeMillis() + "", msg));
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
 	}
 
 	/**
@@ -74,11 +74,11 @@ public class KafkaProducer implements IJmsSender, Runnable {
 	 * @status 正常
 	 * @exception no
 	 */
-	private Producer createProducer() {
-		Properties properties = new Properties();
-		properties.put("serializer.class", StringEncoder.class.getName());
-		properties.put("metadata.broker.list", kafkaMQConfig.getUrl());
-		return new Producer<String, String>(new ProducerConfig(properties));
-	}
+//	private Producer createProducer() {
+//		Properties properties = new Properties();
+//		properties.put("serializer.class", StringEncoder.class.getName());
+//		properties.put("metadata.broker.list", kafkaMQConfig.getUrl());
+//		return new Producer<String, String>(new ProducerConfig(properties));
+//	}
 
 }

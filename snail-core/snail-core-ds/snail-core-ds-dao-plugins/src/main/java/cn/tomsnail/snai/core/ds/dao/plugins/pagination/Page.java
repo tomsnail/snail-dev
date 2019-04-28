@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package cn.tomsnail.snai.ext.ds.dao.plugins.pagination;
+package cn.tomsnail.snai.core.ds.dao.plugins.pagination;
 
 import java.util.ArrayList;
 import java.util.List;

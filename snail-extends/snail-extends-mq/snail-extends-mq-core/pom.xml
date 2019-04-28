@@ -7,8 +7,7 @@
   </parent>
   <artifactId>snail-extends-mq-core</artifactId>
   <properties>
-  	<avtivemq.version>5.11.1</avtivemq.version>
-  	<commons-pool.version>1.6</commons-pool.version>
+  
   </properties>
   <dependencies>
   
@@ -30,13 +29,13 @@
 		</dependency>
 		<dependency>
     		<groupId>org.apache.kafka</groupId>
-    		<artifactId>kafka_2.10</artifactId>
-    		<version>0.10.0.1</version>
+    		<artifactId>kafka_2.12</artifactId>
+    		<version>${kafka.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
+			<version>${jackson.version}</version>
 		</dependency>
   </dependencies>
 </project>

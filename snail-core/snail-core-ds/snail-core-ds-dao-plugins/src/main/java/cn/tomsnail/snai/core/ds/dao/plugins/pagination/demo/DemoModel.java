@@ -1,6 +1,6 @@
-package cn.tomsnail.snai.ext.ds.dao.plugins.pagination.demo;
+package cn.tomsnail.snai.core.ds.dao.plugins.pagination.demo;
 
-import cn.tomsnail.snai.ext.ds.dao.plugins.pagination.PageModel;
+import cn.tomsnail.snai.core.ds.dao.plugins.pagination.PageModel;
 
 public class DemoModel extends PageModel<DemoModel>{
 	

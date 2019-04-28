@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package cn.tomsnail.snai.ext.ds.dao.plugins.pagination.interceptor;
+package cn.tomsnail.snai.core.ds.dao.plugins.pagination.interceptor;
 
 import org.apache.ibatis.executor.statement.BaseStatementHandler;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
@@ -13,7 +13,7 @@ import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 
-import cn.tomsnail.snai.ext.ds.dao.plugins.pagination.Page;
+import cn.tomsnail.snai.core.ds.dao.plugins.pagination.Page;
 import cn.tomsnail.snail.core.util.reflect.Reflections;
 
 import java.sql.Connection;

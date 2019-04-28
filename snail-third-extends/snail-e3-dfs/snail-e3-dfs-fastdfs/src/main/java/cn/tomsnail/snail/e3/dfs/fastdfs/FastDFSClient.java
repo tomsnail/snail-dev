@@ -20,7 +20,6 @@ import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.service.DefaultFastFileStorageClient;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import com.github.tobato.fastdfs.service.TrackerClient;
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 
 import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 
@@ -62,11 +61,12 @@ public class FastDFSClient {
 	 }
 	 
 	 public static String upload(byte[] fileBytes,String extFileName,String key) throws Exception{
-		 ByteInputStream inputStream = new ByteInputStream(fileBytes, fileBytes.length);
-		 Set<MateData> metaDataSet = new HashSet<>();
-		 metaDataSet.add(new MateData("MD5KEY",key));
-	     StorePath storePath = storageClient.uploadFile(inputStream,fileBytes.length, extFileName,metaDataSet);
-		 return storePath.getFullPath();
+//		 ByteInputStream inputStream = new ByteInputStream(fileBytes, fileBytes.length);
+//		 Set<MateData> metaDataSet = new HashSet<>();
+//		 metaDataSet.add(new MateData("MD5KEY",key));
+//	     StorePath storePath = storageClient.uploadFile(inputStream,fileBytes.length, extFileName,metaDataSet);
+//		 return storePath.getFullPath();
+		 return null;
 	 }
 	 
 	 public static void delete(String path){

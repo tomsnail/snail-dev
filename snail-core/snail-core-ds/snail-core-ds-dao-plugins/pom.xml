@@ -2,10 +2,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>cn.tomsnail</groupId>
-    <artifactId>snail-extends-db</artifactId>
+    <artifactId>snail-core-ds</artifactId>
     <version>${revision}</version>
   </parent>
-  <artifactId>snail-extends-db-dao-plugins</artifactId>
+  <artifactId>snail-core-ds-dao-plugins</artifactId>
   <dependencies>
 		<dependency>
 			 <groupId>cn.tomsnail</groupId>

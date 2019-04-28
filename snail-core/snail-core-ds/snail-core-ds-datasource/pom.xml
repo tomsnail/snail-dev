@@ -7,10 +7,7 @@
   </parent>
   <artifactId>snail-core-ds-datasource</artifactId>
   <properties>
-		<mysql.connector.version>5.1.40</mysql.connector.version>
-		<druid.version>1.0.29</druid.version>
-		<oracle.connector.version>10.2.0.3.0</oracle.connector.version>
-		<aspectj.version>1.8.10</aspectj.version>
+		
 	</properties>
 	<dependencies>
 		<dependency>

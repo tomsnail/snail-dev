@@ -7,7 +7,7 @@
   </parent>
   <artifactId>snail-core-service-dubbo-restful</artifactId>
   <properties>
-		<jackson.version>1.9.13</jackson.version>
+		
 	</properties>
 	<dependencies>
 		<dependency>

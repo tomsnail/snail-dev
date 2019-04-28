@@ -12,11 +12,7 @@
   	<module>snail-core-service-dubbo-service</module>
   </modules>
    <properties>
-		<io.netty.version>4.0.18.Final</io.netty.version>
-		<org.jboss.netty.version>3.2.5.Final</org.jboss.netty.version>
-		<org.javassist.version>3.20.0-GA</org.javassist.version>
-		<kryo-serializers.version>0.30</kryo-serializers.version>
-		<kryo.version>2.24.0</kryo.version>
+		
 	</properties>
 	<dependencies>
 		<dependency>

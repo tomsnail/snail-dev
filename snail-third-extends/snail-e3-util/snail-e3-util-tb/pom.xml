@@ -9,7 +9,6 @@
 	</parent>
 	<artifactId>snail-e3-util-tb</artifactId>
 	<properties>
-		<httpclient.version>4.1.2</httpclient.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -30,13 +29,13 @@
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
-			<version>2.4</version>
+			<version>${json-lib.version}</version>
 			<classifier>jdk15</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20090211</version>
+			<version>${org.json.verison}</version>
 		</dependency>
 	</dependencies>
 </project>

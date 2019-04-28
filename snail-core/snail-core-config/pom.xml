@@ -7,8 +7,7 @@
   </parent>
   <artifactId>snail-core-config</artifactId>
   <properties>
-		<aspectj.version>1.8.10</aspectj.version>
-		<jackson.version>1.9.13</jackson.version>
+		
   </properties>
   <dependencies>
 		<dependency>

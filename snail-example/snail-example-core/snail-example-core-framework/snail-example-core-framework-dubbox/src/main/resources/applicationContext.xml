@@ -19,6 +19,7 @@
 	<context:component-scan base-package="cn.tomsnail.snail.core.config.client.plugin"/>
 	<!-- zookeepr 内嵌服务器 -->
 	<context:component-scan base-package="cn.tomsnail.snail.core.util.zookeeper.server"/>
+	
 
 
 

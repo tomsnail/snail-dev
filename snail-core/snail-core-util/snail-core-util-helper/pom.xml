@@ -7,10 +7,7 @@
   </parent>
   <artifactId>snail-core-util-helper</artifactId>
    <properties>
-    <bcprov-jdk15.version>140</bcprov-jdk15.version>
-    <commons-codec.version>1.9</commons-codec.version>
-    <commons-beanutils.version>1.9.3</commons-beanutils.version>
-    <dom4j.version>1.6.1</dom4j.version>
+
   </properties>
   <dependencies>
 		<dependency>

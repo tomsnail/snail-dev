@@ -19,11 +19,11 @@ import cn.tomsnail.snail.ext.mq.core.IJmsReceiveCall;
 import cn.tomsnail.snail.ext.mq.core.IJmsReceiver;
 import cn.tomsnail.snail.ext.mq.core.Message;
 import cn.tomsnail.snail.ext.mq.core.kafka.KafkaMQConfig;
-import kafka.consumer.Consumer;
-import kafka.consumer.ConsumerConfig;
-import kafka.consumer.ConsumerIterator;
-import kafka.consumer.KafkaStream;
-import kafka.javaapi.consumer.ConsumerConnector;
+//import kafka.consumer.Consumer;
+//import kafka.consumer.ConsumerConfig;
+//import kafka.consumer.ConsumerIterator;
+//import kafka.consumer.KafkaStream;
+//import kafka.javaapi.consumer.ConsumerConnector;
 
 
 /**
@@ -39,7 +39,7 @@ public class KafkaConsumer implements IJmsReceiver, Runnable, IJmsConsumer {
 	/**
 	 * 消费者连接点
 	 */
-	private ConsumerConnector consumer;
+//	private ConsumerConnector consumer;
 
 	/**
 	 * 是否活动
@@ -74,7 +74,7 @@ public class KafkaConsumer implements IJmsReceiver, Runnable, IJmsConsumer {
 	public KafkaConsumer(KafkaMQConfig mqConfig){
 		this.mqConfig = mqConfig;
 		executorService = Executors.newFixedThreadPool(mqConfig.getThreadNum());
-		consumer = this.createConsumer();
+//		consumer = this.createConsumer();
 		this.name = mqConfig.getName();
 	}
 
@@ -90,23 +90,23 @@ public class KafkaConsumer implements IJmsReceiver, Runnable, IJmsConsumer {
 
 	@Override
 	public void close() {
-		if(consumer!=null)
-			consumer.shutdown();
+//		if(consumer!=null)
+//			consumer.shutdown();
 		if(executorService!=null)
 			executorService.shutdown();
 	}
 
 	@Override
 	public void run() {
-		Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
-		topicCountMap.put(name, 1); // 一次从主题中获取一个数据
-		Map<String, List<KafkaStream<byte[], byte[]>>> messageStreams = consumer.createMessageStreams(topicCountMap);
-		KafkaStream<byte[], byte[]> stream = messageStreams.get(name).get(0);// 获取每次接收到的这个数据
-		ConsumerIterator<byte[], byte[]> iterator = stream.iterator();
-		while (isActived && iterator.hasNext()) {
-			String message = new String(iterator.next().message());
-			onMessage(new Message(message));
-		}
+//		Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
+//		topicCountMap.put(name, 1); // 一次从主题中获取一个数据
+//		Map<String, List<KafkaStream<byte[], byte[]>>> messageStreams = consumer.createMessageStreams(topicCountMap);
+//		KafkaStream<byte[], byte[]> stream = messageStreams.get(name).get(0);// 获取每次接收到的这个数据
+//		ConsumerIterator<byte[], byte[]> iterator = stream.iterator();
+//		while (isActived && iterator.hasNext()) {
+//			String message = new String(iterator.next().message());
+//			onMessage(new Message(message));
+//		}
 	}
 
 	@Override
@@ -147,24 +147,24 @@ public class KafkaConsumer implements IJmsReceiver, Runnable, IJmsConsumer {
 	 * @status 正常
 	 * @exception no
 	 */
-	private ConsumerConnector createConsumer() {
-		Properties properties = new Properties();
-		properties.put("zookeeper.connect", mqConfig.getUrl());// 声明zk
-		if(!StringUtils.isBlank(mqConfig.getGroup())){
-			properties.put("group.id", "group" + mqConfig.getGroup());
-		}else{
-			properties.put("group.id", "group" + System.currentTimeMillis());
-		}
-		return Consumer.createJavaConsumerConnector(new ConsumerConfig(properties));
-	}
-
-	public ConsumerConnector getConsumer() {
-		return consumer;
-	}
-
-	public void setConsumer(ConsumerConnector consumer) {
-		this.consumer = consumer;
-	}
+//	private ConsumerConnector createConsumer() {
+//		Properties properties = new Properties();
+//		properties.put("zookeeper.connect", mqConfig.getUrl());// 声明zk
+//		if(!StringUtils.isBlank(mqConfig.getGroup())){
+//			properties.put("group.id", "group" + mqConfig.getGroup());
+//		}else{
+//			properties.put("group.id", "group" + System.currentTimeMillis());
+//		}
+//		return Consumer.createJavaConsumerConnector(new ConsumerConfig(properties));
+//	}
+//
+//	public ConsumerConnector getConsumer() {
+//		return consumer;
+//	}
+//
+//	public void setConsumer(ConsumerConnector consumer) {
+//		this.consumer = consumer;
+//	}
 
 	public boolean isActived() {
 		return isActived;

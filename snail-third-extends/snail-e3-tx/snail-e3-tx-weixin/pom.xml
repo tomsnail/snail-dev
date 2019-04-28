@@ -17,18 +17,12 @@
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
-			<version>3.5.0</version>
+			<version>${okhttp.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>6.9.10</version>
-			<scope>test</scope>
+			<version>${jackson-mapper-asl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.nutz</groupId>
@@ -38,7 +32,7 @@
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
-			<version>1.5.2</version>
+			<version>${dom4j.version}</version>
 		</dependency>
 		<dependency>
 			 <groupId>cn.tomsnail</groupId>
