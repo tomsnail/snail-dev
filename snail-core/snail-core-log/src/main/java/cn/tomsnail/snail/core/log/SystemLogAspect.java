@@ -53,6 +53,7 @@ import cn.tomsnail.snail.core.log.annotation.LogLevel;
 import cn.tomsnail.snail.core.log.annotation.LogPoint;
 import cn.tomsnail.snail.core.log.ls.ExceptionUtil;
 import cn.tomsnail.snail.core.starter.AppMain;
+import cn.tomsnail.snail.core.util.JsonUtil;
 import cn.tomsnail.snail.core.util.ex.Exceptions;
 import cn.tomsnail.snail.core.util.string.StringUtils;
 
@@ -76,7 +77,6 @@ public class SystemLogAspect {
 	@Resource(name="DefaultListaLogService")
 	private LogService logService;
 	
-	ObjectMapper mapper = new ObjectMapper();
 	  
     //本地异常日志记录对象    
      private  static  final Logger logger = LoggerFactory.getLogger(SystemLogAspect. class);    
@@ -106,6 +106,7 @@ public class SystemLogAspect {
     	Object t = null;
 		try {
 			LogPoint logPoint = getLogPoint(joinPoint);
+			ResultData _t = null;
 			if(logPoint==null){//没有注解
 				t = joinPoint.proceed();
 			}else{
@@ -145,10 +146,11 @@ public class SystemLogAspect {
 						log.setLevel(Log.ERROR);
 						log.setThrowable(ex);
 						isDebug = true;
-						ResultData<Map<String,Object>> _t = new ResultData<Map<String,Object>>();
+						
 						if(logPoint.level().equals(LogLevel.DEBUG)){
 							logger.error("",ex);
 						}
+						_t = new ResultData<>();
 						_t.setStatus(CommonMessage.FAILED);
 						_t.setMsg("application error");
 						String em = ex.getMessage();
@@ -157,12 +159,28 @@ public class SystemLogAspect {
 						}else {
 							_t.setErrorMsg(em);
 						}
-						t = _t;
+						
+						if(t  instanceof ResultData) {
+							
+						}
+						else {
+							
+							_t.putBody("exResult", JsonUtil.toJson(t));
+						}
 						
 					}
 					long endTime = System.currentTimeMillis();
 					log.addContent(runinfo.toString());
-					log(joinPoint, isDebug, t, logPoint, log,startTime,endTime);
+					
+					
+					
+					if(t==null) {
+						log(joinPoint, isDebug, "null", logPoint, log,startTime,endTime);
+					}else if(_t !=null) {
+						log(joinPoint, isDebug, _t, logPoint, log,startTime,endTime);
+					}else {
+						log(joinPoint, isDebug, t, logPoint, log,startTime,endTime);
+					}
 					if(logPoint.level().equals(LogLevel.DEBUG)){
 						logger.info(logPoint.desc()+" end ");
 					}
@@ -194,14 +212,11 @@ public class SystemLogAspect {
 			Object[] os = joinPoint.getArgs() ;
 			if (os !=  null && os.length > 0) {    
 				for(Object o:os){
-					if ( o instanceof RequestData){
-						parmsb.append(mapper.writeValueAsString(o)); 
-						break;
-					}
+					parmsb.append(JsonUtil.toJson(o)); 
 				}
 			} 
 			log.addParams(parmsb.toString());
-			log.addResult(mapper.writeValueAsString(t));
+			log.addResult(JsonUtil.toJson(t));
 			log.setLevel(Log.DEBUG);
 			ExceptionUtil.log("params:{},result:{},exception:{}",log.getParams(),log.getResults(),log.getContent());
 		}
@@ -301,6 +316,7 @@ public class SystemLogAspect {
 	public void setLogService(LogService logService) {
 		this.logService = logService;
 	}
+	
 	
    
 }    

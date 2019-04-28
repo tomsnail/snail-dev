@@ -135,6 +135,7 @@
 		<commons-pool.version>1.6</commons-pool.version>
 		<javax.ws.rs-api.version>2.0</javax.ws.rs-api.version>
 		<javax.servlet-api.version>4.0.1</javax.servlet-api.version>
+		<sqlite-jdbc.version>3.25.2</sqlite-jdbc.version>
 
 	</properties>
 	<dependencies>

@@ -29,13 +29,14 @@ public class MyBatisConfig  implements TransactionManagementConfigurer{
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         bean.setTypeAliasesPackage(ConfigHelp.getInstance("config").getLocalConfig("mybatis.type-aliases-package", ""));
-
+        
         
 
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
             bean.setMapperLocations(resolver.getResources(ConfigHelp.getInstance("config").getLocalConfig("mybatis.mapper-locations", "")));
+            bean.setConfigLocation(resolver.getResource(ConfigHelp.getInstance("config").getLocalConfig("mybatis.config-location", "classpath:mybatis-config.xml")));
             return bean.getObject();
         } catch (Exception e) {
             e.printStackTrace();
