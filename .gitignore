@@ -7,6 +7,8 @@ target/
 *.zip
 *.tar
 *.tar.gz
+*-ontest.properties
+*-online.properties
 
 # eclipse ignore
 .settings/

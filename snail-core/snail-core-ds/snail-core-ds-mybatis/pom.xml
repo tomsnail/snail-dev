@@ -27,5 +27,10 @@
 			<version>${mybatis.spring.version}</version>
 		</dependency>
 		<!--mybatis end -->
+		<dependency>
+  			 <groupId>cn.tomsnail</groupId>
+    		 <artifactId>snail-core-util-helper</artifactId>
+             <version>${revision}</version>
+  		</dependency>
 	</dependencies>
 </project>

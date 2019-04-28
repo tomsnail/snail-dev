@@ -13,7 +13,11 @@ public class DemoServiceClient {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
-            System.out.println(demoService.hello(Jdk8DateTimeUtil.getNowDateTimeStr()));
+            try {
+				System.out.println(demoService.hello(Jdk8DateTimeUtil.getNowDateTimeStr()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         }
     }
 

@@ -12,5 +12,6 @@
   	<module>snail-core-ds-mybatis</module>
   	<module>snail-core-ds-obj-sql</module>
   	<module>snail-core-ds-dao-plugins</module>
+  	<module>snail-core-ds-springboot</module>
   </modules>
 </project>
