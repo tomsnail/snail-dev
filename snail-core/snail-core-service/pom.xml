@@ -10,5 +10,6 @@
   <modules>
   	<module>snail-core-service-dubbo-parent</module>
   	<module>snail-core-service-http-parent</module>
+    <module>snail-core-service-spring-parent</module>
   </modules>
 </project>

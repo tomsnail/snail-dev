@@ -9,5 +9,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>snail-extends-mq-core</module>
+      <module>snail-extends-mq-spring</module>
   </modules>
 </project>

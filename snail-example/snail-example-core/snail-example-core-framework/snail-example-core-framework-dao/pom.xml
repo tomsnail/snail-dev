@@ -8,6 +8,9 @@
 		<version>${revision}</version>
 	</parent>
 	<artifactId>snail-example-core-framework-dao</artifactId>
+
+	<packaging>jar</packaging>
+
 	<build>
 		<resources>
 			<resource>
