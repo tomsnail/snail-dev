@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.tomsnail</groupId>
+    <artifactId>snail-example-ext-mq</artifactId>
+    <version>${revision}</version>
+  </parent>
+  <artifactId>snail-example-ext-mq-activemq</artifactId>
+  <build>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>log4j2.xml</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/spring-*</include>
+          <include>**/*.xml</include>
+          <include>*.xml</include>
+          <include>**/data-source/*.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+    </resources>
+
+  </build>
+  <dependencies>
+   <dependency>
+      <groupId>cn.tomsnail</groupId>
+      <artifactId>snail-core-framework-dubbo-springboot</artifactId>
+      <version>${revision}</version>
+    </dependency>
+  	<dependency>
+  		<groupId>cn.tomsnail</groupId>
+  		<artifactId>snail-extends-mq-spring-activemq</artifactId>
+  		<version>${revision}</version>
+  	</dependency>
+  </dependencies>
+</project>

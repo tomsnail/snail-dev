@@ -7,4 +7,7 @@
   </parent>
   <artifactId>snail-example-ext-mq</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>snail-example-ext-mq-activemq</module>
+  </modules>
 </project>

@@ -3,6 +3,7 @@ package cn.tomsnail.snail.core.service.spring.core.async;
 import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -11,6 +12,7 @@ import java.util.concurrent.Executor;
 
 @Configuration
 @EnableAsync
+@PropertySource("classpath:config.properties")
 public class AutoAsyncConfigurer implements AsyncConfigurer {
 
 
@@ -26,6 +28,7 @@ public class AutoAsyncConfigurer implements AsyncConfigurer {
         taskExecutor.setQueueCapacity(Integer.parseInt(ConfigHelp.getInstance("config").getLocalConfig("spring.async.executor.queue.capacity","1000")));
         // 初始化
         taskExecutor.initialize();
+        System.out.println("=========================================================");
         return taskExecutor;
     }
 

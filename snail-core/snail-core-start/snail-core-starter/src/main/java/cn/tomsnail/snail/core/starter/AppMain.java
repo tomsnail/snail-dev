@@ -38,9 +38,9 @@ public class AppMain {
 	 * @return
 	 */
 	public static void main(String[] args) {
-		
+		ConfigurableApplicationContext context = null;
 		if(APP_BOOT_TYPE.equalsIgnoreCase("springboot")) {
-			ConfigurableApplicationContext context = SpringApplication.run(AppMain.class, args);
+			context = SpringApplication.run(AppMain.class, args);
 			SpringBeanUtil.init(context);
 		}else {
 			String applicationContextXml = "applicationContext.xml";
@@ -53,19 +53,21 @@ public class AppMain {
 			if(StringUtils.isNotBlank(SPRING_CONTEXT_XML)) {
 				applicationContextXml = SPRING_CONTEXT_XML;
 			}		
-			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:"+applicationContextXml);
+			 context = new ClassPathXmlApplicationContext("classpath:"+applicationContextXml);
 			context.start();
 			SpringBeanUtil.init(context);
-			try {
-				ServiceStartupInsertor startupInsertor = context.getBean(ServiceStartupInsertor.class);
-				startupInsertor.insertor();
-			} catch (NoSuchBeanDefinitionException e) {
-
-			}
-			Thread appService = new AppService(context);
-			appService.start();
+			
 			
 		}
+		
+		try {
+			ServiceStartupInsertor startupInsertor = context.getBean(ServiceStartupInsertor.class);
+			startupInsertor.insertor();
+		} catch (NoSuchBeanDefinitionException e) {
+
+		}
+		Thread appService = new AppService(context);
+		appService.start();
 		System.out.println(APP_BOOT_TYPE+" main started...");
 		
 	}

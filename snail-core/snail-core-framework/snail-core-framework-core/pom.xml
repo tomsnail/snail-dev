@@ -49,5 +49,10 @@
 			<version>${revision}</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>cn.tomsnail</groupId>
+			<artifactId>snail-core-service-spring-core</artifactId>
+			<version>${revision}</version>
+		</dependency>
 	</dependencies>
 </project>

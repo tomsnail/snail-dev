@@ -12,5 +12,6 @@
   	<module>snail-example-ext-mq</module>
   	<module>snail-example-ext-task</module>
   	<module>snail-example-ext-lock</module>
+  	<module>snail-example-ext-spring</module>
   </modules>
 </project>
