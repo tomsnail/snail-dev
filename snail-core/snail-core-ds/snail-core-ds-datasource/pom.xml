@@ -41,7 +41,7 @@
 			<version>${mysql.connector.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>ojdbc14</groupId>
+			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc14</artifactId>
 			<version>${oracle.connector.version}</version>
 		</dependency>
