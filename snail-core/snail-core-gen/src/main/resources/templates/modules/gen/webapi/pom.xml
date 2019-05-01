@@ -116,17 +116,17 @@
 	</properties>
 	<dependencies>
 		<dependency>
-            <groupId>cn.tomsnail</groupId>
+            <groupId>cn.tomsnail.snail</groupId>
             <artifactId>dev-obj-sql</artifactId>
             <version>${"$"}{dev.component.version}</version>
         </dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>dev-log</artifactId>
 			<version>${"$"}{dev.component.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>dev-http-rest-server</artifactId>
 			<version>${"$"}{dev.component.version}</version>
 		</dependency>
@@ -136,7 +136,7 @@
 			<version>${pomversion}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>dev-uuid</artifactId>
 			<version>${"$"}{dev.component.version}</version>
 		</dependency>

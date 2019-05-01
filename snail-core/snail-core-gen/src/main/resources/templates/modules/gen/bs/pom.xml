@@ -49,12 +49,12 @@
   <dependencies>
    <!-- datasource start -->
         <dependency>
-            <groupId>cn.tomsnail</groupId>
+            <groupId>cn.tomsnail.snail</groupId>
             <artifactId>snail-extends-dao-plugins</artifactId>
             <version>${"$"}{dev.component.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.tomsnail</groupId>
+            <groupId>cn.tomsnail.snail</groupId>
             <artifactId>snail-core-util-helper</artifactId>
             <version>${"$"}{dev.component.version}</version>
         </dependency>

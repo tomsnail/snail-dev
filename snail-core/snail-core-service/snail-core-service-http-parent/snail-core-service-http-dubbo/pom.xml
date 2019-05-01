@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>cn.tomsnail</groupId>
+    <groupId>cn.tomsnail.snail</groupId>
     <artifactId>snail-core-service-http-parent</artifactId>
     <version>${revision}</version>
   </parent>
@@ -11,37 +11,37 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>snail-core-service-dubbo-restful</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>snail-core-service-http-core</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>snail-core-util-helper</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>snail-core-config</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>snail-core-util-http</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>snail-core-util-zkclient</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>snail-core-model</artifactId>
 			<version>${revision}</version>
 		</dependency>

@@ -8,7 +8,7 @@
 		<version>21</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>cn.tomsnail</groupId>
+	<groupId>cn.tomsnail.snail</groupId>
 	<artifactId>snail-parent</artifactId>
 	<version>${revision}</version>
 	<packaging>pom</packaging>

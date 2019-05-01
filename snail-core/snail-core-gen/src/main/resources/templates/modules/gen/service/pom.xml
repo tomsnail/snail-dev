@@ -30,12 +30,12 @@
 			<version>${pomversion}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>dev-config</artifactId>
 			<version>${"$"}{dev.component.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.tomsnail</groupId>
+			<groupId>cn.tomsnail.snail</groupId>
 			<artifactId>dev-uuid</artifactId>
 			<version>${"$"}{dev.component.version}</version>
 		</dependency>
