@@ -15,6 +15,7 @@
         * [参数验证与转换](user/basic/PARAMS.md)
     * [高级配置](user/sc/README.md)
     * [第三方配置](user/e3/README.md)
+    * [配置项全示例](user/ALL_CONFIG.md)
     * [版本与升级](user/VERSION.md)
 * [开发扩展指南](dev/README.md)
 

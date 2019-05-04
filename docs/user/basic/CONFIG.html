@@ -291,7 +291,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.7" data-path="../VERSION.html">
+        <li class="chapter " data-level="1.2.7" data-path="../ALL_CONFIG.html">
+            
+                <a href="../ALL_CONFIG.html">
+            
+                    
+                    配置项全示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../VERSION.html">
             
                 <a href="../VERSION.html">
             
@@ -368,6 +381,59 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x914D;&#x7F6E;&#x7BA1;&#x7406;">&#x914D;&#x7F6E;&#x7BA1;&#x7406;</h1>
+<h3 id="1&#x5F00;&#x542F;spring&#x5C5E;&#x6027;&#x52A0;&#x8F7D;">1.&#x5F00;&#x542F;Spring&#x5C5E;&#x6027;&#x52A0;&#x8F7D;</h3>
+<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- spring &#x5C5E;&#x6027;&#x914D;&#x7F6E;&#x63D2;&#x4EF6;&#xFF0C;&#x7528;&#x4E8E;spring&#x76F8;&#x5173;&#x5C5E;&#x6027;(&#x5982;${zk.address})&#x4ECE;config.properties&#x4E2D;&#x83B7;&#x53D6;&#x503C; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.core.config.client.plugin&quot;</span>/&gt;</span>
+</code></pre>
+<h3 id="2&#x8BFB;&#x53D6;&#x672C;&#x5730;&#x914D;&#x7F6E;">2.&#x8BFB;&#x53D6;&#x672C;&#x5730;&#x914D;&#x7F6E;</h3>
+<pre><code class="lang-java">ConfigHelp.getInstance(<span class="hljs-string">&quot;config&quot;</span>).getLocalConfig(<span class="hljs-string">&quot;system.log.level&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>)
+</code></pre>
+<h3 id="3&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x5DE5;&#x5382;">3.&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x5DE5;&#x5382;</h3>
+<pre><code class="lang-java">String c = ConfigClientFactory.getInstance().getConfigClient().getConfig(<span class="hljs-string">&quot;xxxx&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);
+</code></pre>
+<blockquote>
+<p>&#x914D;&#x7F6E;&#x5DE5;&#x5382;&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x987A;&#x5E8F;&#xFF1A;&#x672C;&#x5730;&#x6587;&#x4EF6;&gt;Zookeeper&gt;Redis&gt;&#x6570;&#x636E;&#x5E93;</p>
+</blockquote>
+<h3 id="4&#x52A8;&#x6001;&#x914D;&#x7F6E;">4.&#x52A8;&#x6001;&#x914D;&#x7F6E;</h3>
+<h4 id="41&#x626B;&#x63CF;">4.1&#x626B;&#x63CF;</h4>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.core.config.client.spring&quot;</span>/&gt;</span>
+</code></pre>
+<h4 id="42&#x793A;&#x4F8B;">4.2&#x793A;&#x4F8B;</h4>
+<pre><code class="lang-java"><span class="hljs-meta">@ConfigListener</span>
+<span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConfigClass</span> </span>{
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String CONF_KEY = <span class="hljs-string">&quot;value1&quot;</span>;
+
+}
+</code></pre>
+<pre><code class="lang-java">
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConfigClassTest</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseTest</span></span>{
+
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testDynaimsConfig</span><span class="hljs-params">()</span></span>{
+    logger.info(ConfigClass.CONF_KEY);
+  }
+
+}
+</code></pre>
+<h3 id="5&#x914D;&#x7F6E;&#x9879;">5.&#x914D;&#x7F6E;&#x9879;</h3>
+<pre><code class="lang-properties">system.config.zookeeper=false
+system.config.zookeeper.address=127.0.0.1:2181
+system.config.zookeeper.root=/tomsnail/config/root
+
+system.config.redis=false
+system.config.redis.address=127.0.0.1:2181
+system.config.redis.mapkey=tomsnail:config
+
+system.config.db=false
+system.config.db.type=JdbcTemplate
+system.config.db.datasource=
+system.config.db.driver=com.mysql.jdbc.Driver
+system.config.db.url=jdbc:mysql://localhost:3306/databasename
+system.config.db.username=username
+system.config.db.password=password
+system.config.db.kv_sql=select value as keyValue from ts_config where name = ${key}
+</code></pre>
 
                                 
                                 </section>
@@ -411,7 +477,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"配置管理","level":"1.2.4.6","depth":3,"next":{"title":"参数验证与转换","level":"1.2.4.7","depth":3,"path":"user/basic/PARAMS.md","ref":"user/basic/PARAMS.md","articles":[]},"previous":{"title":"日志记录","level":"1.2.4.5","depth":3,"path":"user/basic/LOGGER.md","ref":"user/basic/LOGGER.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"user/basic/CONFIG.md","mtime":"2019-05-01T09:39:32.982Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-01T09:53:30.063Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"配置管理","level":"1.2.4.6","depth":3,"next":{"title":"参数验证与转换","level":"1.2.4.7","depth":3,"path":"user/basic/PARAMS.md","ref":"user/basic/PARAMS.md","articles":[]},"previous":{"title":"日志记录","level":"1.2.4.5","depth":3,"path":"user/basic/LOGGER.md","ref":"user/basic/LOGGER.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"user/basic/CONFIG.md","mtime":"2019-05-04T08:32:06.881Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-04T09:13:54.352Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

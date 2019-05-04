@@ -291,7 +291,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.7" data-path="../VERSION.html">
+        <li class="chapter " data-level="1.2.7" data-path="../ALL_CONFIG.html">
+            
+                <a href="../ALL_CONFIG.html">
+            
+                    
+                    配置项全示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../VERSION.html">
             
                 <a href="../VERSION.html">
             
@@ -368,6 +381,128 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;">&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;</h1>
+<h3 id="1&#x5F00;&#x542F;&#x65E5;&#x5FD7;&#x626B;&#x63CF;">1.&#x5F00;&#x542F;&#x65E5;&#x5FD7;&#x626B;&#x63CF;</h3>
+<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- &#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x63D2;&#x4EF6;&#xFF0C;&#x987B;&#x5F00;&#x542F;&#x52A8;&#x6001;&#x4EE3;&#x7406; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.core.log&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">aop:aspectj-autoproxy</span> <span class="hljs-attr">proxy-target-class</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span>
+</code></pre>
+<h3 id="2&#x65E5;&#x5FD7;&#x6CE8;&#x89E3;">2.&#x65E5;&#x5FD7;&#x6CE8;&#x89E3;</h3>
+<pre><code class="lang-java"><span class="hljs-meta">@Component</span>(<span class="hljs-string">&quot;demoService&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">DemoService</span> </span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-meta">@LogPoint</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">(String name)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello &quot;</span>+name;
+    }
+}
+</code></pre>
+<h3 id="3&#x6CE8;&#x89E3;&#x8BF4;&#x660E;">3.&#x6CE8;&#x89E3;&#x8BF4;&#x660E;</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> LogPoint {
+
+    <span class="hljs-comment">/**
+     *        &#x7EA7;&#x522B;,&#x9ED8;&#x8BA4;INFO&#x7EA7;&#x522B;&#xFF0C;INFO,ERROR,DEBUG,NOLOG
+     * <span class="hljs-doctag">@methodauthor</span> yangsong
+     * <span class="hljs-doctag">@methodversion</span> 0.0.1
+     * <span class="hljs-doctag">@date</span> 2016&#x5E74;9&#x6708;21&#x65E5; &#x4E0B;&#x5348;5:42:14
+     * <span class="hljs-doctag">@see</span> 
+     * <span class="hljs-doctag">@param</span>                   
+     * <span class="hljs-doctag">@return</span>               
+     * <span class="hljs-doctag">@status</span> &#x6B63;&#x5E38;
+     * <span class="hljs-doctag">@exception</span> no
+     */</span>
+    <span class="hljs-function">String <span class="hljs-title">level</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> LogLevel.INFO</span>;
+    <span class="hljs-comment">/**
+     *        &#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x7684;&#x76EE;&#x7684;&#x5730;,&#x9ED8;&#x8BA4;&#x672C;&#x5730;&#x65E5;&#x5FD7;,LOG,CENTER,SYSOUT,CAT
+     * <span class="hljs-doctag">@methodauthor</span> yangsong
+     * <span class="hljs-doctag">@methodversion</span> 0.0.1
+     * <span class="hljs-doctag">@date</span> 2016&#x5E74;9&#x6708;21&#x65E5; &#x4E0B;&#x5348;5:42:20
+     * <span class="hljs-doctag">@see</span> 
+     * <span class="hljs-doctag">@param</span>                   
+     * <span class="hljs-doctag">@return</span>               
+     * <span class="hljs-doctag">@status</span> &#x6B63;&#x5E38;
+     * <span class="hljs-doctag">@exception</span> no
+     */</span>
+    <span class="hljs-function">String <span class="hljs-title">target</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> LogTarget.LOG</span>;
+    <span class="hljs-comment">/**
+     *        &#x63CF;&#x8FF0;,&#x7528;&#x4E8E;&#x8BF4;&#x660E;&#x65B9;&#x6CD5;&#x76F8;&#x5173;&#x63CF;&#x8FF0;
+     * <span class="hljs-doctag">@methodauthor</span> yangsong
+     * <span class="hljs-doctag">@methodversion</span> 0.0.1
+     * <span class="hljs-doctag">@date</span> 2016&#x5E74;9&#x6708;21&#x65E5; &#x4E0B;&#x5348;5:42:26
+     * <span class="hljs-doctag">@see</span> 
+     * <span class="hljs-doctag">@param</span>                   
+     * <span class="hljs-doctag">@return</span>               
+     * <span class="hljs-doctag">@status</span> &#x6B63;&#x5E38;
+     * <span class="hljs-doctag">@exception</span> no
+     */</span>
+    <span class="hljs-function">String <span class="hljs-title">desc</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> &quot;&quot;</span>;
+    <span class="hljs-comment">/**
+     *        &#x662F;&#x5426;&#x8BB0;&#x5F55;&#x5230;&#x5168;&#x90E8;&#x65E5;&#x5FD7;&#x7CFB;&#x7EDF;
+     * <span class="hljs-doctag">@methodauthor</span> yangsong
+     * <span class="hljs-doctag">@methodversion</span> 0.0.1
+     * <span class="hljs-doctag">@date</span> 2016&#x5E74;9&#x6708;21&#x65E5; &#x4E0B;&#x5348;5:42:31
+     * <span class="hljs-doctag">@see</span> 
+     * <span class="hljs-doctag">@param</span>                   
+     * <span class="hljs-doctag">@return</span>               
+     * <span class="hljs-doctag">@status</span> &#x6B63;&#x5E38;
+     * <span class="hljs-doctag">@exception</span> no
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">shared</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">false</span></span>;
+
+}
+</code></pre>
+<h3 id="4&#x914D;&#x7F6E;&#x9879;">4.&#x914D;&#x7F6E;&#x9879;</h3>
+<pre><code class="lang-java"><span class="hljs-meta">@Component</span>(<span class="hljs-string">&quot;demoService&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">DemoService</span> </span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-meta">@LogPoint</span>(level = <span class="hljs-string">&quot;${demo.logger.level}&quot;</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">(String name)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello &quot;</span>+name;
+    }
+}
+</code></pre>
+<blockquote>
+<p>${demo.logger.level} &#x5C06;&#x4F1A;&#x5F15;&#x7528;config.properties&#x4E2D;&#x7684;&#x914D;&#x7F6E;,&#x5176;&#x4ED6;&#x914D;&#x7F6E;&#x7C7B;&#x540C;</p>
+</blockquote>
+<h3 id="5&#x5168;&#x5C40;&#x914D;&#x7F6E;">5.&#x5168;&#x5C40;&#x914D;&#x7F6E;</h3>
+<pre><code class="lang-properties">#&#x662F;&#x5426;&#x8BB0;&#x5F55;&#x65E5;&#x5FD7;&#xFF0C;&#x9ED8;&#x8BA4;true
+system.islogger=true
+#&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x7EA7;&#x522B; INFO 1,ERROR 0,DEBUG 2,NOLOG -1,B_ERROR 3
+system.log.level=1
+
+##############&#x65E5;&#x5FD7;&#x4E2D;&#x5FC3;&#x914D;&#x7F6E;#################
+#&#x662F;&#x5426;&#x8BB0;&#x5F55;&#x5230;&#x65E5;&#x5FD7;&#x4E2D;&#x5FC3;
+system.log.center=true
+#&#x65E5;&#x5FD7;&#x4E2D;&#x5FC3;&#x914D;&#x7F6E;&#xFF0C;&#x901A;&#x8FC7;log4j2&#x7684;Appender&#x53D1;&#x9001;&#x5230;kafka&#x6D88;&#x606F;&#x961F;&#x5217;
+#&#x65E5;&#x5FD7;&#x540D;&#x79F0;
+system.log.center.LOG_NAME=DefaultCenterLogService
+#&#x65E5;&#x5FD7;&#x683C;&#x5F0F;
+system.log.center.LAYOUT=%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+#&#x65E5;&#x5FD7;&#x5730;&#x5740;
+system.log.center.address=127.0.0.1:8457
+#&#x65E5;&#x5FD7;&#x5730;&#x5740;&#xFF0C;LogAddress&#x5982;&#x679C;&#x6CA1;&#x6709;&#xFF0C;&#x5C06;&#x4F7F;&#x7528;address&#x914D;&#x7F6E;
+system.log.center.LogAddress=127.0.0.1:8457
+#log4j2&#x7684;AppenderName
+system.log.center.AppenderName=kafka
+#kafka&#x4E3B;&#x9898;
+system.log.center.topic=LOG_CENTER
+##########################################
+
+##################CAT&#x914D;&#x7F6E;#################
+system.log.cat=true
+##########################################
+</code></pre>
+<h3 id="6&#x5176;&#x4ED6;&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;">6.&#x5176;&#x4ED6;&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;</h3>
+<pre><code class="lang-java">Logger logger = LoggerFactory.getLogger(<span class="hljs-string">&quot;&quot;</span>);<span class="hljs-comment">//&#x4F7F;&#x7528;org.slf4j.Logger</span>
+
+<span class="hljs-comment">//&#x4F7F;&#x7528;&#x65E5;&#x5FD7;&#x5E2E;&#x52A9;&#x7C7B;</span>
+ILogger loggerHelper = <span class="hljs-keyword">new</span> LoggerHelper();
+<span class="hljs-comment">//&#x9ED8;&#x8BA4;&#x8BB0;&#x5F55;&#x5230;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;</span>
+loggerHelper.info(<span class="hljs-string">&quot;logger point&quot;</span>);
+<span class="hljs-comment">//&#x8BB0;&#x5F55;&#x5230;&#x65E5;&#x5FD7;&#x4E2D;&#x5FC3;</span>
+loggerHelper.info(<span class="hljs-string">&quot;center logger point&quot;</span>, LogTarget.CENTER);
+</code></pre>
 
                                 
                                 </section>
@@ -411,7 +546,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"日志记录","level":"1.2.4.5","depth":3,"next":{"title":"配置管理","level":"1.2.4.6","depth":3,"path":"user/basic/CONFIG.md","ref":"user/basic/CONFIG.md","articles":[]},"previous":{"title":"数据库服务","level":"1.2.4.4","depth":3,"path":"user/basic/DATABASE.md","ref":"user/basic/DATABASE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"user/basic/LOGGER.md","mtime":"2019-05-01T09:39:32.974Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-01T09:53:30.063Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"日志记录","level":"1.2.4.5","depth":3,"next":{"title":"配置管理","level":"1.2.4.6","depth":3,"path":"user/basic/CONFIG.md","ref":"user/basic/CONFIG.md","articles":[]},"previous":{"title":"数据库服务","level":"1.2.4.4","depth":3,"path":"user/basic/DATABASE.md","ref":"user/basic/DATABASE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"user/basic/LOGGER.md","mtime":"2019-05-04T08:36:16.906Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-04T09:13:54.352Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

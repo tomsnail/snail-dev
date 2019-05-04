@@ -15,7 +15,7 @@ public class ConfigInfo {
 	/**
 	 * ZOOKEEPER根目录
 	 */
-	public static  final String rootNode = ConfigHelp.getInstance("config").getLocalConfig("ConfigInfo.rootNode", "/ts/config/root");
+	public static  final String rootNode = ConfigHelp.getInstance("config").getLocalConfig("system.config.zookeeper.root", "/ts/config/root");
 
 	
 }

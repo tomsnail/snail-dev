@@ -109,7 +109,7 @@ public class DefaultListaLogService implements LogService,Runnable{
 					}
 					continue;
 				}
-				if(log.getTarget().equals(LogTarget.LOG)){
+				if(log.getTarget()==null||log.getTarget().equals(LogTarget.LOG)){
 					if(fileLogService!=null)fileLogService.log(log);
 				}
 				if(log.getTarget().equals(LogTarget.SYSOUT)){

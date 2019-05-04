@@ -3,6 +3,7 @@ package cn.tomsnail.snail.core.config.client;
 
 import java.util.List;
 
+import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkDataListener;
 
@@ -65,7 +66,7 @@ public class ZookeeperConfigClient extends AConfigCilent{
 	}
 		
 	private void init(){
-		String address = ZooKeeperAddress.ZK_ADDRESS;
+		String address = ConfigHelp.getInstance("config").getLocalConfig("system.config.zookeeper.address",ZooKeeperAddress.ZK_ADDRESS);
 		ZK_HELPER = ZkHelper.getInstance(address);
 		if(!ZK_HELPER.isExtisPath(ConfigInfo.rootNode)){
 			ZK_HELPER.createPathWithParent(ConfigInfo.rootNode, true);
@@ -103,7 +104,10 @@ public class ZookeeperConfigClient extends AConfigCilent{
 		});
 	}
 
-	
+	@Override
+	protected boolean isDo() {
+		return Boolean.parseBoolean(ConfigHelp.getInstance("config").getLocalConfig("system.config.zookeeper","false"));
+	}
 
 	@Override
 	protected String getName() {

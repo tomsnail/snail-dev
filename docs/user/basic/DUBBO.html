@@ -291,7 +291,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.7" data-path="../VERSION.html">
+        <li class="chapter " data-level="1.2.7" data-path="../ALL_CONFIG.html">
+            
+                <a href="../ALL_CONFIG.html">
+            
+                    
+                    配置项全示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../VERSION.html">
             
                 <a href="../VERSION.html">
             
@@ -368,6 +381,107 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x53D1;&#x5E03;dubbo&#x670D;&#x52A1;">&#x53D1;&#x5E03;Dubbo&#x670D;&#x52A1;</h1>
+<h3 id="1-&#x5F15;&#x7528;">1 &#x5F15;&#x7528;</h3>
+<h4 id="11-maven&#x4ED3;&#x5E93;">1.1 Maven&#x4ED3;&#x5E93;</h4>
+<h4 id="12-pom&#x5F15;&#x7528;">1.2 pom&#x5F15;&#x7528;</h4>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>cn.tomsnail.snail<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>snail-core-framework-dubbo<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${last_verion}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h3 id="2-&#x63A5;&#x53E3;&#x5B9A;&#x4E49;">2 &#x63A5;&#x53E3;&#x5B9A;&#x4E49;</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">DemoService</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">(String name)</span></span>;
+}
+</code></pre>
+<h3 id="3-xml">3 XML</h3>
+<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- &#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x63D2;&#x4EF6;&#xFF0C;&#x987B;&#x5F00;&#x542F;&#x52A8;&#x6001;&#x4EE3;&#x7406; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.core.log&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">aop:aspectj-autoproxy</span> <span class="hljs-attr">proxy-target-class</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.example.core.framework.dubbo&quot;</span>/&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">dubbo:application</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;snail-example-core-framework-dubbo-server&quot;</span> /&gt;</span>  
+<span class="hljs-tag">&lt;<span class="hljs-name">dubbo:registry</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;zk&quot;</span> <span class="hljs-attr">protocol</span>=<span class="hljs-string">&quot;zookeeper&quot;</span> <span class="hljs-attr">address</span>=<span class="hljs-string">&quot;${zk.address}&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dubbo:protocol</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;dubbo&quot;</span> <span class="hljs-attr">port</span>=<span class="hljs-string">&quot;${dubbo.server.port}&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dubbo:service</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;demoService&quot;</span> <span class="hljs-attr">interface</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.example.core.framework.dubbo.DemoService&quot;</span> <span class="hljs-attr">protocol</span>=<span class="hljs-string">&quot;dubbo&quot;</span> <span class="hljs-attr">registry</span>=<span class="hljs-string">&quot;zk&quot;</span>/&gt;</span>
+</code></pre>
+<p>&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> cn.tomsnail.snail.example.core.framework.dubbo;
+
+<span class="hljs-keyword">import</span> cn.tomsnail.snail.core.log.annotation.LogPoint;
+<span class="hljs-keyword">import</span> org.springframework.stereotype.Component;
+
+<span class="hljs-meta">@Component</span>(<span class="hljs-string">&quot;demoService&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoServiceImpl</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">DemoService</span> </span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-meta">@LogPoint</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">(String name)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello &quot;</span>+name;
+    }
+}
+</code></pre>
+<h3 id="4-&#x6CE8;&#x89E3;">4 &#x6CE8;&#x89E3;</h3>
+<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- &#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x63D2;&#x4EF6;&#xFF0C;&#x987B;&#x5F00;&#x542F;&#x52A8;&#x6001;&#x4EE3;&#x7406; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.core.log&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">aop:aspectj-autoproxy</span> <span class="hljs-attr">proxy-target-class</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span>
+<span class="hljs-comment">&lt;!-- spring &#x5C5E;&#x6027;&#x914D;&#x7F6E;&#x63D2;&#x4EF6;&#xFF0C;&#x7528;&#x4E8E;spring&#x76F8;&#x5173;&#x5C5E;&#x6027;(&#x5982;${zk.address})&#x4ECE;config.properties&#x4E2D;&#x83B7;&#x53D6;&#x503C; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.core.config.client.plugin&quot;</span>/&gt;</span>
+
+
+
+
+<span class="hljs-comment">&lt;!-- dubbo application&#x914D;&#x7F6E; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dubbo:application</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;snail-example-core-framework-dubbo-annotation-server&quot;</span> &gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dubbo:parameter</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;qos.enable&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dubbo:parameter</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;qos.accept.foreign.ip&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dubbo:parameter</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;qos.port&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;33333&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dubbo:application</span>&gt;</span>
+
+
+<span class="hljs-comment">&lt;!-- dubbo &#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x5730;&#x5740; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dubbo:registry</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;zk&quot;</span> <span class="hljs-attr">protocol</span>=<span class="hljs-string">&quot;zookeeper&quot;</span> <span class="hljs-attr">address</span>=<span class="hljs-string">&quot;${zk.address}&quot;</span> /&gt;</span>
+<span class="hljs-comment">&lt;!-- dubbo &#x534F;&#x8BAE;&#x914D;&#x7F6E; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dubbo:protocol</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;dubbo&quot;</span> <span class="hljs-attr">port</span>=<span class="hljs-string">&quot;${dubbo.server.port}&quot;</span> /&gt;</span>
+<span class="hljs-comment">&lt;!-- dubbo &#x6CE8;&#x89E3;&#x626B;&#x63CF;&#x5305; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dubbo:annotation</span> <span class="hljs-attr">package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.example.core.framework.dubbo.annotation.server&quot;</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">dubbo:annotation</span>&gt;</span>
+</code></pre>
+<p>&#x63A5;&#x53E3;&#x5B9E;&#x73B0;(&#x4F7F;&#x7528;dubbo&#x670D;&#x52A1;&#x6CE8;&#x89E3;Service)&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> cn.tomsnail.snail.example.core.framework.dubbo.annotation.server;
+
+<span class="hljs-keyword">import</span> cn.tomsnail.snail.core.log.annotation.LogPoint;
+<span class="hljs-keyword">import</span> cn.tomsnail.snail.example.core.framework.dubbo.DemoService;
+<span class="hljs-keyword">import</span> com.alibaba.dubbo.config.annotation.Service;
+
+<span class="hljs-meta">@Service</span>(protocol = <span class="hljs-string">&quot;dubbo&quot;</span>,registry = <span class="hljs-string">&quot;zk&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">DemoService</span> </span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-meta">@LogPoint</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">(String name)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello &quot;</span>+name;
+    }
+}
+</code></pre>
+<h3 id="5&#x5185;&#x5D4C;zookeeper&#x670D;&#x52A1;&#x5668;">5.&#x5185;&#x5D4C;ZooKeeper&#x670D;&#x52A1;&#x5668;</h3>
+<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- zookeepr &#x5185;&#x5D4C;&#x670D;&#x52A1;&#x5668; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.core.util.zookeeper.server&quot;</span>/&gt;</span>
+</code></pre>
+<h3 id="6-&#x914D;&#x7F6E;">6 &#x914D;&#x7F6E;</h3>
+<pre><code class="lang-properties">#&#x6846;&#x67B6;&#x542F;&#x52A8;&#x7C7B;&#x578B; dubbo/springboot  &#x9ED8;&#x8BA4;dubbo
+framework.boot=dubbo
+
+#&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#x662F;spring&#x5C5E;&#x6027;&#x5B9A;&#x4E49;&#x53D8;&#x91CF;&#xFF0C;&#x4F9D;&#x636E;spring&#x5185;&#x5BB9;&#x7279;&#x5F02;&#x5316;
+#dubbo&#x670D;&#x52A1;&#x7AEF;&#x53E3;
+dubbo.server.port = 20881
+#zookeeper&#x670D;&#x52A1;&#x5730;&#x5740;
+zk.address=127.0.0.1:2181
+</code></pre>
+<h3 id="7-&#x542F;&#x52A8;">7 &#x542F;&#x52A8;</h3>
+<pre><code class="lang-bash">mvn <span class="hljs-built_in">exec</span>:java -Dexec.mainClass=<span class="hljs-string">&quot;cn.tomsnail.snail.core.starter.AppMain&quot;</span>
+</code></pre>
 
                                 
                                 </section>
@@ -411,7 +525,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"发布Dubbo服务","level":"1.2.4.1","depth":3,"next":{"title":"发布基于Dubbo的HTTP服务","level":"1.2.4.2","depth":3,"path":"user/basic/DUBBOX.md","ref":"user/basic/DUBBOX.md","articles":[]},"previous":{"title":"基础配置","level":"1.2.4","depth":2,"path":"user/basic/README.md","ref":"user/basic/README.md","articles":[{"title":"发布Dubbo服务","level":"1.2.4.1","depth":3,"path":"user/basic/DUBBO.md","ref":"user/basic/DUBBO.md","articles":[]},{"title":"发布基于Dubbo的HTTP服务","level":"1.2.4.2","depth":3,"path":"user/basic/DUBBOX.md","ref":"user/basic/DUBBOX.md","articles":[]},{"title":"发布SpringBoot服务","level":"1.2.4.3","depth":3,"path":"user/basic/SPRINGBOOT.md","ref":"user/basic/SPRINGBOOT.md","articles":[]},{"title":"数据库服务","level":"1.2.4.4","depth":3,"path":"user/basic/DATABASE.md","ref":"user/basic/DATABASE.md","articles":[]},{"title":"日志记录","level":"1.2.4.5","depth":3,"path":"user/basic/LOGGER.md","ref":"user/basic/LOGGER.md","articles":[]},{"title":"配置管理","level":"1.2.4.6","depth":3,"path":"user/basic/CONFIG.md","ref":"user/basic/CONFIG.md","articles":[]},{"title":"参数验证与转换","level":"1.2.4.7","depth":3,"path":"user/basic/PARAMS.md","ref":"user/basic/PARAMS.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"user/basic/DUBBO.md","mtime":"2019-05-01T09:39:32.945Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-01T09:53:30.063Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"发布Dubbo服务","level":"1.2.4.1","depth":3,"next":{"title":"发布基于Dubbo的HTTP服务","level":"1.2.4.2","depth":3,"path":"user/basic/DUBBOX.md","ref":"user/basic/DUBBOX.md","articles":[]},"previous":{"title":"基础配置","level":"1.2.4","depth":2,"path":"user/basic/README.md","ref":"user/basic/README.md","articles":[{"title":"发布Dubbo服务","level":"1.2.4.1","depth":3,"path":"user/basic/DUBBO.md","ref":"user/basic/DUBBO.md","articles":[]},{"title":"发布基于Dubbo的HTTP服务","level":"1.2.4.2","depth":3,"path":"user/basic/DUBBOX.md","ref":"user/basic/DUBBOX.md","articles":[]},{"title":"发布SpringBoot服务","level":"1.2.4.3","depth":3,"path":"user/basic/SPRINGBOOT.md","ref":"user/basic/SPRINGBOOT.md","articles":[]},{"title":"数据库服务","level":"1.2.4.4","depth":3,"path":"user/basic/DATABASE.md","ref":"user/basic/DATABASE.md","articles":[]},{"title":"日志记录","level":"1.2.4.5","depth":3,"path":"user/basic/LOGGER.md","ref":"user/basic/LOGGER.md","articles":[]},{"title":"配置管理","level":"1.2.4.6","depth":3,"path":"user/basic/CONFIG.md","ref":"user/basic/CONFIG.md","articles":[]},{"title":"参数验证与转换","level":"1.2.4.7","depth":3,"path":"user/basic/PARAMS.md","ref":"user/basic/PARAMS.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"user/basic/DUBBO.md","mtime":"2019-05-04T09:12:51.273Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-04T09:13:54.352Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

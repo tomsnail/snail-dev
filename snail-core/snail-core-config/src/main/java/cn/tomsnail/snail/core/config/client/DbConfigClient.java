@@ -3,6 +3,7 @@ package cn.tomsnail.snail.core.config.client;
 import java.util.List;
 import java.util.Map;
 
+import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import cn.tomsnail.snail.core.starter.spring.SpringBeanUtil;
@@ -65,6 +66,11 @@ public class DbConfigClient extends AConfigCilent{
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	protected boolean isDo() {
+		return Boolean.parseBoolean(ConfigHelp.getInstance("config").getLocalConfig("system.config.db","false"));
 	}
 	
 	

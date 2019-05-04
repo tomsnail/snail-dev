@@ -2,6 +2,8 @@ package cn.tomsnail.snail.core.config.client.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import cn.tomsnail.snail.core.config.client.AnnotationConfigListener;
@@ -17,8 +19,13 @@ import cn.tomsnail.snail.core.config.client.annotation.ConfigListener;
  * @date 2016年8月12日 下午3:04:04
  * @see 
  */
-@Component
+@Configuration
 public class ConfigBeanPostProcessor implements BeanPostProcessor {
+
+	@Bean
+	public ConfigBeanPostProcessor newConfigBeanPostProcessor(){
+		return new ConfigBeanPostProcessor();
+	}
 	
 	private AnnotationConfigListener annotationConfigListener = new AnnotationConfigListener();
 

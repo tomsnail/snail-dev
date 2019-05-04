@@ -1,6 +1,15 @@
 package cn.tomsnail.snail.core.log;
 
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import cn.tomsnail.snail.core.log.annotation.LogLevel;
 import cn.tomsnail.snail.core.log.annotation.LogTarget;
+
+
 
 /**
  *        日志帮助类
@@ -10,16 +19,104 @@ import cn.tomsnail.snail.core.log.annotation.LogTarget;
  * @date 2016年9月21日 下午5:46:50
  * @see 
  */
-public interface LoggerHelper {
+@Component("ILogger")
+public class LoggerHelper implements ILogger {
 	
-	public  void info(String info,LogTarget target);
+	private static final Logger LOGGER = LoggerFactory.getLogger("LoggerHelper");
 	
-	public  void error(String error,Throwable e,LogTarget target);
+	@Resource(name="DefaultListaLogService")
+	private LogService logService; 
 	
-	public  void error(String error,LogTarget target);
+	public  void info(String info,String target){
+		if(!isLoggerService(info,LogLevel.INFO)){
+			return;
+		}
+		Log log = new Log();
+		log.addContent(info);
+		log.setLevel(Integer.valueOf(LogLevel.INFO));
+		log.setTarget(target.toString());
+		logService.log(log);
+	}
 	
-	public  void debug(String debug,LogTarget target);
+	public  void error(String error,Throwable e,String target){
+		if(!isLoggerService(error,LogLevel.ERROR)){
+			return;
+		}
+		Log log = new Log();
+		log.addContent(error);
+		log.setLevel(Integer.valueOf(LogLevel.ERROR));
+		log.setDesc(e.getMessage());
+		log.setTarget(target.toString());
+		logService.log(log);
+	}
 	
-	public  void warn(String warn,LogTarget target);
+	public  void error(String error,String target){
+		if(!isLoggerService(error,LogLevel.ERROR)){
+			return;
+		}
+		Log log = new Log();
+		log.addContent(error);
+		log.setLevel(Integer.valueOf(LogLevel.ERROR));
+		log.setTarget(target.toString());
+		logService.log(log);
+	}
 	
+	public  void debug(String debug,String target){
+		if(!isLoggerService(debug,LogLevel.DEBUG)){
+			return;
+		}
+		Log log = new Log();
+		log.addContent(debug);
+		log.setLevel(Integer.valueOf(LogLevel.DEBUG));
+		log.setTarget(target.toString());
+		logService.log(log);
+	}
+	
+	public  void warn(String warn,String target){
+		if(!isLoggerService(warn,LogLevel.DEBUG)){
+			return;
+		}
+		Log log = new Log();
+		log.addContent(warn);
+		log.setLevel(Integer.valueOf(LogLevel.DEBUG));
+		log.setTarget(target.toString());
+		logService.log(log);
+	}
+
+	@Override
+	public void info(String info) {
+		this.info(info,null);
+	}
+
+	@Override
+	public void error(String error, Throwable e) {
+		this.error(error,e,null);
+	}
+
+	@Override
+	public void error(String error) {
+		//this.error(error,LogTarget.LOG);
+	}
+
+	@Override
+	public void debug(String debug) {
+		this.debug(debug,null);
+	}
+
+	@Override
+	public void warn(String warn) {
+		this.warn(warn,null);
+	}
+
+	private boolean isLoggerService(String loginfo,String level){
+		if(logService!=null){
+			switch(level){
+				case LogLevel.DEBUG:LOGGER.debug(loginfo);break;
+				case LogLevel.INFO:LOGGER.info(loginfo);break;
+				case LogLevel.ERROR:LOGGER.error(loginfo);break;
+			}
+			return true;
+		}
+		return false;
+	}
 }
