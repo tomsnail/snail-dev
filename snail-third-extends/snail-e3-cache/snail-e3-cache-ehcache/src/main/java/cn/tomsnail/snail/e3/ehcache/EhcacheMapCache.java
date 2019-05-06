@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
+import cn.tomsnail.snail.core.util.string.StringUtils;
 import cn.tomsnail.snail.ext.cache.core.CacheConfig;
 import cn.tomsnail.snail.ext.cache.core.ICache;
 import cn.tomsnail.snail.ext.cache.core.IDestoryCache;
@@ -155,24 +157,29 @@ public class EhcacheMapCache implements ICache,IInitCache,IDestoryCache{
 		if(manager==null){
 			synchronized (cacheConfig) {
 				if(manager==null){
-					if(cacheConfig.getUrl()!=null){
-						try {
-							File file = new File(cacheConfig.getUrl());
-							if(file.exists()&&file.isFile()) {
-								manager = new CacheManager(cacheConfig.getUrl());
-							}else {
-								URL url = ClassLoader.getSystemClassLoader().getResource(cacheConfig.getUrl());
-								if(url!=null) {
-									manager = new CacheManager(url);
-								}else {
-									manager = CacheManager.create();
-								}
-							}
-							return;
-						} catch (Exception e) {
-						}
+					String _url = cacheConfig.getUrl();
+					if(StringUtils.isBlank(_url)) {
+						_url = ConfigHelp.getInstance("config").getLocalConfig("system.cache.ehcache.url", "");
 					}
-					manager = CacheManager.create();
+					if(StringUtils.isBlank(_url)) {
+						manager = CacheManager.create();
+						return;
+					}
+					try {
+						File file = new File(_url);
+						if(file.exists()&&file.isFile()) {
+							manager = new CacheManager(cacheConfig.getUrl());
+						}else {
+							URL url = getClass().getClassLoader().getResource(_url);
+							if(url!=null) {
+								manager = new CacheManager(url);
+							}else {
+								manager = CacheManager.create();
+							}
+						}
+					} catch (Exception e) {
+						manager = CacheManager.create();
+					}
 				}
 			}
 		}		

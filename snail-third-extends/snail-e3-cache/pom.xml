@@ -11,5 +11,6 @@
   	<module>snail-e3-cache-redis</module>
   	<module>snail-e3-cache-ehcache</module>
   	<module>snail-e3-cache-j2cache</module>
+  	<module>snail-e3-cache-ehcache3</module>
   </modules>
 </project>

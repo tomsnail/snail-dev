@@ -7,7 +7,7 @@ public class CacheFactory extends DefaultCacheFactory{
 
 	public void init(){
 		super.init();
-		map.put(CacheType.J2CACHE, null);
+		map.put(CacheType.J2CACHE, new J2CacheMapCacheFactory());
 	}
 	
 }

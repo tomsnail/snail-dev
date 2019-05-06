@@ -1,98 +1,126 @@
 /**
- *  Copyright 2014-2015 Oschina
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright (c) 2015-2017, Winter Lau (javayou@gmail.com), wendal.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package net.oschina.j2cache.ehcache;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
+import net.oschina.j2cache.CacheChannel;
+import net.oschina.j2cache.CacheObject;
+import net.sf.ehcache.config.CacheConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.oschina.j2cache.CacheException;
 import net.oschina.j2cache.CacheExpiredListener;
 import net.oschina.j2cache.CacheProvider;
 import net.sf.ehcache.CacheManager;
 
 /**
- * EhCache Provider plugin
- * 
- * Taken from EhCache 1.3 distribution
- * @author liudong
+ * EhCache 2.x 缓存管理器的封装，用来管理多个缓存区域
+ *
+ * @author Winter Lau (javayou@gmail.com)
  * @author wendal
  */
 public class EhCacheProvider implements CacheProvider {
 
 	private final static Logger log = LoggerFactory.getLogger(EhCacheProvider.class);
-	public static String KEY_EHCACHE_NAME = "ehcache.name";
-	public static String KEY_EHCACHE_CONFIG_XML = "ehcache.configXml";
+
+	public final static String KEY_EHCACHE_NAME = "name";
+	public final static String KEY_EHCACHE_CONFIG_XML = "configXml";
 
 	private CacheManager manager;
-	private ConcurrentHashMap<String, EhCache> _CacheManager ;
+	private ConcurrentHashMap<String, EhCache> caches;
 
 	@Override
 	public String name() {
 		return "ehcache";
 	}
 
+	@Override
+	public int level() {
+		return CacheObject.LEVEL_1;
+	}
+
+	@Override
+	public Collection<CacheChannel.Region> regions() {
+		Collection<CacheChannel.Region> regions = new ArrayList<>();
+		caches.forEach((k,c) -> regions.add(new CacheChannel.Region(k, c.size(), c.ttl())));
+		return regions;
+	}
+
     /**
      * Builds a Cache.
-     * Even though this method provides properties, they are not used.
-     * Properties for EHCache are specified in the ehcache.xml file.
-     * Configuration will be read from ehcache.xml for a cache declaration
-     * where the name attribute matches the name parameter in this builder.
      *
-     * @param name the name of the cache. Must match a cache configured in ehcache.xml
-     * @param autoCreate auto create cache region ?
+     * @param regionName the regionName of the cache. Must match a cache configured in ehcache.xml
      * @param listener cache listener
      * @return a newly built cache will be built and initialised
-     * @throws CacheException inter alia, if a cache of the same name already exists
      */
-    public EhCache buildCache(String name, boolean autoCreate, CacheExpiredListener listener) throws CacheException {
-    	EhCache ehcache = _CacheManager.get(name);
-    	if(ehcache == null && autoCreate){
-		    try {
-	            synchronized(_CacheManager){
-	            	ehcache = _CacheManager.get(name);
-	            	if(ehcache == null){
-			            net.sf.ehcache.Cache cache = manager.getCache(name);
-			            if (cache == null) {
-			                log.warn("Could not find configuration [" + name + "]; using defaults.");
-			                manager.addCache(name);
-			                cache = manager.getCache(name);
-			                log.debug("started EHCache region: " + name);                
-			            }
-			            ehcache = new EhCache(cache, listener);
-			            _CacheManager.put(name, ehcache);
-	            	}
-	            }
-		    }
-	        catch (net.sf.ehcache.CacheException e) {
-	            throw new CacheException(e);
-	        }
-    	}
-        return ehcache;
+    @Override
+    public EhCache buildCache(String regionName, CacheExpiredListener listener) {
+    	return caches.computeIfAbsent(regionName, v -> {
+			net.sf.ehcache.Cache cache = manager.getCache(regionName);
+			if (cache == null) {
+				manager.addCache(regionName);
+				cache = manager.getCache(regionName);
+				log.warn("Could not find configuration [{}]; using defaults (TTL:{} seconds).", regionName, cache.getCacheConfiguration().getTimeToLiveSeconds());
+			}
+			return new EhCache(cache, listener);
+		});
     }
 
+	@Override
+	public EhCache buildCache(String region, long timeToLiveInSeconds, CacheExpiredListener listener) {
+		EhCache ehcache = caches.computeIfAbsent(region, v -> {
+			//配置缓存
+			CacheConfiguration cfg = manager.getConfiguration().getDefaultCacheConfiguration().clone();
+			cfg.setName(region);
+			if(timeToLiveInSeconds > 0) {
+				cfg.setTimeToLiveSeconds(timeToLiveInSeconds);
+				cfg.setTimeToIdleSeconds(timeToLiveInSeconds);
+			}
+
+			net.sf.ehcache.Cache cache = new net.sf.ehcache.Cache(cfg);
+			manager.addCache(cache);
+
+			log.info("Started Ehcache region [{}] with TTL: {}", region, timeToLiveInSeconds);
+
+			return new EhCache(cache, listener);
+		});
+
+		if (ehcache.ttl() != timeToLiveInSeconds)
+			throw new IllegalArgumentException(String.format("Region [%s] TTL %d not match with %d", region, ehcache.ttl(), timeToLiveInSeconds));
+
+		return ehcache;
+	}
+
+	@Override
+	public void removeCache(String region) {
+		caches.remove(region);
+		manager.removeCache(region);
+	}
+
 	/**
-	 * Callback to perform any necessary initialization of the underlying cache implementation
-	 * during SessionFactory construction.
+	 * init ehcache config
 	 *
 	 * @param props current configuration settings.
 	 */
-	public void start(Properties props) throws CacheException {
+	public void start(Properties props) {
 		if (manager != null) {
             log.warn("Attempt to restart an already started EhCacheProvider.");
             return;
@@ -105,13 +133,14 @@ public class EhCacheProvider implements CacheProvider {
 		if (manager == null) {
 			// 指定了配置文件路径? 加载之
 			if (props.containsKey(KEY_EHCACHE_CONFIG_XML)) {
-				manager = new CacheManager(props.getProperty(KEY_EHCACHE_CONFIG_XML));
+				URL url = getClass().getClassLoader().getResource(props.getProperty(KEY_EHCACHE_CONFIG_XML));
+				manager = CacheManager.newInstance(url);
 			} else {
 				// 加载默认实例
 				manager = CacheManager.getInstance();
 			}
 		}
-        _CacheManager = new ConcurrentHashMap<String, EhCache>();
+        caches = new ConcurrentHashMap<>();
 	}
 
 	/**
@@ -120,7 +149,7 @@ public class EhCacheProvider implements CacheProvider {
 	public void stop() {
 		if (manager != null) {
             manager.shutdown();
-            _CacheManager.clear();
+            caches.clear();
             manager = null;
         }
 	}

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import cn.tomsnail.snail.core.config.client.plugin.AnnotationConverter;
 import cn.tomsnail.snail.core.util.string.StringUtils;
-import cn.tomsnail.snail.ext.cache.annotation.CacheClassd;
+import cn.tomsnail.snail.ext.cache.annotation.SnailCache;
 import cn.tomsnail.snail.ext.cache.annotation.CacheConfig;
 import cn.tomsnail.snail.ext.cache.core.CacheType;
 import cn.tomsnail.snail.ext.cache.core.DefaultCacheFactory;
@@ -35,7 +35,7 @@ public class CacheBeanPostProcessor implements BeanPostProcessor{
 	public Object postProcessBeforeInitialization(Object bean, String beanName)
 			throws BeansException {
 		Class clazz = bean.getClass();
-		if(clazz.isAnnotationPresent(CacheClassd.class)){
+		if(clazz.isAnnotationPresent(SnailCache.class)){
 			Field[] fs = clazz.getDeclaredFields();
 			for(Field f:fs){
 				boolean needCache = f.getType().getCanonicalName().startsWith("cn.tomsnail.snail.ext.cache.core.ICache")&&f.isAnnotationPresent(CacheConfig.class);
@@ -46,8 +46,12 @@ public class CacheBeanPostProcessor implements BeanPostProcessor{
 						String cacheType = AnnotationConverter.getValue(acacheConfig.cachedType());
 						if("ehcache".equalsIgnoreCase(cacheType)){
 							cacheConfig.setCacheType(CacheType.EHCACHE);
+						}else if("ehcache3".equalsIgnoreCase(cacheType)){
+							cacheConfig.setCacheType(CacheType.EHCACHE3);
 						}else if("redis".equalsIgnoreCase(cacheType)){
 							cacheConfig.setCacheType(CacheType.REDIS);
+						}else if("j2cache".equalsIgnoreCase(cacheType)){
+							cacheConfig.setCacheType(CacheType.J2CACHE);
 						}else{
 							cacheConfig.setCacheType(CacheType.LOCAL);
 						}

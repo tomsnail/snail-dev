@@ -7,4 +7,7 @@
   </parent>
   <artifactId>snail-example-ext-cache</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>snail-example-ext-cache-common</module>
+  </modules>
 </project>

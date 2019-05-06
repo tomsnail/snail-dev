@@ -7,7 +7,7 @@ public class CacheFactory extends DefaultCacheFactory{
 	
 	public void init(){
 		super.init();
-		map.put(CacheType.LOCAL, new EhcacheMapCacheFactory());
+		map.put(CacheType.EHCACHE, new EhcacheMapCacheFactory());
 	}
 
 }

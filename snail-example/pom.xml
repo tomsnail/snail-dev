@@ -11,5 +11,6 @@
   	<module>snail-example-core</module>
   	<module>snail-example-ext</module>
   	<module>snail-example-e3</module>
+  	<module>snail-example-model</module>
   </modules>
 </project>

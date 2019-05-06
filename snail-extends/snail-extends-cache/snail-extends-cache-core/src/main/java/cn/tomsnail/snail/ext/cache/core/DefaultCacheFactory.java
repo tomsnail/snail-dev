@@ -39,12 +39,30 @@ public class DefaultCacheFactory implements ICacheFactory{
 	public void init(){
 		map.put(CacheType.LOCAL, new LocalMapCacheFactory());
 		try {
-			map.put(CacheType.REDIS, (ICacheFactory) Class.forName("cn.tomsnail.snail.3e.redis.RedisMapCacheFactory").newInstance());
+			Class clazz=  Class.forName("cn.tomsnail.snail.e3.redis.RedisMapCacheFactory");
+			if(clazz!=null)
+				map.put(CacheType.REDIS, (ICacheFactory) clazz.newInstance());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try {
-			map.put(CacheType.EHCACHE, (ICacheFactory) Class.forName("cn.tomsnail.snail.3e.ehcache.EhcacheMapCacheFactory").newInstance());
+			Class clazz=  Class.forName("cn.tomsnail.snail.e3.ehcache.EhcacheMapCacheFactory");
+			if(clazz!=null)
+				map.put(CacheType.EHCACHE, (ICacheFactory) clazz.newInstance());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			Class clazz=  Class.forName("cn.tomsnail.snail.e3.ehcache3.EhcacheMapCacheFactory");
+			if(clazz!=null)
+				map.put(CacheType.EHCACHE3, (ICacheFactory) clazz.newInstance());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			Class clazz=  Class.forName("cn.tomsnail.snail.e3.j2cache.J2CacheMapCacheFactory");
+			if(clazz!=null)
+				map.put(CacheType.J2CACHE, (ICacheFactory) clazz.newInstance());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

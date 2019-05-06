@@ -1,79 +1,93 @@
+/**
+ * Copyright (c) 2015-2017, Winter Lau (javayou@gmail.com).
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package net.oschina.j2cache;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 空的缓存Provider
- * @author winterlau
+ * @author Winter Lau(javayou@gmail.com)
  */
-public class NullCache implements Cache {
+public class NullCache implements Level1Cache, Level2Cache {
 
-	/* (non-Javadoc)
-	 * @see net.oschina.j2cache.Cache#get(java.lang.Object)
-	 */
 	@Override
-	public Object get(Object key) throws CacheException {
+	public long ttl() {
+		return -1;
+	}
+
+	@Override
+	public long size() {
+		return 0;
+	}
+
+	@Override
+	public Object get(String key) {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see net.oschina.j2cache.Cache#put(java.lang.Object, java.lang.Object)
-	 */
 	@Override
-	public void put(Object key, Object value) throws CacheException {
+	public void put(String key, Object value) {
 	}
 
-	/* (non-Javadoc)
-	 * @see net.oschina.j2cache.Cache#update(java.lang.Object, java.lang.Object)
-	 */
 	@Override
-	public void update(Object key, Object value) throws CacheException {
+	public Collection<String> keys() {
+		return Collections.emptyList();
 	}
 
-	/* (non-Javadoc)
-	 * @see net.oschina.j2cache.Cache#keys()
-	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List keys() throws CacheException {
+	public Map get(Collection<String> keys) {
+		return Collections.emptyMap();
+	}
+
+	@Override
+	public boolean exists(String key) {
+		return false;
+	}
+
+	@Override
+	public void put(Map<String, Object> elements)  {
+	}
+
+	@Override
+	public byte[] getBytes(String key) {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see net.oschina.j2cache.Cache#remove(java.lang.Object)
-	 */
 	@Override
-	public void evict(Object key) throws CacheException {
-	}
-
-	/* (non-Javadoc)
-	 * @see net.oschina.j2cache.Cache#batchRemove(java.util.List)
-	 */
-	@Override
-	@SuppressWarnings("rawtypes")
-	public void evict(List keys) throws CacheException {	
-	}
-
-	/* (non-Javadoc)
-	 * @see net.oschina.j2cache.Cache#clear()
-	 */
-	@Override
-	public void clear() throws CacheException {
-	}
-
-	/* (non-Javadoc)
-	 * @see net.oschina.j2cache.Cache#destroy()
-	 */
-	@Override
-	public void destroy() throws CacheException {
+	public List<byte[]> getBytes(Collection<String> key) {
+		return Collections.emptyList();
 	}
 
 	@Override
-	public void put(Object key, Object value, Integer expireInSec) throws CacheException {
+	public void setBytes(String key, byte[] bytes) {
 	}
 
 	@Override
-	public void update(Object key, Object value, Integer expireInSec) throws CacheException {
+	public void setBytes(Map<String,byte[]> bytes) {
 	}
 
+	@Override
+	public void evict(String...keys) {
+	}
+
+	@Override
+	public void clear() {
+
+	}
 }

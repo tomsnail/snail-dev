@@ -6,13 +6,13 @@ import com.alibaba.fastjson.JSON;
 
 import cn.tomsnail.snail.core.util.math.encrypt.HmacSha1Util;
 import cn.tomsnail.snail.core.util.math.encrypt.MD5Util;
-import cn.tomsnail.snail.ext.cache.annotation.CacheClassd;
+import cn.tomsnail.snail.ext.cache.annotation.SnailCache;
 import cn.tomsnail.snail.ext.cache.annotation.CacheConfig;
 import cn.tomsnail.snail.ext.cache.core.ICache;
 
 
 
-@CacheClassd
+@SnailCache
 public class TokenFactory {
 	
 	private static int DEFAULT_EXPIRE = 7200;

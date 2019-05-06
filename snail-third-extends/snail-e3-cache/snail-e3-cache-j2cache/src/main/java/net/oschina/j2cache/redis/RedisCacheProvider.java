@@ -1,97 +1,126 @@
+/**
+ * Copyright (c) 2015-2017, Winter Lau (javayou@gmail.com), wendal.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package net.oschina.j2cache.redis;
 
 import net.oschina.j2cache.*;
-import net.oschina.j2cache.redis.support.RedisClientFactoryAdapter;
-import net.oschina.j2cache.redis.support.RedisPoolConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import redis.clients.jedis.*;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Redis 缓存实现
+ * Redis 缓存管理，实现对多种 Redis 运行模式的支持和自动适配，实现连接池管理等
  *
- * @author Winter Lau
+ * @author Winter Lau (javayou@gmail.com)
  * @author wendal
  */
 public class RedisCacheProvider implements CacheProvider {
 
-    private static RedisCacheProxy redisCacheProxy;
+    private static final Logger log = LoggerFactory.getLogger(RedisCacheProvider.class);
 
-    protected ConcurrentHashMap<String, RedisCache> caches = new ConcurrentHashMap<>();
+    private RedisClient redisClient;
+    private String namespace;
+    private String storage;
 
+    private final ConcurrentHashMap<String, Level2Cache> regions = new ConcurrentHashMap();
+
+    @Override
     public String name() {
         return "redis";
     }
 
-    // 这个实现有个问题,如果不使用RedisCacheProvider,但又使用RedisCacheChannel,这就NPE了
-    public RedisCacheProxy getResource() {
-        if (redisCacheProxy == null) {
-            this.start(J2Cache.getConfig());
-        }
-
-        return redisCacheProxy;
+    @Override
+    public int level() {
+        return CacheObject.LEVEL_2;
     }
 
+    /**
+     * 初始化 Redis 连接
+     * @param props current configuration settings.
+     */
     @Override
-    public Cache buildCache(String regionName, boolean autoCreate, CacheExpiredListener listener) throws CacheException {
-        // 虽然这个实现在并发时有概率出现同一各regionName返回不同的实例
-        // 但返回的实例一次性使用,所以加锁了并没有增加收益
-        RedisCache cache = caches.get(regionName);
-        if (cache == null) {
-            cache = new RedisCache(regionName, redisCacheProxy);
-            caches.put(regionName, cache);
-        }
-        return cache;
-    }
+    public void start(Properties props) {
 
-    @Override
-    public void start(Properties props) throws CacheException {
-        RedisPoolConfig config = new RedisPoolConfig();
+        this.namespace = props.getProperty("namespace");
+        this.storage = props.getProperty("storage");
 
-        config.setHost(getProperty(props, "host", "127.0.0.1"));
-        config.setPort(getProperty(props, "port", 6379));
-        config.setPassword(props.getProperty("password", null));
-        config.setTimeout(getProperty(props, "timeout", 2000));
-        config.setBlockWhenExhausted(getProperty(props, "blockWhenExhausted", true));
-        config.setMaxIdle(getProperty(props, "maxIdle", 10));
-        config.setMinIdle(getProperty(props, "minIdle", 5));
-        config.setMaxTotal(getProperty(props, "maxTotal", 10000));
-        config.setMaxWaitMillis(getProperty(props, "maxWait", 100));
-        config.setTestWhileIdle(getProperty(props, "testWhileIdle", false));
-        config.setTestOnBorrow(getProperty(props, "testOnBorrow", true));
-        config.setTestOnReturn(getProperty(props, "testOnReturn", false));
-        config.setNumTestsPerEvictionRun(getProperty(props, "numTestsPerEvictionRun", 10));
-        config.setMinEvictableIdleTimeMillis(getProperty(props, "minEvictableIdleTimeMillis", 1000));
-        config.setSoftMinEvictableIdleTimeMillis(getProperty(props, "softMinEvictableIdleTimeMillis", 10));
-        config.setTimeBetweenEvictionRunsMillis(getProperty(props, "timeBetweenEvictionRunsMillis", 10));
-        config.setLifo(getProperty(props, "lifo", false));
+        JedisPoolConfig poolConfig = RedisUtils.newPoolConfig(props, null);
 
-        config.setDatabase(getProperty(props, "database", 0));
-        
-        String redisPolicy = getProperty(props, "policy", "single");
-        redisCacheProxy = new RedisCacheProxy(new RedisClientFactoryAdapter(config, RedisClientFactoryAdapter.RedisPolicy.valueOf(redisPolicy)));
+        String hosts = props.getProperty("hosts", "127.0.0.1:6379");
+        String mode = props.getProperty("mode", "single");
+        String clusterName = props.getProperty("cluster_name");
+        String password = props.getProperty("password");
+        int database = Integer.parseInt(props.getProperty("database", "0"));
 
+        long ct = System.currentTimeMillis();
+
+        this.redisClient = new RedisClient.Builder()
+                .mode(mode)
+                .hosts(hosts)
+                .password(password)
+                .cluster(clusterName)
+                .database(database)
+                .poolConfig(poolConfig).newClient();
+
+        log.info("Redis client starts with mode({}),db({}),storage({}),namespace({}),time({}ms)",
+                mode,
+                database,
+                storage,
+                namespace,
+                (System.currentTimeMillis()-ct)
+        );
     }
 
     @Override
     public void stop() {
-        redisCacheProxy.close();
-        caches.clear();
-    }
-
-    private static String getProperty(Properties props, String key, String defaultValue) {
-        return props.getProperty(key, defaultValue).trim();
-    }
-
-    private static int getProperty(Properties props, String key, int defaultValue) {
+        regions.clear();
         try {
-            return Integer.parseInt(props.getProperty(key, String.valueOf(defaultValue)).trim());
-        } catch (Exception e) {
-            return defaultValue;
+            redisClient.close();
+        } catch (IOException e) {
+            log.warn("Failed to close redis connection.", e);
         }
     }
 
-    private static boolean getProperty(Properties props, String key, boolean defaultValue) {
-        return "true".equalsIgnoreCase(props.getProperty(key, String.valueOf(defaultValue)).trim());
+    @Override
+    public Cache buildCache(String region, CacheExpiredListener listener) {
+        return regions.computeIfAbsent(this.namespace+":"+region, v -> "hash".equalsIgnoreCase(this.storage)?
+                new RedisHashCache(this.namespace, region, redisClient):
+                new RedisGenericCache(this.namespace, region, redisClient));
+    }
+
+    @Override
+    public Cache buildCache(String region, long timeToLiveInSeconds, CacheExpiredListener listener) {
+        return buildCache(region, listener);
+    }
+
+    @Override
+    public Collection<CacheChannel.Region> regions() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * 获取 Redis 客户端实例
+     * @return redis client interface instance
+     */
+    public RedisClient getRedisClient() {
+        return redisClient;
     }
 }
