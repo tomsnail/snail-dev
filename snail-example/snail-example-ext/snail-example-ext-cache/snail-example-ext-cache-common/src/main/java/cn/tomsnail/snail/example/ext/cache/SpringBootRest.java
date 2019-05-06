@@ -1,5 +1,6 @@
 package cn.tomsnail.snail.example.ext.cache;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,11 +11,15 @@ import cn.tomsnail.snail.core.log.annotation.LogPoint;
 import cn.tomsnail.snail.ext.cache.annotation.SnailCache;
 import cn.tomsnail.snail.ext.cache.annotation.CacheConfig;
 import cn.tomsnail.snail.ext.cache.core.ICache;
+import net.oschina.j2cache.CacheChannel;
 
 @RestController
 @RequestMapping("/cache")
 @SnailCache
 public class SpringBootRest {
+	
+	@Autowired
+	private CacheChannel cacheChannel;
 	
 		
 		 @CacheConfig(cachedType="EHCACHE3",name="test")
