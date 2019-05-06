@@ -1,5 +1,6 @@
 package net.oschina.j2cache.cache.support.util;
 
+import org.springframework.core.env.CompositePropertySource;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.StandardEnvironment;
 
@@ -27,19 +28,37 @@ public class SpringJ2CacheConfigUtil {
 				MapPropertySource c = (MapPropertySource) a;
 				c.getSource().forEach((k,v) -> {
 					String key = k;
-					if (key.startsWith(config.getBroadcast() + ".")) {
+					if (key.startsWith("system.cache.j2cache."+config.getBroadcast() + ".")) {
 						config.getBroadcastProperties().setProperty(key.substring((config.getBroadcast() + ".").length()),
 								environment.getProperty(key));
 					}	
-					if (key.startsWith(config.getL1CacheName() + ".")) {
+					if (key.startsWith("system.cache.j2cache."+config.getL1CacheName() + ".")) {
 						config.getL1CacheProperties().setProperty(key.substring((config.getL1CacheName() + ".").length()),
 								environment.getProperty(key));
 					}
-					if (key.startsWith(l2_section + ".")) {
+					if (key.startsWith("system.cache.j2cache."+l2_section + ".")) {
 						config.getL2CacheProperties().setProperty(key.substring((l2_section + ".").length()),
 								environment.getProperty(key));
 					}
 				});
+			}
+			if(a instanceof CompositePropertySource) {
+				CompositePropertySource c = (CompositePropertySource) a;
+				String[] keys = c.getPropertyNames();
+				for(String key:keys){
+					if (key.startsWith("system.cache.j2cache."+config.getBroadcast() + ".")) {
+						config.getBroadcastProperties().setProperty(key.substring(("system.cache.j2cache."+config.getBroadcast() + ".").length()),
+								environment.getProperty(key));
+					}
+					if (key.startsWith("system.cache.j2cache."+config.getL1CacheName() + ".")) {
+						config.getL1CacheProperties().setProperty(key.substring(("system.cache.j2cache."+config.getL1CacheName() + ".").length()),
+								environment.getProperty(key));
+					}
+					if (key.startsWith("system.cache.j2cache."+l2_section + ".")) {
+						config.getL2CacheProperties().setProperty(key.substring(("system.cache.j2cache."+l2_section + ".").length()),
+								environment.getProperty(key));
+					}
+				}
 			}
 		});
 		return config;

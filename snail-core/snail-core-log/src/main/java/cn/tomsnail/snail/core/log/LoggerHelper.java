@@ -19,8 +19,8 @@ import cn.tomsnail.snail.core.log.annotation.LogTarget;
  * @date 2016年9月21日 下午5:46:50
  * @see 
  */
-@Component("Logger")
-public class LoggerHelper  {
+@Component
+public class LoggerHelper  implements ILogger{
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger("LoggerHelper");
 	

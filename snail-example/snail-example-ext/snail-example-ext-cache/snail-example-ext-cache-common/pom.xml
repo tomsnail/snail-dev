@@ -46,12 +46,15 @@
 		<!-- ehcache3和ehcache不能同时存在，因为ehcache本身编译依赖的terracotta有版本方法冲突 -->
 		
         
+
+        <!--
+
         <dependency>
             <groupId>cn.tomsnail.snail</groupId>
             <artifactId>snail-e3-cache-ehcache3</artifactId>
             <version>${revision}</version>
         </dependency>
-        <!-- 
+
         <dependency>
             <groupId>cn.tomsnail.snail</groupId>
             <artifactId>snail-e3-cache-ehcache</artifactId>
@@ -65,13 +68,22 @@
             <version>${revision}</version>
         </dependency>
         
-        -->
+
         
         <dependency>
             <groupId>cn.tomsnail.snail</groupId>
             <artifactId>snail-e3-cache-j2cache</artifactId>
             <version>${revision}</version>
         </dependency>
+        -->
+
+        <dependency>
+            <groupId>cn.tomsnail.snail</groupId>
+            <artifactId>snail-e3-cache-springboot</artifactId>
+            <version>${revision}</version>
+
+        </dependency>
+
         <dependency>
             <groupId>cn.tomsnail.snail</groupId>
             <artifactId>snail-example-model</artifactId>

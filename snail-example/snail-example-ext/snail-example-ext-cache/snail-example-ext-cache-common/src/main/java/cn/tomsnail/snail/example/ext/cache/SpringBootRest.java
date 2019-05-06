@@ -1,5 +1,6 @@
 package cn.tomsnail.snail.example.ext.cache;
 
+import cn.tomsnail.snail.core.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,12 @@ import net.oschina.j2cache.CacheChannel;
 @RequestMapping("/cache")
 @SnailCache
 public class SpringBootRest {
+
+		@Autowired
+		CacheService cacheService;
 	
-	@Autowired
-	private CacheChannel cacheChannel;
+	     @Autowired
+		 private CacheChannel cacheChannel;
 	
 		
 		 @CacheConfig(cachedType="EHCACHE3",name="test")
@@ -38,7 +42,8 @@ public class SpringBootRest {
 	     @LogPoint
 	     @RequestMapping(value = "put/{name}/{value}", method = RequestMethod.GET)
 	     public String put(@PathVariable("name") String name,@PathVariable("value") String value) {
-	    	 ehcache.set(name, value);
+	    	 //ehcache.set(name, value);
+			 cacheChannel.set("default",name,value);
 	    	 return "OK";
 	     }
 	     
@@ -53,7 +58,22 @@ public class SpringBootRest {
 	     @LogPoint
 	     @RequestMapping(value = "get/{name}", method = RequestMethod.GET)
 	     public String get(@PathVariable("name") String name) {
-	        return  String.valueOf(ehcache.get(name));
+	        return  String.valueOf(cacheChannel.get("default",name));
 	     }
+
+
+	@LogPoint
+	@RequestMapping(value = "putbean", method = RequestMethod.GET)
+	public String putbean() {
+		//ehcache.set(name, value);
+		return JsonUtil.toJson(cacheService.testBean());
+	}
+
+	@LogPoint
+	@RequestMapping(value = "evictbean", method = RequestMethod.GET)
+	public String get() {
+		cacheService.evict();
+		return "OK";
+	}
 	
 }

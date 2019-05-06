@@ -2,6 +2,7 @@ package net.oschina.j2cache.autoconfigure;
 
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -25,6 +26,7 @@ import net.oschina.j2cache.cache.support.J2CacheCacheManger;
 @ConditionalOnClass(J2Cache.class)
 @EnableConfigurationProperties({ J2CacheConfig.class, CacheProperties.class })
 @ConditionalOnProperty(name = "system.cache.j2cache.open-spring-cache", havingValue = "true")
+@AutoConfigureAfter(J2CacheAutoConfiguration.class)
 @EnableCaching
 public class J2CacheSpringCacheAutoConfiguration {
 
@@ -38,7 +40,7 @@ public class J2CacheSpringCacheAutoConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnBean(CacheChannel.class)
+	@ConditionalOnClass(CacheChannel.class)
 	public J2CacheCacheManger cacheManager(CacheChannel cacheChannel) {
 		List<String> cacheNames = cacheProperties.getCacheNames();
 		J2CacheCacheManger cacheCacheManger = new J2CacheCacheManger(cacheChannel);
