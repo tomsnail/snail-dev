@@ -7,4 +7,7 @@
   </parent>
   <artifactId>snail-example-e3</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>snail-example-e3-task</module>
+  </modules>
 </project>

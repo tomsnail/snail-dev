@@ -21,14 +21,13 @@ public class AutoAsyncConfigurer implements AsyncConfigurer {
         // 定义线程池
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         // 核心线程数
-        taskExecutor.setCorePoolSize(Integer.parseInt(ConfigHelp.getInstance("config").getLocalConfig("spring.async.executor.core.size","10")));
+        taskExecutor.setCorePoolSize(Integer.parseInt(ConfigHelp.getInstance("config").getLocalConfig("system.spring.async.executor.core.size","10")));
         // 线程池最大线程数
-        taskExecutor.setMaxPoolSize(Integer.parseInt(ConfigHelp.getInstance("config").getLocalConfig("spring.async.executor.max.size","30")));
+        taskExecutor.setMaxPoolSize(Integer.parseInt(ConfigHelp.getInstance("config").getLocalConfig("system.spring.async.executor.max.size","30")));
         // 线程队列最大线程数
-        taskExecutor.setQueueCapacity(Integer.parseInt(ConfigHelp.getInstance("config").getLocalConfig("spring.async.executor.queue.capacity","1000")));
+        taskExecutor.setQueueCapacity(Integer.parseInt(ConfigHelp.getInstance("config").getLocalConfig("system.spring.async.executor.queue.capacity","1000")));
         // 初始化
         taskExecutor.initialize();
-        System.out.println("=========================================================");
         return taskExecutor;
     }
 

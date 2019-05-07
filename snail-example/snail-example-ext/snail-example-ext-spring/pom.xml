@@ -45,5 +45,10 @@
       <artifactId>snail-core-framework-dubbo-springboot</artifactId>
       <version>${revision}</version>
     </dependency>
+    <dependency>
+      <groupId>cn.tomsnail.snail</groupId>
+      <artifactId>snail-extends-task-core</artifactId>
+      <version>${revision}</version>
+    </dependency>
   </dependencies>
 </project>

@@ -10,28 +10,36 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import com.dangdang.ddframe.job.api.ElasticJob;
 import com.dangdang.ddframe.job.config.JobCoreConfiguration;
 import com.dangdang.ddframe.job.config.simple.SimpleJobConfiguration;
+import com.dangdang.ddframe.job.event.JobEventConfiguration;
+import com.dangdang.ddframe.job.event.mq.JobEventMQConfiguration;
+import com.dangdang.ddframe.job.event.rdb.JobEventRdbConfiguration;
 import com.dangdang.ddframe.job.lite.config.LiteJobConfiguration;
 import com.dangdang.ddframe.job.lite.spring.api.SpringJobScheduler;
 import com.dangdang.ddframe.job.reg.base.CoordinatorRegistryCenter;
+
+import cn.tomsnail.snail.core.config.client.plugin.AnnotationConverter;
+import cn.tomsnail.snail.core.util.commons.CollectionUtils;
+import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
+import cn.tomsnail.snail.core.util.string.StringUtils;
+import cn.tomsnail.snail.e3.task.elastic.job.mq.KafkaEventSender;
 
 @Component
 public class SpringElasticJobScheduler implements ApplicationListener<ContextRefreshedEvent>{
 	
 	private static final Logger logger = LoggerFactory.getLogger(SpringElasticJobScheduler.class);
 	
-	static final List<SpringElasticJobM> ELASTIC_JOBS = new ArrayList<SpringElasticJobM>();
+	public static final List<SpringElasticJobM> ELASTIC_JOBS = new ArrayList<SpringElasticJobM>();
 	
 	private ApplicationContext applicationContext;
 
@@ -68,7 +76,6 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 	
 	
 	private void createMultipleSpringElasticJob(SpringElasticJobM springElasticJobM){
-		
 		
 
 		if(springElasticJobM==null){
@@ -160,17 +167,69 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 			throw new NullPointerException("liteJobConfiguration is null");
 		}
 		
-		SpringJobScheduler jobScheduler = new SpringJobScheduler(elasticJob, registryCenter, liteJobConfiguration);
+		
+		JobEventConfiguration jobEventConfiguration = jobEventConfiguration(springElasticJobM);
+		SpringJobScheduler jobScheduler = null;
+		if(jobEventConfiguration==null) {
+			jobScheduler = new SpringJobScheduler(elasticJob, registryCenter, liteJobConfiguration);
+		}else {
+			jobScheduler = new SpringJobScheduler(elasticJob, registryCenter, liteJobConfiguration,jobEventConfiguration);
+		}
 		jobScheduler.init();
 		
 	
 	}
 	
-	private CoordinatorRegistryCenter getCoordinatorRegistryCenter(SpringElasticJobM springElasticJobM){
-		if(springElasticJobM==null||StringUtils.isBlank(springElasticJobM.getRegistryCenter())){
+	
+	
+	
+	
+	private JobEventConfiguration jobEventConfiguration(SpringElasticJobM springElasticJobM){
+		
+		
+		boolean mq = ConfigHelp.getInstance("config").getLocalConfig("system.elastic.job.event-mq", false);
+		if(mq) {
+			String mqType = ConfigHelp.getInstance("config").getLocalConfig("system.elastic.job.event-mq-type", "kafka");
+			KafkaTemplate kafkaTemplate = applicationContext.getBean(KafkaTemplate.class);
+			if(kafkaTemplate!=null) {
+				KafkaEventSender kafkaEventSender = new KafkaEventSender(kafkaTemplate);
+				JobEventMQConfiguration jobEventMQConfiguration = new JobEventMQConfiguration(kafkaEventSender);
+				return jobEventMQConfiguration;
+			}
+		}
+		
+		boolean db = ConfigHelp.getInstance("config").getLocalConfig("system.elastic.job.event-db", false);
+		
+		if(!db) {
 			return null;
-		}				
-		return applicationContext.getBean(springElasticJobM.getRegistryCenter(), CoordinatorRegistryCenter.class);
+		}
+		
+		
+		String edb = springElasticJobM.getEventTraceRdbDataSource();
+		
+		if(StringUtils.isBlank(edb)) {
+			edb = ConfigHelp.getInstance("config").getLocalConfig("system.elastic.job.event-trace-rdb-data-source", "");
+		}
+		
+		if(StringUtils.isBlank(edb)) {
+			return null;
+		}
+		
+		DataSource dataSource =  applicationContext.getBean(edb,DataSource.class);
+		
+		if(dataSource==null) {
+			return null;
+		}
+		
+		JobEventRdbConfiguration jobEventRdbConfiguration = new JobEventRdbConfiguration(dataSource);
+		return jobEventRdbConfiguration;
+		
+	}
+	
+	
+	private CoordinatorRegistryCenter getCoordinatorRegistryCenter(SpringElasticJobM springElasticJobM){
+		return applicationContext.getBean(CoordinatorRegistryCenter.class);
+//		return applicationContext.getBean(springElasticJobM.getRegistryCenter(), CoordinatorRegistryCenter.class);
 	}
 	
 	private LiteJobConfiguration getLiteJobConfiguration(SpringElasticJobM springElasticJobM){
@@ -238,16 +297,37 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 			} catch (Exception e) {
 				logger.error("", e);
 			}
-			
 		}
+		
+		
+		if(StringUtils.isBlank(_cron)) {
+			throw new RuntimeException("cron is null");
+		}
+		
+		if(_cron.startsWith("${")) {
+			_cron = AnnotationConverter.getValue(_cron);
+		}
+		
 		return _cron;
 	}
 	
 	private String getCronSQL(String dataSourceStr,String sql) throws SQLException{
-		if(StringUtils.isAnyBlank(sql,dataSourceStr)){
+		
+		if(StringUtils.isBlank(sql)) {
 			return null;
 		}
-		DataSource dataSource = applicationContext.getBean(dataSourceStr, DataSource.class);
+		
+		DataSource dataSource = null;
+		if(StringUtils.isBlank(dataSourceStr)) {
+			 dataSource = applicationContext.getBean(DataSource.class);
+		}else {
+			dataSource = applicationContext.getBean(dataSourceStr, DataSource.class);
+		}
+		
+		if(dataSource==null) {
+			return null;
+		}
+		
 		Connection connection = dataSource.getConnection();
 		Statement statement = connection.createStatement();
 		ResultSet rs = statement.executeQuery(sql);

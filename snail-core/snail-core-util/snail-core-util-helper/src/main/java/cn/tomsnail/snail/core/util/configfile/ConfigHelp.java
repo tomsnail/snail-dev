@@ -13,6 +13,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.tomsnail.snail.core.util.string.StringUtils;
+
 
 /**
  * 配置文件工具类
@@ -62,6 +64,43 @@ public class ConfigHelp {
 	 * */
 	public String getLocalConfig(String key,String defaultValue){
 		return getProperties(key,defaultValue);
+	}
+	
+	public long getLocalConfig(String key,long defaultValue){
+		String v = getProperties(key,"");
+		if(StringUtils.isBlank(v)) {
+			return defaultValue;
+		}
+		try {
+			return Long.parseLong(v);
+		} catch (NumberFormatException e) {
+			return defaultValue;
+		}
+	}
+	
+	public int getLocalConfig(String key,int defaultValue){
+		String v = getProperties(key,"");
+		if(StringUtils.isBlank(v)) {
+			return defaultValue;
+		}
+		try {
+			return Integer.parseInt(v);
+		} catch (NumberFormatException e) {
+			return defaultValue;
+		}
+	}
+	
+	
+	public boolean getLocalConfig(String key,boolean defaultValue){
+		String v = getProperties(key,"");
+		if(StringUtils.isBlank(v)) {
+			return defaultValue;
+		}
+		try {
+			return Boolean.parseBoolean(v);
+		} catch (Exception e) {
+			return defaultValue;
+		}
 	}
 
 	

@@ -20,7 +20,7 @@ public class ScheduledStatisticsHandler {
 	
 		private static final LogSystem LOG_SYSTEM = FileLogFactory.instance().create("scheduled");
 	 	
-	    @Pointcut("@annotation(cn.tomsnail.task.spring.annotation.Task)")  
+	    @Pointcut("@annotation(cn.tomsnail.snail.ext.task.spring.annotation.Task)")  
 	    public void proxyAspect() {
 
 	    }

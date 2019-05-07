@@ -17,7 +17,7 @@ public @interface SpringElasticJob {
 	
 	String cron() default "";
 	
-	String registryCenter();
+	String registryCenter() default  "";
 	
 	String shardingTotalCount() default "1";
 	

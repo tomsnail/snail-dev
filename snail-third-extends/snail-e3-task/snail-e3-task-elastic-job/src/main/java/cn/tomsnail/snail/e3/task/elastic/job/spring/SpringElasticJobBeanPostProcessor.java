@@ -1,4 +1,4 @@
-package cn.tomsnail.snail.e3.task.elastic.job;
+package cn.tomsnail.snail.e3.task.elastic.job.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -6,6 +6,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import com.dangdang.ddframe.job.api.ElasticJob;
+
+import cn.tomsnail.snail.e3.task.elastic.job.SpringElasticJob;
+import cn.tomsnail.snail.e3.task.elastic.job.SpringElasticJobM;
+import cn.tomsnail.snail.e3.task.elastic.job.SpringElasticJobScheduler;
 
 @Component
 @ComponentScan(basePackages={"cn.tomsnail.snail.e3.task.elastic.job"})

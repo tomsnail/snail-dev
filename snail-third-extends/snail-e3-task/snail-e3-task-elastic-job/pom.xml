@@ -25,5 +25,24 @@
     	<version>${elastic.job.lite.spring.version}</version>
 	</dependency>
 	
+	<dependency>
+		<groupId>cn.tomsnail.snail</groupId>
+    	<artifactId>snail-core-config</artifactId>
+    	<version>${revision}</version>
+	</dependency>
+	
+	<dependency>
+    	<groupId>org.springframework.kafka</groupId>
+    	<artifactId>spring-kafka</artifactId>
+    	<version>2.2.2.RELEASE</version>
+    	<scope>provided</scope>
+	</dependency>
+	<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+      <version>${springboot.version}</version>
+      <scope>provided</scope>
+    </dependency>
+	
   </dependencies>
 </project>
