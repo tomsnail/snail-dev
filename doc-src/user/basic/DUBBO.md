@@ -10,7 +10,7 @@
 <dependency>
    <groupId>cn.tomsnail.snail</groupId>
    <artifactId>snail-core-framework-dubbo</artifactId>
-   <version>${last_verion}</version>
+   <version>${reverion}</version>
 </dependency>
 ```
 
@@ -22,7 +22,7 @@ public interface DemoService {
 }
 ```
 
-### 3 XML
+### 3 XML方式
 
 ```xml
 <!-- 日志记录插件，须开启动态代理 -->
@@ -56,7 +56,7 @@ public class DemoServiceImpl extends BaseService implements DemoService {
 }
 ```
 
-### 4 注解
+### 4 注解方式
 
 ```xml
 <!-- 日志记录插件，须开启动态代理 -->

@@ -29,50 +29,18 @@ public @interface LogPoint {
 
 	/**
 	 *        级别,默认INFO级别，INFO,ERROR,DEBUG,NOLOG
-	 * @methodauthor yangsong
-	 * @methodversion 0.0.1
-	 * @date 2016年9月21日 下午5:42:14
-	 * @see 
-	 * @param                   
-	 * @return               
-	 * @status 正常
-	 * @exception no
 	 */
 	String level() default LogLevel.INFO;
 	/**
 	 *        日志记录的目的地,默认本地日志,LOG,CENTER,SYSOUT,CAT
-	 * @methodauthor yangsong
-	 * @methodversion 0.0.1
-	 * @date 2016年9月21日 下午5:42:20
-	 * @see 
-	 * @param                   
-	 * @return               
-	 * @status 正常
-	 * @exception no
 	 */
 	String target() default LogTarget.LOG;
 	/**
 	 *        描述,用于说明方法相关描述
-	 * @methodauthor yangsong
-	 * @methodversion 0.0.1
-	 * @date 2016年9月21日 下午5:42:26
-	 * @see 
-	 * @param                   
-	 * @return               
-	 * @status 正常
-	 * @exception no
 	 */
 	String desc() default "";
 	/**
 	 *        是否记录到全部日志系统
-	 * @methodauthor yangsong
-	 * @methodversion 0.0.1
-	 * @date 2016年9月21日 下午5:42:31
-	 * @see 
-	 * @param                   
-	 * @return               
-	 * @status 正常
-	 * @exception no
 	 */
 	boolean shared() default false;
 	
