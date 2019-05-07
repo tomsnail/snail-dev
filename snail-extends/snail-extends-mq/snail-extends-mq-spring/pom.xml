@@ -14,6 +14,7 @@
     <modules>
         <module>snail-extends-mq-spring-activemq</module>
         <module>snail-extends-mq-spring-rabbitmq</module>
+        <module>snail-extends-mq-spring-kafka</module>
     </modules>
 
 

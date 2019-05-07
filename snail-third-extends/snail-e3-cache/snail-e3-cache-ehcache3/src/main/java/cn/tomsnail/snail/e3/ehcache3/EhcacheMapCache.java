@@ -131,7 +131,7 @@ public class EhcacheMapCache implements ICache,IInitCache,IDestoryCache{
 				if(manager==null){
 					String _url = cacheConfig.getUrl();
 					if(StringUtils.isBlank(_url)) {
-						_url = ConfigHelp.getInstance("config").getLocalConfig("system.cache.ehcache.url", "");
+						_url = ConfigHelp.getInstance("config").getLocalConfig("system.cache.ehcache3.url", "");
 					}
 					if(StringUtils.isBlank(_url)) {
 						manager = CacheManagerBuilder.newCacheManagerBuilder().build();

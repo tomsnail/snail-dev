@@ -1,5 +1,4 @@
 package cn.tomsnail.snail.example.ext.mq.activemq;
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
@@ -13,6 +12,7 @@ import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 @Component
 public class ActiveMqService {
 
+	@Autowired
     private JmsMessagingTemplate  jmsTemplate;
 	
 	

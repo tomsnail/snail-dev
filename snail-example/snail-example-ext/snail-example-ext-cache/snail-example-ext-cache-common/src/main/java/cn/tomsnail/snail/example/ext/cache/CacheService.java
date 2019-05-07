@@ -1,8 +1,8 @@
 package cn.tomsnail.snail.example.ext.cache;
 
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -19,6 +19,14 @@ public class CacheService {
 
     @Cacheable(cacheNames="testBean")
     public CacheBean testBean() {
+        CacheBean bean = new CacheBean();
+        bean.setNum(num.incrementAndGet());
+        return bean;
+    }
+    
+    
+    @CachePut(cacheNames="testBean")
+    public CacheBean putBean() {
         CacheBean bean = new CacheBean();
         bean.setNum(num.incrementAndGet());
         return bean;
