@@ -19,10 +19,10 @@ import cn.tomsnail.snail.ext.lock.core.LockTarget;
  * @date 2016年9月21日 下午5:35:24
  * @see 
  */
-@Target({ElementType.TYPE})
+@Target({ElementType.FIELD,ElementType.TYPE,ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@ComponentScan(basePackages="cn.tomsnail.lock.spring")
+@ComponentScan(basePackages="cn.tomsnail.snail.ext.lock.spring")
 public @interface Lock {
 
 	/**
