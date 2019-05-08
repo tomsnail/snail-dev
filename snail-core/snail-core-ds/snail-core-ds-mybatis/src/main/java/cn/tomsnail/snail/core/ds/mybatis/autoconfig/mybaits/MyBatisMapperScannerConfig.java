@@ -1,13 +1,12 @@
-package cn.tomsnail.snail.core.ds.mybatis.autoconfig;
+package cn.tomsnail.snail.core.ds.mybatis.autoconfig.mybaits;
 
 
+import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
-
-@Configuration()
+@Configuration
 public class MyBatisMapperScannerConfig {
 
 	@Bean

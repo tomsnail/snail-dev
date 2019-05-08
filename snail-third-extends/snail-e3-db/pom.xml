@@ -11,5 +11,6 @@
   	<module>snail-e3-db-mongodb</module>
   	<module>snail-e3-db-sqlite</module>
   	<module>snail-e3-db-mybatis-plus</module>
+      <module>snail-e3-db-h2</module>
   </modules>
 </project>

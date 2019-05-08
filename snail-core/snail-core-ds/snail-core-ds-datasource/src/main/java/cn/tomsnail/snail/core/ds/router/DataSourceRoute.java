@@ -2,8 +2,6 @@ package cn.tomsnail.snail.core.ds.router;
 
 import org.aspectj.lang.JoinPoint;
 
-import cn.tomsnail.snail.core.ds.DataSourceName;
-
 
 public interface DataSourceRoute {
 	

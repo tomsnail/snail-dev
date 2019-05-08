@@ -1,12 +1,13 @@
 /**
  * Copyright &copy; 2012-2016 
  */
-package cn.tomsnail.snail.example.core.framework.dao;
+package com.tomsnail.framework.example.dao;
 
 
 
 import java.util.List;
 
+import cn.tomsnail.snail.core.ds.router.DataSource;
 import org.springframework.stereotype.Repository;
 
 import cn.tomsnail.snai.core.ds.dao.plugins.pagination.PageDao;
@@ -18,6 +19,7 @@ import cn.tomsnail.snail.example.core.framework.model.DispatchStrategyDto;
  * @version 2018-09-06
  */
 @Repository
+@DataSource("mysql1")
 public interface DispatchStrategyDao extends PageDao<DispatchStrategyDto> {
 	
 	public List<DispatchStrategyDto> findList(DispatchStrategyDto dispatchStrategy);

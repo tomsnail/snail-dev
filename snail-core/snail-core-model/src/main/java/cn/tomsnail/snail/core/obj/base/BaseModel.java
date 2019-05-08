@@ -1,14 +1,11 @@
 package cn.tomsnail.snail.core.obj.base;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Pattern;
-
 import cn.tomsnail.core.util.validator.annotation.FieldValidator;
 import cn.tomsnail.snail.core.util.string.StringUtils;
 
-
-
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 
 public class BaseModel {

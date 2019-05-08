@@ -1,7 +1,6 @@
-package cn.tomsnail.snail.core.ds.mybatis.autoconfig;
+package cn.tomsnail.snail.core.ds.mybatis.autoconfig.mybaits;
 
-import javax.sql.DataSource;
-
+import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,7 +14,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
-import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
+import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement

@@ -1,13 +1,12 @@
 package cn.tomsnail.snail.core.obj.base;
 
+import cn.tomsnail.core.util.validator.annotation.FieldValidator;
+import org.apache.commons.lang.StringUtils;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.lang.StringUtils;
-
-import cn.tomsnail.core.util.validator.annotation.FieldValidator;
 
 
 public class BaseVo<K> extends BaseModel {

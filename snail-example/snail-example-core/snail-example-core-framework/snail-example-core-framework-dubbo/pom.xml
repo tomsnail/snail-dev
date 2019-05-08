@@ -41,7 +41,7 @@
 
     <dependency>
       <groupId>cn.tomsnail.snail</groupId>
-      <artifactId>snail-core-framework-dubbo</artifactId>
+      <artifactId>snail-core-framework-dubbox</artifactId>
       <version>${revision}</version>
     </dependency>
   </dependencies>

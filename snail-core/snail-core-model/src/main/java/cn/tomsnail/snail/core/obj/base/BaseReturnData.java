@@ -1,12 +1,10 @@
 package cn.tomsnail.snail.core.obj.base;
 
-import java.io.Serializable;
-
-import org.apache.commons.collections.map.LRUMap;
-
 import cn.tomsnail.snail.core.http.ResultData;
 import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
+import org.apache.commons.collections.map.LRUMap;
 
+import java.io.Serializable;
 
 
 public class BaseReturnData<T> implements Serializable{

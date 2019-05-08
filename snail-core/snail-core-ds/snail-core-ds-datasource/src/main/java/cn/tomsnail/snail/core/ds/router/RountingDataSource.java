@@ -1,4 +1,4 @@
-package cn.tomsnail.snail.core.ds;
+package cn.tomsnail.snail.core.ds.router;
 
 
 import javax.sql.DataSource;

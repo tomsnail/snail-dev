@@ -55,5 +55,11 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${aspectj.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>cn.tomsnail.snail</groupId>
+			<artifactId>snail-core-model</artifactId>
+			<version>${revision}</version>
+		</dependency>
 	</dependencies>
 </project>

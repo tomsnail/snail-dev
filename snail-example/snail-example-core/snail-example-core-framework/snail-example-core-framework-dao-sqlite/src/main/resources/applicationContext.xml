@@ -20,7 +20,7 @@
 	<!-- zookeepr 内嵌服务器 -->
 	<context:component-scan base-package="cn.tomsnail.snail.core.util.zookeeper.server"/>
 	<!-- mybatis默认自动配置，提供datasource,sqlsessionfactory,事务管理 -->
-	<context:component-scan base-package="cn.tomsnail.snail.core.ds.mybatis.autoconfig"/>
+	<context:component-scan base-package="cn.tomsnail.snail.core.ds.mybatis.autoconfig.single"/>
 	
 	<context:component-scan base-package="cn.tomsnail.snail.example.core.framework.service"/>
 	

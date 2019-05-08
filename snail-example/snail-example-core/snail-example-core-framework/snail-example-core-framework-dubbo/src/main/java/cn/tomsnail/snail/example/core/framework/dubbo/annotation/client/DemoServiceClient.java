@@ -2,6 +2,7 @@ package cn.tomsnail.snail.example.core.framework.dubbo.annotation.client;
 
 import cn.tomsnail.snail.core.util.date.Jdk8DateTimeUtil;
 import cn.tomsnail.snail.example.core.framework.dubbo.DemoService;
+import cn.tomsnail.snail.example.core.framework.dubbo.annotation.server.ModelObject;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +22,8 @@ public class DemoServiceClient {
             } catch (InterruptedException e) {
             }
             try {
-				System.out.println(demoService.hello(Jdk8DateTimeUtil.getNowDateTimeStr()));
+                ModelObject modelObject = new ModelObject();
+				System.out.println(demoService.vtest(modelObject));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -1,4 +1,4 @@
-package cn.tomsnail.snail.core.ds;
+package cn.tomsnail.snail.core.ds.router;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -15,13 +15,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import cn.tomsnail.snail.core.ds.router.DataSourceRoute;
-
 
 @Aspect
 @Order(1)
 @Component
-@ComponentScan(basePackages=" cn.tomsnail.snail.core.ds.router")
 public class DataSourceAspect {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);

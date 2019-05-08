@@ -3,16 +3,14 @@ package cn.tomsnail.snai.core.ds.dao.plugins.pagination;
 
 
 
+import cn.tomsnail.snail.core.obj.base.BaseTransactionComponent;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import cn.tomsnail.snail.core.obj.base.BaseService;
-
 
 
 /**
  * Page Service
  */
-public  class PageService<D extends PageDao<T>,T extends PageModel<T>> extends BaseService implements IPageService<T>{
+public  class PageService<D extends PageDao<T>,T extends PageModel<T>> extends BaseTransactionComponent implements IPageService<T>{
 	
 	@Autowired
 	protected D dao;

@@ -4,10 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.springframework.stereotype.Component;
 
-import cn.tomsnail.snail.core.ds.DataSourceName;
-import cn.tomsnail.snail.core.ds.RountingDataSource;
-
-
 
 @Component
 public class AutoWriteReadRoute implements DataSourceRoute{

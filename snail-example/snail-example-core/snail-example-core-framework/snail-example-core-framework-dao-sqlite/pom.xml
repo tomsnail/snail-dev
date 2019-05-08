@@ -53,6 +53,11 @@
             <artifactId>snail-e3-db-sqlite</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.tomsnail.snail</groupId>
+            <artifactId>snail-e3-db-h2</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>

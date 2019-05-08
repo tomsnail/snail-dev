@@ -67,7 +67,7 @@
 		
 	
 	
-	<bean id="dataSource" class="cn.tomsnail.snail.core.ds.RountingDataSource">
+	<bean id="dataSource" class="cn.tomsnail.snail.core.ds.router.RountingDataSource">
 		<property name="routeType" value="MULTI_TYPE_DB"></property>
         <property name="targetDataSources">      
           <map key-type="java.lang.String">

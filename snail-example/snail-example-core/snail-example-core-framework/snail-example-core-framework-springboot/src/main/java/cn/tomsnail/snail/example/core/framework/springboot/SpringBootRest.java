@@ -24,5 +24,18 @@ public class SpringBootRest {
 	     public String sayHello(@PathVariable("name") String name) {
 	         return demoService.hello(name);
 	     }
+
+
+	@LogPoint
+	@RequestMapping(value = "/post/object", method = RequestMethod.POST)
+	public String postObject(@PathVariable("name") String name) {
+		return demoService.hello(name);
+	}
+
+	@LogPoint
+	@RequestMapping(value = "/post/map", method = RequestMethod.POST)
+	public String postMap(@PathVariable("name") String name) {
+		return demoService.hello(name);
+	}
 	
 }

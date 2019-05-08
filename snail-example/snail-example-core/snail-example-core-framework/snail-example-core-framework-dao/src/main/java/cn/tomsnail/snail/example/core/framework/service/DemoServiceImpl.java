@@ -1,10 +1,9 @@
 package cn.tomsnail.snail.example.core.framework.service;
 
-import cn.tomsnail.snail.core.log.annotation.LogPoint;
-import cn.tomsnail.snail.core.obj.base.BaseService;
+import cn.tomsnail.snail.core.obj.base.BaseTransactionComponent;
 import cn.tomsnail.snail.core.util.date.Jdk8DateTimeUtil;
 import cn.tomsnail.snail.core.util.uuid.UuidUtil;
-import cn.tomsnail.snail.example.core.framework.dao.DispatchStrategyDao;
+import com.tomsnail.framework.example.dao.DispatchStrategyDao;
 import cn.tomsnail.snail.example.core.framework.dubbo.DemoService;
 import cn.tomsnail.snail.example.core.framework.model.DispatchStrategyDto;
 
@@ -13,13 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 
 @Service(protocol = "dubbo",registry = "zk")
-public class DemoServiceImpl extends BaseService implements DemoService {
+public class DemoServiceImpl extends BaseTransactionComponent implements DemoService {
 	
 	int count = 1;
 	
-	@Autowired
+
 	private DispatchStrategyDao dispatchStrategyDao;
-	
+
+
     @Override
     public String hello(String name) {
     	
@@ -44,6 +44,8 @@ public class DemoServiceImpl extends BaseService implements DemoService {
     	
         return "hello "+name+ " "+dispatchStrategyDao.findAllList().size();
     }
+
+
     
     
 }

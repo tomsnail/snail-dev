@@ -1,26 +1,26 @@
-package cn.tomsnail.snail.core.ds.mybatis.autoconfig;
+package cn.tomsnail.snail.core.ds.autoconfig.single;
 
+
+import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
+import cn.tomsnail.snail.core.util.string.StringUtils;
+import com.alibaba.druid.pool.DruidDataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import java.sql.SQLException;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import com.alibaba.druid.pool.DruidDataSource;
-
-import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
-
 @Configuration
-public class AutoDruidDataSource {
+@PropertySource("classpath:config.properties")
+public class AutoSingleDataSource {
 	
-	
-//	spring.datasource.name=mysql_test
-//			spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
-//			spring.datasource.druid.pool-prepared-statements=false
-//			spring.datasource.druid.max-pool-prepared-statement-per-connection-size=20
-//	
+
 	@Bean(name="dataSource",initMethod="init",destroyMethod="close")
 	public DruidDataSource init() {
+		String r = ConfigHelp.getInstance("config").getLocalConfig("spring.datasource.name", "");
+		if(StringUtils.isBlank(r)){
+			return null;
+		}
 		DruidDataSource dataSource = new DruidDataSource();
 		dataSource.setUrl(ConfigHelp.getInstance("config").getLocalConfig("spring.datasource.druid.url", ""));
 		dataSource.setDriverClassName(ConfigHelp.getInstance("config").getLocalConfig("spring.datasource.druid.driver-class-name", "com.mysql.jdbc.Driver"));
@@ -46,5 +46,7 @@ public class AutoDruidDataSource {
 		}
 		return dataSource;
 	}
+
+
 
 }
