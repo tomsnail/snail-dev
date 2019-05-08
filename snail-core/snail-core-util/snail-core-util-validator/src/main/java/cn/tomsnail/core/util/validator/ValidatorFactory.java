@@ -62,5 +62,7 @@ public class ValidatorFactory{
 	public static BizValidator getBizValidator(){
 		return new BizValidator();
 	}
+
+	public static HibernateObjectValidator getHibernateObjectValidator(){return  new HibernateObjectValidator();};
 	
 }

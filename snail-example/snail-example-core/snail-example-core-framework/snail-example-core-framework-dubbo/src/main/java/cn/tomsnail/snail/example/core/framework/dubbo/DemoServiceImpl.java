@@ -2,7 +2,6 @@ package cn.tomsnail.snail.example.core.framework.dubbo;
 
 
 import cn.tomsnail.snail.core.log.annotation.LogPoint;
-import cn.tomsnail.snail.example.core.framework.dubbo.annotation.server.ModelObject;
 import org.springframework.stereotype.Component;
 
 @Component("demoService")

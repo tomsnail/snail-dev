@@ -1,13 +1,9 @@
-package cn.tomsnail.snail.example.core.framework.dubbo.annotation.server;
+package cn.tomsnail.snail.example.core.framework.dubbox;
 
 import cn.tomsnail.snail.core.obj.base.BaseModel;
 
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+public class Mo extends BaseModel {
 
-public class ModelObject implements Serializable {
-
-    @NotNull
     private String id;
 
     private String name;
@@ -47,4 +43,6 @@ public class ModelObject implements Serializable {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+
 }

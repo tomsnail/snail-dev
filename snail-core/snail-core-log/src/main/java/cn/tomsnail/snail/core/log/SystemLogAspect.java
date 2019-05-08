@@ -42,6 +42,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import cn.tomsnail.snail.core.config.client.ConfigClientFactory;
@@ -72,6 +73,7 @@ import cn.tomsnail.snail.core.util.string.StringUtils;
  */
 @Aspect    
 @Component
+@Order(1)
 public class SystemLogAspect {
 	
 	@Resource(name="DefaultListaLogService")
@@ -174,10 +176,15 @@ public class SystemLogAspect {
 					
 					
 					
-					if(t==null) {
-						log(joinPoint, isDebug, "null", logPoint, log,startTime,endTime);
-					}else if(_t !=null) {
+					if(_t !=null) {
+						if(t==null){
+							t = _t;
+						}
 						log(joinPoint, isDebug, _t, logPoint, log,startTime,endTime);
+
+					}else if(t==null) {
+						log(joinPoint, isDebug, "null", logPoint, log,startTime,endTime);
+
 					}else {
 						log(joinPoint, isDebug, t, logPoint, log,startTime,endTime);
 					}

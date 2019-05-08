@@ -14,6 +14,7 @@
 
 	<!-- 日志记录插件，须开启动态代理-->
 	<context:component-scan base-package="cn.tomsnail.snail.core.log"/>
+	<context:component-scan base-package="cn.tomsnail.snail.core.framework.validator"/>
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<!-- spring 属性配置插件，用于spring相关属性(如${zk.address})从config.properties中获取值-->
 	<context:component-scan base-package="cn.tomsnail.snail.core.config.client.plugin"/>

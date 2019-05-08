@@ -2,10 +2,8 @@ package cn.tomsnail.snail.example.core.framework.dubbo.annotation.server;
 
 import cn.tomsnail.snail.core.log.annotation.LogPoint;
 import cn.tomsnail.snail.example.core.framework.dubbo.DemoService;
+import cn.tomsnail.snail.example.core.framework.dubbo.ModelObject;
 import com.alibaba.dubbo.config.annotation.Service;
-import org.springframework.stereotype.Component;
-
-import javax.validation.constraints.NotNull;
 
 @Service(protocol = "dubbo",registry = "zk",validation = "true",retries = 1)
 public class DemoServiceImpl implements DemoService {

@@ -2,11 +2,8 @@ package cn.tomsnail.snail.example.core.framework.springboot;
 
 import cn.tomsnail.snail.core.obj.base.BaseModel;
 
-import javax.validation.constraints.NotNull;
+public class Mo extends BaseModel {
 
-public class ModelObject extends BaseModel {
-
-    @NotNull
     private String id;
 
     private String name;
@@ -46,4 +43,6 @@ public class ModelObject extends BaseModel {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+
 }

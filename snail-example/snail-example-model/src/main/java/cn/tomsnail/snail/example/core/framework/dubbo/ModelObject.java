@@ -1,10 +1,9 @@
-package cn.tomsnail.snail.example.core.framework.springboot;
-
-import cn.tomsnail.snail.core.obj.base.BaseModel;
+package cn.tomsnail.snail.example.core.framework.dubbo;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class ModelObject extends BaseModel {
+public class ModelObject implements Serializable {
 
     @NotNull
     private String id;

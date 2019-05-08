@@ -44,5 +44,10 @@
       <artifactId>snail-core-framework-dubbox</artifactId>
       <version>${revision}</version>
     </dependency>
+      <dependency>
+          <groupId>cn.tomsnail.snail</groupId>
+          <artifactId>snail-example-model</artifactId>
+          <version>${revision}</version>
+      </dependency>
   </dependencies>
 </project>

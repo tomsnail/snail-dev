@@ -19,6 +19,7 @@ public class RequestData<T> implements java.io.Serializable {
     private String key= "";
     private String timestrap= "";
     private String uri= "";
+    private Object targetObj;
  
 
 	public RequestData() {
@@ -92,5 +93,11 @@ public class RequestData<T> implements java.io.Serializable {
 	}
 
 
-	
+	public Object getTargetObj() {
+		return targetObj;
+	}
+
+	public void setTargetObj(Object targetObj) {
+		this.targetObj = targetObj;
+	}
 }
