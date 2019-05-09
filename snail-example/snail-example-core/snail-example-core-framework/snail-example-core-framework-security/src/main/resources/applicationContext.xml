@@ -18,23 +18,30 @@
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<!-- spring 属性配置插件，用于spring相关属性(如${zk.address})从config.properties中获取值-->
 	<context:component-scan base-package="cn.tomsnail.snail.core.config.client.plugin"/>
+	<context:component-scan base-package="cn.tomsnail.snail.ext.security.authority.filter.springboot"/>
+	<context:component-scan base-package="cn.tomsnail.snail.ext.security.authority.filter.dubbox"/>
+	<!--
 
 	<context:component-scan base-package="cn.tomsnail.snail.core.util.zookeeper.server"/>
-
+	-->
+	<!---->
 	<context:component-scan base-package="cn.tomsnail.snail.example.core.framework.springboot"/>
 
-	<!-- dubbo application配置 -->
+
+	<!-- dubbo application配置
 	<dubbo:application name="snail-example-core-framework-dubbo-annotation-server" >
 		<dubbo:parameter key="qos.enable" value="false"/>
 		<dubbo:parameter key="qos.accept.foreign.ip" value="false"/>
 		<dubbo:parameter key="qos.port" value="33333"/>
-	</dubbo:application>
+	</dubbo:application>-->
 
 
-	<!-- dubbo 注册中心地址 -->
+	<!-- dubbo 注册中心地址
 	<dubbo:registry id="zk" protocol="zookeeper" address="${zk.address}" />
 
-	<dubbo:annotation package="cn.tomsnail.snail.example.core.framework.springboot" ></dubbo:annotation>
+	<dubbo:protocol name="rest" port="${dubbo.server.port}" server="tomcat"/>
+
+	<dubbo:annotation package="cn.tomsnail.snail.example.core.framework.dubbox" ></dubbo:annotation>-->
 
 
 

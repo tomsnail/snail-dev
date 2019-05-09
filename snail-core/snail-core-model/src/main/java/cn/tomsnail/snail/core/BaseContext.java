@@ -1,5 +1,7 @@
 package cn.tomsnail.snail.core;
 
+import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,9 +12,9 @@ import java.util.Map;
  */
 public class BaseContext {
 	
-	public static final String USER_UUID = "USER_UUID";
+	public static final String USER_UUID = ConfigHelp.getInstance("config").getLocalConfig("system.core.http.user.flag","USER_UUID");
 	
-	public static final String SYSTEM_CODE = "SYSTEM_CODE";
+	public static final String SYSTEM_CODE = ConfigHelp.getInstance("config").getLocalConfig("system.core.http.system.flag","SYSTEM_CODE");
 	
 	private String contextId;
 	

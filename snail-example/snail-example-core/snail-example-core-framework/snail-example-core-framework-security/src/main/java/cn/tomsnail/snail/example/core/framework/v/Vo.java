@@ -1,9 +1,9 @@
-package cn.tomsnail.snail.example.core.framework.springboot;
+package cn.tomsnail.snail.example.core.framework.v;
 
-import cn.tomsnail.core.util.validator.RuleType;
 import cn.tomsnail.core.util.validator.annotation.BeanValidator;
 import cn.tomsnail.core.util.validator.annotation.FieldValidator;
 import cn.tomsnail.snail.core.obj.base.BaseVo;
+import cn.tomsnail.snail.example.core.framework.m.Mo;
 
 import javax.validation.constraints.NotNull;
 

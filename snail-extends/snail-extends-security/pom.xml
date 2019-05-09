@@ -1,15 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>cn.tomsnail.snail</groupId>
-    <artifactId>snail-extends</artifactId>
-    <version>${revision}</version>
-  </parent>
-  <artifactId>snail-extends-security</artifactId>
-  <packaging>pom</packaging>
-  <modules>
-  	<module>snail-extends-security-token</module>
-  	<module>snail-extends-security-authority</module>
-  	<module>snail-extends-security-limit</module>
-  </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.tomsnail.snail</groupId>
+        <artifactId>snail-extends</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>snail-extends-security</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>snail-extends-security-token</module>
+        <module>snail-extends-security-authority</module>
+        <module>snail-extends-security-limit</module>
+        <module>snail-extends-security-web</module>
+    </modules>
 </project>

@@ -14,5 +14,6 @@
       <module>snail-example-core-framework-dao</module>
       <module>snail-example-core-framework-dao-springboot</module>
       <module>snail-example-core-framework-dao-sqlite</module>
+      <module>snail-example-core-framework-security</module>
   </modules>
 </project>

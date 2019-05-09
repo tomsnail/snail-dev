@@ -8,12 +8,14 @@ import cn.tomsnail.snail.core.obj.base.BaseVo;
 import javax.validation.constraints.NotNull;
 
 @BeanValidator
-public class Vo extends BaseVo<Mo> {
+public class Vo1 extends BaseVo<Mo> {
 
     @NotNull
     @FieldValidator(mapperName = "ID",onlyToBean = false)
     private String id;
 
+    @FieldValidator(mapperName = "NickName",onlyToBean = false,rules = {RuleType.NotNullValue,RuleType.LIMITMAX},values = {"","20"})
+    private String name;
 
 
 
@@ -25,4 +27,12 @@ public class Vo extends BaseVo<Mo> {
         this.id = id;
     }
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

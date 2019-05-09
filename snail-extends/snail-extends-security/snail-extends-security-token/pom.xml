@@ -10,15 +10,22 @@
   <artifactId>snail-extends-security-token</artifactId>
   
    <dependencies>
-  		<dependency>
-  			<groupId>cn.tomsnail.snail</groupId>
-    		<artifactId>snail-e3-cache-ehcache</artifactId>
-    		<version>${revision}</version>
-  		</dependency>
-  		<dependency>
-  			<groupId>cn.tomsnail.snail</groupId>
-    		<artifactId>snail-e3-cache-redis</artifactId>
-    		<version>${revision}</version>
-  		</dependency>
+	   <dependency>
+		   <groupId>cn.tomsnail.snail</groupId>
+		   <artifactId>snail-extends-cache-core</artifactId>
+		   <version>${revision}</version>
+	   </dependency>
+       <dependency>
+           <groupId>cn.tomsnail.snail</groupId>
+           <artifactId>snail-e3-cache-ehcache</artifactId>
+           <version>${revision}</version>
+           <scope>provided</scope>
+       </dependency>
+       <dependency>
+           <groupId>cn.tomsnail.snail</groupId>
+           <artifactId>snail-e3-cache-redis</artifactId>
+           <version>${revision}</version>
+           <scope>provided</scope>
+       </dependency>
   </dependencies>
 </project>

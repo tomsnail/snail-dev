@@ -11,12 +11,36 @@
   			<groupId>cn.tomsnail.snail</groupId>
     		<artifactId>snail-extends-security-token</artifactId>
     		<version>${revision}</version>
+			<scope>provided</scope>
   		</dependency>
   		<dependency>
 			<groupId>cn.tomsnail.snail</groupId>
     		<artifactId>snail-core-framework-dubbox</artifactId>
     		<version>${revision}</version>
-    		<scope>provided</scope>
+			<scope>provided</scope>
 		</dependency>
+	  <dependency>
+		  <groupId>cn.tomsnail.snail</groupId>
+		  <artifactId>snail-core-framework-dubbo-springboot</artifactId>
+		  <version>${revision}</version>
+		  <scope>provided</scope>
+	  </dependency>
+	  <dependency>
+		  <groupId>io.jsonwebtoken</groupId>
+		  <artifactId>jjwt-api</artifactId>
+		  <version>0.10.5</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>io.jsonwebtoken</groupId>
+		  <artifactId>jjwt-impl</artifactId>
+		  <version>0.10.5</version>
+		  <scope>runtime</scope>
+	  </dependency>
+	  <dependency>
+		  <groupId>io.jsonwebtoken</groupId>
+		  <artifactId>jjwt-jackson</artifactId>
+		  <version>0.10.5</version>
+		  <scope>runtime</scope>
+	  </dependency>
   </dependencies>
 </project>
