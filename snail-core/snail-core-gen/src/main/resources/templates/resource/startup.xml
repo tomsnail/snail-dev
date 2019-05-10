@@ -46,7 +46,7 @@ done
 #DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=1045"
 CLASSPATH=$cp
 
-$JAVA_HOME/bin/java -D$EXE_NAME $MEM_OPTS  -classpath $cp cn.tomsnail.starter.domain.AppMain &
+$JAVA_HOME/bin/java -D$EXE_NAME $MEM_OPTS  -classpath $cp cn.tomsnail.snail.core.starter.AppMain &
 
 
 ]]>

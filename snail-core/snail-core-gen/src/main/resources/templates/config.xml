@@ -24,23 +24,33 @@
         </module>
 
         <module name="http.springboot">
-
+            <template>springboot/springboot.xml</template>
+            <template>springboot/conf-application.xml</template>
+            <template>springboot/conf-config.xml</template>
         </module>
         <module name="http.dubbox">
             <template>dubbox/iservice.xml</template>
             <template>dubbox/service.xml</template>
+            <template>dubbox/conf-application.xml</template>
+            <template>dubbox/conf-config.xml</template>
+
+
         </module>
         <module name="pom">
 
         </module>
         <module name="resource.test">
-
+            <template>resource/test-localhost.xml</template>
+            <template>resource/test-online.xml</template>
+            <template>resource/test-ontest.xml</template>
         </module>
-        <module name="resource.java">
-
+        <module name="resource.main">
+            <template>resource/conf-log4j2.xml</template>
+            <template>resource/conf-log4j.xml</template>
         </module>
         <module name="resource.system">
-
+            <template>resource/shutdown.xml</template>
+            <template>resource/startup.xml</template>
         </module>
     </module>
 </config>

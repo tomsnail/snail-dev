@@ -24,6 +24,8 @@
 	
 	<context:component-scan base-package="cn.tomsnail.snail.core.ds.springboot.mybatis"/>
 
+	<context:component-scan base-package="cn.tomsnail.snail.core.ds.mybatis.autoconfig.single"/>
+
 	<!-- dubbo application配置
 	<dubbo:application name="snail-example-core-framework-dubbo-dao-server" >
 		<dubbo:parameter key="qos.enable" value="false"/>

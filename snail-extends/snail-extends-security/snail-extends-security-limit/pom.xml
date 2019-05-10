@@ -9,11 +9,7 @@
   <properties>
   </properties>
   <dependencies>
-  		<dependency>
-			<groupId>cn.tomsnail.snail</groupId>
-    		<artifactId>snail-extends-security-core</artifactId>
-    		<version>${revision}</version>
-		</dependency>
+
       <dependency>
           <groupId>cn.tomsnail.snail</groupId>
           <artifactId>snail-extends-security-web</artifactId>

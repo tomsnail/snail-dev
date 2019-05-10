@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <template>
 	<name>applicationContext</name>
-	<filePath>src/test/resources</filePath>
+	<filePath>src/java/resources</filePath>
 	<fileName>applicationContext.xml</fileName>
 	<content><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
@@ -38,16 +38,7 @@
     <import resource="spring-dubbo.xml"></import>
    	
         
-    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
-    	<property name="converters">
-      		<list>
-        		<bean class="cn.tomsnail.config.client.plugin.StringSpringConverter" />
-        		<bean class="cn.tomsnail.config.client.plugin.IntegerSpringConverter" />
-        		<bean class="cn.tomsnail.config.client.plugin.LongSpringConverter" />
-        		<bean class="cn.tomsnail.config.client.plugin.BooleanSpringConverter" />
-      		</list>
-    	</property>
-  	</bean>
+
 </beans>
 ]]>
 	</content>

@@ -183,7 +183,24 @@ public class GenScheme  {
 	}
 
 	public  Map<String, Object> dataModel(){
-		Map<String,Object> model =JsonUtil.getMap(JsonUtil.toNotNullObjectJson(this));
+		Map<String,Object> model = new HashMap<>();
+
+
+		model.put("genTable",this.genTable);
+		model.put("packageName",this.packageName);
+		model.put("moduleName",this.moduleName);
+		model.put("subModuleName",this.subModuleName);
+		model.put("functionName",this.functionName);
+		model.put("functionNameSimple",this.functionNameSimple);
+		model.put("functionAuthor",this.functionAuthor);
+		model.put("parentGroupId",this.parentGroupId);
+		model.put("artifactId",this.artifactId);
+		model.put("parentArtifactId",this.parentArtifactId);
+		model.put("parentVersion",this.parentVersion);
+		model.put("version",this.version);
+		model.put("dbType",this.dbType);
+		model.put("replaceFile",this.replaceFile);
+
 		model.put("packageName", StringUtils.lowerCase(this.getPackageName()));
 		model.put("lastPackageName", StringUtils.substringAfterLast((String)model.get("packageName"),"."));
 		model.put("moduleName", StringUtils.lowerCase(this.getModuleName()));

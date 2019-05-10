@@ -1,7 +1,6 @@
 package cn.tomsnail.snail.ext.security.core.limit.filter;
 
 
-import cn.tomsnail.snail.ext.security.core.filter.DefaultSecurityBasicFilter;
 
 /**
  *        
@@ -11,14 +10,13 @@ import cn.tomsnail.snail.ext.security.core.filter.DefaultSecurityBasicFilter;
  * @date 2016年8月10日 下午5:29:01
  * @see 
  */
-public class LimitSecurityBasicFilter extends DefaultSecurityBasicFilter implements ILimitFilter{
+public class LimitSecurityBasicFilter implements ILimitFilter{
 
 	private ILimitFilter limitFilter;
 	
-	@Override
 	public boolean doFilter(Object obj){
 		if(doLimitFilter(obj)){
-			return super.doFilter(obj);
+			return false;//super.doFilter(obj);
 		}else{
 			return false;
 		}

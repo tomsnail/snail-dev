@@ -1,6 +1,5 @@
 package cn.tomsnail.snail.ext.security.core.limit;
 
-import cn.tomsnail.snail.ext.security.core.authorization.model.TResource;
 
 /**
  *        
@@ -10,7 +9,7 @@ import cn.tomsnail.snail.ext.security.core.authorization.model.TResource;
  * @date 2016年8月10日 下午6:20:52
  * @see 
  */
-public class TResourceUser extends TResource{
+public class TResourceUser {
 	
 	private LimitRule limitRule;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <template>
 	<name>log4j2</name>
-	<filePath>src/test/resources</filePath>
+	<filePath>src/main/resources</filePath>
 	<fileName>log4j2.xml</fileName>
 	<content><![CDATA[
 
