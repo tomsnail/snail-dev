@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>Dubbox</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/dubbox/${subModuleName}</filePath>
+	<fileName>${ClassName}Dubbox.java</fileName>
+	<content><![CDATA[
+package ${packageName}.${moduleName}.dubbox<#if subModuleName != "">.${subModuleName}</#if>;
+
+import cn.tomsnail.snail.core.http.RequestData;
+import cn.tomsnail.snail.core.http.ResultData;
+import ${packageName}.${moduleName}.vo.${ClassName}Vo;
+
+
+import java.util.Map;
+
+
+public interface ${ClassName}Dubbox {
+
+
+	public ResultData<Map<String,Object>> findList(RequestData<${ClassName}Vo> ${className}MoRequestData);
+
+
+
+	public ResultData<Map<String,Object>> save(RequestData<${ClassName}Vo> ${className}MoRequestData) ;
+
+
+
+	public ResultData<Map<String,Object>> delete(RequestData<${ClassName}Vo> ${className}MoRequestData);
+
+
+	public ResultData<Map<String,Object>> update(RequestData<${ClassName}Vo> ${className}MoRequestData) ;
+
+
+
+}
+
+]]>
+	</content>
+</template>

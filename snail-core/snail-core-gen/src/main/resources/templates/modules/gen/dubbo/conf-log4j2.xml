@@ -5,7 +5,7 @@
 	<fileName>log4j2.xml</fileName>
 	<content><![CDATA[
 
-<?xml version="1.0" encoding="UTF-8"?>  
+<?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="info" monitorInterval="10">  
   
     <properties>  

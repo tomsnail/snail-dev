@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import cn.tomsnail.snai.core.ds.dao.plugins.pagination.PageDao;
+import cn.tomsnail.snail.core.ds.dao.plugins.pagination.PageDao;
 import cn.tomsnail.snail.example.core.framework.model.DispatchStrategyDto;
 
 /**

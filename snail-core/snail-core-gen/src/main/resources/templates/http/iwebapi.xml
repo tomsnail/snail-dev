@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>iwebapi</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/webapi/${subModuleName}</filePath>
+	<fileName>TestFacade.java</fileName>
+	<content><![CDATA[
+package ${packageName}.${moduleName}.webapi<#if subModuleName != "">.${subModuleName}</#if>;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Context;
+
+import cn.tomsnail.framwork.http.RequestData;
+import cn.tomsnail.framwork.http.ResultData;
+import cn.tomsnail.http.register.annotation.HttpRestServiceDubbo;
+
+/**
+ * ${functionName}webapi接口
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+@HttpRestServiceDubbo
+public interface TestFacade  {
+
+	public ResultData<Map<String,Object>> get(RequestData<Map<String, Object>> requestData,HttpServletRequest request,HttpServletResponse response);
+	
+	public ResultData<Map<String,Object>> page(RequestData<Map<String, Object>> requestData,@Context HttpServletRequest request,@Context HttpServletResponse response);
+	
+}]]>
+	</content>
+</template>

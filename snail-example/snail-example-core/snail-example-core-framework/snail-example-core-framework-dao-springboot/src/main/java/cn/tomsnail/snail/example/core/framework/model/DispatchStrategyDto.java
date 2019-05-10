@@ -8,7 +8,7 @@ package cn.tomsnail.snail.example.core.framework.model;
 
 import java.io.Serializable;
 
-import cn.tomsnail.snai.core.ds.dao.plugins.pagination.PageModel;
+import cn.tomsnail.snail.core.ds.dao.plugins.pagination.PageModel;
 
 /**
  *  model

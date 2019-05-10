@@ -60,7 +60,7 @@ public class JsonUtil {
 		Iterator<?> it = json.entrySet().iterator();
 		while(it.hasNext()){
 			String key = String.valueOf(it.next());
-			String value = json.get(key).toString();
+			String value = String.valueOf(json.get(key));
 			data.put(key, value);
 		}
 		return data;

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <module>
+        <module name="dao">
+            <template>dao/convert.xml</template>
+            <template>dao/dao.xml</template>
+            <template>dao/dto.xml</template>
+            <template>dao/mapper.xml</template>
+            <template>api/model.xml</template>
+        </module>
+        <module name="dao.service">
+            <template>dao/api.xml</template>
+            <template>dao/service.xml</template>
+        </module>
+        <module name="dao.vo">
+            <template>dao/vo.xml</template>
+        </module>
+        <module name="dao.dubbo">
+            <template>api/api.xml</template>
+            <template>dubbo/service.xml</template>
+        </module>
+        <module name="service">
+
+        </module>
+
+        <module name="http.springboot">
+
+        </module>
+        <module name="http.dubbox">
+            <template>dubbox/iservice.xml</template>
+            <template>dubbox/service.xml</template>
+        </module>
+        <module name="pom">
+
+        </module>
+        <module name="resource.test">
+
+        </module>
+        <module name="resource.java">
+
+        </module>
+        <module name="resource.system">
+
+        </module>
+    </module>
+</config>
