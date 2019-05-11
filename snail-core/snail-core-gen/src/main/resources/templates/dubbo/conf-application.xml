@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <template>
-	<name>applicationContext</name>
+	<name>dubbo-applicationContext</name>
 	<filePath>src/main/resources</filePath>
-	<fileName>applicationContext-springboot.xml</fileName>
+	<fileName>applicationContext-dubbo.xml</fileName>
 	<content><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
@@ -23,22 +23,27 @@
 	<context:component-scan base-package="cn.tomsnail.snail.core.framework.validator"/>
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<context:component-scan base-package="cn.tomsnail.snail.core.config.client.plugin"/>
-	<context:component-scan base-package="cn.tomsnail.snail.core.framework.validator"/>
 	<#if genConfigModel.gen_dao>
-	<context:component-scan base-package="cn.tomsnail.snail.core.ds.springboot.mybatis"/>
+	<context:component-scan base-package="cn.tomsnail.snail.core.ds.mybatis.autoconfig.single"/>
 	</#if>
 	<context:component-scan base-package="${packageName}.${moduleName}"/>
 
-	<#if genConfigModel.gen_http_springboot_dubbo>
+	<!-- dubbo application配置 -->
 	<dubbo:application name="${packageName}.${moduleName}" >
 		<dubbo:parameter key="qos.enable" value="false"/>
 		<dubbo:parameter key="qos.accept.foreign.ip" value="false"/>
 		<dubbo:parameter key="qos.port" value="33333"/>
 	</dubbo:application>
+
+
+	<!-- dubbo 注册中心地址 -->
 	<dubbo:registry id="zk" protocol="zookeeper" address="${"$"}{zk.address}" />
+	<!-- dubbo 协议配置 -->
 	<dubbo:protocol name="dubbo" port="${"$"}{dubbo.server.port}" />
-	<dubbo:annotation package="${packageName}.${moduleName}" ></dubbo:annotation>
-	</#if>
+	<!-- dubbo 注解扫描包 -->
+	<dubbo:annotation package="${packageName}.${moduleName}.dubbo" ></dubbo:annotation>
+
+
 
 
 </beans>

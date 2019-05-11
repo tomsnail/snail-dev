@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>snail-pom</artifactId>
+        <groupId>cn.tomsnail.snail</groupId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>snail-dao-dubbox-pom</artifactId>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.tomsnail.snail</groupId>
+            <artifactId>snail-core-framework-dao</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.tomsnail.snail</groupId>
+            <artifactId>snail-core-framework-dubbox</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+
+
+</project>

@@ -195,11 +195,13 @@ public class GenScheme  {
 		model.put("functionAuthor",this.functionAuthor);
 		model.put("parentGroupId",this.parentGroupId);
 		model.put("artifactId",this.artifactId);
+		model.put("groupId",GenConfigModel.getInstance().gen_pom_groupId);
 		model.put("parentArtifactId",this.parentArtifactId);
 		model.put("parentVersion",this.parentVersion);
 		model.put("version",this.version);
 		model.put("dbType",this.dbType);
 		model.put("replaceFile",this.replaceFile);
+		model.put("genConfigModel",GenConfigModel.getInstance());
 
 		model.put("packageName", StringUtils.lowerCase(this.getPackageName()));
 		model.put("lastPackageName", StringUtils.substringAfterLast((String)model.get("packageName"),"."));

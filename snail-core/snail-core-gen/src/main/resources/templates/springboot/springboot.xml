@@ -25,7 +25,7 @@ import java.util.Map;
 public class ${ClassName}SpringBoot  {
 
 	@Autowired
-	@Reference
+	@Reference(check = false)
 	private ${ClassName}Service ${className}Service;
 
 	@LogPoint

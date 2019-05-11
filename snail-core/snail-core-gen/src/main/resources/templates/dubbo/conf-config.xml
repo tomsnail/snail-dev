@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <template>
-	<name>config</name>
+	<name>dubbo-config</name>
 	<filePath>src/main/resources</filePath>
 	<fileName>config.properties</fileName>
 	<content><![CDATA[
 
 #框架http服务类型，默认dubbo
-framework.boot=springboot
+framework.boot=dubbo
 #springboot端口配置，在本文件中对springboot进行配置，完全遵从springboot标准
-server.port = 8081
-dubbo.server.port=18081
+dubbo.server.port=8081
 #zookeeper注册中心地址，本示例须先启动snail-example-core-framework-dubbo的dubbo服务
 zk.address=127.0.0.1:2181
+
 
 spring.datasource.name=dataSource
 spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
@@ -36,6 +36,8 @@ spring.datasource.druid.max-pool-prepared-statement-per-connection-size=20
 mybatis.mapper-locations=classpath:${packagePath}/${moduleName}/dao/mapper/*.xml
 mybatis.type-aliases-package=${packageName}.${moduleName}.model
 mybatis.mapper-scanners=${packageName}.${moduleName}.dao
+
+
 
 #exec:java -Dexec.mainClass="cn.tomsnail.snail.core.starter.AppMain"
 

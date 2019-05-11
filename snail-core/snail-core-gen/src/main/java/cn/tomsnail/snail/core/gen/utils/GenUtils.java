@@ -92,7 +92,10 @@ public class GenUtils {
 		// 如果选择替换文件，则删除原文件
 		if (isReplaceFile){
 			FileUtils.deleteFile(fileName);
+		}else if(new File(fileName).exists()){
+			return "文件已存在,不创建："+fileName+"<br/>";
 		}
+
 		
 		// 创建并写入文件
 		if (FileUtils.createFile(fileName)){

@@ -29,10 +29,10 @@ public class GenStarter {
 	public static void main(String[] args) throws Exception {
 
 
-		if(!GenConfigModel.getInstance().gen_dao){
-			LoggerUtils.info("gen_dao is not true,exit 0 .");
-			return;
-		}
+//		if(!GenConfigModel.getInstance().gen_dao){
+//			LoggerUtils.info("gen_dao is not true,exit 0 .");
+//			return;
+//		}
 
 		String[] tables = GenConfigModel.getInstance().gen_jdbc_tables.split(",");
 		String[] objects = GenConfigModel.getInstance().gen_class_objects.split(",");
@@ -60,8 +60,7 @@ public class GenStarter {
 				if(genTable==null) continue;
 				GenScheme genScheme =GenScheme.genScheme(genTable);
 				for (GenTemplate tpl : templateList){
-					System.out.println(tpl.getFileName());
-					GenUtils.generateToFile(tpl, genScheme.dataModel(), genScheme.getReplaceFile());
+					System.out.println(GenUtils.generateToFile(tpl, genScheme.dataModel(), genScheme.getReplaceFile()));
 				}
 			}
 		}

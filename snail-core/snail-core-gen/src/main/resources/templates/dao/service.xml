@@ -21,7 +21,7 @@ import ${packageName}.${moduleName}.api.${ClassName}Mo;
 import cn.tomsnail.snail.core.util.string.StringUtils;
 import cn.tomsnail.snail.core.util.uuid.UuidUtil;
 
-@Service("${className}Service")
+@Service("${className}BaseService")
 public class ${ClassName}BaseServiceImpl implements ${ClassName}BaseService{
 	
 	@Autowired

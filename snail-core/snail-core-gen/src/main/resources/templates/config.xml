@@ -18,11 +18,9 @@
         <module name="dao.dubbo">
             <template>api/api.xml</template>
             <template>dubbo/service.xml</template>
+            <template>dubbo/conf-application.xml</template>
+            <template>dubbo/conf-config.xml</template>
         </module>
-        <module name="service">
-
-        </module>
-
         <module name="http.springboot">
             <template>springboot/springboot.xml</template>
             <template>springboot/conf-application.xml</template>
@@ -36,9 +34,7 @@
 
 
         </module>
-        <module name="pom">
 
-        </module>
         <module name="resource.test">
             <template>resource/test-localhost.xml</template>
             <template>resource/test-online.xml</template>
@@ -51,6 +47,10 @@
         <module name="resource.system">
             <template>resource/shutdown.xml</template>
             <template>resource/startup.xml</template>
+        </module>
+        <module name="pom">
+            <template>pom/assembly.xml</template>
+            <template>pom/jar-pom.xml</template>
         </module>
     </module>
 </config>

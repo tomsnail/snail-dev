@@ -272,5 +272,6 @@
 		<module>snail-research</module>
 		<module>snail-example</module>
 		<module>snail-all</module>
-	</modules>
+        <module>snail-pom</module>
+    </modules>
 </project>
