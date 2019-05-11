@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>SpringBoot</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/springboot/${subModuleName}</filePath>
+	<fileName>${ClassName}SpringBoot.java</fileName>
+	<content><![CDATA[
+package ${packageName}.${moduleName}.springboot<#if subModuleName != "">.${subModuleName}</#if>;
+
+import ${packageName}.${moduleName}.api.${ClassName}Mo;
+import ${packageName}.${moduleName}.api.${ClassName}Service;
+import ${packageName}.${moduleName}.vo.${ClassName}Vo;
+import cn.tomsnail.snail.core.framework.validator.SnailValidator;
+import cn.tomsnail.snail.core.http.RequestData;
+import cn.tomsnail.snail.core.http.ResultData;
+import cn.tomsnail.snail.core.log.annotation.LogPoint;
+import com.alibaba.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+
+import java.util.Map;
+
+@RestController
+@RequestMapping("/${ClassName}")
+public class ${ClassName}SpringBoot  {
+
+	@Autowired
+	@Reference(check = false)
+	private ${ClassName}Service ${className}Service;
+
+	@LogPoint
+	@RequestMapping(value = "/findList", method = RequestMethod.POST)
+	@SnailValidator
+	@ResponseBody
+	public ResultData<Map<String,Object>> findList(@RequestBody RequestData<${ClassName}Vo> ${className}MoRequestData) {
+		ResultData<Map<String,Object>> resultData = new ResultData<>();
+		resultData.putBody("data",${className}Service.findList(${className}MoRequestData.getBody().getModel(${ClassName}Mo.class)));
+		return resultData;
+	}
+
+
+
+	@LogPoint
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@SnailValidator
+	@ResponseBody
+	public ResultData<Map<String,Object>> save(@RequestBody RequestData<${ClassName}Vo> ${className}MoRequestData) {
+		ResultData<Map<String,Object>> resultData = new ResultData<>();
+		resultData.putBody("data",${className}Service.save(${className}MoRequestData.getBody().getModel(${ClassName}Mo.class)));
+		return resultData;
+	}
+
+
+
+	@LogPoint
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@SnailValidator
+	@ResponseBody
+	public ResultData<Map<String,Object>> delete(@RequestBody RequestData<${ClassName}Vo> ${className}MoRequestData) {
+		ResultData<Map<String,Object>> resultData = new ResultData<>();
+		resultData.putBody("data",${className}Service.delete(${className}MoRequestData.getBody().getModel(${ClassName}Mo.class).getId()));
+		return resultData;
+	}
+
+
+	@LogPoint
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@SnailValidator
+	@ResponseBody
+	public ResultData<Map<String,Object>> update(@RequestBody RequestData<${ClassName}Vo> ${className}MoRequestData) {
+		ResultData<Map<String,Object>> resultData = new ResultData<>();
+		resultData.putBody("data",${className}Service.update(${className}MoRequestData.getBody().getModel(${ClassName}Mo.class)));
+		return resultData;
+	}
+
+
+
+}
+
+]]>
+	</content>
+</template>

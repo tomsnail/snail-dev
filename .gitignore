@@ -1,16 +1,39 @@
-/dev-component
-# ---> Java
-*.class
+# maven ignore
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+target/
 *.jar
+!.mvn/wrapper/*
 *.war
-*.ear
+*.zip
+*.tar
+*.tar.gz
+*-ontest.properties
+*-online.properties
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# eclipse ignore
+.settings/
+.project
+.classpath
 
-/target/
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+logs/
+*.logs
+
+# system ignore
+.DS_Store
+Thumbs.db
+*.orig
+
+# flatten ignore
+.flattened-pom.xml

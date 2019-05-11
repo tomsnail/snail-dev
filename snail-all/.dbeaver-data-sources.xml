@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="sqlite_jdbc-16a62e7fe31-5953e11f6ed309b" provider="generic" driver="sqlite_jdbc" name="SQLite - test.db" save-password="true" read-only="false">
+		<connection server="" database="G://02_workspace//34_snail_dev//v1_0//snail-dev//snail-example//snail-example-core//snail-example-core-framework//snail-example-core-framework-dao-sqlite//sqlitedb/test.db" url="jdbc:sqlite:G://02_workspace//34_snail_dev//v1_0//snail-dev//snail-example//snail-example-core//snail-example-core-framework//snail-example-core-framework-dao-sqlite//sqlitedb/test.db" type="dev"/>
+	</data-source>
+	<filters/>
+</data-sources>

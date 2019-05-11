@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.tomsnail.snail</groupId>
+    <artifactId>snail-parent</artifactId>
+    <version>${revision}</version>
+  </parent>
+  <artifactId>snail-extends</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>snail-extends-security</module>
+  	<module>snail-extends-cache</module>
+  	<module>snail-extends-pilot</module>
+  	<module>snail-extends-db</module>
+  	<module>snail-extends-lock</module>
+  	<module>snail-extends-task</module>
+  	<module>snail-extends-web</module>
+  	<module>snail-extends-mq</module>
+  </modules>
+</project>

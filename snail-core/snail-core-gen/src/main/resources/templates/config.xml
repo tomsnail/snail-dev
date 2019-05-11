@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <module>
+        <module name="dao">
+            <template>dao/convert.xml</template>
+            <template>dao/dao.xml</template>
+            <template>dao/dto.xml</template>
+            <template>dao/mapper.xml</template>
+            <template>api/model.xml</template>
+        </module>
+        <module name="dao.service">
+            <template>dao/api.xml</template>
+            <template>dao/service.xml</template>
+        </module>
+        <module name="dao.vo">
+            <template>dao/vo.xml</template>
+        </module>
+        <module name="dao.dubbo">
+            <template>api/api.xml</template>
+            <template>dubbo/service.xml</template>
+            <template>dubbo/conf-application.xml</template>
+            <template>dubbo/conf-config.xml</template>
+        </module>
+        <module name="http.springboot">
+            <template>springboot/springboot.xml</template>
+            <template>springboot/conf-application.xml</template>
+            <template>springboot/conf-config.xml</template>
+        </module>
+        <module name="http.dubbox">
+            <template>dubbox/iservice.xml</template>
+            <template>dubbox/service.xml</template>
+            <template>dubbox/conf-application.xml</template>
+            <template>dubbox/conf-config.xml</template>
+
+
+        </module>
+
+        <module name="resource.test">
+            <template>resource/test-localhost.xml</template>
+            <template>resource/test-online.xml</template>
+            <template>resource/test-ontest.xml</template>
+        </module>
+        <module name="resource.main">
+            <template>resource/conf-log4j2.xml</template>
+            <template>resource/conf-log4j.xml</template>
+        </module>
+        <module name="resource.system">
+            <template>resource/shutdown.xml</template>
+            <template>resource/startup.xml</template>
+        </module>
+        <module name="pom">
+            <template>pom/pom.xml</template>
+        </module>
+        <module name="pom.package">
+            <template>pom/assembly.xml</template>
+            <template>pom/jar-pom.xml</template>
+        </module>
+    </module>
+</config>

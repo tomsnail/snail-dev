@@ -1,3 +1,0 @@
-# dev-pilot
-
-dev-pilot

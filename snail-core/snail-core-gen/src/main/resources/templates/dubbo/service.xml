@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>ServiceDubbo</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/dubbo/${subModuleName}</filePath>
+	<fileName>${ClassName}ServiceDubbo.java</fileName>
+	<content><![CDATA[
+package ${packageName}.${moduleName}.dubbo<#if subModuleName != "">.${subModuleName}</#if>;
+
+
+import cn.tomsnail.snail.core.page.Page;
+import com.alibaba.dubbo.config.annotation.Service;
+import ${packageName}.${moduleName}.api.${ClassName}Mo;
+import ${packageName}.${moduleName}.api.${ClassName}Service;
+import ${packageName}.${moduleName}.service.${ClassName}BaseService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
+@Service
+public class ${ClassName}ServiceDubbo implements ${ClassName}Service{
+
+	@Autowired
+	private ${ClassName}BaseService ${className}BaseService;
+
+	@Override
+	public List<${ClassName}Mo> findList(${ClassName}Mo ${className}) {
+		
+		
+
+		return dispatchUrlBaseService.findList(dispatchUrl);
+	}
+
+	@Override
+	public ${ClassName}Mo get(String id) {
+		
+		return ${className}BaseService.get(id);
+	}
+
+	@Override
+	public int findPageCount(${ClassName}Mo ${className}) {
+		
+		return ${className}BaseService.findPageCount(dispatchUrl);
+	}
+	
+	
+	@Override
+	public List<${ClassName}Mo> findPage(${ClassName}Mo ${className},Page page) {
+		
+		return ${className}BaseService.findPage(dispatchUrl,page);
+	}
+	
+	
+
+	@Override
+	public boolean save(${ClassName}Mo ${className}) {
+		
+		return ${className}BaseService.save(dispatchUrl);
+	}
+
+	@Override
+	public boolean saveBatch(List<${ClassName}Mo> ${className}s) {
+		return false;
+	}
+
+	@Override
+	public boolean delete(String id) {
+		
+		return ${className}BaseService.delete(id);
+	}
+
+	@Override
+	public boolean deleteBatch(List<String> ids) {
+		return false;
+	}
+
+	@Override
+	public boolean update(${ClassName}Mo ${className}) {
+		
+		return ${className}BaseService.update(dispatchUrl);
+	}
+
+	@Override
+	public boolean updateBatch(List<${ClassName}Mo> ${className}s) {
+		return false;
+	}
+
+
+
+}
+]]>
+	</content>
+</template>

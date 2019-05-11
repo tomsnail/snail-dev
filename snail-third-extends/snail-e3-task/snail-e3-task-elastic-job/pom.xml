@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.tomsnail.snail</groupId>
+    <artifactId>snail-e3-task</artifactId>
+    <version>${revision}</version>
+  </parent>
+  <artifactId>snail-e3-task-elastic-job</artifactId>
+   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <elastic.job.lite.core.version>2.1.5-ts-SNAPSHOT</elastic.job.lite.core.version>
+    <elastic.job.lite.spring.version>2.1.5-ts-SNAPSHOT</elastic.job.lite.spring.version>
+  </properties>
+  <dependencies>
+   	<dependency>
+    	<groupId>com.dangdang</groupId>
+    	<artifactId>elastic-job-lite-core</artifactId>
+    	<version>${elastic.job.lite.core.version}</version>
+	</dependency>
+
+	<!-- 使用springframework自定义命名空间时引入 -->
+	<dependency>
+    	<groupId>com.dangdang</groupId>
+    	<artifactId>elastic-job-lite-spring</artifactId>
+    	<version>${elastic.job.lite.spring.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>cn.tomsnail.snail</groupId>
+    	<artifactId>snail-core-config</artifactId>
+    	<version>${revision}</version>
+	</dependency>
+	
+	<dependency>
+    	<groupId>org.springframework.kafka</groupId>
+    	<artifactId>spring-kafka</artifactId>
+    	<version>2.2.2.RELEASE</version>
+    	<scope>provided</scope>
+	</dependency>
+	<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+      <version>${springboot.version}</version>
+      <scope>provided</scope>
+    </dependency>
+	
+  </dependencies>
+</project>

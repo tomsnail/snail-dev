@@ -1,3 +1,0 @@
-# dev-mybatis
-
-dev-mybatis

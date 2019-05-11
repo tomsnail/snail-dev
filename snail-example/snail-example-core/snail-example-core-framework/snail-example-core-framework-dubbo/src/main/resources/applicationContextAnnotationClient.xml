@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/jdbc
+    http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+    http://www.springframework.org/schema/cache
+    http://www.springframework.org/schema/cache/spring-cache.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<!-- 日志记录插件，须开启动态代理 -->
+	<context:component-scan base-package="cn.tomsnail.snail.core.log"/>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	<!-- spring 属性配置插件，用于spring相关属性(如${zk.address})从config.properties中获取值 -->
+	<context:component-scan base-package="cn.tomsnail.snail.core.config.client.plugin"/>
+	<!-- 业务扫描 -->
+	<context:component-scan base-package="cn.tomsnail.snail.example.core.framework.dubbo.annotation.client"/>
+
+
+	<!-- dubbo application配置 -->
+	<dubbo:application name="snail-example-core-framework-dubbo-annotation-client" >
+		<dubbo:parameter key="qos.enable" value="false"/>
+		<dubbo:parameter key="qos.accept.foreign.ip" value="false"/>
+		<dubbo:parameter key="qos.port" value="33333"/>
+	</dubbo:application>
+
+
+	<!-- dubbo 注册中心地址 -->
+	<dubbo:registry id="zk" protocol="zookeeper" address="${zk.address}" />
+	<!-- dubbo 注解扫描包 -->
+	<dubbo:annotation package="cn.tomsnail.snail.example.core.framework.dubbo.annotation.client" ></dubbo:annotation>
+
+
+
+
+  	
+  	
+</beans>
