@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tomsnail.snail.example.gen.ex.dao.DispatchUrlDao">
+    
+	<sql id="dispatchUrlColumns">
+		a.id AS "id",
+		a.strategy_id AS "strategyId",
+		a.url_type AS "urlType",
+		a.url_context AS "urlContext",
+		a.url_user_name AS "urlUserName",
+		a.url_password AS "urlPassword",
+		a.url_additional AS "urlAdditional",
+		a.create_date AS "createDate",
+		a.create_by AS "createBy",
+		a.update_date AS "updateDate",
+		a.update_by AS "updateBy",
+		a.del_flag AS "delFlag",
+		a.remarks AS "remarks"
+	</sql>
+	
+	<sql id="dispatchUrlJoins">
+	</sql>
+    
+	<select id="get" resultType="cn.tomsnail.snail.example.gen.ex.model.DispatchUrlDto">
+		SELECT 
+			<include refid="dispatchUrlColumns"/>
+		FROM Dispatch_url a
+		<include refid="dispatchUrlJoins"/>
+		WHERE a.id = #{id}
+		
+	</select>
+	
+	<select id="findList" resultType="cn.tomsnail.snail.example.gen.ex.model.DispatchUrlDto">
+		SELECT 
+			<include refid="dispatchUrlColumns"/>
+		FROM Dispatch_url a
+		<include refid="dispatchUrlJoins"/>
+		<where>
+			a.del_flag = '0'
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="strategyId != null and strategyId != ''">
+				AND a.strategy_id = #{strategyId}
+			</if>
+			<if test="urlType != null and urlType != ''">
+				AND a.url_type = #{urlType}
+			</if>
+			<if test="urlContext != null and urlContext != ''">
+				AND a.url_context = #{urlContext}
+			</if>
+			<if test="urlUserName != null and urlUserName != ''">
+				AND a.url_user_name = #{urlUserName}
+			</if>
+			<if test="urlPassword != null and urlPassword != ''">
+				AND a.url_password = #{urlPassword}
+			</if>
+			<if test="urlAdditional != null and urlAdditional != ''">
+				AND a.url_additional = #{urlAdditional}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.create_date = #{createDate}
+			</if>
+			<if test="createBy != null and createBy != ''">
+				AND a.create_by = #{createBy}
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND a.update_date = #{updateDate}
+			</if>
+			<if test="updateBy != null and updateBy != ''">
+				AND a.update_by = #{updateBy}
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND a.del_flag = #{delFlag}
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND a.remarks = #{remarks}
+			</if>
+		</where>
+		<choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<select id="findPageCount" resultType="java.lang.Integer">
+		SELECT 
+			count(0) as c
+		FROM Dispatch_url a
+		<include refid="dispatchUrlJoins"/>
+		<where>
+			a.del_flag = '0'
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="strategyId != null and strategyId != ''">
+				AND a.strategy_id = #{strategyId}
+			</if>
+			<if test="urlType != null and urlType != ''">
+				AND a.url_type = #{urlType}
+			</if>
+			<if test="urlContext != null and urlContext != ''">
+				AND a.url_context = #{urlContext}
+			</if>
+			<if test="urlUserName != null and urlUserName != ''">
+				AND a.url_user_name = #{urlUserName}
+			</if>
+			<if test="urlPassword != null and urlPassword != ''">
+				AND a.url_password = #{urlPassword}
+			</if>
+			<if test="urlAdditional != null and urlAdditional != ''">
+				AND a.url_additional = #{urlAdditional}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.create_date = #{createDate}
+			</if>
+			<if test="createBy != null and createBy != ''">
+				AND a.create_by = #{createBy}
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND a.update_date = #{updateDate}
+			</if>
+			<if test="updateBy != null and updateBy != ''">
+				AND a.update_by = #{updateBy}
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND a.del_flag = #{delFlag}
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND a.remarks = #{remarks}
+			</if>
+		</where>
+		<choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="cn.tomsnail.snail.example.gen.ex.model.DispatchUrlDto">
+		SELECT 
+			<include refid="dispatchUrlColumns"/>
+		FROM Dispatch_url a
+		<include refid="dispatchUrlJoins"/>
+		<where>
+			a.del_flag = '0'
+		</where>		
+		<choose>
+			<when test="orderBy != null and orderBy != ''">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO Dispatch_url(
+		<trim suffixOverrides=",">
+			<if test="id != null and id != ''">
+			id,
+			</if>
+			<if test="strategyId != null and strategyId != ''">
+			strategy_id,
+			</if>
+			<if test="urlType != null and urlType != ''">
+			url_type,
+			</if>
+			<if test="urlContext != null and urlContext != ''">
+			url_context,
+			</if>
+			<if test="urlUserName != null and urlUserName != ''">
+			url_user_name,
+			</if>
+			<if test="urlPassword != null and urlPassword != ''">
+			url_password,
+			</if>
+			<if test="urlAdditional != null and urlAdditional != ''">
+			url_additional,
+			</if>
+			<if test="createDate != null and createDate != ''">
+			create_date,
+			</if>
+			<if test="createBy != null and createBy != ''">
+			create_by,
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+			update_date,
+			</if>
+			<if test="updateBy != null and updateBy != ''">
+			update_by,
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+			del_flag,
+			</if>
+			<if test="remarks != null and remarks != ''">
+			remarks,
+			</if>
+		</trim>
+		) VALUES (
+		<trim suffixOverrides=",">
+			<if test="id != null and id != ''">
+			#{id},
+			</if>
+			<if test="strategyId != null and strategyId != ''">
+			#{strategyId},
+			</if>
+			<if test="urlType != null and urlType != ''">
+			#{urlType},
+			</if>
+			<if test="urlContext != null and urlContext != ''">
+			#{urlContext},
+			</if>
+			<if test="urlUserName != null and urlUserName != ''">
+			#{urlUserName},
+			</if>
+			<if test="urlPassword != null and urlPassword != ''">
+			#{urlPassword},
+			</if>
+			<if test="urlAdditional != null and urlAdditional != ''">
+			#{urlAdditional},
+			</if>
+			<if test="createDate != null and createDate != ''">
+			#{createDate},
+			</if>
+			<if test="createBy != null and createBy != ''">
+			#{createBy},
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+			#{updateDate},
+			</if>
+			<if test="updateBy != null and updateBy != ''">
+			#{updateBy},
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+			#{delFlag},
+			</if>
+			<if test="remarks != null and remarks != ''">
+			#{remarks},
+			</if>
+		</trim>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE Dispatch_url SET
+			<trim suffixOverrides=",">	
+					
+					<if test="id != null and id != ''">
+						id = #{id},
+					</if>
+					
+					<if test="strategyId != null and strategyId != ''">
+						strategy_id = #{strategyId},
+					</if>
+					
+					<if test="urlType != null and urlType != ''">
+						url_type = #{urlType},
+					</if>
+					
+					<if test="urlContext != null and urlContext != ''">
+						url_context = #{urlContext},
+					</if>
+					
+					<if test="urlUserName != null and urlUserName != ''">
+						url_user_name = #{urlUserName},
+					</if>
+					
+					<if test="urlPassword != null and urlPassword != ''">
+						url_password = #{urlPassword},
+					</if>
+					
+					<if test="urlAdditional != null and urlAdditional != ''">
+						url_additional = #{urlAdditional},
+					</if>
+					
+					<if test="createDate != null and createDate != ''">
+						create_date = #{createDate},
+					</if>
+					
+					<if test="createBy != null and createBy != ''">
+						create_by = #{createBy},
+					</if>
+					
+					<if test="updateDate != null and updateDate != ''">
+						update_date = #{updateDate},
+					</if>
+					
+					<if test="updateBy != null and updateBy != ''">
+						update_by = #{updateBy},
+					</if>
+					
+					<if test="delFlag != null and delFlag != ''">
+						del_flag = #{delFlag},
+					</if>
+					
+					<if test="remarks != null and remarks != ''">
+						remarks = #{remarks},
+					</if>
+			</trim>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE Dispatch_url SET 
+			del_flag = '1'
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

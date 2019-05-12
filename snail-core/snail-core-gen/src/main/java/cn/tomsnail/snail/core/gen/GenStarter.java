@@ -29,11 +29,15 @@ public class GenStarter {
 	public static void main(String[] args) throws Exception {
 
 
-//		if(!GenConfigModel.getInstance().gen_dao){
-//			LoggerUtils.info("gen_dao is not true,exit 0 .");
-//			return;
-//		}
+		new GenStarter().gen();
 
+	}
+
+	public GenStarter(){
+
+	}
+
+	public void gen(){
 		String[] tables = GenConfigModel.getInstance().gen_jdbc_tables.split(",");
 		String[] objects = GenConfigModel.getInstance().gen_class_objects.split(",");
 
@@ -64,8 +68,6 @@ public class GenStarter {
 				}
 			}
 		}
-		
-
 	}
 	
 

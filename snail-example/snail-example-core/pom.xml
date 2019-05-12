@@ -9,5 +9,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>snail-example-core-framework</module>
+    <module>snail-example-core-gen</module>
   </modules>
 </project>

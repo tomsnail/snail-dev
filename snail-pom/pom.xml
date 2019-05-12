@@ -83,6 +83,7 @@
             <groupId>cn.tomsnail.snail</groupId>
             <artifactId>snail-core-gen</artifactId>
             <version>${revision}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
