@@ -180,8 +180,9 @@ public class RollingFileAppender extends AbstractOutputStreamAppender<RollingFil
             layout = PatternLayout.createDefaultLayout();
         }
 
-        final RollingFileManager manager = RollingFileManager.getFileManager(fileName, filePattern, isAppend,
-            isBuffered, policy, strategy, advertiseURI, layout, bufferSize, isFlush);
+        //String fileName, String pattern, boolean append, boolean bufferedIO, TriggeringPolicy policy, RolloverStrategy strategy, String advertiseURI, Layout<? extends Serializable> layout, int bufferSize, boolean immediateFlush, boolean createOnDemand, Configuration configuration
+        final RollingFileManager manager = RollingFileManager.getFileManager(fileName,filePattern,isAppend,isBuffered,policy,strategy,advertiseURI,layout,bufferSize,isFlush,true,config);//RollingFileManager.getFileManager(fileName, filePattern, isAppend,
+            //isBuffered, policy, strategy, advertiseURI, layout, bufferSize, isFlush);
         if (manager == null) {
             return null;
         }

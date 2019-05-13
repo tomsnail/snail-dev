@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan("cn.tomsnail.snail.core.ds.autoconfig.single")
 public class AutoJdbcTemplate {
 
     @Bean

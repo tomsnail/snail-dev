@@ -104,7 +104,7 @@ public class DefaultCenterLogService implements LogService{
 				String _address = ConfigClientFactory.getInstance().getConfigClient().getConfig("system.log.center.LogAddress", address);
 				Property property =  Property.createProperty("bootstrap.servers",_address );
 				properties[0] = property;
-				Appender appender = KafkaAppender.createAppender(layout, null, ConfigHelp.getInstance("config").getLocalConfig("system.log.center.AppenderName", "kafka"), false, ConfigHelp.getInstance("config").getLocalConfig("system.log.center.topic", "LOG_CENTER"), properties);
+				Appender appender = KafkaAppender.createAppender(layout, null, ConfigHelp.getInstance("config").getLocalConfig("system.log.center.AppenderName", "kafka"), false, ConfigHelp.getInstance("config").getLocalConfig("system.log.center.topic", "LOG_CENTER"),properties,config);
 				appender.start();
 				config.addAppender(appender);
 				AppenderRef ref = AppenderRef.createAppenderRef(LOG_NAME, null, null);

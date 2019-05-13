@@ -1,5 +1,9 @@
 package cn.tomsnail.snail.core.util.configfile;
 
+import org.springframework.core.io.DefaultResourceLoader;
+
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLDecoder;
 
@@ -157,6 +161,22 @@ public class ProgramPathHelper {
 		}
 
 		return retPath;
+	}
+
+
+	public static String getProjectPath(){
+		// 如果配置了工程路径，则直接返回，否则自动获取。
+
+		try {
+			File file = new DefaultResourceLoader().getResource("").getFile();
+			if (file != null){
+
+				return file.toString()+File.pathSeparator;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 }

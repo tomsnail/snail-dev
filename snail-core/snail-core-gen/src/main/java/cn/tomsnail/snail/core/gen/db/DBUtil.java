@@ -51,7 +51,7 @@ public class DBUtil {
 		}
 		
 
-		if(StringUtils.isBlank(driver)||StringUtils.isBlank(url)||StringUtils.isBlank(user)){
+		if(StringUtils.isBlank(driver)||StringUtils.isBlank(url)){
 			return null;
 		}
 		Class.forName(driver);

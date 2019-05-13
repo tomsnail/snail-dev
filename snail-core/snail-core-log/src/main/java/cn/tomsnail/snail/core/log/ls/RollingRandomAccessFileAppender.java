@@ -195,8 +195,8 @@ public class RollingRandomAccessFileAppender extends  AbstractOutputStreamAppend
 	            layout = PatternLayout.createDefaultLayout();
 	        }
 
-	        final RollingRandomAccessFileManager manager = RollingRandomAccessFileManager.getRollingRandomAccessFileManager(
-	                fileName, filePattern, isAppend, isFlush, bufferSize, policy, strategy, advertiseURI, layout);
+	        final RollingRandomAccessFileManager manager = RollingRandomAccessFileManager.getRollingRandomAccessFileManager(fileName,filePattern,isAppend,isFlush,bufferSize,policy,strategy,advertiseURI,layout,config);//RollingRandomAccessFileManager.getRollingRandomAccessFileManager(
+	                //fileName, filePattern, isAppend, isFlush, bufferSize, policy, strategy, advertiseURI, layout);
 	        if (manager == null) {
 	            return null;
 	        }
