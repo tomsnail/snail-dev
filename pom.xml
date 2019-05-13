@@ -69,6 +69,139 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${maven_jacoco_version}</version>
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<propertyName>jacocoArgLine</propertyName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>report-aggregate</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report-aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.rat</groupId>
+				<artifactId>apache-rat-plugin</artifactId>
+				<version>${apache-rat-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>verify.rat</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<excludes>
+								<exclude>**/*.versionsBackup</exclude>
+								<exclude>**/.idea/</exclude>
+								<exclude>**/*.iml</exclude>
+								<exclude>**/*.txt</exclude>
+								<exclude>**/*.load</exclude>
+								<exclude>**/*.flex</exclude>
+								<exclude>**/*.fc</exclude>
+								<exclude>**/*.javascript</exclude>
+								<exclude>**/*.properties</exclude>
+								<exclude>**/*.thrift</exclude>
+								<exclude>**/*.sh</exclude>
+								<exclude>**/*.bat</exclude>
+								<exclude>**/*.md</exclude>
+								<exclude>.git/</exclude>
+								<exclude>.gitignore</exclude>
+								<!-- ASF jenkins box puts the Maven repo in our root directory. -->
+								<exclude>.repository/</exclude>
+								<exclude>**/.settings/*</exclude>
+								<exclude>**/.classpath</exclude>
+								<exclude>**/.project</exclude>
+								<exclude>**/target/**</exclude>
+								<exclude>**/*.log</exclude>
+								<exclude>CODE_OF_CONDUCT.md</exclude>
+								<exclude>.codecov.yml</exclude>
+								<exclude>.travis.yml</exclude>
+								<exclude>PULL_REQUEST_TEMPLATE.md</exclude>
+								<exclude>CONTRIBUTING.md</exclude>
+								<exclude>README.md</exclude>
+								<exclude>**/codestyle/*</exclude>
+								<exclude>**/resources/META-INF/**</exclude>
+								<!-- exclude the internal threadlocal files -->
+								<exclude>**/org/apache/dubbo/common/threadlocal/InternalThreadLocal.java</exclude>
+								<exclude>**/org/apache/dubbo/common/threadlocal/InternalThreadLocalMap.java</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.5</version>
+				<configuration>
+					<!-- <configLocation>${basedir}/springside-findbugs.xml</configLocation> -->
+					<threshold>High</threshold>
+					<effort>Default</effort>
+					<findbugsXmlOutput>true</findbugsXmlOutput>
+					<!-- findbugs xml输出路径 -->
+					<findbugsXmlOutputDirectory>target/site</findbugsXmlOutputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.10.0</version>
+				<configuration>
+					<rulesets>
+						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-comment.xml</ruleset>
+						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-concurrent.xml</ruleset>
+						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-constant.xml</ruleset>
+						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-exception.xml</ruleset>
+						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-flowcontrol.xml</ruleset>
+						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-naming.xml</ruleset>
+						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-oop.xml</ruleset>
+						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-orm.xml</ruleset>
+						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-other.xml</ruleset>
+						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-set.xml</ruleset>
+					</rulesets>
+					<printFailingErrors>true</printFailingErrors>
+				</configuration>
+				<executions>
+					<!-- 绑定pmd:check到verify生命周期 -->
+					<execution>
+						<id>pmd-check-verify</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+					<!-- 绑定pmd:pmd到site生命周期 -->
+					<execution>
+						<id>pmd-pmd-site</id>
+						<phase>site</phase>
+						<goals>
+							<goal>pmd</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.alibaba.p3c</groupId>
+						<artifactId>p3c-pmd</artifactId>
+						<version>1.3.6</version>
+					</dependency>
+
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
 	<properties>
@@ -137,6 +270,16 @@
 		<javax.ws.rs-api.version>2.0</javax.ws.rs-api.version>
 		<javax.servlet-api.version>4.0.1</javax.servlet-api.version>
 		<sqlite-jdbc.version>3.25.2</sqlite-jdbc.version>
+
+		<maven_javadoc_version>3.0.1</maven_javadoc_version>
+		<maven_checkstyle_version>3.0.0</maven_checkstyle_version>
+
+		<maven_jacoco_version>0.8.2</maven_jacoco_version>
+		<maven_flatten_version>1.1.0</maven_flatten_version>
+		<apache-rat-plugin.version>0.12</apache-rat-plugin.version>
+		<arguments />
+		<checkstyle.skip>true</checkstyle.skip>
+		<rat.skip>true</rat.skip>
 
 	</properties>
 	<dependencies>
@@ -228,7 +371,116 @@
    			<version>2.0.1.Final</version>
 		</dependency>
 
+
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>javadoc-lint</id>
+			<activation>
+				<jdk>[1.8,)</jdk>
+			</activation>
+			<properties>
+				<doclint>none</doclint>
+			</properties>
+		</profile>
+		<profile>
+			<id>checkstyle</id>
+			<activation>
+				<jdk>[1.8,)</jdk>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>${maven_checkstyle_version}</version>
+						<dependencies>
+							<dependency>
+								<groupId>com.puppycrawl.tools</groupId>
+								<artifactId>checkstyle</artifactId>
+								<version>8.9</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>checkstyle-validation</id>
+								<phase>validate</phase>
+								<configuration>
+									<configLocation>codestyle/checkstyle.xml</configLocation>
+									<suppressionsLocation>codestyle/checkstyle-suppressions.xml</suppressionsLocation>
+									<encoding>UTF-8</encoding>
+									<consoleOutput>true</consoleOutput>
+									<failOnViolation>true</failOnViolation>
+									<excludes>**/JSONWriter.java</excludes>
+								</configuration>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>release</id>
+			<properties>
+				<log4j2_version>2.11.1</log4j2_version>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven_javadoc_version}</version>
+						<executions>
+							<execution>
+								<id>attach-javadoc</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<configuration>
+									<additionalDependencies>
+										<additionalDependency>
+											<groupId>org.apache.logging.log4j</groupId>
+											<artifactId>log4j-api</artifactId>
+											<version>${log4j2_version}</version>
+										</additionalDependency>
+										<additionalDependency>
+											<groupId>org.apache.logging.log4j</groupId>
+											<artifactId>log4j-core</artifactId>
+											<version>${log4j2_version}</version>
+										</additionalDependency>
+									</additionalDependencies>
+								</configuration>
+							</execution>
+						</executions>
+						<configuration>
+							<show>public</show>
+							<charset>UTF-8</charset>
+							<encoding>UTF-8</encoding>
+							<docencoding>UTF-8</docencoding>
+							<links>
+								<link>http://docs.oracle.com/javase/8/docs/api</link>
+							</links>
+							<doclint>none</doclint>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<repositories>
 		<repository>
 			<id>zkjd-nexus</id>
@@ -253,8 +505,13 @@
 					<effort>Default</effort>
 					<findbugsXmlOutput>true</findbugsXmlOutput>
 					<!-- findbugs xml输出路径 -->
-					<findbugsXmlOutputDirectory>target/site</findbugsXmlOutputDirectory>
+					<findbugsXmlOutputDirectory>target/site/findbugs</findbugsXmlOutputDirectory>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>3.0.0</version>
 			</plugin>
 		</plugins>
 	</reporting>
