@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>消息 · GitBook</title>
+        <title>脚手架 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="LOCK.html" />
+    <link rel="next" href="../e3/" />
     
     
-    <link rel="prev" href="CACHE.html" />
+    <link rel="prev" href="TOMCAT_JVM.html" />
     
 
     </head>
@@ -305,7 +305,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.5.2" data-path="MQ.html">
+        <li class="chapter " data-level="1.2.5.2" data-path="MQ.html">
             
                 <a href="MQ.html">
             
@@ -409,7 +409,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5.10" data-path="ARCHETYPE.html">
+        <li class="chapter active" data-level="1.2.5.10" data-path="ARCHETYPE.html">
             
                 <a href="ARCHETYPE.html">
             
@@ -785,7 +785,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >消息</a>
+        <a href="../.." >脚手架</a>
     </h1>
 </div>
 
@@ -800,226 +800,38 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x6D88;&#x606F;">&#x6D88;&#x606F;</h1>
-<h3 id="1-activemq">1 ActiveMQ</h3>
+                                <h1 id="&#x811A;&#x624B;&#x67B6;">&#x811A;&#x624B;&#x67B6;</h1>
 <ul>
-<li><p>maven</p>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>cn.tomsnail.snail<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>snail-extends-mq-spring-activemq<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${revision}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-</code></pre>
-</li>
-<li><p>spring&#x626B;&#x63CF;</p>
-<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- &#x975E;springboot&#x9879;&#x76EE;&#x987B;&#x626B;&#x63CF;&#x8BE5;&#x5305; --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.ext.mq.activemq&quot;</span>/&gt;</span>
-</code></pre>
+<li><p>&#x5B89;&#x88C5;</p>
+<p>&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x540E;install&#x76F8;&#x5173;archetype</p>
 </li>
 <li><p>&#x4F7F;&#x7528;</p>
-<p>```java
-@Component
-public class ActiveMqService {</p>
-<pre><code>private JmsMessagingTemplate  jmsTemplate;
-</code></pre></li>
-</ul>
-<pre><code>  @Autowired
-  public ActiveMqService(JmsMessagingTemplate template) {
-      this.jmsTemplate = template;
-  }
-
-  @Scheduled(fixedDelayString=&quot;${spring.schedule.test.fiexd.delay}&quot;)
-  @Async
-  public void send() {
-      jmsTemplate.convertAndSend(ConfigHelp.getInstance(&quot;config&quot;).getLocalConfig(&quot;spring.jms.template.default-destination&quot;, &quot;ActiveMqService&quot;),&quot;test&quot;);
-
-  }
-
-  @JmsListener(destination = &quot;${spring.jms.template.default-destination}&quot;)
-  public void recivce(String message){
-      System.out.println(&quot;===============recivce======================&quot;);
-      System.out.println(message);
-
-  }
-</code></pre><p>  }</p>
-<pre><code>
-&#x200B;    **&#x53D1;&#x9001;**&#xFF1A;
-
-&#x200B;        &#x63D0;&#x4F9B;JmsMessagingTemplate
-
-&#x200B;        &#x793A;&#x4F8B;&#x4E2D;&#x662F;&#x5728;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x63D0;&#x4F9B;&#x7684;&#xFF0C;&#x5728;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x6CE8;&#x89E3;@Autowired
-
-&#x200B;    **&#x63A5;&#x6536;**&#xFF1A;
-
-&#x200B;        &#x6CE8;&#x89E3;JmsListener&#xFF0C;&#x63A5;&#x6536;&#x65B9;&#x6CD5;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x662F;&#x81EA;&#x5B9A;&#x4E49;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x5E8F;&#x5217;&#x5316;&#x63A5;&#x53E3;&#xFF08;&#x53D1;&#x9001;&#x5BF9;&#x8C61;&#x7C7B;&#x540C;&#xFF09;
-
-- &#x914D;&#x7F6E;
-
-  ```properties
-  #activemq&#x7684;url
-  spring.activemq.broker-url=tcp://192.168.169.170:61616
-  #activemq&#x7684;&#x7528;&#x6237;&#x540D;
-  spring.activemq.user=
-  #activemq&#x7684;&#x5BC6;&#x7801;
-  spring.activemq.password=
-  #&#x662F;&#x5426;&#x4F7F;&#x7528;&#x5185;&#x5B58;
-  spring.activemq.in-memory=false
-  #&#x662F;&#x5426;&#x662F;&#x8BA2;&#x9605;&#x6A21;&#x5F0F;
-  spring.jms.pub-sub-domain=false
-  #&#x961F;&#x5217;&#x540D;&#x79F0;&#xFF0C;&#x81EA;&#x5B9A;&#x4E49;
-  spring.jms.template.default-destination=spring_test
-  #&#x662F;&#x5426;&#x4F7F;&#x7528;&#x8FDE;&#x63A5;&#x6C60;
-  spring.activemq.pool.enabled=true
-  #&#x8FDE;&#x63A5;&#x6C60;&#x6700;&#x5927;&#x6570;
-  spring.activemq.pool.max-connections=50
-  #&#x5E8F;&#x5217;&#x5316;&#x5BF9;&#x8C61;&#x4FE1;&#x4EFB;&#x7684;&#x7C7B;
-  spring.activemq.packages.trusted=cn.tomsnail.snail.xxxx
-  #&#x5E8F;&#x5217;&#x5316;&#x5BF9;&#x8C61;&#x4FE1;&#x4EFB;&#x6240;&#x6709;&#x7684;&#x7C7B;&#xFF0C;&#x914D;&#x7F6E;&#x4E3A;true,spring.activemq.packages.trusted&#x4E0D;&#x751F;&#x6548;
-  spring.activemq.packages.trust-all=true
-</code></pre><h3 id="2-rabbitmq">2 RabbitMQ</h3>
 <ul>
-<li><p>maven</p>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>cn.tomsnail.snail<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>snail-extends-mq-spring-rabbitmq<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${revision}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-</code></pre>
+<li>snail-dao-archetype<ul>
+<li>dao&#x6A21;&#x5757;</li>
+</ul>
+</li>
+<li>snail-dao-dubbo-archetype<ul>
+<li>dao&#x5E76;&#x4E14;&#x53D1;&#x5E03;dubbo&#x670D;&#x52A1;</li>
+<li>&#x5355;&#x6A21;&#x5757;</li>
+</ul>
+</li>
+<li>snail-dao-springboot-archetype<ul>
+<li>dao&#x5E76;&#x4E14;&#x63D0;&#x4F9B;SpringBoot&#x5FAE;&#x670D;&#x52A1;</li>
+<li>&#x5355;&#x6A21;&#x5757;</li>
+</ul>
+</li>
+<li>snail-muliti-dao-dubbo-archetype<ul>
+<li>snail-dao-dubbo-archetype</li>
+<li>&#x591A;&#x6A21;&#x5757;</li>
+</ul>
+</li>
+<li>snail-muliti-dao-springboot-archetype<ul>
+<li>snail-dao-springboot-archetype</li>
+<li>&#x591A;&#x6A21;&#x5757;</li>
+</ul>
 </li>
 </ul>
-<ul>
-<li><p>spring&#x626B;&#x63CF;</p>
-<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- &#x975E;springboot&#x9879;&#x76EE;&#x987B;&#x626B;&#x63CF;&#x8BE5;&#x5305; --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.ext.mq.rabbitmq&quot;</span>/&gt;</span>
-</code></pre>
-</li>
-</ul>
-<ul>
-<li><p>&#x4F7F;&#x7528;</p>
-<p><strong>&#x53D1;&#x9001;</strong>&#xFF1A;</p>
-<p>&#x5B9E;&#x73B0;ConfirmCallback&#x63A5;&#x53E3;&#xFF0C;&#x83B7;&#x5F97;RabbitTemplate</p>
-<pre><code class="lang-java"><span class="hljs-meta">@Service</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RabbitMQSendService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ConfirmCallback</span></span>{
-
-    <span class="hljs-meta">@Autowired</span>
-    <span class="hljs-keyword">private</span> RabbitTemplate rabbitTemplate = <span class="hljs-keyword">null</span>;
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">confirm</span><span class="hljs-params">(CorrelationData correlationData, <span class="hljs-keyword">boolean</span> ack, String cause)</span> </span>{
-        <span class="hljs-keyword">if</span> (ack) {
-            System.out.println(<span class="hljs-string">&quot;&#x6D88;&#x606F;&#x6210;&#x529F;&#x6D88;&#x8D39;&quot;</span>);
-        }<span class="hljs-keyword">else</span> {
-            System.out.println(<span class="hljs-string">&quot;&#x6D88;&#x606F;&#x6D88;&#x8D39;&#x5931;&#x8D25;:&quot;</span> + cause);
-        }
-
-    }
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">send</span><span class="hljs-params">(String message)</span> </span>{
-        rabbitTemplate.setConfirmCallback(<span class="hljs-keyword">this</span>);
-        rabbitTemplate.convertAndSend(<span class="hljs-string">&quot;rabbitmq.test&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, message);
-    }
-
-}
-</code></pre>
-<p>&#x8BBE;&#x7F6E;&#x56DE;&#x8C03;</p>
-<pre><code class="lang-java">rabbitTemplate.setConfirmCallback(<span class="hljs-keyword">this</span>);
-</code></pre>
-<p>&#x53D1;&#x9001;&#x6D88;&#x606F;</p>
-<pre><code class="lang-java">rabbitTemplate.convertAndSend(<span class="hljs-string">&quot;rabbitmq.test&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, message);
-</code></pre>
-<p><strong>&#x63A5;&#x6536;</strong>&#xFF1A;</p>
-<p>&#x6CE8;&#x89E3;RabbitListener</p>
-<pre><code class="lang-java"><span class="hljs-meta">@Component</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RabbitMQReceiveService</span> </span>{
-
-    <span class="hljs-meta">@RabbitListener</span>(queues = { <span class="hljs-string">&quot;test&quot;</span> })
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">receiver</span><span class="hljs-params">(String message)</span> </span>{
-        System.out.println(<span class="hljs-string">&quot;&#x6536;&#x5230;&#x6D88;&#x606F;: &#x3010;&quot;</span> + message + <span class="hljs-string">&quot;&#x3011;&quot;</span>);
-    }
-
-}
-</code></pre>
-</li>
-<li><p>&#x914D;&#x7F6E;</p>
-<pre><code class="lang-properties">#RabbitMQ &#x914D;&#x7F6E;&#xFF0C;&#x5176;&#x4ED6;&#x914D;&#x7F6E;&#x53C2;&#x52A0;spring&#x76F8;&#x5173;&#x914D;&#x7F6E;
-#RabbitMQ &#x670D;&#x52A1;&#x5668;&#x5730;&#x5740; 
-spring.rabbitmq.host=127.0.0.1
-#RabbitMQ &#x7AEF;&#x53E3;
-spring.rabbitmq.port=5672
-#RabbitMQ &#x7528;&#x6237;
-spring.rabbitmq.username=xx
-#RabbitMQ &#x5BC6;&#x7801;p.
-spring.rabbitmq.password=xxx
-#&#x662F;&#x5426;&#x786E;&#x8BA4;&#x53D1;&#x9001;&#x7684;&#x6D88;&#x606F;&#x5DF2;&#x7ECF;&#x88AB;&#x6D88;&#x8D39;
-spring.rabbitmq.publisher-confirms=true
-</code></pre>
-</li>
-</ul>
-<h3 id="3-kafka">3 Kafka</h3>
-<ul>
-<li><p>maven</p>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>cn.tomsnail.snail<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>snail-extends-mq-spring-kafka<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${revision}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-</code></pre>
-</li>
-<li><p>spring&#x626B;&#x63CF;</p>
-<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- &#x975E;springboot&#x9879;&#x76EE;&#x987B;&#x626B;&#x63CF;&#x8BE5;&#x5305; --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;cn.tomsnail.snail.ext.mq.kafka&quot;</span>/&gt;</span>
-</code></pre>
-</li>
-<li><p>&#x4F7F;&#x7528;</p>
-<p><strong>&#x53D1;&#x9001;</strong></p>
-<pre><code class="lang-java"><span class="hljs-meta">@Service</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KafkaSendService</span> </span>{
-
-         <span class="hljs-meta">@Autowired</span>
-        <span class="hljs-keyword">private</span> KafkaTemplate kafkaTemplate;
-
-        <span class="hljs-comment">/**
-         * &#x5B9A;&#x65F6;&#x4EFB;&#x52A1;
-         */</span>
-
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">send</span><span class="hljs-params">(String message)</span></span>{
-            ListenableFuture future = kafkaTemplate.send(<span class="hljs-string">&quot;test&quot;</span>, message);
-            future.addCallback(o -&gt; System.out.println(<span class="hljs-string">&quot;send-&#x6D88;&#x606F;&#x53D1;&#x9001;&#x6210;&#x529F;&#xFF1A;&quot;</span> + message), throwable -&gt; System.out.println(<span class="hljs-string">&quot;&#x6D88;&#x606F;&#x53D1;&#x9001;&#x5931;&#x8D25;&#xFF1A;&quot;</span> + message));
-        }
-
-        <span class="hljs-meta">@Scheduled</span>(fixedDelayString=<span class="hljs-string">&quot;${spring.schedule.test.fiexd.delay}&quot;</span>)
-        <span class="hljs-meta">@Async</span>
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">async</span><span class="hljs-params">()</span> </span>{
-            send(UuidUtil.getNUUID());
-        }
-
-}
-</code></pre>
-<p><strong>&#x63A5;&#x6536;</strong></p>
-<pre><code class="lang-java"><span class="hljs-meta">@Component</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KafkaReceiverService</span> </span>{
-
-    <span class="hljs-meta">@KafkaListener</span>(topics = {<span class="hljs-string">&quot;test&quot;</span>}, groupId = <span class="hljs-string">&quot;receiver&quot;</span>)
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">registryReceiver</span><span class="hljs-params">(ConsumerRecord&lt;Integer, String&gt; integerStringConsumerRecords)</span> </span>{
-        System.out.println(<span class="hljs-string">&quot;&#x63A5;&#x6536;&#x5230;Kafka&#x6D88;&#x606F;&#xFF1A;&quot;</span>+integerStringConsumerRecords.value());
-    }
-}
-</code></pre>
-</li>
-</ul>
-<ul>
-<li><p>&#x914D;&#x7F6E;</p>
-<p>&#x5176;&#x4ED6;&#x914D;&#x7F6E;&#x53C2;&#x8003;spring-kafka</p>
-<pre><code class="lang-properties">#kafka&#x9ED8;&#x8BA4;&#x6D88;&#x8D39;&#x8005;&#x914D;&#x7F6E;
-spring.kafka.consumer.bootstrap-servers=127.0.0.1:8457
-spring.kafka.consumer.enable-auto-commit=false
-spring.kafka.consumer.auto-offset-reset=earliest
-#kafka&#x9ED8;&#x8BA4;&#x751F;&#x4EA7;&#x8005;&#x914D;&#x7F6E;
-spring.kafka.producer.bootstrap-servers=127.0.0.1:8457
-spring.kafka.producer.acks=-1
-spring.kafka.client-id=kafka-producer
-spring.kafka.producer.batch-size=5
-</code></pre>
 </li>
 </ul>
 
@@ -1049,12 +861,12 @@ spring.kafka.producer.batch-size=5
 
             
                 
-                <a href="CACHE.html" class="navigation navigation-prev " aria-label="Previous page: 缓存">
+                <a href="TOMCAT_JVM.html" class="navigation navigation-prev " aria-label="Previous page: Tomcat与JVM">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="LOCK.html" class="navigation navigation-next " aria-label="Next page: 锁">
+                <a href="../e3/" class="navigation navigation-next " aria-label="Next page: 第三方配置">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1065,7 +877,7 @@ spring.kafka.producer.batch-size=5
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"消息","level":"1.2.5.2","depth":3,"next":{"title":"锁","level":"1.2.5.3","depth":3,"path":"user/sc/LOCK.md","ref":"user/sc/LOCK.md","articles":[]},"previous":{"title":"缓存","level":"1.2.5.1","depth":3,"path":"user/sc/CACHE.md","ref":"user/sc/CACHE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"user/sc/MQ.md","mtime":"2019-05-13T01:09:56.520Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-13T01:48:48.178Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"脚手架","level":"1.2.5.10","depth":3,"next":{"title":"第三方配置","level":"1.2.6","depth":2,"path":"user/e3/README.md","ref":"user/e3/README.md","articles":[{"title":"监控","level":"1.2.6.1","depth":3,"ref":"","articles":[]},{"title":"阿里","level":"1.2.6.2","depth":3,"ref":"","articles":[]},{"title":"腾讯","level":"1.2.6.3","depth":3,"ref":"","articles":[]},{"title":"文件","level":"1.2.6.4","depth":3,"ref":"","articles":[]},{"title":"数据","level":"1.2.6.5","depth":3,"ref":"","articles":[]}]},"previous":{"title":"Tomcat与JVM","level":"1.2.5.9","depth":3,"path":"user/sc/TOMCAT_JVM.md","ref":"user/sc/TOMCAT_JVM.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"user/sc/ARCHETYPE.md","mtime":"2019-05-13T01:48:12.231Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-13T01:54:36.518Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
