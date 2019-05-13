@@ -13,7 +13,7 @@ public final  class GenConfigModel {
     public final static GenConfigModel getInstance(){
         return instance;
     }
-
+    public final Boolean gen_test = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.test",false);
     public final Boolean gen_replace = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.replace",true);
 
     public final String gen_jdbc_driver = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.jdbc.driver","");
@@ -245,5 +245,9 @@ public final  class GenConfigModel {
 
     public Boolean getGen_pom_package() {
         return gen_pom_package;
+    }
+
+    public Boolean getGen_test() {
+        return gen_test;
     }
 }

@@ -24,6 +24,7 @@
         * [工作流](user/sc/ACTIVIT.md)
         * 返回消息
         * [Tomcat与JVM](user/sc/TOMCAT_JVM.md)
+        * [脚手架](user/sc/ARCHETYPE.md)
     * [第三方配置](user/e3/README.md)
         * 监控
         * 阿里
