@@ -13,7 +13,7 @@ public class XssSecurityManager {
   
     // 非法的字符集  
     private static final String[] INVALID_CHARS = new String[] { "<", ">",   
-            "\"", "\\" };  
+            "\"", "\\\\" };
   
     // 统一替换可能造成XSS漏洞的字符为全角中文字符  
     private static final String[] VALID_CHARS = new String[] { "&lt;", "&gt;", "&quot;",  

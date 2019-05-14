@@ -85,7 +85,7 @@ public class ValidatorRule<T> {
 		
 		if (ruleTypeMap.containsKey(RuleType.LIMIT)) {
 			String v = value + "";
-			if (Integer.valueOf(ruleTypeMap.get(RuleType.LIMIT) + "") == v.trim().length()) {
+			if (Integer.parseInt(ruleTypeMap.get(RuleType.LIMIT) + "") == v.trim().length()) {
 
 			} else {
 				throw new ParamValidatorException(getValidFaildMsg(desc,key + "的值是" + value
@@ -237,7 +237,7 @@ public String validator(String key, T value,Map<RuleType,String> descMap) throws
 		
 		if (ruleTypeMap.containsKey(RuleType.LIMIT)) {
 			String v = value + "";
-			if (Integer.valueOf(ruleTypeMap.get(RuleType.LIMIT) + "") == v.trim().length()) {
+			if (Integer.parseInt(ruleTypeMap.get(RuleType.LIMIT) + "") == v.trim().length()) {
 
 			} else {
 				throw new ParamValidatorException(getValidFaildMsg(descMap.get(RuleType.LIMIT),key + "的值是" + value

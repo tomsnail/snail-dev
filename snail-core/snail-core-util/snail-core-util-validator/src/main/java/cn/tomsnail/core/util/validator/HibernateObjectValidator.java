@@ -31,16 +31,13 @@ public class HibernateObjectValidator implements IObjectValidator{
 			throw new ParamValidatorException(ValidateUtil.getValidFaildMsg("", "Map值或者Key值空异常"));
 		}
 		if(!clazz.isAnnotationPresent(cn.tomsnail.core.util.validator.annotation.BeanValidator.class)){
-			if(valueMap!=null){
-				try {
-					Object obj = clazz.newInstance();  
-					BeanUtils.populate(obj, valueMap);
-					valid(obj);
-					return obj;
-				} catch (Exception e) {
-					throw new ParamValidatorException(e.getMessage());
-				} 
-				
+			try {
+				Object obj = clazz.newInstance();
+				BeanUtils.populate(obj, valueMap);
+				valid(obj);
+				return obj;
+			} catch (Exception e) {
+				throw new ParamValidatorException(e.getMessage());
 			}
 		}else{
 			Object obj = BEAN_VALIDATOR.getValidBean(valueMap, clazz, validType);
@@ -48,7 +45,6 @@ public class HibernateObjectValidator implements IObjectValidator{
 			return obj;
 		}
 		
-		return null;
 	}
 	
 	

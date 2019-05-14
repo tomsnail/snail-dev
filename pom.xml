@@ -73,6 +73,9 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${maven_jacoco_version}</version>
+				<configuration>
+					<skip>${jacoco.skip}</skip>
+				</configuration>
 				<executions>
 					<execution>
 						<id>jacoco-initialize</id>
@@ -148,6 +151,7 @@
 				<artifactId>findbugs-maven-plugin</artifactId>
 				<version>3.0.5</version>
 				<configuration>
+					<skip>${findbugs.skip}</skip>
 					<!-- <configLocation>${basedir}/springside-findbugs.xml</configLocation> -->
 					<threshold>High</threshold>
 					<effort>Default</effort>
@@ -155,23 +159,37 @@
 					<!-- findbugs xml输出路径 -->
 					<findbugsXmlOutputDirectory>target/site</findbugsXmlOutputDirectory>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>findbugs</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>3.0.0</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.10.0</version>
+				<version>3.8</version>
 				<configuration>
+					<skip>${pmd.skip}</skip>
 					<rulesets>
-						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-comment.xml</ruleset>
-						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-concurrent.xml</ruleset>
-						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-constant.xml</ruleset>
-						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-exception.xml</ruleset>
-						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-flowcontrol.xml</ruleset>
-						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-naming.xml</ruleset>
-						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-oop.xml</ruleset>
-						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-orm.xml</ruleset>
-						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-other.xml</ruleset>
-						<ruleset>src/main/resources/p3c-pmd/rulesets/java/ali-set.xml</ruleset>
+						<ruleset>rulesets/java/ali-comment.xml</ruleset>
+						<ruleset>rulesets/java/ali-concurrent.xml</ruleset>
+						<ruleset>rulesets/java/ali-constant.xml</ruleset>
+						<ruleset>rulesets/java/ali-exception.xml</ruleset>
+						<ruleset>rulesets/java/ali-flowcontrol.xml</ruleset>
+						<ruleset>rulesets/java/ali-naming.xml</ruleset>
+						<ruleset>rulesets/java/ali-oop.xml</ruleset>
+						<ruleset>rulesets/java/ali-orm.xml</ruleset>
+						<ruleset>rulesets/java/ali-other.xml</ruleset>
+						<ruleset>rulesets/java/ali-set.xml</ruleset>
 					</rulesets>
 					<printFailingErrors>true</printFailingErrors>
 				</configuration>
@@ -199,9 +217,9 @@
 						<artifactId>p3c-pmd</artifactId>
 						<version>1.3.6</version>
 					</dependency>
-
 				</dependencies>
 			</plugin>
+
 		</plugins>
 	</build>
 	<properties>
@@ -280,6 +298,9 @@
 		<arguments />
 		<checkstyle.skip>true</checkstyle.skip>
 		<rat.skip>true</rat.skip>
+		<findbugs.skip>true</findbugs.skip>
+		<jacoco.skip>true</jacoco.skip>
+		<pmd.skip>true</pmd.skip>
 
 	</properties>
 	<dependencies>
@@ -310,6 +331,7 @@
 			<version>1.7.21</version>
 
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
@@ -370,8 +392,6 @@
    			<artifactId>validation-api</artifactId>
    			<version>2.0.1.Final</version>
 		</dependency>
-
-
 	</dependencies>
 	<profiles>
 		<profile>
@@ -491,6 +511,23 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>alimaven</id>
+			<name>aliyun maven</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>nexus-163</id>
+			<name>Nexus 163</name>
+			<url>http://mirrors.163.com/maven/repository/maven-public/</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
 		</repository>
 	</repositories>
 	<reporting>
