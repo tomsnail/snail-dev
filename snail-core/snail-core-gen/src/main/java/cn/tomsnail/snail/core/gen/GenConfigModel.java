@@ -37,7 +37,7 @@ public final  class GenConfigModel {
     public final Boolean gen_dao = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.dao",true);
     public final String gen_dao_jdbctype = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.dao.jdbctype","");
     public final String gen_dao_db = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.dao.db","");
-    public final String gen_dao_feild_type = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.dao.feild.type","");
+    public final String gen_dao_field_type = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.dao.field.type","");
     public final Boolean gen_dao_service = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.dao.service",true);
     public final Boolean gen_dao_page = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.dao.page",true);
     public final Boolean gen_dao_vo = ConfigHelp.getInstance("genConfig").getLocalConfig("gen.dao.vo",true);
@@ -155,8 +155,8 @@ public final  class GenConfigModel {
         return gen_dao_db;
     }
 
-    public String getGen_dao_feild_type() {
-        return gen_dao_feild_type;
+    public String getGen_dao_field_type() {
+        return gen_dao_field_type;
     }
 
     public Boolean getGen_dao_service() {

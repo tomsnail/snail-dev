@@ -38,7 +38,7 @@ public class DBUtil {
 		String user = GenConfigModel.getInstance().gen_jdbc_username;
 		String password = GenConfigModel.getInstance().gen_jdbc_password;
 		String jdbctype = GenConfigModel.getInstance().gen_dao_jdbctype;
-		String feildtype = GenConfigModel.getInstance().gen_dao_feild_type;//UPPER、LOWER、Hump
+		String feildtype = GenConfigModel.getInstance().gen_dao_field_type;//UPPER、LOWER、Hump
 		String dbType = GenConfigModel.getInstance().gen_dao_db;//mysql、oracle
 		if(StringUtils.isNotBlank(dbType)) {
 			genTable.setDbType(dbType);
