@@ -41,10 +41,11 @@
           * fastdfs
         * 数据计算
     * [配置项全示例](user/ALL_CONFIG.md)
+    * [API](user/API.md)
     * [工程引用]()
     * [版本与升级](user/VERSION.md)
     * 发布与测试
-    * DI/DC
+    * CI/CD
     * Dubbo Admin
     * Spring Cloud
 * [扩展指南](dev/README.md)
