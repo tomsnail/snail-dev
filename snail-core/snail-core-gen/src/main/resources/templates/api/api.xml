@@ -20,27 +20,93 @@ import ${packageName}.${moduleName}.api<#if subModuleName != "">.${subModuleName
  * ${functionName}Service接口
  * @author ${functionAuthor}
  * @version ${functionVersion}
+ * @Date ${genDate}
  */
 public interface ${ClassName}Service  {
-	
+
+	/**
+	 * findList//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}
+	 * @return java.util.List
+	 **/
 	public List<${ClassName}Mo> findList(${ClassName}Mo ${className});
-		
+
+	/**
+	 * get//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param id
+	 * @return ${ClassName}Mo
+	 **/
 	public ${ClassName}Mo get(String id);
-	
+
+	/**
+	 * findPageCount//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}
+	 * @return int
+	 **/
 	public int findPageCount(${ClassName}Mo ${className});
-	
+
+	/**
+	 * findPage//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}
+	 * @param page
+	 * @return java.util.List
+	 **/
 	public List<${ClassName}Mo> findPage(${ClassName}Mo ${className},Page page);
-	
+	/**
+	 * save//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}
+	 * @return boolean
+	 **/
 	public boolean save(${ClassName}Mo ${className});
-	
+	/**
+	 * saveBatch//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}s
+	 * @return boolean
+	 **/
 	public boolean saveBatch(List<${ClassName}Mo> ${className}s);
-	
+	/**
+	 * delete//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param id
+	 * @return boolean
+	 **/
 	public boolean delete(String id);
-	
+	/**
+	 * deleteBatch//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ids
+	 * @return boolean
+	 **/
 	public boolean deleteBatch(List<String> ids);
-	
+	/**
+	 * update//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}
+	 * @return boolean
+	 **/
 	public boolean update(${ClassName}Mo ${className});
-	
+	/**
+	 * updateBatch//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}s
+	 * @return boolean
+	 **/
 	public boolean updateBatch(List<${ClassName}Mo> ${className}s);
 	
 }]]>

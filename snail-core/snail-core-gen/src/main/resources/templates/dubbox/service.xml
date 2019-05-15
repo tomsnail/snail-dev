@@ -24,6 +24,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Map;
 
+/**
+ * ${functionName}DubboxService
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ * @Date ${genDate}
+ */
 @Path("${ClassName}")
 @Service
 public class ${ClassName}DubboxService implements ${ClassName}Dubbox {
@@ -33,7 +39,7 @@ public class ${ClassName}DubboxService implements ${ClassName}Dubbox {
 	private ${ClassName}Service ${className}Service;
 
 	@POST
-	@Path("findList")
+	@Path("list")
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
 	@LogPoint

@@ -20,6 +20,7 @@ import java.math.BigDecimal;
  * ${functionName} model
  * @author ${functionAuthor}
  * @version ${functionVersion}
+ * @Date ${genDate}
  */
 @BeanValidator(isAllValidator=true)
 public class ${ClassName}Vo  extends BaseVo<${ClassName}Mo> {
@@ -29,12 +30,14 @@ public class ${ClassName}Vo  extends BaseVo<${ClassName}Mo> {
 		<#-- 如果不是基类属性 -->
 		<#if c.isNotBaseField>
 			<#if c.isPK>
+	<#if c.comments??>// ${c.comments}</#if>
 	@FieldValidator(onlyToBean=true,mapperName="",validTypes={ValidType.UPDATE,ValidType.DELETE})
-	private ${c.simpleJavaType} ${c.simpleJavaField};		<#if c.comments??>// ${c.comments}</#if>
+	private ${c.simpleJavaType} ${c.simpleJavaField};
 			<#-- 其它字段 -->
 			<#else>
+	<#if c.comments??>// ${c.comments}</#if>
 	@FieldValidator(onlyToBean=true,mapperName="")
-	private ${c.simpleJavaType} ${c.simpleJavaField};		<#if c.comments??>// ${c.comments}</#if>
+	private ${c.simpleJavaType} ${c.simpleJavaField};
 			</#if>
 		</#if>
 	</#list>

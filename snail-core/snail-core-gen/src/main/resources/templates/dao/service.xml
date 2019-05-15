@@ -21,6 +21,12 @@ import ${packageName}.${moduleName}.api.${ClassName}Mo;
 import cn.tomsnail.snail.core.util.string.StringUtils;
 import cn.tomsnail.snail.core.util.uuid.UuidUtil;
 
+/**
+ * ${functionName}BaseService接口
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ * @Date ${genDate}
+ */
 @Service("${className}BaseService")
 public class ${ClassName}BaseServiceImpl implements ${ClassName}BaseService{
 	

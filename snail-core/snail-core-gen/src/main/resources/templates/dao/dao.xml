@@ -19,21 +19,64 @@ import cn.tomsnail.snail.core.ds.dao.plugins.pagination.PageDao;
  * ${functionName}DAO接口
  * @author ${functionAuthor}
  * @version ${functionVersion}
+ * @Date ${genDate}
  */
 public interface ${ClassName}Dao extends PageDao<${ClassName}Dto> {
-	
+	/**
+	 * findList//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}Dto
+	 * @return java.util.List
+	 **/
 	public List<${ClassName}Dto> findList(${ClassName}Dto ${className}Dto);
-	
+	/**
+	 * findAllList//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param
+	 * @return java.util.List
+	 **/
 	public List<${ClassName}Dto> findAllList();
-	
+	/**
+	 * get//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}
+	 * @return java.util.List
+	 **/
 	public ${ClassName}Dto get(String id);
-	
+	/**
+	 * findPageCount//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}Dto
+	 * @return int
+	 **/
 	public int findPageCount(${ClassName}Dto ${className}Dto);
-	
+	/**
+	 * insert//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}Dto
+	 * @return int
+	 **/
 	public int insert(${ClassName}Dto ${className}Dto);
-	
+	/**
+	 * delete//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param id
+	 * @return int
+	 **/
 	public int delete(String id);
-	
+	/**
+	 * update//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}Dto
+	 * @return int
+	 **/
 	public int update(${ClassName}Dto ${className}Dto);
 	
 }]]>

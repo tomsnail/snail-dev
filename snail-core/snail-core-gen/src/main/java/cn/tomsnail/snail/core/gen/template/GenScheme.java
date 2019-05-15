@@ -8,6 +8,7 @@ import cn.tomsnail.snail.core.gen.GenConfigModel;
 import cn.tomsnail.snail.core.gen.db.GenTable;
 import cn.tomsnail.snail.core.util.JsonUtil;
 import cn.tomsnail.snail.core.util.bean.BeanUtil;
+import cn.tomsnail.snail.core.util.date.DateTimeUtil;
 import cn.tomsnail.snail.core.util.string.StringUtils;
 
 import java.util.HashMap;
@@ -227,7 +228,7 @@ public class GenScheme  {
 			e.printStackTrace();
 		}
 		model.put("packagePath", StringUtils.lowerCase(this.getPackageName()).replaceAll("\\.","/"));
-
+		model.put("genDate", DateTimeUtil.getNow());
 		return model;
 	}
 }

@@ -20,6 +20,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+
+/**
+ * ${functionName}SpringBoot
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ * @Date ${genDate}
+ */
 @RestController
 @RequestMapping("/${ClassName}")
 public class ${ClassName}SpringBoot  {
@@ -28,8 +35,16 @@ public class ${ClassName}SpringBoot  {
 	@Reference(check = false)
 	private ${ClassName}Service ${className}Service;
 
+
+	/**
+	 * findList//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}MoRequestData
+	 * @return cn.tomsnail.snail.core.http.ResultData
+	 **/
 	@LogPoint
-	@RequestMapping(value = "/findList", method = RequestMethod.POST)
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@SnailValidator
 	@ResponseBody
 	public ResultData<Map<String,Object>> findList(@RequestBody RequestData<${ClassName}Vo> ${className}MoRequestData) {
@@ -39,7 +54,13 @@ public class ${ClassName}SpringBoot  {
 	}
 
 
-
+	/**
+	 * save//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}MoRequestData
+	 * @return cn.tomsnail.snail.core.http.ResultData
+	 **/
 	@LogPoint
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@SnailValidator
@@ -51,7 +72,13 @@ public class ${ClassName}SpringBoot  {
 	}
 
 
-
+	/**
+	 * delete//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}MoRequestData
+	 * @return cn.tomsnail.snail.core.http.ResultData
+	 **/
 	@LogPoint
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@SnailValidator
@@ -62,7 +89,13 @@ public class ${ClassName}SpringBoot  {
 		return resultData;
 	}
 
-
+	/**
+	 * update//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}MoRequestData
+	 * @return cn.tomsnail.snail.core.http.ResultData
+	 **/
 	@LogPoint
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@SnailValidator

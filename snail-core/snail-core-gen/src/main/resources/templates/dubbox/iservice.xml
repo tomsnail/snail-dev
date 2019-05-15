@@ -13,21 +13,50 @@ import ${packageName}.${moduleName}.vo.${ClassName}Vo;
 
 import java.util.Map;
 
-
+/**
+ * ${functionName}Dubbox
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ * @Date ${genDate}
+ */
 public interface ${ClassName}Dubbox {
 
-
+	/**
+	 * findList//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}MoRequestData
+	 * @return cn.tomsnail.snail.core.http.ResultData
+	 **/
 	public ResultData<Map<String,Object>> findList(RequestData<${ClassName}Vo> ${className}MoRequestData);
 
 
-
+	/**
+	 * save//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}MoRequestData
+	 * @return cn.tomsnail.snail.core.http.ResultData
+	 **/
 	public ResultData<Map<String,Object>> save(RequestData<${ClassName}Vo> ${className}MoRequestData) ;
 
 
-
+	/**
+	 * delete//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}MoRequestData
+	 * @return cn.tomsnail.snail.core.http.ResultData
+	 **/
 	public ResultData<Map<String,Object>> delete(RequestData<${ClassName}Vo> ${className}MoRequestData);
 
-
+	/**
+	 * update//TODO
+	 * @author ${functionAuthor}
+	 * @Date ${genDate}
+	 * @param ${className}MoRequestData
+	 * @return cn.tomsnail.snail.core.http.ResultData
+	 **/
 	public ResultData<Map<String,Object>> update(RequestData<${ClassName}Vo> ${className}MoRequestData) ;
 
 
