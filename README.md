@@ -2,7 +2,7 @@
 
 ## 开发指导文档
 
-[docs](https://tomsnail.github.io/snail-dev/)
+[docs链接](https://tomsnail.github.io/snail-dev/)
 
 ## 版本计划
 
