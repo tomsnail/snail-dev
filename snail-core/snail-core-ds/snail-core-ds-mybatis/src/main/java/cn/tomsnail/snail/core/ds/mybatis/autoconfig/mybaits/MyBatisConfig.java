@@ -16,13 +16,24 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 
 import javax.sql.DataSource;
 
+/**
+ * The type My batis config.
+ */
 @Configuration
 @EnableTransactionManagement
 public class MyBatisConfig  implements TransactionManagementConfigurer{
 
-	@Autowired
+    /**
+     * The Data source.
+     */
+    @Autowired
     DataSource dataSource;
 
+    /**
+     * Sql session factory bean sql session factory.
+     *
+     * @return the sql session factory
+     */
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactoryBean() {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
@@ -43,6 +54,12 @@ public class MyBatisConfig  implements TransactionManagementConfigurer{
         }
     }
 
+    /**
+     * Sql session template sql session template.
+     *
+     * @param sqlSessionFactory the sql session factory
+     * @return the sql session template
+     */
     @Bean
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);

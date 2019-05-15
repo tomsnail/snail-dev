@@ -1,9 +1,18 @@
 package cn.tomsnail.snail.core.ds.mybatis.dialect;
 
+/**
+ * The type Dialect.
+ */
 public abstract class Dialect implements cn.tomsnail.snail.core.ds.dialect.Dialect
 {
 
-  public abstract String getCountString(String paramString);
+    /**
+     * Gets count string.
+     *
+     * @param paramString the param string
+     * @return the count string
+     */
+    public abstract String getCountString(String paramString);
   
   public boolean supportsLimit() {
 	  return false;

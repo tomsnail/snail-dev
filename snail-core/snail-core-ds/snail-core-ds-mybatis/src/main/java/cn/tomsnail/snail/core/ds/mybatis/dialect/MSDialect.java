@@ -1,8 +1,15 @@
 /*    */ package cn.tomsnail.snail.core.ds.mybatis.dialect;
-/*    */ 
+
+/**
+ * The type Ms dialect.
+ */
+/*    */
 /*    */ public class MSDialect extends Dialect
 /*    */ {
-/*    */   protected static final String SQL_END_DELIMITER = ";";
+    /**
+     * The constant SQL_END_DELIMITER.
+     */
+    /*    */   protected static final String SQL_END_DELIMITER = ";";
 /*    */ 
 /*    */   public String getLimitString(String sql, int offset, int limit)
 /*    */   {

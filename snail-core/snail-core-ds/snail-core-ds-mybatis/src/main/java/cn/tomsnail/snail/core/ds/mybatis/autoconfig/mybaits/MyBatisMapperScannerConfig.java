@@ -6,10 +6,18 @@ import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * The type My batis mapper scanner config.
+ */
 @Configuration
 public class MyBatisMapperScannerConfig {
 
-	@Bean
+    /**
+     * Mapper scanner configurer mapper scanner configurer.
+     *
+     * @return the mapper scanner configurer
+     */
+    @Bean
 	public MapperScannerConfigurer mapperScannerConfigurer() {
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
 		mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");

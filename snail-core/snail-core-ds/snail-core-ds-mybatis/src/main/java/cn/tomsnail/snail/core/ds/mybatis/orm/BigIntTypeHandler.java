@@ -12,6 +12,7 @@ import org.apache.ibatis.type.TypeHandler;
 
 /**
  * String 转换为BigInt
+ *
  * @author yangsong
  * @date 2015年9月24日 下午12:24:43
  */

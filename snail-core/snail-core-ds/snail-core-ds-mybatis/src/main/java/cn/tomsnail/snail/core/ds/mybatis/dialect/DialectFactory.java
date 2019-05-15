@@ -2,11 +2,24 @@
 /*    */ 
 /*    */ import org.apache.ibatis.session.Configuration;
 
-/*    */ 
+/**
+ * The type Dialect factory.
+ */
+/*    */
 /*    */ public class DialectFactory
 /*    */ {
-/* 13 */   public static String dialectClass = null;
-/*    */ 
+    /**
+     * The constant dialectClass.
+     */
+    /* 13 */   public static String dialectClass = null;
+
+    /**
+     * Build dialect dialect.
+     *
+     * @param configuration the configuration
+     * @return the dialect
+     */
+    /*    */
 /*    */   public static Dialect buildDialect(Configuration configuration) {
 /* 16 */     if (dialectClass == null) {
 /* 17 */       synchronized (DialectFactory.class) {

@@ -2,10 +2,20 @@
 /*     */ 
 /*     */ import java.util.regex.Matcher;
 /*     */ import java.util.regex.Pattern;
-/*     */ 
+
+/**
+ * The type Postgre page hepler.
+ */
+/*     */
 /*     */ public class PostgrePageHepler
 /*     */ {
-/*     */   public static String getCountString(String querySelect)
+    /**
+     * Gets count string.
+     *
+     * @param querySelect the query select
+     * @return the count string
+     */
+    /*     */   public static String getCountString(String querySelect)
 /*     */   {
 /*  14 */     querySelect = getLineSql(querySelect);
 /*  15 */     int orderIndex = getLastOrderInsertPoint(querySelect);
@@ -30,7 +40,16 @@
 /*     */     }
 /*  41 */     return orderIndex;
 /*     */   }
-/*     */ 
+
+    /**
+     * Gets limit string.
+     *
+     * @param querySelect the query select
+     * @param offset      the offset
+     * @param limit       the limit
+     * @return the limit string
+     */
+    /*     */
 /*     */   public static String getLimitString(String querySelect, int offset, int limit)
 /*     */   {
 /*  54 */     querySelect = getLineSql(querySelect);

@@ -11,13 +11,23 @@ import org.apache.ibatis.type.MappedJdbcTypes;
 
 import com.alibaba.fastjson.JSON;
 
+/**
+ * The type Mybatis json type handler.
+ *
+ * @param <T> the type parameter
+ */
 @MappedJdbcTypes(JdbcType.VARCHAR)
 public class MybatisJsonTypeHandler<T extends Object> extends BaseTypeHandler<T> {
 	
 	
  
     private Class<T> clazz;
- 
+
+    /**
+     * Instantiates a new Mybatis json type handler.
+     *
+     * @param clazz the clazz
+     */
     public MybatisJsonTypeHandler(Class<T> clazz) {
         if (clazz == null) throw new IllegalArgumentException("Type argument cannot be null");
         this.clazz = clazz;

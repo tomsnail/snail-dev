@@ -1,5 +1,9 @@
 /*    */ package cn.tomsnail.snail.core.ds.mybatis.dialect;
-/*    */ 
+
+/**
+ * The type Oracle dialect.
+ */
+/*    */
 /*    */ public class OracleDialect extends Dialect
 /*    */ {
 /*    */   public String getLimitString(String sql, int offset, int limit)

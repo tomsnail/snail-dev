@@ -1,8 +1,15 @@
 /*    */ package cn.tomsnail.snail.core.ds.mybatis.dialect;
-/*    */ 
+
+/**
+ * The type My sql 5 dialect.
+ */
+/*    */
 /*    */ public class MySql5Dialect extends Dialect
 /*    */ {
-/*    */   protected static final String SQL_END_DELIMITER = ";";
+    /**
+     * The constant SQL_END_DELIMITER.
+     */
+    /*    */   protected static final String SQL_END_DELIMITER = ";";
 /*    */ 
 /*    */   public String getLimitString(String sql, int offset, int limit)
 /*    */   {
