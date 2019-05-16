@@ -56,14 +56,14 @@ public class SmartProxyServer extends ZkServer{
 	private void initNodeInfo(){
 		Map<String,ProxyInfo> allProryInfo = this.source.getSourceData();
 		if(allProryInfo!=null&&allProryInfo.size()>0){
-			Iterator<String> it = allProryInfo.keySet().iterator();
+			Iterator<Map.Entry<String,ProxyInfo>> it = allProryInfo.entrySet().iterator();
 			while(it.hasNext()){
-				String _proxy = it.next();
-				ProxyInfo proxyInfo = allProryInfo.get(_proxy);
+				Map.Entry<String,ProxyInfo> entry = it.next();
+				ProxyInfo proxyInfo = entry.getValue();
 				SmartProxyInfo _proxyInfo = new SmartProxyInfo();
 				_proxyInfo.setConfigList(proxyInfo.getCommandInfo());
 				_proxyInfo.setSelfInfo(proxyInfo.getSelfInfo());
-				writeData(_proxy,_proxyInfo);
+				writeData(entry.getKey(),_proxyInfo);
 			}
 		}
 	}

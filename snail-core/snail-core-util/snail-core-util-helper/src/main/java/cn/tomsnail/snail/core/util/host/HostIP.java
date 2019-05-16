@@ -17,7 +17,7 @@ import java.util.Enumeration;
  */
 public class HostIP {
 
-	public static String HOST_IP = getHostNameIP();
+	public final static String HOST_IP = getHostNameIP();
 	
 	public static String getHostNameIP(){
 		InetAddress ia = null;

@@ -16,19 +16,19 @@ import java.math.BigDecimal;
  */
 public class DispatchUrlMo  implements Serializable {
 	
-	private String id;		// 
-	private String strategyId;		// 
-	private String urlType;		// 
-	private String urlContext;		// 
-	private String urlUserName;		// 
-	private String urlPassword;		// 
-	private String urlAdditional;		// 
-	private Timestamp createDate;		// 
-	private String createBy;		// 
-	private Timestamp updateDate;		// 
-	private String updateBy;		// 
-	private String delFlag;		// 
-	private String remarks;		// 
+	private String id;		 
+	private String strategyId;		 
+	private String urlType;		 
+	private String urlContext;		 
+	private String urlUserName;		 
+	private String urlPassword;		 
+	private String urlAdditional;		 
+	private Timestamp createDate;		 
+	private String createBy;		 
+	private Timestamp updateDate;		 
+	private String updateBy;		 
+	private String delFlag;		 
+	private String remarks;		 
 	
 
 
@@ -105,7 +105,7 @@ public class DispatchUrlMo  implements Serializable {
 	}
 	
 	public Timestamp getUpdateDate() {
-		return updateDate;
+		return this.updateDate;
 	}
 
 	public void setUpdateDate(Timestamp updateDate) {

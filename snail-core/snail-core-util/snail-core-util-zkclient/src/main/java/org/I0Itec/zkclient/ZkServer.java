@@ -79,15 +79,15 @@ public class ZkServer {
     @PostConstruct
     public void start() {
         final String[] localHostNames = NetworkUtil.getLocalHostNames();
-        String names = "";
+        StringBuffer names = new StringBuffer();
         for (int i = 0; i < localHostNames.length; i++) {
             final String name = localHostNames[i];
-            names += " " + name;
+            names.append( " ").append(name);
             if (i + 1 != localHostNames.length) {
-                names += ",";
+                names .append(",");
             }
         }
-        LOG.info("Starting ZkServer on: [" + names + "] port " + _port + "...");
+        LOG.info("Starting ZkServer on: [" + names.toString() + "] port " + _port + "...");
         try {
             startZooKeeperServer();
             _zkClient = new ZkClient("localhost:" + _port, 10000);

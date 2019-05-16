@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class Page<T> {
 	
-	public static int DEFAULT_PAGE_MODE = 1;
-	public static int NO_PAGE_MODE = 0;
+	public final static int DEFAULT_PAGE_MODE = 1;
+	public final static int NO_PAGE_MODE = 0;
 	
 	private int pageNo = 1; // 当前页码
-	private int pageSize = Integer.valueOf("30"); // 页面大小，设置为“-1”表示不进行分页（分页无效）
+	private int pageSize = Integer.parseInt("30"); // 页面大小，设置为“-1”表示不进行分页（分页无效）
 	
 	private long count;// 总记录数，设置为“-1”表示不查询总数
 	

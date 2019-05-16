@@ -118,11 +118,10 @@ public class SearchObjectSQLHepler<K,T> extends ParamObjectSQLHepler<K, T> imple
 	public List<T> search(Map<String, String> paramMap,String[] orders, int start, int limit) {
 		BaseSqlCondition baseSqlCondition = new BaseSqlCondition();
 		if(paramMap!=null){
-			Iterator<String> it = paramMap.keySet().iterator();
+			Iterator<Map.Entry<String,String>> it = paramMap.entrySet().iterator();
 			while(it.hasNext()){
-				String key = it.next();
-				String value = paramMap.get(key);
-				baseSqlCondition.add(new BaseSqlCondition(key, ConditionType.eq, value));
+				Map.Entry<String,String> entry = it.next();
+				baseSqlCondition.add(new BaseSqlCondition(entry.getKey(), ConditionType.eq, entry.getValue()));
 			}
 		}
 		BaseSqlParse baseSqlParse = new BaseSqlParse(this.objectSQL);

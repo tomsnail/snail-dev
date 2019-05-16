@@ -25,8 +25,8 @@ public class RtFileListener implements FileAlterationListener{
 	private long interval = 2000;
 	
 	private RtFileCallBack fileCallBack;
-	
-	public static boolean isInited =false;
+
+	protected static boolean isInited =false;
 	
 	public RtFileListener(String path,long interval,RtFileCallBack fileCallBack){
 		this.path = path;

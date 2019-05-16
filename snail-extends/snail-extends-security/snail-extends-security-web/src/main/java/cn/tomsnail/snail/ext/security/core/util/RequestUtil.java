@@ -22,15 +22,15 @@ public class RequestUtil {
 	
 	 public static String getBodyString(BufferedReader br) {
 		  String inputLine;
-		       String str = "";
+		       StringBuffer str = new StringBuffer();
 		     try {
 		       while ((inputLine = br.readLine()) != null) {
-		        str += inputLine;
+		        str.append(inputLine);
 		       }
 		       br.close();
 		     } catch (IOException e) {
 		    	 logger.error("", e);
 		     }
-		     return str;
+		     return str.toString();
 		 }
 }

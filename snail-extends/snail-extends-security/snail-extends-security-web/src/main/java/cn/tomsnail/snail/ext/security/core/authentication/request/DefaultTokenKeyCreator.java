@@ -27,7 +27,7 @@ public class DefaultTokenKeyCreator implements IKeyCreator{
 	public Key getKey(String key, Map<String, Object> addtionMap) {
 		Key _key = new Key();
 		try {
-			String str = new String(key+System.currentTimeMillis());
+			String str = String.valueOf(key+System.currentTimeMillis());
 			String md5Str = MD5Util.md5Encode(str);
 			_key.setKey(md5Str);
 			return _key;

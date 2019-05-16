@@ -12,17 +12,17 @@ import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 	*/     
 public class Constants {
 
-	public static  int coreSize = get("batchinsert.coreSize",5);
+	public final static  int coreSize = get("batchinsert.coreSize",5);
 	
-	public static  int maxSize = get("batchinsert.maxSize",10);
+	public final static  int maxSize = get("batchinsert.maxSize",10);
 	
-	public static  int zeroCount = get("batchinsert.zeroCount",0);
+	public final static  int zeroCount = get("batchinsert.zeroCount",0);
 	
-	public static  boolean isRun = get("batchinsert.isRun",true);
+	public final static  boolean isRun = get("batchinsert.isRun",true);
 	
-	public static  int dbSize = get("batchinsert.dbSize",5);
+	public final static  int dbSize = get("batchinsert.dbSize",5);
 	
-	public static  long insertCount  = get("batchinsert.insertCount",0l);
+	public final static  long insertCount  = get("batchinsert.insertCount",0l);
 	
 	public static <T> T get(String key,T t){
 		String v = ConfigHelp.getInstance("config").getLocalConfig(key, t+"");

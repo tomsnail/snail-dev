@@ -75,9 +75,8 @@ public class XssValidator implements IValidator{
 	 */
 	private String cleanXSS(String value) {
         Set<String> keySet = xssMap.keySet();
-        for(String key : keySet){
-            String v = xssMap.get(key);
-            value = value.replaceAll(key,v);
+        for(Map.Entry<String,String> entry: xssMap.entrySet()){
+            value = value.replaceAll(entry.getKey(),entry.getValue());
         }
         return value;
     }

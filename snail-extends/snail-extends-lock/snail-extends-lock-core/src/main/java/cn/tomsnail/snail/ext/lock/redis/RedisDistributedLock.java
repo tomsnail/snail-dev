@@ -75,7 +75,7 @@ public class RedisDistributedLock implements Lock{
 	public void unlock() {
 		 long current = System.currentTimeMillis();       
 		 // 避免删除非自己获取得到的锁
-		 if (current < Long.valueOf(jedis.get(lockName))){
+		 if (current < Long.parseLong(jedis.get(lockName))){
 		       jedis.del(lockName);
 		 }
 	}

@@ -196,7 +196,7 @@ public class BaseSqlParse extends ASqlParse{
 	}
 
 	public String[] getFields() {
-		return fields;
+		return this.fields;
 	}
 
 	public void setFields(String[] fields) {

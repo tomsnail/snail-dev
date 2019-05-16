@@ -2,6 +2,7 @@ package cn.tomsnail.snail.core.util.thread.task;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Timer;
 
 public class TaskManager {
@@ -13,7 +14,7 @@ public class TaskManager {
 	private static void start(SchedulerModel sm){
 		sm.status = 1;
 		Timer timer = new Timer();
-		timer.schedule(sm, 0,Long.valueOf(sm.getTaskModel().getPeriod())*1000L);
+		timer.schedule(sm, 0,Long.parseLong(sm.getTaskModel().getPeriod())*1000L);
 		timerMap.put(sm.getTaskModel().getUuid(), timer);
 	}
 	private static void stop(SchedulerModel sm){
@@ -21,10 +22,10 @@ public class TaskManager {
 		timer.cancel();
 	}
 	static void update(){
-		Iterator<String> it = taskMap.keySet().iterator();
+		Iterator<Map.Entry<String,SchedulerModel>> it = taskMap.entrySet().iterator();
 		while(it.hasNext()){
-			String key = it.next();
-			SchedulerModel sm = taskMap.get(key);
+			Map.Entry<String,SchedulerModel> entry = it.next();
+			SchedulerModel sm = entry.getValue();
 			if(sm.status==0){
 				start(sm);
 			}

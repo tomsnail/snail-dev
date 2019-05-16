@@ -37,16 +37,16 @@ public class AnnotationConverter {
 						return dk;
 					}
 					if(clazz.getName().contains("Integer")){
-						return (K) new Integer(_value);
+						return (K) Integer.valueOf(_value);
 					}
 					if(clazz.getName().contains("String")){
-						return (K) new String(_value);
+						return (K) String.valueOf(_value);
 					}
 					if(clazz.getName().contains("Boolean")){
-						return (K) new Boolean(_value);
+						return (K) Boolean.valueOf(_value);
 					}
 					if(clazz.getName().contains("Long")){
-						return (K) new Long(_value);
+						return (K) Long.valueOf(_value);
 					}
 					return null;
 				}else{

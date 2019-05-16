@@ -43,11 +43,11 @@ public class SHA1 {
 	 
 	 
 	 private static String byteToStr(byte[] byteArray) {  
-	        String strDigest = "";  
+	        StringBuffer strDigest = new StringBuffer();
 	        for (int i = 0; i < byteArray.length; i++) {  
-	            strDigest += byteToHexStr(byteArray[i]);  
+	            strDigest.append( byteToHexStr(byteArray[i]));
 	        }  
-	        return strDigest;  
+	        return strDigest.toString();
 	    }  
 	 
 	 private static String byteToHexStr(byte mByte) {  

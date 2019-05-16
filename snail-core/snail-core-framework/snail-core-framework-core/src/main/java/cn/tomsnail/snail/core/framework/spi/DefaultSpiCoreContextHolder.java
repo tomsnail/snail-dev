@@ -64,7 +64,9 @@ public class DefaultSpiCoreContextHolder extends ASpiCoreContextHolder{
 			}
 			return isDefaultSPI();
 		}
-		else return flag == 0;
+		else {
+			return flag == 0;
+		}
 	}
 	
 	private  String getProperties(String key,String defaultValue){

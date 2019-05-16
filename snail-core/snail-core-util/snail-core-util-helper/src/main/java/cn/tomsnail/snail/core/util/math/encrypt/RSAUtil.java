@@ -112,12 +112,12 @@ public class RSAUtil {
         int key_len = publicKey.getModulus().bitLength() / 8;  
         // 加密数据长度 <= 模长-11  
         String[] datas = splitString(data, key_len - 11);  
-        String mi = "";  
+        StringBuffer mi = new StringBuffer();
         //如果明文长度大于模长-11则要分组加密  
         for (String s : datas) {  
-            mi += bcd2Str(cipher.doFinal(s.getBytes()));  
+            mi.append(bcd2Str(cipher.doFinal(s.getBytes())));
         }  
-        return mi;  
+        return mi.toString();
     }  
     
     public static String encryptByPublicKeyBase64(String data, RSAPublicKey publicKey)  
@@ -128,12 +128,12 @@ public class RSAUtil {
         int key_len = publicKey.getModulus().bitLength() / 8;  
         // 加密数据长度 <= 模长-11  
         String[] datas = splitString(data, key_len - 11);  
-        String mi = "";  
+        StringBuffer mi = new StringBuffer();
         //如果明文长度大于模长-11则要分组加密  
         for (String s : datas) {  
-            mi += Base64Util.getBase64(cipher.doFinal(s.getBytes()));  
+            mi.append(Base64Util.getBase64(cipher.doFinal(s.getBytes())));
         }  
-        return mi;  
+        return mi.toString();
     }  
   
     /** 
@@ -154,12 +154,12 @@ public class RSAUtil {
         byte[] bcd = ASCII_To_BCD(bytes, bytes.length);  
         System.err.println(bcd.length);  
         //如果密文长度大于模长则要分组解密  
-        String ming = "";  
+        StringBuffer ming = new StringBuffer();
         byte[][] arrays = splitArray(bcd, key_len);  
         for(byte[] arr : arrays){  
-            ming += new String(cipher.doFinal(arr));  
+            ming.append(new String(cipher.doFinal(arr)));
         }  
-        return ming;  
+        return ming.toString();
     }  
     /** 
      * ASCII码转BCD码 

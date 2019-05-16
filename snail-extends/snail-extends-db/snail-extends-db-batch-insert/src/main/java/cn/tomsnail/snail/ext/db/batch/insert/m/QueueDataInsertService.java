@@ -52,17 +52,17 @@ public class QueueDataInsertService implements DataInsertService,Runnable{
 		if(tragetData==null||tragetData.size()<1){
 			return;
 		}
-		Iterator<String> it = tragetData.keySet().iterator();
+		Iterator<Map.Entry<String,List<Map<String,Object>>>> it = tragetData.entrySet().iterator();
 		while(it.hasNext()){
-			String table = it.next();
-			List<Map<String,Object>> dataList = tragetData.get(table);
+			Map.Entry<String,List<Map<String,Object>>> entry = it.next();
+			List<Map<String,Object>> dataList =entry.getValue();
 			
 			if(dataList==null||dataList.size()<1){
 				continue;
 			}
 			for(Map<String,Object> data:dataList){
 				DataInsertModel insertModel = new DataInsertModel();
-				insertModel.setTable(table);
+				insertModel.setTable(entry.getKey());
 				LinkedHashMap<String,DataInsertField> fieldMap = new LinkedHashMap<String, DataInsertField>();
 				Iterator<String> fit = data.keySet().iterator();
 				while(fit.hasNext()){

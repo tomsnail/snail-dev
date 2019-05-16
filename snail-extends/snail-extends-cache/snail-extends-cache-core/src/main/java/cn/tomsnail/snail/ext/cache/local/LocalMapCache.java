@@ -82,18 +82,17 @@ public class LocalMapCache extends AClearedCache implements IInitCache,IDestoryC
 
 	@Override
 	public void clean() {
-		Iterator<String> it = _map.keySet().iterator();
+		Iterator<Map.Entry<String,SoftReference<MapCacheObject<Object>>>> it = _map.entrySet().iterator();
 		while(it.hasNext()){
-			String key = it.next();
-			SoftReference<MapCacheObject<Object>> reference= _map.get(key);
-			MapCacheObject<Object> mapCacheObject = _map.get(key).get();
+			Map.Entry<String,SoftReference<MapCacheObject<Object>>> entry = it.next();
+			MapCacheObject<Object> mapCacheObject = _map.get(entry.getKey()).get();
 			if(mapCacheObject!=null){
 				Long expire = mapCacheObject.getExpire();
 				if(mapCacheObject.getLastTime()+expire<=System.currentTimeMillis()){
-					_map.remove(key);
+					_map.remove(entry.getKey());
 				}
 			}else{
-				_map.remove(key);
+				_map.remove(entry.getKey());
 			}
 		}
 	}

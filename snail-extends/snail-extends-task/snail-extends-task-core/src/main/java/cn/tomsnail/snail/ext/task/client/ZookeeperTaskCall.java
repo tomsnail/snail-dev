@@ -75,7 +75,7 @@ public abstract class ZookeeperTaskCall<T> extends ATaskCall<T>{
 	public void callback(Object data) {
 		
 		String taskInfo = (String) data;
-		int status = Integer.valueOf(taskInfo.split(",")[4]);
+		int status = Integer.parseInt(taskInfo.split(",")[4]);
 		LOGGER.info("[任务中心客户端]客户端监听到数据变化..."+taskInfo.split(",")[1]+":"+status);
 		T result = null;
 		switch(status){

@@ -2,6 +2,7 @@ package cn.tomsnail.snail.ext.db.batch.insert.model;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import cn.tomsnail.snail.ext.db.batch.insert.obj.annotation.BatchModel;
 
@@ -67,11 +68,11 @@ public class DataInsertModel {
 		sb.append(table).append(" (");
 		StringBuffer sfname = new StringBuffer();
 		StringBuffer svalue = new StringBuffer();
-		Iterator<String> it = fieldMap.keySet().iterator();
+		Iterator<Map.Entry<String,DataInsertField>> it = fieldMap.entrySet().iterator();
 		while(it.hasNext()){
-			String fname = it.next();
-			DataInsertField insertField = fieldMap.get(fname);
-			sfname.append(fname).append(",");
+			Map.Entry<String,DataInsertField> entry = it.next();
+			DataInsertField insertField = entry.getValue();
+			sfname.append(entry.getKey()).append(",");
 			if(insertField.parseValue().equals("NULL")){
 				svalue.append(" ").append(insertField.parseValue()).append(" ,");
 			}else{

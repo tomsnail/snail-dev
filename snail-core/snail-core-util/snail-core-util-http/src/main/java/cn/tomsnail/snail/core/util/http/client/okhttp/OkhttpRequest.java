@@ -73,11 +73,11 @@ public class OkhttpRequest {
 			 //处理参数
             StringBuilder tempParams = new StringBuilder();
             int pos = 0;
-            for (String key : paramsMap.keySet()) {
+            for (Map.Entry<String,String> entry : paramsMap.entrySet()) {
                 if (pos > 0) {
                     tempParams.append("&");
                 }
-                tempParams.append(String.format("%s=%s", key, URLEncoder.encode(paramsMap.get(key), "utf-8")));
+                tempParams.append(String.format("%s=%s", entry.getKey(), URLEncoder.encode(entry.getValue(), "utf-8")));
                 pos++;
             }
      
@@ -123,8 +123,8 @@ public class OkhttpRequest {
 			Builder builder = new Request.Builder();
 			
 			if(headers!=null&&!headers.isEmpty()){
-				 for (String key : headers.keySet()) {
-					 builder.addHeader(key, headers.get(key));
+				 for (Map.Entry<String,String>  entry: headers.entrySet()) {
+					 builder.addHeader(entry.getKey(), entry.getValue());
 		         }
 			}
 			

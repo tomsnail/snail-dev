@@ -20,7 +20,7 @@ public class TextModel {
 	/**
 	 * 默认字段属性
 	 */
-	public static TextModel DEFAULT_TEXT_MODEL = new TextModel();
+	public final static TextModel DEFAULT_TEXT_MODEL = new TextModel();
 	
 	public static TextModel NULL_TEXT_MODEL = new TextModel(0f);
 	

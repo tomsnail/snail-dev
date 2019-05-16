@@ -97,9 +97,9 @@ public class MemCache implements Level2Cache {
      */
     public void setBytes(Map<String,byte[]> bytes, long timeToLiveInSeconds) {
         try {
-            for(String key : bytes.keySet()) {
-                String mkey = _key(key);
-                client.set(mkey, (int) timeToLiveInSeconds, bytes.get(key));
+            for(Map.Entry<String,byte[]> entry: bytes.entrySet()) {
+                String mkey = _key(entry.getKey());
+                client.set(mkey, (int) timeToLiveInSeconds, entry.getValue());
             }
         } catch (Exception e) {
             log.error("Failed to set data to memcached.", e);

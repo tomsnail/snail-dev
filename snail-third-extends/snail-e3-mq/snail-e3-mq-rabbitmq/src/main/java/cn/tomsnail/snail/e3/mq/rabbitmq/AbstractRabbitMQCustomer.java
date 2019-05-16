@@ -39,7 +39,7 @@ public abstract class AbstractRabbitMQCustomer implements RabbitMQCustomer{
 		
 		rabbitmqObject.routeKey = ConfigClientFactory.getConfig("rabbitmq.route.key", "");
 		
-		rabbitmqObject.port = Integer.valueOf(ConfigClientFactory.getConfig("rabbitmq.port", "5672"));
+		rabbitmqObject.port = Integer.parseInt(ConfigClientFactory.getConfig("rabbitmq.port", "5672"));
 		
 		rabbitmqObject.eDurable = Boolean.valueOf(ConfigClientFactory.getConfig("rabbitmq.exchange.durable", "true"));
 		rabbitmqObject.eAutoDelete = Boolean.valueOf(ConfigClientFactory.getConfig("rabbitmq.exchange.autoDelete", "false"));

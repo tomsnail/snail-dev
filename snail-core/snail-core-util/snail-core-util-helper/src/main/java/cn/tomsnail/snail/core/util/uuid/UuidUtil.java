@@ -19,8 +19,8 @@ import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 	*/     
 public class UuidUtil {
 	
-	private static final long workId = Long.valueOf(ConfigHelp.getInstance("config").getLocalConfig("uuid.workId", "1"));
-	private static final long dcId = Long.valueOf(ConfigHelp.getInstance("config").getLocalConfig("uuid.dcId", "2"));
+	private static final long workId = Long.parseLong(ConfigHelp.getInstance("config").getLocalConfig("uuid.workId", "1"));
+	private static final long dcId = Long.parseLong(ConfigHelp.getInstance("config").getLocalConfig("uuid.dcId", "2"));
 	private static final IdWorker ID_WORKER = new IdWorker(workId, dcId);
 	
 	final static char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8',  

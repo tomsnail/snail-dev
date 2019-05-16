@@ -69,14 +69,5 @@ public class MD5Util {
         return hexValue.toString();
     }
 
-    /**
-     * 测试主函数
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String args[]) throws Exception {
-        String str = new String("amigoxiexiexingxing");
-        System.out.println("原始：" + str);
-        System.out.println("MD5后：" + md5Encode(str).length());
-    }
+    
 }

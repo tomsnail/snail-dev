@@ -25,7 +25,7 @@ public class LongSpringConverter implements Converter<String, Long> {
 				return  Long.valueOf(value);
 			}
 		}
-		return new Long(source);
+		return Long.valueOf(source);
 	}
 
 }

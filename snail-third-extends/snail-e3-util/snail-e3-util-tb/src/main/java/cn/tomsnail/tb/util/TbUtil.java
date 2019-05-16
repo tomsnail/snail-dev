@@ -133,7 +133,7 @@ public class TbUtil {
 			m1.put("grant_type", "code");
 			String url1 = "https://account.teambition.com/oauth2/access_token";
 			JSONObject json1 = JSONObject.fromObject(m1);
-			String jsonObjectStr = new String();
+			String jsonObjectStr = null;
 			try {
 				logger.info(json1.toString());
 				jsonObjectStr = sendPost1(url1,code,key,secert);
@@ -218,10 +218,10 @@ public class TbUtil {
 				url);
 		
 		if(map!=null){
-			Iterator<String> it = map.keySet().iterator();
+			Iterator<Map.Entry<String,String>> it = map.entrySet().iterator();
 			while(it.hasNext()){
-				String key = it.next();
-				postMethod.addParameter(key,map.get(key));
+				Map.Entry<String,String> entry = it.next();
+				postMethod.addParameter(entry.getKey(),entry.getValue());
 			}
 		}
 		postMethod.addRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -241,10 +241,10 @@ public class TbUtil {
 				url);
 		
 		if(map!=null){
-			Iterator<String> it = map.keySet().iterator();
+			Iterator<Map.Entry<String,String>> it = map.entrySet().iterator();
 			while(it.hasNext()){
-				String key = it.next();
-				postMethod.addParameter(key,map.get(key));
+				Map.Entry<String,String> entry = it.next();
+				postMethod.addParameter(entry.getKey(),entry.getValue());
 			}
 		}
 		postMethod.addRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");

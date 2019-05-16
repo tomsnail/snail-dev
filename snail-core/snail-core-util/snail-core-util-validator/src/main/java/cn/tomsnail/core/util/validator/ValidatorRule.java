@@ -95,16 +95,14 @@ public class ValidatorRule<T> {
 		}
 		if (ruleTypeMap.containsKey(RuleType.LIMITMAX)) {
 			String v = value + "";
-			if (v.trim().length() > Integer.valueOf(ruleTypeMap.get(RuleType.LIMITMAX)
-					+ "")) {
+			if (v.trim().length() > Integer.parseInt(String.valueOf(ruleTypeMap.get(RuleType.LIMITMAX)))) {
 				throw new ParamValidatorException(getValidFaildMsg(desc,key + "的值是" + value + ",位数大于:"
 						+ ruleTypeMap.get(RuleType.LIMITMAX)));
 			}
 		}
 		if (ruleTypeMap.containsKey(RuleType.LIMITMIN)) {
 			String v = value + "";
-			if (v.trim().length() < Integer.valueOf(ruleTypeMap.get(RuleType.LIMITMIN)
-					+ "")) {
+			if (v.trim().length() < Integer.parseInt(String.valueOf(ruleTypeMap.get(RuleType.LIMITMIN)))) {
 				throw new ParamValidatorException(getValidFaildMsg(desc,key + key + "的值是" + value + ",位数小于:"
 						+ ruleTypeMap.get(RuleType.LIMITMIN)));
 			}
@@ -187,7 +185,7 @@ public class ValidatorRule<T> {
 			}
 		}
 		if(ruleTypeMap.containsKey(RuleType.ESCAPE)){
-			String v = value+"";
+			String v = String.valueOf(value);
 			return EscapeSecurityManager.replaceSpecialChars(v);
 		}
 		return null;

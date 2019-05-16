@@ -36,15 +36,22 @@ public class LocalMapCacheFactory implements ICacheFactory {
 		if(cacheConfig==null||cacheConfig.getName()==null){
 			return null;
 		}
-		_lock.lock();
-		if(MAP.containsKey(cacheConfig.getName())){
-			 
-		}else{
-			LocalMapCache localMapCache = new LocalMapCache();
-			MAP.put(cacheConfig.getName(),localMapCache);
-			new Thread(localMapCache).start();
+		try{
+			_lock.lock();
+			if(MAP.containsKey(cacheConfig.getName())){
+
+			}else{
+				LocalMapCache localMapCache = new LocalMapCache();
+				MAP.put(cacheConfig.getName(),localMapCache);
+				new Thread(localMapCache).start();
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			_lock.unlock();
 		}
-		_lock.unlock();
+
+
 		return MAP.get(cacheConfig.getName());
 	}
 

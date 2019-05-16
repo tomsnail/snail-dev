@@ -65,13 +65,13 @@ public class NodeServer  extends ZkServer {
 
 	
 	public void stop() {
-		Iterator<String> it = nodeSet.keySet().iterator();
+		Iterator<Map.Entry<String,ServiceListenerHandler>> it = nodeSet.entrySet().iterator();
 		while(it.hasNext()){
-			String node = it.next();
-			String nodePath =Consts.ZK_ROOT+"/"+node;
-			IZkChildListener childListener =  childListenerSet.remove(node);
+			Map.Entry<String,ServiceListenerHandler> entry = it.next();
+			String nodePath =Consts.ZK_ROOT+"/"+entry.getKey();
+			IZkChildListener childListener =  childListenerSet.remove(entry.getKey());
 			unsubscribeChildListener(nodePath,childListener);
-			ServiceListenerHandler handler = nodeSet.get(node);
+			ServiceListenerHandler handler = entry.getValue();
 			handler.close();
 			handler = null;
 			childListener = null;

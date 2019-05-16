@@ -65,15 +65,15 @@ public class RandomUtils {
 		*/
 	public static String getRandLetterAndNum(int size) {
 		ThreadLocalRandom random = ThreadLocalRandom.current();
-		String sRand = "";
+		StringBuffer sRand = new StringBuffer();
 		String codeList = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz0123456789";
 		for (int i = 0; i < size; i++) {
 			int a = random.nextInt(codeList.length() - 1);
 			String rand = codeList.substring(a, a + 1);
-			sRand += rand;
+			sRand.append(rand);
 
 		}
-		return sRand;
+		return sRand.toString();
 	}
 	
 	   /**
@@ -90,14 +90,14 @@ public class RandomUtils {
 		public static String getRandLetterAndNum(int size,long seed) {
 			ThreadLocalRandom random = ThreadLocalRandom.current();
 			random.setSeed(seed);
-			String sRand = "";
+			StringBuffer sRand = new StringBuffer();
 			String codeList = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz0123456789";
 			for (int i = 0; i < size; i++) {
 				int a = random.nextInt(codeList.length() - 1);
 				String rand = codeList.substring(a, a + 1);
-				sRand += rand;
+				sRand.append(rand);
 
 			}
-			return sRand;
+			return sRand.toString();
 		}
 }

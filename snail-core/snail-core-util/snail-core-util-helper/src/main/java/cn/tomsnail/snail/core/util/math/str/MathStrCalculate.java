@@ -58,18 +58,18 @@ public class MathStrCalculate {
 				mm.setName(MathDefine.DIV);
 			}else{
 				mm.setName(MathDefine.DIGIT);
-				String str = String.valueOf(ch);
+				StringBuffer str = new StringBuffer(String.valueOf(ch));
 				
 				while(j<chs.length){
 					char tempChar = chs[j++];
 					if(tempChar!='('&&tempChar!=')'&&tempChar!='+'&&tempChar!='-'&&tempChar!='*'&&tempChar!='/'){
-						str = str + String.valueOf(tempChar);
+						str.append(String.valueOf(tempChar));
 					}else{
 						break;
 					}
 				}
 				i = j-2;
-				mm.setValue(str);
+				mm.setValue(str.toString());
 				
 			}
 			list.add(mm);
@@ -220,13 +220,13 @@ public class MathStrCalculate {
 			BigDecimal b = new BigDecimal(d);  
 			Double r = b.setScale(length,BigDecimal.ROUND_HALF_UP).doubleValue();  
 			result = r.toString();
-			String temp1 = result.split("\\.")[1];
+			StringBuffer temp1 = new StringBuffer(result.split("\\.")[1]);
 			String temp0 = result.split("\\.")[0];
 			if(temp1.length()<length){
 				for(int i=temp1.length();i<length;i++){
-					temp1 = temp1+"0";
+					temp1.append("0");
 				}
-				result = temp0+"."+temp1;
+				result = temp0+"."+temp1.toString();
 			}
 		}
 		return result;

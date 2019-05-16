@@ -188,7 +188,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 * @data 2015-10-11 下午20:34:05
 	 */
 	public static String getLogDate() {
-		return logSdf.format(new Date());
+		return new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
 	}
 	/**
      * @discription 字符串转date
@@ -325,8 +325,8 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     	if(time == null || time == 0){
     		return "";
     	}
-    	Date date = new Date(time * 1000l);  
-		return formatTime.format(date);
+    	Date date = new Date(time * 1000L);
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 		
     } 
       
@@ -347,8 +347,8 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     	}
     	Date date = null;
         try {
-			date = new Date(Long.valueOf(str)*1000l);  
-			return formatTime.format(date);
+			date = new Date(Long.parseLong(str)*1000L);
+			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 		} catch (Exception e) {
 			return "";
 		}  
@@ -371,7 +371,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     	}
     	Date date = null;
         try {
-			date = new Date(Long.valueOf(str)*1000l);  
+			date = new Date(Long.parseLong(str)*1000l);
 			return df.format(date);
 		} catch (Exception e) {
 			return "";

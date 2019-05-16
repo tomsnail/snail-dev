@@ -621,7 +621,7 @@ public class DefaultWechatOperImpl implements WechatOper {
         for (int i = 0; i < RETRY_COUNT; i++) {
             ar = ApiResult.create(HttpTool.post(apiurl, data));
             if (ar.isSuccess()) {
-                return Long.valueOf(ar.get("msgid").toString());
+                return Long.parseLong(ar.get("msgid").toString());
             }
 
             //LOGGER.error("Send mp[%s] template message failed. There try %d items.",

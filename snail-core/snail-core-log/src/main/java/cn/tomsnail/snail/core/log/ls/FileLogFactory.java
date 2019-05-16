@@ -39,12 +39,19 @@ public class FileLogFactory {
 	}
 	
 	public  LogSystem create(String path,String fileName,String format) {
-		
-		LOCK.lock();
-		if(!LS_MAP.containsKey(fileName)) {
-			LS_MAP.put(fileName, initLogSystem(path,fileName,format));
+
+		try{
+			LOCK.lock();
+			if(!LS_MAP.containsKey(fileName)) {
+				LS_MAP.put(fileName, initLogSystem(path,fileName,format));
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			LOCK.unlock();
 		}
-		LOCK.unlock();
+
+
 		
 		return LS_MAP.get(fileName);
 	}

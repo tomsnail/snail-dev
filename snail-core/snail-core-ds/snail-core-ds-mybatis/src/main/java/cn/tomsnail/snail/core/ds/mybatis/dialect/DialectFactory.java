@@ -11,7 +11,7 @@
     /**
      * The constant dialectClass.
      */
-    /* 13 */   public static String dialectClass = null;
+    /* 13 */   protected static String dialectClass = null;
 
     /**
      * Build dialect dialect.

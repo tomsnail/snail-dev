@@ -83,7 +83,7 @@ public class ConfigModel implements Serializable{
 	}
 
 	public ConfigModel[] getSubs() {
-		return subs;
+		return this.subs;
 	}
 
 	public void setSubs(ConfigModel[] subs) {

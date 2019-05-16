@@ -77,7 +77,7 @@ public class AES {
         return keyGen.generateKey().getEncoded();
     }
  
-    private static byte[] encrypt(byte[] content, byte[] keyBytes) {
+    public static byte[] encrypt(byte[] content, byte[] keyBytes) {
         byte[] encryptedText = null;
         if (!isInited) { 
             init();

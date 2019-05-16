@@ -56,11 +56,11 @@ public class ZkPathUtil {
     }
 
     private static String getSpaces(final int level) {
-        String s = "";
+        StringBuffer s = new StringBuffer();
         for (int i = 0; i < level; i++) {
-            s += "  ";
+            s.append("  ");
         }
-        return s;
+        return s.toString();
     }
 
     public static interface PathFilter {

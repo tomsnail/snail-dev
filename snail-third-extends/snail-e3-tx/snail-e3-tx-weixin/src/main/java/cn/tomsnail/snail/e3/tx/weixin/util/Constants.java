@@ -4,7 +4,7 @@ import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 
 public class Constants {
 
-	public static String TOKEN = ConfigHelp.getInstance("config").getLocalConfig("TOKEN", "weixintest01");
+	public final static String TOKEN = ConfigHelp.getInstance("config").getLocalConfig("TOKEN", "weixintest01");
 	
 	public static String ACCESS_TOKEN = "";
 	

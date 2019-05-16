@@ -101,7 +101,9 @@ public class ZookeeperConfigService extends AConfigService  {
 	@Override
 	public void initConfigMap() {
 		ZK_HELPER = ZkHelper.getInstance(ZooKeeperAddress.ZK_ADDRESS);
-		if(cacheMap==null)cacheMap = new HashMap<String, String>();
+		if(cacheMap==null){
+			cacheMap = new HashMap<String, String>();
+		}
 		if(!ZK_HELPER.isExtisPath(ConfigInfo.rootNode)){
 			ZK_HELPER.createPathWithParent(ConfigInfo.rootNode, true);
 		}
@@ -110,11 +112,10 @@ public class ZookeeperConfigService extends AConfigService  {
 			for(String node:nodes){
 				setSubNode(ConfigInfo.rootNode+"/"+node);
 			}
-			Iterator<String> it = cacheMap.keySet().iterator();
+			Iterator<Map.Entry<String,String>> it = cacheMap.entrySet().iterator();
 			while(it.hasNext()){
-				String key = it.next();
-				String value = cacheMap.get(key);
-				this.configMap.put(key.replace(ConfigInfo.rootNode+"/", "").replace("/", "."), value);
+				Map.Entry<String,String> entry = it.next();
+				this.configMap.put(entry.getKey().replace(ConfigInfo.rootNode+"/", "").replace("/", "."), entry.getValue());
 			}
 		}
 	}

@@ -66,12 +66,13 @@ public class ZKDistributedLock implements Lock, Watcher {
 	/**
 	 * zookeeper节点的监视器
 	 */
+	@Override
 	public void process(WatchedEvent event) {
 		if (this.latch != null) {
 			this.latch.countDown();
 		}
 	}
-
+	@Override
 	public void lock() {
 		if (exception.size() > 0) {
 			throw new LockException(exception.get(0));
@@ -90,12 +91,14 @@ public class ZKDistributedLock implements Lock, Watcher {
 			throw new LockException(e);
 		}
 	}
-
+	@Override
 	public boolean tryLock() {
 		try {
 			String splitStr = "_lock_";
-			if (lockName.contains(splitStr))
+			if (lockName.contains(splitStr)){
 				throw new LockException("lockName can not contains \\u000B");
+			}
+
 			// 创建临时子节点
 			myZnode = zk.create(root + "/" + lockName + splitStr, new byte[0],
 					ZooDefs.Ids.OPEN_ACL_UNSAFE,
@@ -128,7 +131,7 @@ public class ZKDistributedLock implements Lock, Watcher {
 		}
 		return false;
 	}
-
+	@Override
 	public boolean tryLock(long time, TimeUnit unit) {
 		try {
 			if (this.tryLock()) {
@@ -154,7 +157,7 @@ public class ZKDistributedLock implements Lock, Watcher {
 		}
 		return true;
 	}
-
+	@Override
 	public void unlock() {
 		try {
 			System.out.println("unlock " + myZnode);
@@ -167,25 +170,15 @@ public class ZKDistributedLock implements Lock, Watcher {
 			e.printStackTrace();
 		}
 	}
-
+	@Override
 	public void lockInterruptibly() throws InterruptedException {
 		this.lock();
 	}
-
+	@Override
 	public Condition newCondition() {
 		return null;
 	}
 
-	public class LockException extends RuntimeException {
-		private static final long serialVersionUID = 1L;
 
-		public LockException(String e) {
-			super(e);
-		}
-
-		public LockException(Exception e) {
-			super(e);
-		}
-	}
 
 }

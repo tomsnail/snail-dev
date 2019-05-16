@@ -35,20 +35,20 @@ public class RabbitMQSender {
 		
 		rabbitmqObject.routeKey = ConfigClientFactory.getConfig("rabbitmq.route.key", "");
 		
-		rabbitmqObject.port = Integer.valueOf(ConfigClientFactory.getConfig("rabbitmq.port", "5672"));
+		rabbitmqObject.port = Integer.parseInt(ConfigClientFactory.getConfig("rabbitmq.port", "5672"));
 		
-		rabbitmqObject.eDurable = Boolean.valueOf(ConfigClientFactory.getConfig("rabbitmq.exchange.durable", "true"));
-		rabbitmqObject.eAutoDelete = Boolean.valueOf(ConfigClientFactory.getConfig("rabbitmq.exchange.autoDelete", "false"));
+		rabbitmqObject.eDurable = Boolean.parseBoolean(ConfigClientFactory.getConfig("rabbitmq.exchange.durable", "true"));
+		rabbitmqObject.eAutoDelete = Boolean.parseBoolean(ConfigClientFactory.getConfig("rabbitmq.exchange.autoDelete", "false"));
 		
-		rabbitmqObject.qDurable = Boolean.valueOf(ConfigClientFactory.getConfig("rabbitmq.queue.durable", "true"));
-		rabbitmqObject.qExclusive = Boolean.valueOf(ConfigClientFactory.getConfig("rabbitmq.queue.exclusive", "false"));
-		rabbitmqObject.qAutoDelete = Boolean.valueOf(ConfigClientFactory.getConfig("rabbitmq.queue.autoDelete", "false"));
+		rabbitmqObject.qDurable = Boolean.parseBoolean(ConfigClientFactory.getConfig("rabbitmq.queue.durable", "true"));
+		rabbitmqObject.qExclusive = Boolean.parseBoolean(ConfigClientFactory.getConfig("rabbitmq.queue.exclusive", "false"));
+		rabbitmqObject.qAutoDelete = Boolean.parseBoolean(ConfigClientFactory.getConfig("rabbitmq.queue.autoDelete", "false"));
 		
-		rabbitmqObject.autoAck = Boolean.valueOf(ConfigClientFactory.getConfig("rabbitmq.autoAck", "true"));
+		rabbitmqObject.autoAck = Boolean.parseBoolean(ConfigClientFactory.getConfig("rabbitmq.autoAck", "true"));
 		
-		rabbitmqObject.isReconnect = Boolean.valueOf(ConfigClientFactory.getConfig("rabbitmq.isReconnect", "true"));
+		rabbitmqObject.isReconnect = Boolean.parseBoolean(ConfigClientFactory.getConfig("rabbitmq.isReconnect", "true"));
 		
-		rabbitmqObject.isRun = Boolean.valueOf(ConfigClientFactory.getConfig("rabbitmq.isRun", "true"));
+		rabbitmqObject.isRun = Boolean.parseBoolean(ConfigClientFactory.getConfig("rabbitmq.isRun", "true"));
 
 	}
 	

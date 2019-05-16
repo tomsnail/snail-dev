@@ -44,23 +44,23 @@ public class ZkTimeSlot extends TimeSlot{
 	
 	public ZkTimeSlot(String str){
 		String[] perproties = str.split(",");
-		this.setType(Integer.valueOf(perproties[0]));
+		this.setType(Integer.parseInt(perproties[0]));
 		this.setName(perproties[1]);
 		this.setPath(TimeSlotConfig.TIME_SLOT_ROOT+"/"+this.getName());
 		this.setTime(perproties[3]);
-		this.setStatus(Integer.valueOf(perproties[4]));
+		this.setStatus(Integer.parseInt(perproties[4]));
 	}
 	
 	public void calculate(){
 		if(this.getType()==TimeSlotType.once_1.ordinal()+1){
 			try {
-				this.setsTime(df.parse(this.getTime()).getTime());
+				this.setsTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(this.getTime()).getTime());
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
 		if(this.getType()==TimeSlotType.once_2.ordinal()+1){
-			long startTime = System.currentTimeMillis()+Long.valueOf(this.getTime());
+			long startTime = System.currentTimeMillis()+Long.parseLong(this.getTime());
 			this.setsTime(startTime);
 		}
 		if(this.getType()==TimeSlotType.cycle.ordinal()+1){

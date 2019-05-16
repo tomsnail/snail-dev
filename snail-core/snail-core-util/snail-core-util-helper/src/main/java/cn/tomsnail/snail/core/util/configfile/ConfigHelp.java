@@ -42,14 +42,21 @@ public class ConfigHelp {
 	
 	public static ConfigHelp getInstance(String fileName){
 		ConfigHelp configHelp = null;
-		LOCK.lock();
-		if(ConfigHelpMap.containsKey(fileName)){
-			configHelp = ConfigHelpMap.get(fileName);
-		}else{
-			configHelp = new ConfigHelp(fileName);
-			ConfigHelpMap.put(fileName, configHelp);
+		try{
+			LOCK.lock();
+			if(ConfigHelpMap.containsKey(fileName)){
+				configHelp = ConfigHelpMap.get(fileName);
+			}else{
+				configHelp = new ConfigHelp(fileName);
+				ConfigHelpMap.put(fileName, configHelp);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			LOCK.unlock();
 		}
-		LOCK.unlock();
+
+
 		return configHelp;
 	}
 	

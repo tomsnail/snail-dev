@@ -26,7 +26,7 @@ public final class TokenBucketRequestLimit implements Runnable,IRequestLimit{
 	/**
 	 * 速率
 	 */
-	private final long rate = 50l; 
+	private  long rate = 50L;
 	
 	/**
 	 * 计数器
@@ -44,7 +44,8 @@ public final class TokenBucketRequestLimit implements Runnable,IRequestLimit{
 		}
 		new Thread(this).start();
 	}
-	
+
+	@Override
 	public  boolean canPass(){
 		Long token = buckets.poll();
 		if(token!=null){
@@ -58,7 +59,7 @@ public final class TokenBucketRequestLimit implements Runnable,IRequestLimit{
 	public void run() {
 		while(isRun){
 			try {
-				Thread.currentThread().sleep(rate);
+				Thread.sleep(rate);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

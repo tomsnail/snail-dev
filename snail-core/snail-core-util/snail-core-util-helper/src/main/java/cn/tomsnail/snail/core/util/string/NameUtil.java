@@ -49,11 +49,11 @@ public class NameUtil {
 		if (begin >= end) {
 			return content;
 		}
-		String starStr = "";
+		StringBuffer starStr = new StringBuffer();
 		for (int i = begin; i < end; i++) {
-			starStr = starStr + "*";
+			starStr.append("*");
 		}
-		return content.substring(0, begin) + starStr + content.substring(end, content.length());
+		return content.substring(0, begin) + starStr.toString() + content.substring(end, content.length());
 	}
 
 }

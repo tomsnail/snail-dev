@@ -82,7 +82,7 @@ public class SignCookieFilter implements RestfulFilter {
 			}
 			if(_cookie.getName().equals("ts_signature_type")){
 				try {
-					signatureType = Integer.valueOf(_cookie.getValue());
+					signatureType = Integer.parseInt(_cookie.getValue());
 				} catch (NumberFormatException e) {
 					//signatureType = 1;
 				}

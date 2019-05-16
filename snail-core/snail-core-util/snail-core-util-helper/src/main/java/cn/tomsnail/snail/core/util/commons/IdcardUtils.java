@@ -30,7 +30,7 @@ public class IdcardUtils extends StringUtils {
 			"62", "63", "64", "65", "71", "81", "82", "91" };
 
 	/** 每位加权因子 */
-	public static final int power[] = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9,
+	protected static final int power[] = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9,
 			10, 5, 8, 4, 2 };
 
 	/** 第18位校检码 */
@@ -38,11 +38,11 @@ public class IdcardUtils extends StringUtils {
 			"6", "5", "4", "3", "2" };
 	/** 最低年限 */
 	public static final int MIN = 1930;
-	public static Map<String, String> cityCodes = new HashMap<String, String>();
+	public final static Map<String, String> cityCodes = new HashMap<String, String>();
 	/** 台湾身份首字母对应数字 */
-	public static Map<String, Integer> twFirstCode = new HashMap<String, Integer>();
+	public final static Map<String, Integer> twFirstCode = new HashMap<String, Integer>();
 	/** 香港身份首字母对应数字 */
-	public static Map<String, Integer> hkFirstCode = new HashMap<String, Integer>();
+	public final static Map<String, Integer> hkFirstCode = new HashMap<String, Integer>();
 	static {
 		cityCodes.put("11", "北京");
 		cityCodes.put("12", "天津");
@@ -243,8 +243,8 @@ public class IdcardUtils extends StringUtils {
 			if (birthDate != null)
 				cal.setTime(birthDate);
 			if (!valiDate(cal.get(Calendar.YEAR),
-					Integer.valueOf(birthCode.substring(2, 4)),
-					Integer.valueOf(birthCode.substring(4, 6)))) {
+					Integer.parseInt(birthCode.substring(2, 4)),
+					Integer.parseInt(birthCode.substring(4, 6)))) {
 				return false;
 			}
 		} else {
@@ -316,7 +316,7 @@ public class IdcardUtils extends StringUtils {
 		char[] chars = mid.toCharArray();
 		Integer iflag = 8;
 		for (char c : chars) {
-			sum = sum + Integer.valueOf(c + "") * iflag;
+			sum = sum + Integer.parseInt(c + "") * iflag;
 			iflag--;
 		}
 		return (sum % 10 == 0 ? 0 : (10 - sum % 10)) == Integer.valueOf(end) ? true
@@ -341,14 +341,14 @@ public class IdcardUtils extends StringUtils {
 		String card = idCard.replaceAll("[\\(|\\)]", "");
 		Integer sum = 0;
 		if (card.length() == 9) {
-			sum = (Integer.valueOf(card.substring(0, 1).toUpperCase()
+			sum = (Integer.parseInt(card.substring(0, 1).toUpperCase()
 					.toCharArray()[0]) - 55)
 					* 9
-					+ (Integer.valueOf(card.substring(1, 2).toUpperCase()
+					+ (Integer.parseInt(card.substring(1, 2).toUpperCase()
 							.toCharArray()[0]) - 55) * 8;
 			card = card.substring(1, 9);
 		} else {
-			sum = 522 + (Integer.valueOf(card.substring(0, 1).toUpperCase()
+			sum = 522 + (Integer.parseInt(card.substring(0, 1).toUpperCase()
 					.toCharArray()[0]) - 55) * 8;
 		}
 		String mid = card.substring(1, 7);
@@ -356,13 +356,13 @@ public class IdcardUtils extends StringUtils {
 		char[] chars = mid.toCharArray();
 		Integer iflag = 7;
 		for (char c : chars) {
-			sum = sum + Integer.valueOf(c + "") * iflag;
+			sum = sum + Integer.parseInt(c + "") * iflag;
 			iflag--;
 		}
 		if (end.toUpperCase().equals("A")) {
 			sum = sum + 10;
 		} else {
-			sum = sum + Integer.valueOf(end);
+			sum = sum + Integer.parseInt(end);
 		}
 		return (sum % 11 == 0) ? true : false;
 	}
@@ -468,7 +468,7 @@ public class IdcardUtils extends StringUtils {
 		String year = idCard.substring(6, 10);
 		Calendar cal = Calendar.getInstance();
 		int iCurrYear = cal.get(Calendar.YEAR);
-		iAge = iCurrYear - Integer.valueOf(year);
+		iAge = iCurrYear - Integer.parseInt(year);
 		return iAge;
 	}
 

@@ -53,7 +53,7 @@ public class RabbitMQClusterPolicy implements ClusterPolicy, Consumer {
         this.exchange = props.getProperty("exchange", "j2cache");
         factory = new ConnectionFactory();
         factory.setHost(props.getProperty("host" , "127.0.0.1"));
-        factory.setPort(Integer.valueOf(props.getProperty("port", "5672")));
+        factory.setPort(Integer.parseInt(props.getProperty("port", "5672")));
         factory.setUsername(props.getProperty("username" , null));
         factory.setPassword(props.getProperty("password" , null));
         //TODO 更多的 RabbitMQ 配置

@@ -123,9 +123,9 @@ public class RedisGenericCache implements Level2Cache {
             if(cmd instanceof MultiKeyBinaryCommands) {
                 byte[][] data = new byte[bytes.size() * 2][];
                 int idx = 0;
-                for(String key : bytes.keySet()){
-                    data[idx++] = _key(key);
-                    data[idx++] = bytes.get(key);
+                for(Map.Entry<String,byte[]> entry: bytes.entrySet()){
+                    data[idx++] = _key(entry.getKey());
+                    data[idx++] = entry.getValue();
                 }
                 ((MultiKeyBinaryCommands)cmd).mset(data);
             }

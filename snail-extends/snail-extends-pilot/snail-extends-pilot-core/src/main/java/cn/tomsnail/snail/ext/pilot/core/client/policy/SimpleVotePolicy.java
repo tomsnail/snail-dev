@@ -50,7 +50,7 @@ public class SimpleVotePolicy implements IVotePolicy{
 		LOGGER.info(Consts.ZK_PROXY+" Change : skPath "+skPath);
 		ServiceKeeper serviceKeeper = (ServiceKeeper) zkHelper.readNode(skPath);
 		List<ServiceProcess> list = serviceKeeper.getNodes();
-		int cn = Integer.valueOf(serviceKeeper.getCurrentCount());
+		int cn = Integer.parseInt(serviceKeeper.getCurrentCount());
 		LOGGER.info(Consts.ZK_PROXY+" Change : list "+list.size());
 		List<ServiceProcess> tempList = new ArrayList<ServiceProcess>();
 		int c = getActiveCount(list, tempList);
@@ -138,7 +138,7 @@ public class SimpleVotePolicy implements IVotePolicy{
 
 	private boolean getSstatus(ServiceProcess serviceProcess, ServiceKeeper serviceKeeper) {
 		boolean s = false;
-		int ln = Integer.valueOf(serviceKeeper.getLimitNumber());
+		int ln = Integer.parseInt(serviceKeeper.getLimitNumber());
 		int cn = getRealCurrentCount(serviceKeeper);
 		if(cn<ln){
 			serviceProcess.setStatus(ServiceStatus.ACTIVE);

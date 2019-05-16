@@ -12,9 +12,9 @@ import org.apache.commons.lang.StringUtils;
  */
 public class MapIP {
 
-	public static String ip = getIP();
+	public final static String ip = getIP();
 	
-	public static int port = getPort();
+	public final static int port = getPort();
 	
 	public static String getIP(){
 		String ip = System.getenv("DEV_MAP_IP");
@@ -31,7 +31,7 @@ public class MapIP {
 			return 8080;
 		}
 		try {
-			return Integer.valueOf(port);
+			return Integer.parseInt(port);
 		} catch (NumberFormatException e) {
 			//e.printStackTrace();
 		}

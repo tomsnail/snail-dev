@@ -2,6 +2,8 @@ package cn.tomsnail.snail.ext.pilot.core.server;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -17,16 +19,18 @@ public abstract class AServer implements IServer,Runnable{
 	protected boolean isRun = true;	
 	
 	protected List<ICallback> callbacks = new ArrayList<ICallback>();
+
+	ExecutorService executorService = Executors.newFixedThreadPool(1);
 	
 	public AServer(){
 		init();
-		new Thread(this).start();
+		executorService.submit(this);
 	}
-	
+	@Override
 	public void run(){
 		start();
 	}
-	
+	@Override
 	public void addCallback(ICallback callback){
 		callbacks.add(callback);
 	}

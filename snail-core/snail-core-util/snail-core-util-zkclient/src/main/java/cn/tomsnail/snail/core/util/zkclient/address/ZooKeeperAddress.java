@@ -15,7 +15,7 @@ public class ZooKeeperAddress implements IAddress{
 	
 	private List<IAddress> addresses = new ArrayList<IAddress>();
 	
-	public static String ZK_ADDRESS = new ZooKeeperAddress().getAddress();
+	public final static String ZK_ADDRESS = new ZooKeeperAddress().getAddress();
 	
 	public ZooKeeperAddress(){
 		addresses.add(new EnvAddress());

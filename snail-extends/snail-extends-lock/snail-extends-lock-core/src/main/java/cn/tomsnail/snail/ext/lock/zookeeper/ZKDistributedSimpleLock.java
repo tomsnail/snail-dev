@@ -65,12 +65,13 @@ public class ZKDistributedSimpleLock implements Lock, Watcher {
 	/**
 	 * zookeeper节点的监视器
 	 */
+	@Override
 	public void process(WatchedEvent event) {
 		if (this.latch != null) {
 			this.latch.countDown();
 		}
 	}
-
+	@Override
 	public void lock() {
 		if (exception.size() > 0) {
 			throw new LockException(exception.get(0));
@@ -89,7 +90,7 @@ public class ZKDistributedSimpleLock implements Lock, Watcher {
 			throw new LockException(e);
 		}
 	}
-
+	@Override
 	public boolean tryLock() {
 		try {
 			String splitStr = "_lock_";
@@ -109,7 +110,7 @@ public class ZKDistributedSimpleLock implements Lock, Watcher {
 		}
 		return false;
 	}
-
+	@Override
 	public boolean tryLock(long time, TimeUnit unit) {
 		try {
 			if (this.tryLock()) {
@@ -135,7 +136,7 @@ public class ZKDistributedSimpleLock implements Lock, Watcher {
 		}
 		return tryLock();
 	}
-
+	@Override
 	public void unlock() {
 		try {
 			System.out.println("unlock " + myZnode);
@@ -149,24 +150,15 @@ public class ZKDistributedSimpleLock implements Lock, Watcher {
 		}
 	}
 
+	@Override
 	public void lockInterruptibly() throws InterruptedException {
 		this.lock();
 	}
-
+	@Override
 	public Condition newCondition() {
 		return null;
 	}
 
-	public class LockException extends RuntimeException {
-		private static final long serialVersionUID = 1L;
 
-		public LockException(String e) {
-			super(e);
-		}
-
-		public LockException(Exception e) {
-			super(e);
-		}
-	}
 
 }

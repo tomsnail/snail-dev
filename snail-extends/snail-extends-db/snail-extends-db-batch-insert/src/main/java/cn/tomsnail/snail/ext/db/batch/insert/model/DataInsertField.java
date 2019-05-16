@@ -62,11 +62,11 @@ public class DataInsertField {
 	public Object parseValue(){
 		try {
 			switch(type){
-				case 0:return new String(value);
-				case 1:return new Double(value);
-				case 2:return new Integer(value);
-				case 3:return new Float(value);
-				default:return new String(value);
+				case 0:return String.valueOf(value);
+				case 1:return Double.parseDouble(value);
+				case 2:return Integer.parseInt(value);
+				case 3:return Float.parseFloat(value);
+				default:return String.valueOf(value);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

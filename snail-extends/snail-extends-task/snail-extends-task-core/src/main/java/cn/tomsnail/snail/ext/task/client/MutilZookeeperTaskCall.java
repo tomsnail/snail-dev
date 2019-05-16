@@ -71,7 +71,7 @@ public  class MutilZookeeperTaskCall extends MutilTaskCall{
 	@Override
 	public  void callback(Object data) {
 		String taskInfo = (String) data;
-		int status = Integer.valueOf(taskInfo.split(",")[4]);
+		int status = Integer.parseInt(taskInfo.split(",")[4]);
 		LOGGER.info(taskInfo.split(",")[1]+":"+status);
 		switch(status){
 			case 0:break;
@@ -107,8 +107,8 @@ public  class MutilZookeeperTaskCall extends MutilTaskCall{
 	@Override
 	public void call(Object data) {
 		String name = data.toString().split(",")[1];
-		int type = Integer.valueOf(data.toString().split(",")[0]);
-		long time = Long.valueOf(data.toString().split(",")[3]);
+		int type = Integer.parseInt(data.toString().split(",")[0]);
+		long time = Long.parseLong(data.toString().split(",")[3]);
 		if(MutilTaskCall.TaskCallMap.containsKey(name)){
 			Object result = MutilTaskCall.TaskCallMap.get(name).call();
 			if(result!=null){

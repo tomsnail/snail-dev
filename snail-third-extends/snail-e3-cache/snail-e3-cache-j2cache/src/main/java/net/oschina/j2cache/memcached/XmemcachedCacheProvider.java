@@ -62,11 +62,11 @@ public class XmemcachedCacheProvider implements CacheProvider {
         if(needAuth)
             builder.addAuthInfo(AddrUtil.getOneAddress(servers), AuthInfo.typical(username, password));
 
-        builder.setConnectionPoolSize(Integer.valueOf(props.getProperty("connectionPoolSize", "10")));
-        builder.setConnectTimeout(Long.valueOf(props.getProperty("connectTimeout", "1000")));
-        builder.setHealSessionInterval(Long.valueOf(props.getProperty("healSessionInterval", "1000")));
-        builder.setMaxQueuedNoReplyOperations(Integer.valueOf(props.getProperty("maxQueuedNoReplyOperations", "100")));
-        builder.setOpTimeout(Long.valueOf(props.getProperty("opTimeout", "100")));
+        builder.setConnectionPoolSize(Integer.parseInt(props.getProperty("connectionPoolSize", "10")));
+        builder.setConnectTimeout(Long.parseLong(props.getProperty("connectTimeout", "1000")));
+        builder.setHealSessionInterval(Long.parseLong(props.getProperty("healSessionInterval", "1000")));
+        builder.setMaxQueuedNoReplyOperations(Integer.parseInt(props.getProperty("maxQueuedNoReplyOperations", "100")));
+        builder.setOpTimeout(Long.parseLong(props.getProperty("opTimeout", "100")));
         builder.setSanitizeKeys("true".equalsIgnoreCase(props.getProperty("sanitizeKeys", "false")));
 
         try {

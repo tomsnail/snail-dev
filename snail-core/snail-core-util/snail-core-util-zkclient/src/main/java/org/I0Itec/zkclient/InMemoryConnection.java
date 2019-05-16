@@ -99,30 +99,6 @@ public class InMemoryConnection implements IZkConnection {
     private Set<String> _nodeWatches = new HashSet<String>();
     private EventThread _eventThread;
 
-    private class EventThread extends Thread {
-
-        private Watcher _watcher;
-        private BlockingQueue<WatchedEvent> _blockingQueue = new LinkedBlockingDeque<WatchedEvent>();
-
-        public EventThread(Watcher watcher) {
-            _watcher = watcher;
-        }
-
-        @Override
-        public void run() {
-            try {
-                while (true) {
-                    _watcher.process(_blockingQueue.take());
-                }
-            } catch (InterruptedException e) {
-                // stop event thread
-            }
-        }
-
-        public void send(WatchedEvent event) {
-            _blockingQueue.add(event);
-        }
-    }
 
     public InMemoryConnection() {
         try {
@@ -309,8 +285,9 @@ public class InMemoryConnection implements IZkConnection {
             }
             checkACL(path, ZooDefs.Perms.READ);
             byte[] bs = dataAndVersion.getData();
-            if (stat != null)
+            if (stat != null) {
                 stat.setVersion(dataAndVersion.getVersion());
+            }
             return bs;
         } finally {
             _lock.unlock();
@@ -367,6 +344,7 @@ public class InMemoryConnection implements IZkConnection {
         return "mem";
     }
 
+    @Override
     public List<OpResult> multi(Iterable<Op> ops) throws KeeperException, InterruptedException {
         List<OpResult> opResults = new ArrayList<OpResult>();
         for (Op op : ops) {

@@ -83,9 +83,9 @@ public class SHAUtil {
      * @throws Exception
      */
     public static void main(String args[]) throws Exception {
-        String str = new String("1234567890123456789012345678901234567890123456789012345678901234567890");
-        System.out.println("原始：" + str);
-        System.out.println("SHA后：" + getSHA256Str(str));
-        System.out.println("SHA后：" + shaEncode(str,SHAUtil.SHA512));
+//        String str = new String("1234567890123456789012345678901234567890123456789012345678901234567890");
+//        System.out.println("原始：" + str);
+//        System.out.println("SHA后：" + getSHA256Str(str));
+//        System.out.println("SHA后：" + shaEncode(str,SHAUtil.SHA512));
     }
 }

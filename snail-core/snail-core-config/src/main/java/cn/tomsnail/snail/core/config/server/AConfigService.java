@@ -57,18 +57,19 @@ public abstract class AConfigService implements IConfigObserver,IConfigService{
 		System.out.println("initConfigObject");
 		Map<String,String> _configMap = this.getConfigSource().getConfigData();
 		if(_configMap!=null){
-			Iterator<String> it = _configMap.keySet().iterator();
+			Iterator<Map.Entry<String,String>> it = _configMap.entrySet().iterator();
 			while(it.hasNext()){
-				String key = it.next();
+				Map.Entry<String,String> entry = it.next();
+				String key = entry.getKey();
 				if(configMap.containsKey(key)){
-					if(_configMap.get(key).equals(configMap.get(key))){
+					if(entry.getValue().equals(configMap.get(key))){
 					}else{
-						refresh(key,_configMap.get(key)+"");
-						configMap.put(key, _configMap.get(key));
+						refresh(key,String.valueOf(_configMap.get(key)));
+						configMap.put(key, entry.getValue());
 					}
 				}else{
-					configMap.put(key, _configMap.get(key));
-					add(key,_configMap.get(key)+"");
+					configMap.put(key,entry.getValue());
+					add(key,String.valueOf(entry.getValue()));
 				}
 			}
 		}

@@ -239,23 +239,23 @@ public class J2CacheSpringRedisAutoConfiguration {
 
 	private GenericObjectPoolConfig getGenericRedisPool(Properties props, String prefix) {
 		GenericObjectPoolConfig cfg = new GenericObjectPoolConfig();
-		cfg.setMaxTotal(Integer.valueOf((String) props.getOrDefault(key(prefix, "maxTotal"), "-1")));
-		cfg.setMaxIdle(Integer.valueOf((String) props.getOrDefault(key(prefix, "maxIdle"), "100")));
-		cfg.setMaxWaitMillis(Integer.valueOf((String) props.getOrDefault(key(prefix, "maxWaitMillis"), "100")));
+		cfg.setMaxTotal(Integer.parseInt((String) props.getOrDefault(key(prefix, "maxTotal"), "-1")));
+		cfg.setMaxIdle(Integer.parseInt((String) props.getOrDefault(key(prefix, "maxIdle"), "100")));
+		cfg.setMaxWaitMillis(Integer.parseInt((String) props.getOrDefault(key(prefix, "maxWaitMillis"), "100")));
 		cfg.setMinEvictableIdleTimeMillis(
-				Integer.valueOf((String) props.getOrDefault(key(prefix, "minEvictableIdleTimeMillis"), "864000000")));
-		cfg.setMinIdle(Integer.valueOf((String) props.getOrDefault(key(prefix, "minIdle"), "10")));
+				Integer.parseInt((String) props.getOrDefault(key(prefix, "minEvictableIdleTimeMillis"), "864000000")));
+		cfg.setMinIdle(Integer.parseInt((String) props.getOrDefault(key(prefix, "minIdle"), "10")));
 		cfg.setNumTestsPerEvictionRun(
-				Integer.valueOf((String) props.getOrDefault(key(prefix, "numTestsPerEvictionRun"), "10")));
-		cfg.setLifo(Boolean.valueOf(props.getProperty(key(prefix, "lifo"), "false")));
+				Integer.parseInt((String) props.getOrDefault(key(prefix, "numTestsPerEvictionRun"), "10")));
+		cfg.setLifo(Boolean.parseBoolean(props.getProperty(key(prefix, "lifo"), "false")));
 		cfg.setSoftMinEvictableIdleTimeMillis(
-				Integer.valueOf((String) props.getOrDefault(key(prefix, "softMinEvictableIdleTimeMillis"), "10")));
-		cfg.setTestOnBorrow(Boolean.valueOf(props.getProperty(key(prefix, "testOnBorrow"), "true")));
-		cfg.setTestOnReturn(Boolean.valueOf(props.getProperty(key(prefix, "testOnReturn"), "false")));
-		cfg.setTestWhileIdle(Boolean.valueOf(props.getProperty(key(prefix, "testWhileIdle"), "true")));
+				Integer.parseInt((String) props.getOrDefault(key(prefix, "softMinEvictableIdleTimeMillis"), "10")));
+		cfg.setTestOnBorrow(Boolean.parseBoolean(props.getProperty(key(prefix, "testOnBorrow"), "true")));
+		cfg.setTestOnReturn(Boolean.parseBoolean(props.getProperty(key(prefix, "testOnReturn"), "false")));
+		cfg.setTestWhileIdle(Boolean.parseBoolean(props.getProperty(key(prefix, "testWhileIdle"), "true")));
 		cfg.setTimeBetweenEvictionRunsMillis(
-				Integer.valueOf((String) props.getOrDefault(key(prefix, "timeBetweenEvictionRunsMillis"), "300000")));
-		cfg.setBlockWhenExhausted(Boolean.valueOf(props.getProperty(key(prefix, "blockWhenExhausted"), "false")));
+				Integer.parseInt((String) props.getOrDefault(key(prefix, "timeBetweenEvictionRunsMillis"), "300000")));
+		cfg.setBlockWhenExhausted(Boolean.parseBoolean(props.getProperty(key(prefix, "blockWhenExhausted"), "false")));
 		return cfg;
 	}
 

@@ -53,12 +53,12 @@ public class ClassUtil {
     public static String[] getPackageAllClassName(String classLocation, String packageName){  
         //将packageName分解  
         String[] packagePathSplit = packageName.split("[.]");  
-        String realClassLocation = classLocation;  
+        StringBuffer realClassLocation = new StringBuffer(classLocation);
         int packageLength = packagePathSplit.length;  
         for(int i = 0; i< packageLength; i++){  
-            realClassLocation = realClassLocation + File.separator+packagePathSplit[i];  
+            realClassLocation.append(File.separator+packagePathSplit[i]);
         }  
-        File packeageDir = new File(realClassLocation);  
+        File packeageDir = new File(realClassLocation.toString());
         if(packeageDir.isDirectory()){  
             String[] allClassName = packeageDir.list();  
             return allClassName;  

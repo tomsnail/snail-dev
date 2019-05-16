@@ -33,7 +33,7 @@ public class LoggerHelper  implements ILogger{
 		}
 		Log log = new Log();
 		log.addContent(info);
-		log.setLevel(Integer.valueOf(LogLevel.INFO));
+		log.setLevel(Integer.parseInt(LogLevel.INFO));
 		log.setTarget(target.toString());
 		logService.log(log);
 	}
@@ -44,7 +44,7 @@ public class LoggerHelper  implements ILogger{
 		}
 		Log log = new Log();
 		log.addContent(error);
-		log.setLevel(Integer.valueOf(LogLevel.ERROR));
+		log.setLevel(Integer.parseInt(LogLevel.ERROR));
 		log.setDesc(e.getMessage());
 		log.setTarget(target.toString());
 		logService.log(log);
@@ -56,7 +56,7 @@ public class LoggerHelper  implements ILogger{
 		}
 		Log log = new Log();
 		log.addContent(error);
-		log.setLevel(Integer.valueOf(LogLevel.ERROR));
+		log.setLevel(Integer.parseInt(LogLevel.ERROR));
 		log.setTarget(target.toString());
 		logService.log(log);
 	}
@@ -67,7 +67,7 @@ public class LoggerHelper  implements ILogger{
 		}
 		Log log = new Log();
 		log.addContent(debug);
-		log.setLevel(Integer.valueOf(LogLevel.DEBUG));
+		log.setLevel(Integer.parseInt(LogLevel.DEBUG));
 		log.setTarget(target.toString());
 		logService.log(log);
 	}
@@ -78,7 +78,7 @@ public class LoggerHelper  implements ILogger{
 		}
 		Log log = new Log();
 		log.addContent(warn);
-		log.setLevel(Integer.valueOf(LogLevel.DEBUG));
+		log.setLevel(Integer.parseInt(LogLevel.DEBUG));
 		log.setTarget(target.toString());
 		logService.log(log);
 	}

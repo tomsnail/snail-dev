@@ -35,8 +35,8 @@ public class FastDFSClient {
 	 static {
 		 
 		 PooledConnectionFactory connectionFactory = new PooledConnectionFactory();
-		 connectionFactory.setConnectTimeout(Integer.valueOf(ConfigHelp.getInstance("config").getLocalConfig("fastdfs.conn.timeout", "30000")));
-		 connectionFactory.setSoTimeout(Integer.valueOf(ConfigHelp.getInstance("config").getLocalConfig("fastdfs.so.timeout", "20000")));
+		 connectionFactory.setConnectTimeout(Integer.parseInt(ConfigHelp.getInstance("config").getLocalConfig("fastdfs.conn.timeout", "30000")));
+		 connectionFactory.setSoTimeout(Integer.parseInt(ConfigHelp.getInstance("config").getLocalConfig("fastdfs.so.timeout", "20000")));
 		 FdfsConnectionPool fdfsConnectionPool = new FdfsConnectionPool(connectionFactory);
 		 List<String> trackerList = new ArrayList<String>();
 		 trackerList.add(ConfigHelp.getInstance("config").getLocalConfig("fastdfs.tracker.address", "192.168.169.157:22122"));
