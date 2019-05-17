@@ -27,9 +27,9 @@ public class AppMain {
 	
 	public static volatile String AppName = cn.tomsnail.snail.core.util.host.AppName.AppName;
 	
-	private static final String SPRING_CONTEXT_XML = ConfigHelp.getInstance("config").getLocalConfig("framework.spring.xml", "");
+	private static final String SPRING_CONTEXT_XML = ConfigHelp.getInstance("config").getLocalConfig("server.spring.xml", "");
 	
-	private static final String APP_BOOT_TYPE = ConfigHelp.getInstance("config").getLocalConfig("framework.boot", "dubbo");
+	private static final String APP_BOOT_TYPE = ConfigHelp.getInstance("config").getLocalConfig("server.boot", "dubbo");
 
 	/**
 	 * 
