@@ -1,6 +1,7 @@
 package cn.tomsnail.snail.core.ds.autoconfig.single;
 
 
+import cn.tomsnail.snail.core.starter.spring.MixPropertySourceFactory;
 import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 import cn.tomsnail.snail.core.util.string.StringUtils;
 import com.alibaba.druid.pool.DruidDataSource;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import java.sql.SQLException;
 
 @Configuration
-@PropertySource("classpath:config.properties")
+@PropertySource(value = {"classpath:config.properties","classpath:config.yml"},factory = MixPropertySourceFactory.class)
 public class AutoSingleDataSource {
 	
 

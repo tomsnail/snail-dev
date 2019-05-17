@@ -17,5 +17,11 @@
       <artifactId>spring-boot-autoconfigure</artifactId>
       <version>${springboot.version}</version>
     </dependency>
+      <dependency>
+          <groupId>cn.tomsnail.snail</groupId>
+          <artifactId>snail-core-starter</artifactId>
+          <version>${revision}</version>
+          <scope>provided</scope>
+      </dependency>
   </dependencies>
 </project>

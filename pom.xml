@@ -59,13 +59,13 @@
 				<configuration>
 					<includes>
 						<include>**/*.class</include>
-						<include>dev-*.properties</include>
 						<include>META-INF/**/*</include>
 					</includes>
 					<excludes>
 						<exclude>*.xml</exclude>
 						<exclude>zookeeper.properties</exclude>
 						<exclude>config.properties</exclude>
+						<exclude>config.yml</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -221,6 +221,34 @@
 			</plugin>
 
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>log4j2.xml</include>
+					<include>**/*.yml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/spring-*</include>
+					<include>**/*.xml</include>
+					<include>*.xml</include>
+					<include>**/*.yml</include>
+					<include>**/data-source/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

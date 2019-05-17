@@ -19,6 +19,12 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
             <version>${springboot.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.tomsnail.snail</groupId>
+            <artifactId>snail-core-starter</artifactId>
+            <version>${revision}</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 

@@ -34,6 +34,12 @@
     		<artifactId>pooled-jms</artifactId>
     		<version>1.0.3</version>
 		</dependency>
+        <dependency>
+            <groupId>cn.tomsnail.snail</groupId>
+            <artifactId>snail-core-starter</artifactId>
+            <version>${revision}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 </project>

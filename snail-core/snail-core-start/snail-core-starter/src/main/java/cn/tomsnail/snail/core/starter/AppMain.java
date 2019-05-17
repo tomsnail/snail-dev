@@ -1,5 +1,6 @@
 package cn.tomsnail.snail.core.starter;
 
+import cn.tomsnail.snail.core.starter.spring.MixPropertySourceFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +22,7 @@ import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
  */
 @SpringBootApplication
 @ImportResource(locations= {"classpath:applicationContext.xml"})
-@PropertySource("classpath:config.properties")
+@PropertySource(value = {"classpath:config.properties","classpath:config.yml"},factory = MixPropertySourceFactory.class)
 public class AppMain {
 	
 	public static volatile String AppName = cn.tomsnail.snail.core.util.host.AppName.AppName;

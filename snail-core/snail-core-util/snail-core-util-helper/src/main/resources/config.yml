@@ -1,0 +1,16 @@
+framework:
+  boot: dubbo
+
+server:
+  port: 8081
+
+
+transfer:
+  way:
+    names: ftp,ftp2
+    ftp:
+      type: FTP
+      class: com.zkjd.npc.data.exchange.way.communication.FtpCommunicationWay
+    ftp2:
+      type: FTP
+      class: com.zkjd.npc.data.exchange.way.communication.FtpCommunicationWay
