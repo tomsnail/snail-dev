@@ -23,6 +23,7 @@
 					<excludes>
 						<exclude>zookeeper.properties</exclude>
 						<exclude>config.properties</exclude>
+						<exclude>config.yml</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

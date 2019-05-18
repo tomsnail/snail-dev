@@ -26,6 +26,7 @@
             <includes>
                 <include>applicationContext.xml</include>
                 <include>config.properties</include>
+                <include>config.yml</include>
                 <include>mybatis-config.xml</include>
             </includes>
         </fileSet>

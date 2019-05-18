@@ -1,5 +1,6 @@
 package cn.tomsnail.snail.e3.task.elastic.job.spring;
 
+import cn.tomsnail.snail.core.starter.spring.MixPropertySourceFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -9,9 +10,10 @@ import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
 
 import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
+import org.springframework.context.annotation.PropertySources;
 
 @Configuration
-@PropertySource("config.properties")
+@PropertySource(value = {"classpath:config.properties","classpath:config.yml"},factory = MixPropertySourceFactory.class)
 public class AutoElasticJobConfigurger {
 	
 	

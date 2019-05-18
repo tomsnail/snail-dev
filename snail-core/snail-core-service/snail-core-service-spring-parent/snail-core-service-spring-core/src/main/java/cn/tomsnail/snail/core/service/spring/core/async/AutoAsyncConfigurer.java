@@ -1,5 +1,6 @@
 package cn.tomsnail.snail.core.service.spring.core.async;
 
+import cn.tomsnail.snail.core.starter.spring.MixPropertySourceFactory;
 import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,7 @@ import java.util.concurrent.Executor;
 
 @Configuration
 @EnableAsync
-@PropertySource("classpath:config.properties")
+@PropertySource(value = {"classpath:config.properties","classpath:config.yml"},factory = MixPropertySourceFactory.class)
 public class AutoAsyncConfigurer implements AsyncConfigurer {
 
 

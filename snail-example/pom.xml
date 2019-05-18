@@ -26,6 +26,7 @@
                     <include>**/spring-*</include>
                     <include>**/*.xml</include>
                     <include>*.xml</include>
+                    <include>**/*.yml</include>
                     <include>**/data-source/*.xml</include>
                 </includes>
             </resource>

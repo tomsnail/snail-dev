@@ -1,5 +1,6 @@
 package cn.tomsnail.snail.ext.security.authority.filter.springboot;
 
+import cn.tomsnail.snail.core.starter.spring.MixPropertySourceFactory;
 import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 import cn.tomsnail.snail.core.util.string.StringUtils;
 import cn.tomsnail.snail.ext.security.authority.filter.FilterContants;
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@PropertySource("classpath:config.properties")
+@PropertySource(value = {"classpath:config.properties","classpath:config.yml"},factory = MixPropertySourceFactory.class)
 @ComponentScan(basePackages = "cn.tomsnail.snail.ext.security.authority.filter.m")
 public class AutoWebMvcConfigurer implements WebMvcConfigurer {
 

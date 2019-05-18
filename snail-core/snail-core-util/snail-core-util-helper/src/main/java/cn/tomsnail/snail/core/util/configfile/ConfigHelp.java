@@ -6,14 +6,18 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import cn.tomsnail.snail.core.util.commons.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.tomsnail.snail.core.util.string.StringUtils;
+
+import static cn.tomsnail.snail.core.util.configfile.TransferUtils.yml2Properties;
 
 
 /**
@@ -39,7 +43,11 @@ public class ConfigHelp {
 	private ConfigHelp(String fileName){
 		this.fileName = fileName;
 	}
-	
+
+	public static ConfigHelp getInstance(){
+		return getInstance("config");
+	}
+
 	public static ConfigHelp getInstance(String fileName){
 		ConfigHelp configHelp = null;
 		try{
@@ -138,11 +146,10 @@ public class ConfigHelp {
 					url = SystemResourceUtil.findAsResource(path);
 				}
 				if (null == url) {
-					//throw new FileNotFoundException(path);
-					return defaultValue;
+					return getYamlProperties(key,defaultValue);
 				}
-				properties =  new Properties();
 				try(InputStreamReader is = new InputStreamReader(new FileInputStream(new File(url.toURI())))){
+					properties =  new Properties();
 					properties.load(is);
 				}
 
@@ -162,11 +169,60 @@ public class ConfigHelp {
 		}
 		return defaultValue;
 	}
-	
-	
-	public static void main(String[] args) {
-		
+
+
+	private  String getYamlProperties(String key,String defaultValue){
+		if(properties==null){
+			try{
+				String path = "";
+				String _path = fileName+".yml";
+				if(new File(DEFAULT_ROOT_CONFIG_PATH+"/"+_path).exists()){
+					path = DEFAULT_ROOT_CONFIG_PATH+"/"+_path;
+				}else{
+					path =_path;
+				}
+				URL url = null;
+				File file = new File(path);
+				try {
+					if (file.exists()) {
+						url = file.toURI().toURL();
+					} else {
+						url = new URL(path);
+					}
+				} catch (MalformedURLException e) {
+					url = SystemResourceUtil.findAsResource(path);
+				}
+				if (null == url) {
+					//throw new FileNotFoundException(path);
+					return defaultValue;
+				}
+
+				List<String> proList = TransferUtils.yml2Properties(url.getPath());
+				if(CollectionUtils.isEmpty(proList)){
+					return defaultValue;
+				}
+				properties =  new Properties();
+				for(String line:proList ){
+					String lineKey = line.split("=")[0];
+					String lineValue = line.replace(lineKey+"=","");
+					properties.setProperty(lineKey,lineValue);
+				}
+			}catch(Exception ex){
+				logger.warn(ex.getMessage());
+			}
+		}
+		try{
+			if(properties!=null){
+				String result = properties.getProperty(key);
+				if(result!=null && !"".equals(result)){
+					return result;
+				}
+			}
+		}catch(Exception ex){
+			logger.warn(ex.getMessage());
+		}
+		return defaultValue;
 	}
-	
+
 
 }

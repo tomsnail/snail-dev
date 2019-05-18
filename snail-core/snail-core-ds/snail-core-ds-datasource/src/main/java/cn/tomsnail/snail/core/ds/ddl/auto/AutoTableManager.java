@@ -36,7 +36,7 @@ public class AutoTableManager {
         boolean ddl = ConfigHelp.getInstance("config").getLocalConfig("system.db.auto.ddl",false);
         logger.info("AutoTableManager ddl [{}]",ddl);
         if(!ddl) return;
-        String sqlPathStr = ConfigHelp.getInstance("config").getLocalConfig("system.db.auto.sql.paths","./sql/init.sql");
+        String sqlPathStr = ConfigHelp.getInstance("config").getLocalConfig("system.db.auto.sql-paths","./sql/init.sql");
         logger.info("AutoTableManager sqlPathStr [{}]",sqlPathStr);
         if(StringUtils.isBlank(sqlPathStr)) return;
         String[] sqlPaths = sqlPathStr.split(",");

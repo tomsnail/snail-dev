@@ -17,6 +17,12 @@
             <version>${revision}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>cn.tomsnail.snail</groupId>
+            <artifactId>snail-core-starter</artifactId>
+            <version>${revision}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 

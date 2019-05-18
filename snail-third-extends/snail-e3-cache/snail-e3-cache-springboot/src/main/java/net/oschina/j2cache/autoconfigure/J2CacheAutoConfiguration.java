@@ -2,6 +2,7 @@ package net.oschina.j2cache.autoconfigure;
 
 import java.io.IOException;
 
+import cn.tomsnail.snail.core.starter.spring.MixPropertySourceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -24,7 +25,7 @@ import net.oschina.j2cache.cache.support.util.SpringUtil;
 @ConditionalOnClass(J2Cache.class)
 @EnableConfigurationProperties({J2CacheConfig.class})
 @Configuration
-@PropertySource(value = "config.properties", encoding = "UTF-8", ignoreResourceNotFound = true)
+@PropertySource(value = {"classpath:config.properties","classpath:config.yml"}, encoding = "UTF-8", ignoreResourceNotFound = true,factory = MixPropertySourceFactory.class)
 public class J2CacheAutoConfiguration {
 	
     @Autowired

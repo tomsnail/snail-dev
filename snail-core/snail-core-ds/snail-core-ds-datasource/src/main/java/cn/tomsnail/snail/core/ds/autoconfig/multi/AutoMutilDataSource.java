@@ -2,6 +2,7 @@ package cn.tomsnail.snail.core.ds.autoconfig.multi;
 
 
 import cn.tomsnail.snail.core.ds.router.RountingDataSource;
+import cn.tomsnail.snail.core.starter.spring.MixPropertySourceFactory;
 import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 import cn.tomsnail.snail.core.util.string.StringUtils;
 import com.alibaba.druid.pool.DruidDataSource;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@PropertySource("classpath:config.properties")
+@PropertySource(value = {"classpath:config.properties","classpath:config.yml"},factory = MixPropertySourceFactory.class)
 @ComponentScan(basePackages=" cn.tomsnail.snail.core.ds.router")
 public class AutoMutilDataSource {
 
