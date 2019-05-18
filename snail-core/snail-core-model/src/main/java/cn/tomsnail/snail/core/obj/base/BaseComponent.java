@@ -19,5 +19,11 @@ public abstract class BaseComponent {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 
+	public Logger getLogger() {
+		return logger;
+	}
 
+	public void setLogger(Logger logger) {
+		this.logger = logger;
+	}
 }

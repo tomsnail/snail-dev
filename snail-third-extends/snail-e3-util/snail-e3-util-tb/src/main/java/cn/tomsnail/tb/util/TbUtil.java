@@ -106,10 +106,10 @@ public class TbUtil {
 		m1.put("redirect_uri", callbackUrl);
 		String url1 = "https://account.teambition.com/oauth2/authorize?response_type=code&client_id="+key+"&redirect_uri="+callbackUrl+"";
 		System.out.println(url1);
-		JSONObject json1 = JSONObject.fromObject(m1);
-		JSONObject jsonObject = new JSONObject();
+		//JSONObject json1 = JSONObject.fromObject(m1);
+		JSONObject jsonObject = null;
 		try {
-			logger.info(json1.toString());
+			//logger.info(json1.toString());
 			jsonObject = HttpsUtil.httpsRequest(url1, "GET", null);
 			logger.info("",jsonObject);
 			if (jsonObject != null) {

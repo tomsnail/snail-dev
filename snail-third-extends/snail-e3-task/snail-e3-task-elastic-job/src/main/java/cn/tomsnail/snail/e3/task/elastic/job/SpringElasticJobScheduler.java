@@ -118,28 +118,29 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 			return null;
 		}
 		DataSource dataSource = applicationContext.getBean(_jobDataSource, DataSource.class);
-		Connection connection = dataSource.getConnection();
-		Statement statement = connection.createStatement();
-		ResultSet rs = statement.executeQuery(_jobSQL);
 		List<SpringElasticJobM> elasticJobMs = new ArrayList<SpringElasticJobM>();
-		while(rs.next()){    
-			String cron = rs.getString("CRON");
-			if(StringUtils.isBlank(cron)){
-				cron = rs.getString("cron");
+		try(Connection connection = dataSource.getConnection();Statement statement = connection.createStatement()){
+			ResultSet rs = statement.executeQuery(_jobSQL);
+			while(rs.next()){
+				String cron = rs.getString("CRON");
+				if(StringUtils.isBlank(cron)){
+					cron = rs.getString("cron");
+				}
+				String jobName = rs.getString("JOB_NAME");
+				if(StringUtils.isBlank(jobName)){
+					jobName = rs.getString("job_name");
+				}
+				if(StringUtils.isBlank(jobName)){
+					jobName = "job-"+System.currentTimeMillis();
+				}
+				String params = rs.getString("PARAMS");
+				if(StringUtils.isBlank(params)){
+					params = rs.getString("params");
+				}
+				elasticJobMs.add(new SpringElasticJobM(jobName, cron, params, springElasticJobM.elasticJob));
 			}
-			String jobName = rs.getString("JOB_NAME");
-			if(StringUtils.isBlank(jobName)){
-				jobName = rs.getString("job_name");
-			}
-			if(StringUtils.isBlank(jobName)){
-				jobName = "job-"+System.currentTimeMillis();
-			}
-			String params = rs.getString("PARAMS");
-			if(StringUtils.isBlank(params)){
-				params = rs.getString("params");
-			}
-			elasticJobMs.add(new SpringElasticJobM(jobName, cron, params, springElasticJobM.elasticJob));
-	     }    
+		}
+
 		return elasticJobMs;
 	}
 	
@@ -327,14 +328,15 @@ public class SpringElasticJobScheduler implements ApplicationListener<ContextRef
 		if(dataSource==null) {
 			return null;
 		}
-		
-		Connection connection = dataSource.getConnection();
-		Statement statement = connection.createStatement();
-		ResultSet rs = statement.executeQuery(sql);
 		String cron = null;
-		while(rs.next()){    
-			cron = rs.getString("cron") ;    
-	     }    
+		try(Connection connection = dataSource.getConnection();Statement statement = connection.createStatement();){
+
+			ResultSet rs = statement.executeQuery(sql);
+
+			while(rs.next()){
+				cron = rs.getString("cron") ;
+			}
+		}
 		return cron;
 	}
 	

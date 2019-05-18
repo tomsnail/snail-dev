@@ -43,7 +43,8 @@ public class SmartInsertThreadManager implements Runnable,IBatchInsert{
 	public SmartInsertThreadManager(){
 		
 	}
-	
+
+	@Override
 	public  IInsertThread getBatchInsertThread(DataInsertModel dataInsertModel){
 		if(dataInsertModel==null){
 			return null;
@@ -52,9 +53,9 @@ public class SmartInsertThreadManager implements Runnable,IBatchInsert{
 	}
 	
 	@PostConstruct
+	@Override
 	public void init(){
-		try {
-			MySQLConnection connection =  (MySQLConnection) jdbcTemplate.getDataSource().getConnection().getMetaData().getConnection();
+		try (MySQLConnection connection =  (MySQLConnection) jdbcTemplate.getDataSource().getConnection().getMetaData().getConnection()){
 			String url = connection.getURL();
 			String username = connection.getUser();
 			String password = connection.getProperties().getProperty("password");
@@ -83,13 +84,14 @@ public class SmartInsertThreadManager implements Runnable,IBatchInsert{
 	private void addNewThread(){
 		try {
 			if(insertThreads.size()<maxSize){
-				MySQLConnection connection =  (MySQLConnection) jdbcTemplate.getDataSource().getConnection().getMetaData().getConnection();
-				String url = connection.getURL();
-				String username = connection.getUser();
-				String password = connection.getProperties().getProperty("password");
-				MySQLSmartInsertThread mySQLSmartInsertThread = new MySQLSmartInsertThread(url,username,password);
-				insertThreads.add(mySQLSmartInsertThread);
-				new Thread(mySQLSmartInsertThread).start();
+				try(MySQLConnection connection =  (MySQLConnection) jdbcTemplate.getDataSource().getConnection().getMetaData().getConnection()){
+					String url = connection.getURL();
+					String username = connection.getUser();
+					String password = connection.getProperties().getProperty("password");
+					MySQLSmartInsertThread mySQLSmartInsertThread = new MySQLSmartInsertThread(url,username,password);
+					insertThreads.add(mySQLSmartInsertThread);
+					new Thread(mySQLSmartInsertThread).start();
+				}
 			}
 			dbSize = insertThreads.size();
 		} catch (SQLException e) {

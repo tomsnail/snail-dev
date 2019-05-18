@@ -65,29 +65,37 @@ public class RedisClient implements Closeable, AutoCloseable {
         public Builder(){}
 
         public Builder mode(String mode){
-            if(mode == null || mode.trim().length() == 0)
+            if(mode == null || mode.trim().length() == 0){
                 this.mode = "single";
-            else
+            }
+            else{
                 this.mode = mode;
+            }
+
             return this;
         }
         public Builder hosts(String hosts){
-            if(hosts == null || hosts.trim().length() == 0)
+            if(hosts == null || hosts.trim().length() == 0){
                 this.hosts = "127.0.0.1:6379";
-            else
+            }
+            else{
                 this.hosts = hosts;
+            }
             return this;
         }
         public Builder password(String password){
-            if(password != null && password.trim().length() > 0)
+            if(password != null && password.trim().length() > 0){
                 this.password = password;
+            }
             return this;
         }
         public Builder cluster(String cluster) {
-            if(cluster == null || cluster.trim().length() == 0)
+            if(cluster == null || cluster.trim().length() == 0){
                 this.cluster = "j2cache";
-            else
+            }
+            else{
                 this.cluster = cluster;
+            }
             return this;
         }
         public Builder database(int database){
@@ -119,8 +127,9 @@ public class RedisClient implements Closeable, AutoCloseable {
         switch(mode){
             case "sentinel":
                 Set<String> nodes = new HashSet<>();
-                for(String node : hosts.split(","))
+                for(String node : hosts.split(",")){
                     nodes.add(node);
+                }
                 this.sentinel = new JedisSentinelPool(cluster_name, nodes, poolConfig, CONNECT_TIMEOUT, password, database);
                 break;
             case "cluster":
@@ -136,8 +145,9 @@ public class RedisClient implements Closeable, AutoCloseable {
             case "sharded":
                 List<JedisShardInfo> shards = new ArrayList<>();
                 try {
-                    for(String node : hosts.split(","))
+                    for(String node : hosts.split(",")){
                         shards.add(new JedisShardInfo(new URI(node)));
+                    }
                 } catch (URISyntaxException e) {
                     throw new JedisConnectionException(e);
                 }
@@ -164,14 +174,18 @@ public class RedisClient implements Closeable, AutoCloseable {
     public BinaryJedisCommands get() {
         BinaryJedisCommands client = clients.get();
         if(client == null) {
-            if (single != null)
+            if (single != null){
                 client = single.getResource();
-            else if (sentinel != null)
+            }
+            else if (sentinel != null){
                 client = sentinel.getResource();
-            else if (sharded != null)
+            }
+            else if (sharded != null){
                 client = sharded.getResource();
-            else if (cluster != null)
+            }
+            else if (cluster != null){
                 client = toBinaryJedisCommands(cluster);
+            }
 
             clients.set(client);
         }
@@ -192,8 +206,9 @@ public class RedisClient implements Closeable, AutoCloseable {
                     log.error("Failed to release jedis connection.", e);
                 }
             }
-            else
+            else{
                 log.warn("Nothing to do while release redis client.");
+            }
 
             clients.remove();
         }

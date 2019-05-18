@@ -85,8 +85,8 @@ public abstract class AConfigService implements IConfigObserver,IConfigService{
 		initConfigMap();
 		if(configSource!=null){
 			configSource.addObserver(this);
+			configSource.start();
 		}
-		configSource.start();
 	}
 
 	public AConfigSource getConfigSource() {

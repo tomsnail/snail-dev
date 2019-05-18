@@ -47,7 +47,7 @@ public class OrcContent {
 	}
 	
 	public boolean face(){
-		if(subType==null||(subType.getType()%2==1)){
+		if(subType==null||(subType.getType()%2!=0)){
 			return true;
 		}
 		return false;

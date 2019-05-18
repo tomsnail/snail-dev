@@ -86,7 +86,7 @@ public class DefaultAnnoToObject implements IAnnoToObject {
 			registerObject.setAddUrl(urlStr);
 			registerObject.setGroup(group);
 			registerObject.setWeight(weight);
-			registerObject.setAppName(AppName.AppName);
+			registerObject.setAppName(AppName.appName);
 			registerObject.setVersion(version);
 			register.register(registerObject);
 			LOGGER.info("RegisterFactory " + serviceName + ":" + urlStr + ":"

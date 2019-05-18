@@ -81,7 +81,7 @@ public class DefaultFileConfigSource extends AConfigSource implements FileAltera
 					Reader reader = null;
 					try {
 						in = new FileInputStream(f);
-						reader = new InputStreamReader(in);
+						reader = new InputStreamReader(in,"UTF-8");
 						properties.load(reader);
 						Iterator<Object> it = properties.keySet().iterator();
 						while(it.hasNext()){

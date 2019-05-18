@@ -30,7 +30,7 @@ public class SpringBootRest extends BaseWebApi {
     @ResponseBody
     public ResultData<ModelObject> post(@RequestBody RequestData<ModelObject> requestData) {
         ResultData<ModelObject> modelObjectResultData = new ResultData<>();
-        ModelObject modelObject = modelObjectResultData.getBody();
+        //ModelObject modelObject = modelObjectResultData.getBody();
         modelObjectResultData.setBody(requestData.getBody());
         return modelObjectResultData;
     }

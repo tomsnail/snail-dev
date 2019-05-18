@@ -22,8 +22,7 @@ public class ZookeeperUtil {
 		if(StringUtils.isBlank(zookeeperServer)){
 			throw new NullPointerException("zookeeperServer is null");
 		}
-		ZkClient zkClient = zkClient = new ZkClient(zookeeperServer,connectionTimeout);
-		return zkClient;
+		return new ZkClient(zookeeperServer,connectionTimeout);
 	}
 	
 	private static void colse(ZkClient zkClient){

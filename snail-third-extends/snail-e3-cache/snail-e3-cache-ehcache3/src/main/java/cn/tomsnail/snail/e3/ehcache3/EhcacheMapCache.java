@@ -65,7 +65,7 @@ public class EhcacheMapCache implements ICache,IInitCache,IDestoryCache{
 
 	@Override
 	public long getExpire(String key) {
-		Cache<String,String> cache = getCache();
+		//Cache<String,String> cache = getCache();
 		return 0;
 	}
 	

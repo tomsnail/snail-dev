@@ -26,7 +26,7 @@ public class BinStrUtil {
 		  str = str.trim();  
 		  int len = str.length();  
 		    
-		  if (len == 0 || len % 2 == 1){  
+		  if (len == 0 ||len % 2 !=0){
 		   return null;  
 		  }  
 		    
@@ -39,5 +39,7 @@ public class BinStrUtil {
 		  } catch (Exception e) {  
 		   return null;  
 		  }  
-		}  
+		}
+
+
 }

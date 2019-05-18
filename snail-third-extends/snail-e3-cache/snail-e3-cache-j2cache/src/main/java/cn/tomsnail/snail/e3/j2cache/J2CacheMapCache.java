@@ -68,7 +68,7 @@ public class J2CacheMapCache implements ICache,IInitCache,IDestoryCache{
 
 	@Override
 	public boolean isExits(String key) {
-		return cache.get(DEFAULT_REGIN, key)==null;
+		return cache.exists(DEFAULT_REGIN, key);
 	}
 
 }

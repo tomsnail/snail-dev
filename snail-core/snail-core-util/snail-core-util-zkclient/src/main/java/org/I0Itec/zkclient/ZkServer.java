@@ -116,8 +116,9 @@ public class ZkServer {
             if (NetworkUtil.isPortFree(port)) {
                 final File dataDir = new File(_dataDir);
                 final File dataLogDir = new File(_logDir);
-                dataDir.mkdirs();
-                dataLogDir.mkdirs();
+                if(dataDir.mkdirs()&&dataLogDir.mkdirs()){
+                    throw new RuntimeException("mkdir exception");
+                }
 
                 if (hosts.length > 1) {
                     // multiple zk servers

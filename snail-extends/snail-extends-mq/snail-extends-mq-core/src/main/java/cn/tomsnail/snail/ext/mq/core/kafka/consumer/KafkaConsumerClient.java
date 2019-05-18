@@ -36,7 +36,7 @@ public class KafkaConsumerClient implements IConsumerClient{
 
 	@Override
 	public void register(MQConfig mqConfig, IJmsReceiveCall jmsReceiveCall) {
-		if(mqConfig!=null){
+		if(mqConfig!=null && mqConfig instanceof KafkaMQConfig){
 			KafkaConsumer consumer =  new KafkaConsumer((KafkaMQConfig) mqConfig);
 			consumer.setJmsReceiveCall(jmsReceiveCall);
 			new Thread(consumer).start();

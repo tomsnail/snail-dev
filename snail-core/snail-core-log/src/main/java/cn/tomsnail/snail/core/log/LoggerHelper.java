@@ -112,8 +112,9 @@ public class LoggerHelper  implements ILogger{
 		if(logService!=null){
 			switch(level){
 				case LogLevel.DEBUG:LOGGER.debug(loginfo);break;
-				case LogLevel.INFO:LOGGER.info(loginfo);break;
 				case LogLevel.ERROR:LOGGER.error(loginfo);break;
+				case LogLevel.INFO:
+				default:LOGGER.info(loginfo);break;
 			}
 			return true;
 		}

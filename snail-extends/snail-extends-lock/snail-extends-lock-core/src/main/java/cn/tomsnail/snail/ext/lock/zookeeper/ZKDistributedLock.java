@@ -151,11 +151,14 @@ public class ZKDistributedLock implements Lock, Watcher {
 		if (stat != null) {
 			System.out.println("Thread " + Thread.currentThread().getId()
 					+ " waiting for " + root + "/" + lower);
-			this.latch = new CountDownLatch(1);
-			this.latch.await(waitTime, TimeUnit.MILLISECONDS);
-			this.latch = null;
+			latch = new CountDownLatch(1);
+			if(latch.await(waitTime, TimeUnit.MILLISECONDS)){
+				this.latch = null;
+				return true;
+			}
+
 		}
-		return true;
+		return false;
 	}
 	@Override
 	public void unlock() {

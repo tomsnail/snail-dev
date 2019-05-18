@@ -78,6 +78,10 @@ public class QiniuPicUtil {
 		* @exception no
 		*/
 	public synchronized void initAccessSecret(String access,String secret){
+		initAuth(access,secret);
+	}
+
+	public static void initAuth(String access,String secret){
 		ACCESS_KEY = access;
 		SECRET_KEY = secret;
 		auth = null;
@@ -270,7 +274,7 @@ public class QiniuPicUtil {
 	}
 	
 	public static void main(String[] args) {
-		uploadF("C://Users//Public//Pictures//Sample Pictures//Chrysanthemum.jpg","Desert1.jp");
+		//uploadF("C://Users//Public//Pictures//Sample Pictures//Chrysanthemum.jpg","Desert1.jp");
 	}
 
 }

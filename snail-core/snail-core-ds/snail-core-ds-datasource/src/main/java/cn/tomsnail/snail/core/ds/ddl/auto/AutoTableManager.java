@@ -54,10 +54,10 @@ public class AutoTableManager {
             }
             try (InputStream inputStream = new FileInputStream(f))
             {
-                if(inputStream==null){
-                    logger.info("inputStream is null ");
-                    return;
-                }
+//                if(inputStream==null){
+//                    logger.info("inputStream is null ");
+//                    return;
+//                }
                 String sqlText = IOUtils.toString(inputStream, "utf-8");
                 logger.info("SQL = {}", sqlText);
                 DataSource ds = jdbcTemplate.getDataSource();

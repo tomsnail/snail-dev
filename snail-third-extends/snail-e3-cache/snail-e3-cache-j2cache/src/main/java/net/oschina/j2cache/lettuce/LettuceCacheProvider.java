@@ -104,7 +104,7 @@ public class LettuceCacheProvider extends RedisPubSubAdapter<String, String> imp
 
         String redis_url = String.format("%s://%s@%s/%d#%s", scheme, password, hosts, database, sentinelMasterId);
 
-        redisClient = isCluster?RedisClusterClient.create(redis_url):RedisClient.create(redis_url);
+        setRedisClient(isCluster?RedisClusterClient.create(redis_url):RedisClient.create(redis_url));
         try {
             int timeout = Integer.parseInt(props.getProperty("timeout", "10000"));
             redisClient.setDefaultTimeout(Duration.ofMillis(timeout));
@@ -119,10 +119,12 @@ public class LettuceCacheProvider extends RedisPubSubAdapter<String, String> imp
         poolConfig.setMinIdle(Integer.parseInt(props.getProperty("minIdle", "10")));
 
         pool = ConnectionPoolSupport.createGenericObjectPool(() -> {
-            if(redisClient instanceof RedisClient)
+            if(redisClient instanceof RedisClient){
                 return ((RedisClient)redisClient).connect(codec);
-            else if(redisClient instanceof RedisClusterClient)
+            }
+            else if(redisClient instanceof RedisClusterClient){
                 return ((RedisClusterClient)redisClient).connect(codec);
+            }
             return null;
         }, poolConfig);
     }
@@ -132,6 +134,14 @@ public class LettuceCacheProvider extends RedisPubSubAdapter<String, String> imp
         pool.close();
         regions.clear();
         redisClient.shutdown();
+    }
+
+    public static AbstractRedisClient getRedisClient() {
+        return redisClient;
+    }
+
+    public static void setRedisClient(AbstractRedisClient redisClient) {
+        LettuceCacheProvider.redisClient = redisClient;
     }
 
     @Override

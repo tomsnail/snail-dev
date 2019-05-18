@@ -44,11 +44,11 @@ public class OrcResult {
 		this.result = result;
 	}
 	
-	public static OrcResult NullError(){
+	public static OrcResult nullError(){
 		return new OrcResult(false,-1,"null error");
 	}
 	
-	public static OrcResult Error(){
+	public static OrcResult error(){
 		return new OrcResult(false,-1,"error");
 	}
 

@@ -67,7 +67,9 @@ public class ProxyServerKeeper implements IServer{
 			e.printStackTrace();
 		}finally{
 			try {
-				fr.close();
+				if(fr!=null){
+					fr.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -1,6 +1,7 @@
 package cn.tomsnail.snail.core.http.register.core;
 
 import cn.tomsnail.snail.core.SpiCoreContextHolder;
+import cn.tomsnail.snail.core.framework.spi.DefaultSpiCoreContextHolder;
 
 /**
  *        默认注册器工厂
@@ -12,7 +13,11 @@ import cn.tomsnail.snail.core.SpiCoreContextHolder;
  */
 public class RegisterFactory implements IRegisterFactory {
 	
-	SpiCoreContextHolder spiCoreContextHolder = null;
+	private SpiCoreContextHolder spiCoreContextHolder = null;
+
+	public RegisterFactory(){
+		spiCoreContextHolder = new DefaultSpiCoreContextHolder("config.properties");
+	}
 
 	@Override
 	public IRegister getRegister(String url) {
@@ -24,5 +29,13 @@ public class RegisterFactory implements IRegisterFactory {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public SpiCoreContextHolder getSpiCoreContextHolder() {
+		return spiCoreContextHolder;
+	}
+
+	public void setSpiCoreContextHolder(SpiCoreContextHolder spiCoreContextHolder) {
+		this.spiCoreContextHolder = spiCoreContextHolder;
 	}
 }

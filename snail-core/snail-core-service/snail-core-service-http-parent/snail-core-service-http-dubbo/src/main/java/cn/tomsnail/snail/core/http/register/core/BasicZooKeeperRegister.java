@@ -35,13 +35,16 @@ public class BasicZooKeeperRegister implements IRegister{
 
 	@Override
 	public void register(RegisterObject registerObject) {
-		JsonServerRegisterObject _registerObject = (JsonServerRegisterObject) registerObject;
-		createProviderNode(_registerObject);		
-		createGroupNode(_registerObject);
-		createCustomerNode(_registerObject);
-		writeGroupData(_registerObject);
-		createChangeNode(_registerObject);
-		createServiceNodeAndData(_registerObject);
+		if(registerObject instanceof JsonServerRegisterObject){
+			JsonServerRegisterObject _registerObject = (JsonServerRegisterObject) registerObject;
+			createProviderNode(_registerObject);
+			createGroupNode(_registerObject);
+			createCustomerNode(_registerObject);
+			writeGroupData(_registerObject);
+			createChangeNode(_registerObject);
+			createServiceNodeAndData(_registerObject);
+		}
+
 	
 	}
 

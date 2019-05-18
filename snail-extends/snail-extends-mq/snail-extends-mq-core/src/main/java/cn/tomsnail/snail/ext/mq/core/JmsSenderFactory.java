@@ -54,7 +54,7 @@ public class JmsSenderFactory implements IJmsSenderFactory{
 		return FACTORY_MAP.get(mqConfig.getJmsType()).getJmsSender(mqConfig);
 	}
 	
-	public void setFactoryMap(Map<JmsType,IJmsSenderFactory> factroyMap ){
+	public static void setFactoryMap(Map<JmsType,IJmsSenderFactory> factroyMap ){
 		FACTORY_MAP = factroyMap;
 	}
 }

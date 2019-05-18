@@ -65,7 +65,7 @@ public class SpringRedisPubSubPolicy implements ClusterPolicy {
 		topics.add(new PatternTopic(del));
 		
 		if("active".equals(config.getCacheCleanMode())) {
-			isActive = true;
+			active(true);
 			//设置键值回调 需要redis支持键值回调
 			ConfigureNotifyKeyspaceEventsAction action = new ConfigureNotifyKeyspaceEventsAction();
 			action.config(listenerContainer.getConnectionFactory().getConnection());
@@ -82,11 +82,20 @@ public class SpringRedisPubSubPolicy implements ClusterPolicy {
 
 	}
 
+	public static boolean isActive() {
+		return isActive;
+	}
+
+	public static void active(boolean isActive) {
+		SpringRedisPubSubPolicy.isActive = isActive;
+	}
+
 	/**
 	 * 删除本地某个缓存条目
 	 * @param region 区域名称
 	 * @param keys   缓存键值
 	 */
+	@Override
 	public void evict(String region, String... keys) {
 		holder.getLevel1Cache(region).evict(keys);
 	}
@@ -95,6 +104,7 @@ public class SpringRedisPubSubPolicy implements ClusterPolicy {
 	 * 清除本地整个缓存区域
 	 * @param region 区域名称
 	 */
+	@Override
 	public void clear(String region) {
 		holder.getLevel1Cache(region).clear();
 	}

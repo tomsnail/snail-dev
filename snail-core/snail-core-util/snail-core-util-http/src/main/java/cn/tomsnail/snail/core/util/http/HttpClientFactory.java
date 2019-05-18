@@ -258,7 +258,7 @@ public class HttpClientFactory {
 	                }  
 	                return entity != null ? resopnse : null;  
 	            } else {  
-	                HttpEntity entity = response.getEntity();  
+	                //HttpEntity entity = response.getEntity();
 	                httpPost.abort();  
 	                logger.error(" status"+status+" url="+url+" jsonstr="+params.toString());  
 	                throw new ClientProtocolException("Unexpected response status: " + status);  

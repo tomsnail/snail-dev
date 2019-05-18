@@ -41,5 +41,11 @@ public abstract class AServer implements IServer,Runnable{
 		}
 	}
 
-	
+	public boolean isRun() {
+		return isRun;
+	}
+
+	public void setRun(boolean run) {
+		isRun = run;
+	}
 }

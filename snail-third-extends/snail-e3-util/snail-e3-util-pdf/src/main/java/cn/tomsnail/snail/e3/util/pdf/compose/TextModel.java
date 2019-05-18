@@ -66,7 +66,7 @@ public class TextModel {
 			this.bf = bf;
 		}else {
 			 try {
-					bf = BaseFont.createFont("STSong-Light","UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+					this.bf = BaseFont.createFont("STSong-Light","UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
 				} catch (DocumentException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -102,7 +102,7 @@ public class TextModel {
 			this.bf = bf;
 		}else {
 			 try {
-					bf = BaseFont.createFont();
+					this.bf = BaseFont.createFont();
 				} catch (DocumentException e) {
 					e.printStackTrace();
 				} catch (IOException e) {

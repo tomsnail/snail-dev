@@ -5,29 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import java.util.Map;
-
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.math.NumberUtils;
@@ -39,7 +16,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -48,7 +24,6 @@ import org.springframework.stereotype.Component;
 import cn.tomsnail.snail.core.config.client.ConfigClientFactory;
 import cn.tomsnail.snail.core.config.client.plugin.AnnotationConverter;
 import cn.tomsnail.snail.core.http.CommonMessage;
-import cn.tomsnail.snail.core.http.RequestData;
 import cn.tomsnail.snail.core.http.ResultData;
 import cn.tomsnail.snail.core.log.annotation.LogLevel;
 import cn.tomsnail.snail.core.log.annotation.LogPoint;
@@ -161,14 +136,8 @@ public class SystemLogAspect {
 						}else {
 							_t.setErrorMsg(em);
 						}
-						
-						if(t  instanceof ResultData) {
-							
-						}
-						else {
-							
-							_t.putBody("exResult", JsonUtil.toJson(t));
-						}
+
+						_t.putBody("exResult", JsonUtil.toJson(t));
 						
 					}
 					long endTime = System.currentTimeMillis();
@@ -229,7 +198,7 @@ public class SystemLogAspect {
 		}
 		
 		log.setDesc(new String(logPoint.desc().getBytes(),"UTF-8"));
-		log.setModule(AppMain.AppName);
+		log.setModule(AppMain.appName);
 		log.setShared(logPoint.shared());
 		log.setClassName(joinPoint.getTarget().getClass().getName());
 		log.setMethodName(joinPoint.getSignature().getName());
@@ -272,8 +241,10 @@ public class SystemLogAspect {
 						System.err.println(e.getMessage());
 					}
 				}else{
-					if(NumberUtils.isNumber(levelStr))
+					if(NumberUtils.isNumber(levelStr)){
 						level = Integer.parseInt(levelStr);
+					}
+
 				}
 		 }
 		return level;
@@ -295,7 +266,9 @@ public class SystemLogAspect {
 		 } catch (Exception e) {
 			 System.err.println(e.getMessage());
 		 }
-    	if(!isLogger) return null;
+    	if(!isLogger){
+			return null;
+		}
         String targetName = joinPoint.getTarget().getClass().getName();    
         String methodName = joinPoint.getSignature().getName();    
         Object[] arguments = joinPoint.getArgs();

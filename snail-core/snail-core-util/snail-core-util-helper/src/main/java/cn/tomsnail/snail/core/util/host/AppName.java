@@ -19,7 +19,7 @@ public class AppName {
 	/**
 	 * 
 	 */
-	public static String AppName = getAppName();
+	public static String appName = getAppName();
 
 	/**
 	 *        
@@ -38,8 +38,7 @@ public class AppName {
 		String appName = defaultAppName;
 		try {
 			// 用一个读输出流类去读
-			InputStreamReader isr = new InputStreamReader(new FileInputStream(
-					startfile));
+			InputStreamReader isr = new InputStreamReader(new FileInputStream(startfile));
 			// 用缓冲器读行
 			BufferedReader br = new BufferedReader(isr);
 			String line = null;

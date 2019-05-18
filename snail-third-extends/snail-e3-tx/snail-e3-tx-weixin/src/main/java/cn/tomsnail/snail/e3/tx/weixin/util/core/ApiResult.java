@@ -24,13 +24,13 @@ public class ApiResult {
     private String json;
     private String errCode;
     private String errMsg;
-    private String errCNMsg;
+    private String errCNMsg = null;
 
     public ApiResult(String json) {
         this.json = json;
         this.content = Json.fromJson(Map.class, json);
-        this.errCode =( (this.content.get("errcode")+"")==null?(this.content.get("err_code")+""):(this.content.get("errcode")+""));
-        this.errMsg = (String) this.content.get("errmsg");
+        this.errCode =String.valueOf(this.content.get("errcode")==null?String.valueOf(this.content.get("err_code")):String.valueOf(this.content.get("errcode")));
+        this.errMsg = String.valueOf(this.content.get("errmsg"));
         //this.errCNMsg = this.errCode == null ? "请求成功." : _cr.get(String.valueOf(this.errCode));
 
         if (log.isInfoEnabled()) {

@@ -59,12 +59,9 @@ public class BaseSqlParse extends ASqlParse{
 	public String getSQL() {
 		String sql = "";
 		switch(sqlType){
-		case SELECT:
-			sql=this.getSelectSQL();
-			break;
-		case DELETE:
-			sql=this.getDeleteSQL();
-			break;		
+		case SELECT: sql=this.getSelectSQL();break;
+		case DELETE: sql=this.getDeleteSQL();break;
+		default:sql=this.getSelectSQL();break;
 		}
 		if(this.parse==null){
 			return sql;

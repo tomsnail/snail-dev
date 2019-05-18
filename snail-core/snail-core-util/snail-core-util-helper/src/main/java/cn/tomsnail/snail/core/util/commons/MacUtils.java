@@ -37,7 +37,7 @@ public class MacUtils {
 			 */
 			process = Runtime.getRuntime().exec("ifconfig eth0");
 			bufferedReader = new BufferedReader(new InputStreamReader(
-					process.getInputStream()));
+					process.getInputStream(),"UTF-8"));
 			String line = null;
 			int index = -1;
 			while ((line = bufferedReader.readLine()) != null) {
@@ -88,7 +88,7 @@ public class MacUtils {
 			 */
 			process = Runtime.getRuntime().exec("ifconfig eth0");
 			bufferedReader = new BufferedReader(new InputStreamReader(
-					process.getInputStream()));
+					process.getInputStream(),"UTF-8"));
 			String line = null;
 			int index = -1;
 			while ((line = bufferedReader.readLine()) != null) {
@@ -140,7 +140,7 @@ public class MacUtils {
 			 * windows下的命令，显示信息中包含有mac地址信息
 			 */
 			process = Runtime.getRuntime().exec("ipconfig /all");
-			bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream(),"UTF-8"));
 			String line = null;
 			int index = -1;
 			while ((line = bufferedReader.readLine()) != null) {

@@ -131,10 +131,13 @@ public class ZKDistributedSimpleLock implements Lock, Watcher {
 			System.out.println("Thread " + Thread.currentThread().getId()
 					+ " waiting for " + root + "/" + lower);
 			this.latch = new CountDownLatch(1);
-			this.latch.await(waitTime, TimeUnit.MILLISECONDS);
-			this.latch = null;
+			if(this.latch.await(waitTime, TimeUnit.MILLISECONDS)){
+				this.latch = null;
+				return tryLock();
+			}
+
 		}
-		return tryLock();
+		return false;
 	}
 	@Override
 	public void unlock() {

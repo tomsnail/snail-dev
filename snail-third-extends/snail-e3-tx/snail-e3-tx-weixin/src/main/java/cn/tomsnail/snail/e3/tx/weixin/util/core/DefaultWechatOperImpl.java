@@ -52,9 +52,9 @@ public class DefaultWechatOperImpl implements WechatOper {
 	
     static int RETRY_COUNT = 1;
 
-    protected static MemoryCache<AccessToken> _atmc;
+    private static MemoryCache<AccessToken> _atmc;
 
-    protected static MemoryCache<JSTicket> _jstmc;
+    private static MemoryCache<JSTicket> _jstmc;
 
     private WXAccount mpAct;
 
@@ -485,9 +485,9 @@ public class DefaultWechatOperImpl implements WechatOper {
         ApiResult ar = null;
         for (int i = 0; i < RETRY_COUNT; i++) {
             Object tmp = HttpTool.get(url);
-            if (tmp instanceof File) {
-                return (File) tmp;
-            }
+//            if (tmp instanceof File) {
+//                return (File) tmp;
+//            }
             return tmp;
             //LOGGER.error("Download mp[%s] qrcode image failed. There try %d items.",mpAct.getMpId(),i);
         }

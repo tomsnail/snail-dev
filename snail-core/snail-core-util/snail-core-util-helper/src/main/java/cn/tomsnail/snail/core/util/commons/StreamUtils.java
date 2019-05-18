@@ -31,7 +31,7 @@ public class StreamUtils {
 	 * @throws Exception
 	 * 
 	 */
-	public static String InputStreamTOString(InputStream in) {
+	public static String inputStreamTOString(InputStream in) {
 
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		byte[] data = new byte[BUFFER_SIZE];
@@ -61,7 +61,7 @@ public class StreamUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String InputStreamTOString(InputStream in, String encoding) {
+	public static String inputStreamTOString(InputStream in, String encoding) {
 		String string = null;
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		byte[] data = new byte[BUFFER_SIZE];
@@ -89,7 +89,7 @@ public class StreamUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static InputStream StringTOInputStream(String in) throws Exception {
+	public static InputStream stringTOInputStream(String in) throws Exception {
 
 		ByteArrayInputStream is = new ByteArrayInputStream(in.getBytes("UTF-8"));
 		return is;
@@ -102,10 +102,10 @@ public class StreamUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static byte[] StringTObyte(String in) {
+	public static byte[] stringTObyte(String in) {
 		byte[] bytes = null;
 		try {
-			bytes = InputStreamTOByte(StringTOInputStream(in));
+			bytes = inputStreamTOByte(stringTOInputStream(in));
 		} catch (IOException e) {
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,7 +121,7 @@ public class StreamUtils {
 	 * @return byte[]
 	 * @throws IOException
 	 */
-	public static byte[] InputStreamTOByte(InputStream in) throws IOException {
+	public static byte[] inputStreamTOByte(InputStream in) throws IOException {
 
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		byte[] data = new byte[BUFFER_SIZE];
@@ -159,7 +159,7 @@ public class StreamUtils {
 		InputStream is = null;
 		try {
 			is = byteTOInputStream(in);
-			result = InputStreamTOString(is, "UTF-8");
+			result = inputStreamTOString(is, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -176,7 +176,7 @@ public class StreamUtils {
 
 		String is = null;
 		try {
-			is = byteTOString(StringTObyte(in));
+			is = byteTOString(stringTObyte(in));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

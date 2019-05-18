@@ -1,7 +1,6 @@
 package cn.tomsnail.snail.core.http.register.springmvc;
 
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
@@ -79,7 +78,7 @@ public class DefaultAnnoToObject implements IAnnoToObject {
 				registerObject.setGroup(group);
 				registerObject.setWeight(weight);
 				registerObject.setVersion(version);
-				registerObject.setAppName(AppName.AppName);
+				registerObject.setAppName(AppName.appName);
 				register.register(registerObject);
 			}
 		}

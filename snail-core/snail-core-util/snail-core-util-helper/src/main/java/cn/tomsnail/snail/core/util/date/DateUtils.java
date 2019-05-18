@@ -171,15 +171,15 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	public static double getDistanceOfTwoDate(Date before, Date after) {
 		long beforeTime = before.getTime();
 		long afterTime = after.getTime();
-		return (afterTime - beforeTime) / (1000 * 60 * 60 * 24);
+		return (afterTime - beforeTime) / (1000D * 60 * 60 * 24);
 	}
 	
-	public static final SimpleDateFormat longSdf  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	public static final SimpleDateFormat logSdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-	public static final SimpleDateFormat yyyymmddSdf = new SimpleDateFormat("yyyyMMdd"); 
-	public static final SimpleDateFormat shortSdf = new SimpleDateFormat("yyyy-MM-dd"); 
-	public static final  DateFormat formatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
-	public static final  DateFormat formatTimeShort = new SimpleDateFormat("yyyy-MM-dd HH:mm");  
+//	public static final SimpleDateFormat longSdf  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//	public static final SimpleDateFormat logSdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+//	public static final SimpleDateFormat yyyymmddSdf = new SimpleDateFormat("yyyyMMdd");
+//	public static final SimpleDateFormat shortSdf = new SimpleDateFormat("yyyy-MM-dd");
+//	public static final  DateFormat formatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//	public static final  DateFormat formatTimeShort = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 	/***
 	 * @Description: 获取当前时间  格式：yyyyMMddHHmmssSSS

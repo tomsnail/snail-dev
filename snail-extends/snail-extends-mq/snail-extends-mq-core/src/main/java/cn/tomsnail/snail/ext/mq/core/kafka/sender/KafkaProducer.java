@@ -81,4 +81,12 @@ public class KafkaProducer implements IJmsSender, Runnable {
 //		return new Producer<String, String>(new ProducerConfig(properties));
 //	}
 
+
+	public MQConfig getKafkaMQConfig() {
+		return kafkaMQConfig;
+	}
+
+	public void setKafkaMQConfig(MQConfig kafkaMQConfig) {
+		this.kafkaMQConfig = kafkaMQConfig;
+	}
 }

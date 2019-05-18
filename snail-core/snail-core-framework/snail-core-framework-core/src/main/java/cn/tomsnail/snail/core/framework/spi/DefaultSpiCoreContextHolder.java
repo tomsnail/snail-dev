@@ -89,8 +89,11 @@ public class DefaultSpiCoreContextHolder extends ASpiCoreContextHolder{
 						if (null == url) {
 							throw new FileNotFoundException(path);
 						}
-						properties =  new Properties(); 
-						properties.load(new InputStreamReader(new FileInputStream(new File(url.toURI()))));
+						properties =  new Properties();
+						try(InputStreamReader is = new InputStreamReader(new FileInputStream(new File(url.toURI())),"UTF-8")){
+							properties.load(is);
+						}
+
 					}catch(Exception ex){
 						Logger logger = LoggerFactory.getLogger(ConfigHelp.class);
 						logger.warn("read configuration.properties while error", ex);
@@ -118,7 +121,7 @@ public class DefaultSpiCoreContextHolder extends ASpiCoreContextHolder{
 			Class[] paramTypes) {
 		try {
 			Class _clazz = Class.forName(clazz);
-			Class[] _paramTypes = {String.class};
+			//Class[] _paramTypes = {String.class};
 			Object[] _params = params; 
 			Constructor con = _clazz.getConstructor(paramTypes); 
 			return con.newInstance(params);

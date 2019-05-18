@@ -245,15 +245,14 @@ public String validator(String key, T value,Map<RuleType,String> descMap) throws
 		}
 		if (ruleTypeMap.containsKey(RuleType.LIMITMAX)) {
 			String v = value + "";
-			if (v.trim().length() > Integer.valueOf(ruleTypeMap.get(RuleType.LIMITMAX)
-					+ "")) {
+			if (v.trim().length() > Integer.parseInt(ruleTypeMap.get(RuleType.LIMITMAX)+"")) {
 				throw new ParamValidatorException(getValidFaildMsg(descMap.get(RuleType.LIMITMAX),key + "的值是" + value + ",位数大于:"
 						+ ruleTypeMap.get(RuleType.LIMITMAX)));
 			}
 		}
 		if (ruleTypeMap.containsKey(RuleType.LIMITMIN)) {
 			String v = value + "";
-			if (v.trim().length() < Integer.valueOf(ruleTypeMap.get(RuleType.LIMITMIN)
+			if (v.trim().length() < Integer.parseInt(ruleTypeMap.get(RuleType.LIMITMIN)
 					+ "")) {
 				throw new ParamValidatorException(getValidFaildMsg(descMap.get(RuleType.LIMITMIN),key + key + "的值是" + value + ",位数小于:"
 						+ ruleTypeMap.get(RuleType.LIMITMIN)));

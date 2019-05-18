@@ -141,8 +141,11 @@ public class ConfigHelp {
 					//throw new FileNotFoundException(path);
 					return defaultValue;
 				}
-				properties =  new Properties(); 
-				properties.load(new InputStreamReader(new FileInputStream(new File(url.toURI()))));
+				properties =  new Properties();
+				try(InputStreamReader is = new InputStreamReader(new FileInputStream(new File(url.toURI())))){
+					properties.load(is);
+				}
+
 			}catch(Exception ex){
 				logger.warn(ex.getMessage());
 			}

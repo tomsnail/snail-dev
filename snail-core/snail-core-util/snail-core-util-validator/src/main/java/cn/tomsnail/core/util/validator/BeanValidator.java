@@ -72,7 +72,7 @@ public class BeanValidator implements IObjectValidator{
 					FieldValidator fv = null;
 					if(f.isAnnotationPresent(FieldValidator.class)){
 						fv = f.getAnnotation(FieldValidator.class);
-						if(!StringUtils.isBlank(fv.mapperName())){
+						if(fv!=null&&!StringUtils.isBlank(fv.mapperName())){
 							value = valueMap.get(fv.mapperName());
 						}
 					}else{

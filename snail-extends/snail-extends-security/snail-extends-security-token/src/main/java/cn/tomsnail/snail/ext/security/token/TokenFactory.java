@@ -22,7 +22,7 @@ public class TokenFactory {
 	@CacheConfig(cachedType="${token.cachedType}",url="${token.url}",port="${token.port}",name="${token.name}",expire="${token.expire}",timeout="${token.timeout}",username="${token.username}",password="${token.password}")
 	private ICache cache;
 	
-	public  void init(int expire,TicketSum tokenSum,byte[] key){
+	public  static void init(int expire,TicketSum tokenSum,byte[] key){
 		if(expire>=0){
 			DEFAULT_EXPIRE = expire;
 		}
@@ -83,7 +83,7 @@ public class TokenFactory {
 	
 	public  void clearToken(String info){
 		try {
-			if(cache!=null){
+			if(info!=null&&cache!=null){
 				cache.remove(HmacSha1Util.getSignature(info.getBytes(), KEY));
 			}
 		} catch (Exception e) {

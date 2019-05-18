@@ -24,8 +24,6 @@ public class TestService extends BaseComponent {
     @Transactional(readOnly = false)
     public void test(){
 
-        logger.info(" mysql1 {}", dispatchStrategyDao.get("1"));
-        logger.info(" mysql2 {}", testDao.test());
     }
 
     @Autowired

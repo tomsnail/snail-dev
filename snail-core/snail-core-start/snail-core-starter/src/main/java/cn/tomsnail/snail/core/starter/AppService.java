@@ -51,7 +51,7 @@ public class AppService extends Thread {
 		}
 		while(true){
 			try {
-				Thread.currentThread().sleep(sleepTime);
+				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

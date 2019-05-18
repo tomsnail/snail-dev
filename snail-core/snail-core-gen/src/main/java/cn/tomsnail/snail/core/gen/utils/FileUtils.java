@@ -188,26 +188,29 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 		boolean flag = true;
 		// 列出源目录下的所有文件名和子目录名
 		File[] files = srcDir.listFiles();
-		for (int i = 0; i < files.length; i++) {
-			// 如果是一个单个文件，则直接复制
-			if (files[i].isFile()) {
-				flag = FileUtils.copyFile(files[i].getAbsolutePath(),
-						descDirName + files[i].getName());
-				// 如果拷贝文件失败，则退出循环
-				if (!flag) {
-					break;
+		if(files!=null){
+			for (int i = 0; i < files.length; i++) {
+				// 如果是一个单个文件，则直接复制
+				if (files[i].isFile()) {
+					flag = FileUtils.copyFile(files[i].getAbsolutePath(),
+							descDirName + files[i].getName());
+					// 如果拷贝文件失败，则退出循环
+					if (!flag) {
+						break;
+					}
 				}
-			}
-			// 如果是子目录，则继续复制目录
-			if (files[i].isDirectory()) {
-				flag = FileUtils.copyDirectory(files[i]
-						.getAbsolutePath(), descDirName + files[i].getName());
-				// 如果拷贝目录失败，则退出循环
-				if (!flag) {
-					break;
+				// 如果是子目录，则继续复制目录
+				if (files[i].isDirectory()) {
+					flag = FileUtils.copyDirectory(files[i]
+							.getAbsolutePath(), descDirName + files[i].getName());
+					// 如果拷贝目录失败，则退出循环
+					if (!flag) {
+						break;
+					}
 				}
 			}
 		}
+
 
 		if (!flag) {
 			logger.debug("复制目录 " + srcDirName + " 到 " + descDirName + " 失败!");
@@ -282,6 +285,9 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 		boolean flag = true;
 		// 列出全部文件及子目录
 		File[] files = dirFile.listFiles();
+		if(files==null){
+			return false;
+		}
 		for (int i = 0; i < files.length; i++) {
 			// 删除子文件
 			if (files[i].isFile()) {
@@ -593,8 +599,15 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 	 */
 	public static List<String> findChildrenList(File dir, boolean searchDirs) {
 		List<String> files = Lists.newArrayList();
-		for (String subFiles : dir.list()) {
-			File file = new File(dir + "/" + subFiles);
+		if(dir==null){
+			return files;
+		}
+		String[] subFiles = dir.list();
+		if(subFiles==null){
+			return files;
+		}
+		for (String subFile : subFiles) {
+			File file = new File(dir + "/" + subFile);
 			if (((searchDirs) && (file.isDirectory())) || ((!searchDirs) && (!file.isDirectory()))) {
 				files.add(file.getName());
 			}

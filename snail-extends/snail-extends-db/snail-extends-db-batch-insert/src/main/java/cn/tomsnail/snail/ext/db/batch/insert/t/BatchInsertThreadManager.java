@@ -38,8 +38,7 @@ public class BatchInsertThreadManager implements IBatchInsert{
 				threadSize = size;
 			}
 			List<IInsertThread> batchInsertThreads = new ArrayList<IInsertThread>();
-			try {
-				MySQLConnection connection =  (MySQLConnection) jdbcTemplate.getDataSource().getConnection().getMetaData().getConnection();
+			try (MySQLConnection connection =  (MySQLConnection) jdbcTemplate.getDataSource().getConnection().getMetaData().getConnection()){
 				String url = connection.getURL();
 				String username = connection.getUser();
 				String password = connection.getProperties().getProperty("password");
@@ -63,7 +62,8 @@ public class BatchInsertThreadManager implements IBatchInsert{
 			return threads.get((int)System.currentTimeMillis()%threads.size());
 		}
 	}
-	
+
+	@Override
 	public  IInsertThread getBatchInsertThread(DataInsertModel dataInsertModel){
 		return getBatchInsertThread(dataInsertModel,false,10);
 	}

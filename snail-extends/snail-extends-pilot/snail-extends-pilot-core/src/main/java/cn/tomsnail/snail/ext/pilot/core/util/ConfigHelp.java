@@ -1,9 +1,6 @@
 package cn.tomsnail.snail.ext.pilot.core.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -111,14 +108,20 @@ public class ConfigHelp {
 				if (null == url) {
 					throw new FileNotFoundException(path);
 				}
-				properties =  new Properties(); 
-				properties.load(new InputStreamReader(new FileInputStream(new File(url.toURI()))));
+				properties =  new Properties();
+				try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(new File(url.toURI())))){
+					properties.load(inputStreamReader);
+
+				}
 			}catch(Exception ex){
 				Logger logger = LoggerFactory.getLogger(ConfigHelp.class);
 				logger.warn("read configuration.properties while error", ex);
 			}
 		}
 		try{
+			if(properties==null){
+				return defaultValue;
+			}
 			String result = properties.getProperty(key);
 			if(result!=null && !"".equals(result)){
 				return result;

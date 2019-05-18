@@ -14,9 +14,9 @@ import com.alibaba.dubbo.config.annotation.Service;
 @Service(protocol = "dubbo",registry = "zk")
 public class DemoServiceImpl extends BaseTransactionComponent implements DemoService {
 	
-	int count = 1;
-	
+	private int count = 1;
 
+	@Autowired
 	private DispatchStrategyDao dispatchStrategyDao;
 
 
@@ -38,7 +38,7 @@ public class DemoServiceImpl extends BaseTransactionComponent implements DemoSer
     	
     	dispatchStrategyDao.insert(dispatchStrategy);
     	
-    	if (count++%2==1) {
+    	if (count++%2!=0) {
     		throw new RuntimeException("事务测试");
     	}
     	

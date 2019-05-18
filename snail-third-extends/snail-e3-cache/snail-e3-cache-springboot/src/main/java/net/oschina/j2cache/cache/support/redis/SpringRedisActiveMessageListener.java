@@ -1,5 +1,6 @@
 package net.oschina.j2cache.cache.support.redis;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.connection.Message;
@@ -29,7 +30,7 @@ public class SpringRedisActiveMessageListener implements MessageListener {
 	@Override
 	public void onMessage(Message message, byte[] pattern) {
 		String key = message.toString();
-		if (key == null) {
+		if (StringUtils.isBlank(key)) {
 			return;
 		}
 		if (key.startsWith(namespace + ":")) {

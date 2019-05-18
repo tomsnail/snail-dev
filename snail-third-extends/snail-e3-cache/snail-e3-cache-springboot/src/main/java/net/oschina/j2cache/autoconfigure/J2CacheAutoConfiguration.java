@@ -32,8 +32,8 @@ public class J2CacheAutoConfiguration {
 
     @Bean
     public net.oschina.j2cache.J2CacheConfig j2CacheConfig() throws IOException{
-    	net.oschina.j2cache.J2CacheConfig cacheConfig = new net.oschina.j2cache.J2CacheConfig();
-    	cacheConfig = SpringJ2CacheConfigUtil.initFromConfig(standardEnvironment);
+    	//net.oschina.j2cache.J2CacheConfig cacheConfig = new net.oschina.j2cache.J2CacheConfig();
+        net.oschina.j2cache.J2CacheConfig cacheConfig = SpringJ2CacheConfigUtil.initFromConfig(standardEnvironment);
     	return cacheConfig;
     }
     

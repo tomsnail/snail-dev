@@ -100,7 +100,9 @@ public class OkhttpUtil {
 			}
 
 		};
-
+		if(sslContext==null){
+			return null;
+		}
 		OkHttpClient okHttpClient0 = okHttpClient.newBuilder()
 				.sslSocketFactory(sslContext.getSocketFactory())
 				.hostnameVerifier(DO_NOT_VERIFY).build();
@@ -152,6 +154,10 @@ public class OkhttpUtil {
 			}
 
 		};
+
+		if(sslContext==null){
+			return null;
+		}
 
 		OkHttpClient okHttpClient0 = okHttpClient.newBuilder()
 				.sslSocketFactory(sslContext.getSocketFactory())

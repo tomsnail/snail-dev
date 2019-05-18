@@ -33,8 +33,12 @@ public class AnnotationConfigListener implements IConfigChangeListener{
 		return className;
 	}
 
-	public void setClassName(String className) {
+	public static void className(String className){
 		AnnotationConfigListener.className = className;
+	}
+
+	public void setClassName(String className) {
+		className(className);
 		try {
 			init();
 		} catch (Exception e) {

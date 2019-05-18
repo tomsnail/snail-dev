@@ -58,6 +58,9 @@ public class DefaultSecurityBasicFilter implements IFilter{
 		}
 		boolean isSucess = false;
 		Map<String,Object> paramMap = paramAdapter.getParamMap(obj);
+		if(paramMap==null){
+			return isSucess;
+		}
 		if(urlFilter!=null){
 			if(!paramMap.containsKey("URL")){
 				throw new SecurityException("ParamAdapte must contains URL key");
@@ -69,7 +72,6 @@ public class DefaultSecurityBasicFilter implements IFilter{
 			}
 		}
 		paramMap.remove("URL");
-		if(paramMap==null) return isSucess;
 		AuthentToken token = paramAdapter.getToken(paramMap);
 		if(authenticationService.validateToken(token)){
 			TResource resource = paramAdapter.getTResource(paramMap);
@@ -79,7 +81,9 @@ public class DefaultSecurityBasicFilter implements IFilter{
 			}
 		}
 		if(afterFilter!=null){
-			if(!afterFilter.doFilter(obj)) return false;
+			if(!afterFilter.doFilter(obj)){
+				return false;
+			}
 		}
 		return isSucess;
 	}

@@ -64,15 +64,15 @@ public class QueueDataInsertService implements DataInsertService,Runnable{
 				DataInsertModel insertModel = new DataInsertModel();
 				insertModel.setTable(entry.getKey());
 				LinkedHashMap<String,DataInsertField> fieldMap = new LinkedHashMap<String, DataInsertField>();
-				Iterator<String> fit = data.keySet().iterator();
+				Iterator<Map.Entry<String,Object>> fit = data.entrySet().iterator();
 				while(fit.hasNext()){
-					String fname = fit.next();
-					Object v = data.get(fname);
+					Map.Entry<String,Object> entry1 = fit.next();
+					Object v = entry1.getValue();
 					DataInsertField dataInsertField = new DataInsertField();
-					dataInsertField.setName(fname);
+					dataInsertField.setName(entry1.getKey());
 					dataInsertField.setType(0);
 					dataInsertField.setValue(v.toString());
-					fieldMap.put(fname, dataInsertField);
+					fieldMap.put(entry1.getKey(), dataInsertField);
 				}
 				insertModel.setFieldMap(fieldMap);
 				try {

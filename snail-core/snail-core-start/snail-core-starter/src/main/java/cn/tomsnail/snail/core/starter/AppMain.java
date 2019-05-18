@@ -24,7 +24,7 @@ import cn.tomsnail.snail.core.util.configfile.ConfigHelp;
 @PropertySource("classpath:config.properties")
 public class AppMain {
 	
-	public static volatile String AppName = cn.tomsnail.snail.core.util.host.AppName.AppName;
+	public static volatile String appName = cn.tomsnail.snail.core.util.host.AppName.appName;
 	
 	private static final String SPRING_CONTEXT_XML = ConfigHelp.getInstance("config").getLocalConfig("framework.spring.xml", "");
 	

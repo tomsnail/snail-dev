@@ -89,29 +89,33 @@ public class ZkClient implements IClient{
 	}
 
 	
-	
+	@Override
 	public void start() {
 		
 	}
 
-	
+	@Override
 	public void stop() {
 		
 	}
 
-	
+	@Override
 	public void destory() {
 		
 	}
 
-	
+	@Override
 	public void send(Object info) {
-		if(zkHelper==null) return;
-		if(!zkHelper.isExtisPath(servicePath)) return;
+		if(zkHelper==null) {
+			return;
+		}
+		if(!zkHelper.isExtisPath(servicePath)){
+			return;
+		}
 		zkHelper.writeNode(servicePath, info);
 	}
 
-	
+	@Override
 	public ServiceProcess getClientInfo() {
 		ServiceProcess serviceProcess = new ServiceProcess();
 		serviceProcess.setName(serviceName);

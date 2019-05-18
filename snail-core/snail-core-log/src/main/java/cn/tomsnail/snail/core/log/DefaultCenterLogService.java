@@ -87,7 +87,7 @@ public class DefaultCenterLogService implements LogService{
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public static void setAddress(String address) {
 		DefaultCenterLogService.address = address;
 	}
 	//使用时加载

@@ -53,10 +53,9 @@ public class ProxyChangeListener implements IZkChildListener {
 			for (String c : tNodes) {
 				LOGGER.info(Consts.ZK_PROXY + " Change : c " + c);
 				SmartProxyInfo proxyInfo = (SmartProxyInfo) zkHelper.readNode(Consts.ZK_ROOT + "/" + c);
-				List<ServiceProcess> _list = proxyInfo.getCommandInfo() == null ? proxyInfo.getConfigList()
-						: proxyInfo.getCommandInfo();
+				List<ServiceProcess> _list = proxyInfo.getCommandInfo() == null ? proxyInfo.getConfigList() : proxyInfo.getCommandInfo();
 				if (_list == null) {
-					LOGGER.info(Consts.ZK_PROXY + " Change : _list " + _list);
+					LOGGER.info("{} Change : _list is null" ,Consts.ZK_PROXY );
 					continue;
 				}
 				changeVotedNode(_list);

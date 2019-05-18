@@ -79,15 +79,16 @@ public class DefaultPdfSignService implements PdfSignService{
 		}
 		PdfReader reader = null;
 		FileOutputStream os = null;
-		try {
+		try (FileInputStream fileInputStream = new FileInputStream(path)){
 			if (signModel.getImageurl() == null) {
 				signModel.setImageurl("http://192.168.169.156/gongan.jpg");
 			}
 			String dest = signModel.getTarget() ;
 			KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-			ks.load(new FileInputStream(path), signModel.getKeyStorePass().toCharArray());
-			if (alias == null || alias.length() == 0)
+			ks.load(fileInputStream, signModel.getKeyStorePass().toCharArray());
+			if (alias == null || alias.length() == 0){
 				alias = (String) ks.aliases().nextElement();
+			}
 			Certificate[] chain = ks.getCertificateChain(alias);
 			PrivateKey key = (PrivateKey) ks.getKey(alias,
 					signModel.getKeyPass().toCharArray());
@@ -130,16 +131,21 @@ public class DefaultPdfSignService implements PdfSignService{
 			
 			File srcdf = new File(signModel.getTarget()); 
 		    File mydest = new File(dest); 
-		    mydest.renameTo(srcdf);
-		    return dest;
+		    if(mydest.renameTo(srcdf)){
+				return dest;
+			}else {
+		    	return null;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
 			try {
-				if(os!=null)
+				if(os!=null){
 					os.close();
-				if(reader!=null)
+				}
+				if(reader!=null){
 					reader.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -155,13 +161,14 @@ public class DefaultPdfSignService implements PdfSignService{
 		}
 		PdfReader reader = null;
 		FileOutputStream os = null;
-		try {
+		try(FileInputStream fileInputStream = new FileInputStream(path)) {
 			addImage(signModel.getSrc(),signModel.getTarget());
 			String dest = signModel.getTarget();
 			KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-			ks.load(new FileInputStream(path), signModel.getKeyStorePass().toCharArray());
-			if (alias == null || alias.length() == 0)
+			ks.load(fileInputStream, signModel.getKeyStorePass().toCharArray());
+			if (alias == null || alias.length() == 0){
 				alias = (String) ks.aliases().nextElement();
+			}
 			Certificate[] chain = ks.getCertificateChain(alias);
 			PrivateKey key = (PrivateKey) ks.getKey(alias,
 					signModel.getKeyPass().toCharArray());

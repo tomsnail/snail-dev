@@ -37,8 +37,7 @@ public class RedisLock implements ILock{
 	@Override
 	public boolean tryLock(long timeout) {
 		try {
-			lock.tryLock(timeout, TimeUnit.MILLISECONDS);
-			return true;
+			return lock.tryLock(timeout, TimeUnit.MILLISECONDS);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

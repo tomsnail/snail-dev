@@ -82,11 +82,17 @@ public class SyncQiniuPicUtil {
 		* @exception no
 		*/
 	public synchronized void initAccessSecret(String access,String secret){
+		initAuth(access, secret);
+	}
+
+	public static void initAuth(String access,String secret){
 		ACCESS_KEY = access;
 		SECRET_KEY = secret;
 		auth = null;
 		auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 	}
+
+
 
 	/**
 	 * 获取上传token,覆盖上传

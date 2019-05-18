@@ -64,7 +64,7 @@ public class ZkTimeSlot extends TimeSlot{
 			this.setsTime(startTime);
 		}
 		if(this.getType()==TimeSlotType.cycle.ordinal()+1){
-			long startTime = System.currentTimeMillis()+Long.valueOf(this.getTime());
+			long startTime = System.currentTimeMillis()+Long.parseLong(this.getTime());
 			this.setsTime(startTime);
 		}
 	}
@@ -95,7 +95,11 @@ public class ZkTimeSlot extends TimeSlot{
 		if(obj==null){
 			return false;
 		}
-		return this.getTaskInfo().equals(((ZkTimeSlot)obj).getTaskInfo());
+		if(obj instanceof  ZkTimeSlot){
+			return this.getTaskInfo().equals(((ZkTimeSlot)obj).getTaskInfo());
+		}
+		return false;
+
 	}
 	
 }

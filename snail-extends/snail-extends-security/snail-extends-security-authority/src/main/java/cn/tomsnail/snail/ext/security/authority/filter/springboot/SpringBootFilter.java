@@ -24,7 +24,7 @@ public class SpringBootFilter implements HandlerInterceptor {
             return true;
         }
 
-        boolean filterType = ConfigHelp.getInstance("config").getLocalConfig("system.security.filter",true);
+        //boolean filterType = ConfigHelp.getInstance("config").getLocalConfig("system.security.filter",true);
 
         RestfulFilterManager filterManager = SpringBeanUtil.getClassBean(RestfulFilterManager.class);
         List<RestfulFilter> filters = filterManager.getFilters();

@@ -17,7 +17,7 @@ public class AddressUtil {
 		String _serviceIP = "";
 		try {
 			InetAddress[] adds =  InetAddress.getAllByName(InetAddress.getLocalHost().getHostName());
-			if(adds==null){
+			if(adds==null||adds.length==0){
 				_serviceIP = InetAddress.getLocalHost().getHostName();
 			}else{
 				_serviceIP = adds[0].getHostAddress();

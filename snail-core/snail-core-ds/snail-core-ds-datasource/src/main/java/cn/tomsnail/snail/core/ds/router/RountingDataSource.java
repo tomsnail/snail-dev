@@ -39,14 +39,16 @@ public class RountingDataSource extends AbstractRoutingDataSource{
 
 	public String getRouteType() {
 		if(RountingDataSource.routeType==null||RountingDataSource.routeType.equals("")){
-			RountingDataSource.routeType = RountingDataSource.ROUTE_WR;
+			setRouteType(RountingDataSource.ROUTE_WR);
 		}
 		return RountingDataSource.routeType;
 	}
 
-	public void setRouteType(String routeType) {
+	public static void setRouteType(String routeType) {
 		RountingDataSource.routeType = routeType;
 	}
+
+
 	
 	
 

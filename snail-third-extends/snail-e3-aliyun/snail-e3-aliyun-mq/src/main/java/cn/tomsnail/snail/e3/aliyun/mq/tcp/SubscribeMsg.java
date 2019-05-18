@@ -43,20 +43,19 @@ public class SubscribeMsg {
 		if(tag==null){
 			tag = "*";
 		}
-		 if(consumer!=null){
-			 consumer.subscribe(topic, tag, new MessageListener() {
-				//订阅全部Tag
-		            public Action consume(Message message, ConsumeContext context) {
-		                System.out.println("Receive: " + message);
-		                try {
-							subscribeHandler.handler(new String(message.getBody(),"UTF-8"));
-			                return Action.CommitMessage;
-						} catch (Exception e) {
-			                return Action.ReconsumeLater;
-						}
-		            }
-		        });
-		 }
+		consumer.subscribe(topic, tag, new MessageListener() {
+			//订阅全部Tag
+			@Override
+			public Action consume(Message message, ConsumeContext context) {
+				System.out.println("Receive: " + message);
+				try {
+					subscribeHandler.handler(new String(message.getBody(),"UTF-8"));
+					return Action.CommitMessage;
+				} catch (Exception e) {
+					return Action.ReconsumeLater;
+				}
+			}
+		});
 	}
 	
 }

@@ -21,15 +21,23 @@ public abstract class ASource implements ISource{
 	protected Map<String,ProxyInfo> map = new HashMap<String, ProxyInfo>();
 	
 	public ASource(String code){
-		this.code = code;
+		setCode(code);
 		initMap();
 	}
-	
+
+	@Override
 	public Map<String,ProxyInfo> getSourceData(){
 		return map;
 	}
 	
 	public abstract void initMap();
-	
-	
+
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 }

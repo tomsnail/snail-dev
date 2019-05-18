@@ -54,7 +54,7 @@ public class JmsConsumerFactory implements IJmsConsumerFactory{
 		return FACTORY_MAP.get(mqConfig.getJmsType()).getConsumerClient(mqConfig);
 	}
 	
-	public void setFactoryMap(Map<JmsType,IJmsConsumerFactory> factroyMap ){
+	public static void setFactoryMap(Map<JmsType,IJmsConsumerFactory> factroyMap ){
 		FACTORY_MAP = factroyMap;
 	}
 

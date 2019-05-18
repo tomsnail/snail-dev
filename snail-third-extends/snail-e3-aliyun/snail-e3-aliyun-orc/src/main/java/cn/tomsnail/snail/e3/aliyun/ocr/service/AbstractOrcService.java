@@ -14,7 +14,7 @@ public abstract class AbstractOrcService implements OrcService{
 	public OrcResult orc(OrcContent orcContent){
 		
 		if(orcContent==null){
-			return OrcResult.NullError();
+			return OrcResult.nullError();
 		}
 		
 		if(providerMap==null||providerMap.isEmpty()){
@@ -53,14 +53,14 @@ public abstract class AbstractOrcService implements OrcService{
 	protected OrcResult service(OrcContent orcContent,Provider provider) {
 		
 		if(orcContent==null||provider==null){
-			return OrcResult.NullError();
+			return OrcResult.nullError();
 		}
 		
 		if(provider.ready()){
 			return provider.doOrc(orcContent);
 		}
 		
-		return OrcResult.Error();
+		return OrcResult.error();
 	}
 	
 	

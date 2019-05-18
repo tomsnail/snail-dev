@@ -83,6 +83,9 @@ public class GenConfig implements Serializable {
 //			logger.debug("File to object: {}", pathName);
 			Resource resource = new ClassPathResource(pathName);
 			InputStream is = resource.getInputStream();
+			if(is==null){
+				return null;
+			}
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			StringBuilder sb = new StringBuilder();
 			while (true) {
@@ -92,12 +95,8 @@ public class GenConfig implements Serializable {
 				}
 				sb.append(line).append("\r\n");
 			}
-			if (is != null) {
-				is.close();
-			}
-			if (br != null) {
-				br.close();
-			}
+			is.close();
+			br.close();
 			return (T) JaxbMapper.fromXml(sb.toString(), clazz);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -31,6 +31,7 @@ public class ValidatorTest {
 			}
 		}
 		long d4 = System.currentTimeMillis();
+		System.out.println(d4-d3);
 	}
 	
 	

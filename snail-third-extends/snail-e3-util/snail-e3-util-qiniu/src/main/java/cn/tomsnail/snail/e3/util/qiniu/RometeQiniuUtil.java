@@ -127,7 +127,7 @@ public class RometeQiniuUtil {
 			System.out.println(key);
 			System.out.println(content);
 			res = uploadManager.put(new File(localFile), key, content);
-			DefaultPutRet ret = res.jsonToObject(DefaultPutRet.class);
+			//DefaultPutRet ret = res.jsonToObject(DefaultPutRet.class);
 			logger.info(res.bodyString());
 			System.out.println(res.bodyString());
 			return true;
@@ -146,6 +146,6 @@ public class RometeQiniuUtil {
         }  
 	}
 	public static void main(String[] args) {
-		localUpload("E://201703121489312011589.jpg","images/photo/2017/12/04/1235454.jpg","ehua");
+		//localUpload("E://201703121489312011589.jpg","images/photo/2017/12/04/1235454.jpg","ehua");
 	}
 }

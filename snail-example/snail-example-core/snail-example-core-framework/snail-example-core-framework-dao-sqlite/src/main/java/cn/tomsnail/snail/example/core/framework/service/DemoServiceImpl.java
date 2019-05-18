@@ -39,7 +39,7 @@ public class DemoServiceImpl extends BaseTransactionComponent implements DemoSer
     	
     	dispatchStrategyDao.insert(dispatchStrategy);
     	
-    	if (count++%2==1) {
+    	if (count++%2!=0) {
     		throw new RuntimeException("事务测试");
     	}
     	

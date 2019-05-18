@@ -30,7 +30,7 @@ public class IdcardUtils extends StringUtils {
 			"62", "63", "64", "65", "71", "81", "82", "91" };
 
 	/** 每位加权因子 */
-	protected static final int power[] = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9,
+	private static final int power[] = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9,
 			10, 5, 8, 4, 2 };
 
 	/** 第18位校检码 */
@@ -38,11 +38,11 @@ public class IdcardUtils extends StringUtils {
 			"6", "5", "4", "3", "2" };
 	/** 最低年限 */
 	public static final int MIN = 1930;
-	public final static Map<String, String> cityCodes = new HashMap<String, String>();
+	private final static Map<String, String> cityCodes = new HashMap<String, String>();
 	/** 台湾身份首字母对应数字 */
-	public final static Map<String, Integer> twFirstCode = new HashMap<String, Integer>();
+	private final static Map<String, Integer> twFirstCode = new HashMap<String, Integer>();
 	/** 香港身份首字母对应数字 */
-	public final static Map<String, Integer> hkFirstCode = new HashMap<String, Integer>();
+	private final static Map<String, Integer> hkFirstCode = new HashMap<String, Integer>();
 	static {
 		cityCodes.put("11", "北京");
 		cityCodes.put("12", "天津");
@@ -311,16 +311,15 @@ public class IdcardUtils extends StringUtils {
 		String start = idCard.substring(0, 1);
 		String mid = idCard.substring(1, 9);
 		String end = idCard.substring(9, 10);
-		Integer iStart = twFirstCode.get(start);
-		Integer sum = iStart / 10 + (iStart % 10) * 9;
+		int iStart = twFirstCode.get(start).intValue();
+		int sum = iStart / 10 + (iStart % 10) * 9;
 		char[] chars = mid.toCharArray();
-		Integer iflag = 8;
+		int iflag = 8;
 		for (char c : chars) {
 			sum = sum + Integer.parseInt(c + "") * iflag;
 			iflag--;
 		}
-		return (sum % 10 == 0 ? 0 : (10 - sum % 10)) == Integer.valueOf(end) ? true
-				: false;
+		return (sum % 10 == 0 ? 0 : (10 - sum % 10)) == Integer.parseInt(end) ? true : false;
 	}
 
 	/**
@@ -341,15 +340,12 @@ public class IdcardUtils extends StringUtils {
 		String card = idCard.replaceAll("[\\(|\\)]", "");
 		Integer sum = 0;
 		if (card.length() == 9) {
-			sum = (Integer.parseInt(card.substring(0, 1).toUpperCase()
-					.toCharArray()[0]) - 55)
+			sum = (Integer.valueOf(card.substring(0, 1).toUpperCase().toCharArray()[0]) - 55)
 					* 9
-					+ (Integer.parseInt(card.substring(1, 2).toUpperCase()
-							.toCharArray()[0]) - 55) * 8;
+					+ (Integer.valueOf(card.substring(1, 2).toUpperCase().toCharArray()[0]) - 55) * 8;
 			card = card.substring(1, 9);
 		} else {
-			sum = 522 + (Integer.parseInt(card.substring(0, 1).toUpperCase()
-					.toCharArray()[0]) - 55) * 8;
+			sum = 522 + (Integer.valueOf(card.substring(0, 1).toUpperCase().toCharArray()[0]) - 55) * 8;
 		}
 		String mid = card.substring(1, 7);
 		String end = card.substring(7, 8);
@@ -448,6 +444,8 @@ public class IdcardUtils extends StringUtils {
 			break;
 		case 0:
 			sCode = "1";
+			break;
+		default:sCode = "2";
 			break;
 		}
 		return sCode;

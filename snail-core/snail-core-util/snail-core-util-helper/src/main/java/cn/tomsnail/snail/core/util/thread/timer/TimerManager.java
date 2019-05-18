@@ -21,7 +21,7 @@ public class TimerManager {
 	/**
 	 * @param tasks the tasks to set
 	 */
-	public void setTasks(List<TimerEvent> tasks) {
+	public static void setTasks(List<TimerEvent> tasks) {
 		TimerManager.tasks = tasks;
 	}
 	/**

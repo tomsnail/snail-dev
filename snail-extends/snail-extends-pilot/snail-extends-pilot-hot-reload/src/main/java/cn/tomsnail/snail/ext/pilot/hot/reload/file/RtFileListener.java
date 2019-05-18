@@ -26,7 +26,7 @@ public class RtFileListener implements FileAlterationListener{
 	
 	private RtFileCallBack fileCallBack;
 
-	protected static boolean isInited =false;
+	private static boolean isInited =false;
 	
 	public RtFileListener(String path,long interval,RtFileCallBack fileCallBack){
 		this.path = path;
@@ -36,7 +36,7 @@ public class RtFileListener implements FileAlterationListener{
 	
 	public void start() throws Exception{
 		if(interval<0){
-			interval = 2000l;
+			interval = 2000L;
 		}
 		if(StringUtils.isBlank(path)){
 			throw new FileNotFoundException("path is null");
@@ -70,7 +70,11 @@ public class RtFileListener implements FileAlterationListener{
 					fileCallBack.call(new File(this.path+File.separator+"service.properties"), FileChangeType.FChange);
 				}
 		}
-		isInited = true;
+		setInitStatus(true);
+	}
+
+	public static void setInitStatus(boolean isInited){
+		RtFileListener.isInited = isInited;
 	}
 
 	@Override

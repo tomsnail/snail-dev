@@ -24,7 +24,7 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
 	 * @param object
 	 */
 	public static void annotationToObject(Object annotation, Object object){
-		if (annotation != null){
+		if (annotation != null&&object!=null){
 			Class<?> annotationClass = annotation.getClass();
 			Class<?> objectClass = object.getClass();
 			for (Method m : objectClass.getMethods()){
@@ -33,9 +33,7 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
 						String s = StringUtils.uncapitalize(StringUtils.substring(m.getName(), 3));
 						Object obj = annotationClass.getMethod(s).invoke(annotation);
 						if (obj != null && !"".equals(obj.toString())){
-							if (object == null){
-								object = objectClass.newInstance();
-							}
+							object = objectClass.newInstance();
 							m.invoke(object, obj);
 						}
 					} catch (Exception e) {

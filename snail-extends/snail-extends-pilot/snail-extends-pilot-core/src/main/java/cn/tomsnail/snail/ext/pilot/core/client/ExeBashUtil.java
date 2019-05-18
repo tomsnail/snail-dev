@@ -45,7 +45,6 @@ public class ExeBashUtil {
 			}
 			//
 			Process p = Runtime.getRuntime().exec(cmds);
-			logger.info(cmds.toString());
 			try {
 				p.waitFor();
 			} catch (InterruptedException e) {
@@ -117,16 +116,18 @@ public class ExeBashUtil {
 				logger.error(e.getMessage());
 				e.printStackTrace();
 			}
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			String line = null;
-			while ((line = bufferedReader.readLine()) != null) {
-				logger.info("checkStatus " + name + " info : " + line);
-				if (line.length() > 1) {
-					isRuning = 1;
+			try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()))){
+				String line = null;
+				while ((line = bufferedReader.readLine()) != null) {
+					logger.info("checkStatus " + name + " info : " + line);
+					if (line.length() > 1) {
+						isRuning = 1;
+					}
 				}
+				logger.info("checkStatus " + name + " : " + isRuning);
+				logger.info("checkStatus " + name + " OK! ");
 			}
-			logger.info("checkStatus " + name + " : " + isRuning);
-			logger.info("checkStatus " + name + " OK! ");
+
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 			e.printStackTrace();

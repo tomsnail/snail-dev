@@ -55,88 +55,92 @@ public class DBUtil {
 			return null;
 		}
 		Class.forName(driver);
-		Connection conn = DriverManager.getConnection(url, user, password);
-		if (!conn.isClosed())
-			System.out.println("Succeeded connecting to the Database!");
-		else
-			System.err.println("connect filed");
-		Statement statement = conn.createStatement();
-		String sql_table="select * from "+table+" limit 10,1";
-		if(driver.indexOf("oracle")>-1){	
-			sql_table="select * from "+table+" where rownum < 10";
-		}
-		ResultSet resultSet = statement.executeQuery(sql_table);
-		// 获取列名
-		ResultSetMetaData metaData = resultSet.getMetaData();
-		for (int i = 0; i < metaData.getColumnCount(); i++) {
-			GenTableColumn column = new GenTableColumn();
-			column.setGenTable(genTable);
-			String columnName = metaData.getColumnName(i + 1);
-			int type = metaData.getColumnType(i + 1);
-			if(columnName.equalsIgnoreCase("id")){
-				column.setIsPk("1");
-			}else{
-				if(metaData.isAutoIncrement(i+1)){
+		try(Connection conn = DriverManager.getConnection(url, user, password)){
+			if (!conn.isClosed()){
+				System.out.println("Succeeded connecting to the Database!");
+			}
+			else{
+				System.err.println("connect filed");
+			}
+			Statement statement = conn.createStatement();
+			String sql_table="select * from "+table+" limit 10,1";
+			if(driver.indexOf("oracle")>-1){
+				sql_table="select * from "+table+" where rownum < 10";
+			}
+			ResultSet resultSet = statement.executeQuery(sql_table);
+			// 获取列名
+			ResultSetMetaData metaData = resultSet.getMetaData();
+			for (int i = 0; i < metaData.getColumnCount(); i++) {
+				GenTableColumn column = new GenTableColumn();
+				column.setGenTable(genTable);
+				String columnName = metaData.getColumnName(i + 1);
+				int type = metaData.getColumnType(i + 1);
+				if(columnName.equalsIgnoreCase("id")){
 					column.setIsPk("1");
-				}
-			}
-			
-			String jdbcType = "";
-			String javaType = "";
-			if (Types.INTEGER == type|| type == Types.SMALLINT || type == Types.TINYINT) {
-				jdbcType = "varchar";
-				javaType = "Integer";
-			}else if (Types.BIGINT == type) {
-				jdbcType = "varchar";
-				javaType = "Long";
-			}else if (Types.NUMERIC == type) {
-				jdbcType = "varchar";
-				javaType = "BigDecimal";
-			}else if (Types.DECIMAL == type) {
-				jdbcType = "varchar";
-				javaType = "BigDecimal";
-			}else if (Types.FLOAT == type) {
-				jdbcType = "varchar";
-				javaType = "Double";
-			}else if (Types.DOUBLE == type) {
-				jdbcType = "varchar";
-				javaType = "Double";
-			} else if(type == Types.DATE || type == Types.TIME ||type == Types.TIMESTAMP) {
-				jdbcType = "varchar";
-				javaType = "Timestamp"; 
-			}else if(type == Types.CLOB || type == Types.BLOB) {
-				jdbcType = "varchar";
-				javaType = "byte[]"; 
-			}else{
-				jdbcType = "varchar";
-				javaType = "String";
-			}
-			column.setComments("");
-			if(jdbctype.equals("mybatis")){
-				if("UPPER".equalsIgnoreCase(feildtype)){
-					column.setJavaField4Dto(columnName.toUpperCase());
-				}else if("LOWER".equalsIgnoreCase(feildtype)){
-					column.setJavaField4Dto(columnName.toLowerCase());
 				}else{
-					column.setJavaField4Dto(StringUtils.lineToHump(linePattern,columnName));
+					if(metaData.isAutoIncrement(i+1)){
+						column.setIsPk("1");
+					}
 				}
-				column.setJavaField(StringUtils.lineToHump(linePattern,columnName));
-			}else{
-				column.setJavaField(columnName);
+
+				String jdbcType = "";
+				String javaType = "";
+				if (Types.INTEGER == type|| type == Types.SMALLINT || type == Types.TINYINT) {
+					jdbcType = "varchar";
+					javaType = "Integer";
+				}else if (Types.BIGINT == type) {
+					jdbcType = "varchar";
+					javaType = "Long";
+				}else if (Types.NUMERIC == type) {
+					jdbcType = "varchar";
+					javaType = "BigDecimal";
+				}else if (Types.DECIMAL == type) {
+					jdbcType = "varchar";
+					javaType = "BigDecimal";
+				}else if (Types.FLOAT == type) {
+					jdbcType = "varchar";
+					javaType = "Double";
+				}else if (Types.DOUBLE == type) {
+					jdbcType = "varchar";
+					javaType = "Double";
+				} else if(type == Types.DATE || type == Types.TIME ||type == Types.TIMESTAMP) {
+					jdbcType = "varchar";
+					javaType = "Timestamp";
+				}else if(type == Types.CLOB || type == Types.BLOB) {
+					jdbcType = "varchar";
+					javaType = "byte[]";
+				}else{
+					jdbcType = "varchar";
+					javaType = "String";
+				}
+				column.setComments("");
+				if(jdbctype.equals("mybatis")){
+					if("UPPER".equalsIgnoreCase(feildtype)){
+						column.setJavaField4Dto(columnName.toUpperCase());
+					}else if("LOWER".equalsIgnoreCase(feildtype)){
+						column.setJavaField4Dto(columnName.toLowerCase());
+					}else{
+						column.setJavaField4Dto(StringUtils.lineToHump(linePattern,columnName));
+					}
+					column.setJavaField(StringUtils.lineToHump(linePattern,columnName));
+				}else{
+					column.setJavaField(columnName);
+				}
+				column.setQueryType("=");
+				column.setJavaType(javaType);
+				column.setIsInsert("1");
+				column.setIsQuery("1");
+				column.setIsEdit("1");
+				column.setJdbcType(jdbcType);
+				column.setName(columnName);
+				column.setId((i+1)+"");
+				columnList.add(column);
 			}
-			column.setQueryType("=");
-			column.setJavaType(javaType);
-			column.setIsInsert("1");
-			column.setIsQuery("1");
-			column.setIsEdit("1");
-			column.setJdbcType(jdbcType);
-			column.setName(columnName);
-			column.setId((i+1)+"");
-			columnList.add(column);
+			statement.close();
+			conn.close();
+			return genTable;
 		}
-		statement.close();
-		conn.close();
-		return genTable;
+
 	}
 
 	public static String convertDatabaseCharsetType(String in, String type) {
@@ -171,9 +175,13 @@ public class DBUtil {
 		List<String> tables = new ArrayList<String>();
 		try {
 			Class.forName(driver);
-			Connection conn = DriverManager.getConnection(url, user, password);
-			if (!conn.isClosed())
+		} catch (ClassNotFoundException e) {
+			return tables;
+		}
+		try (Connection conn = DriverManager.getConnection(url, user, password)){
+			if (!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
+			}
 			else {
 				System.err.println("connect filed");
 				return tables;

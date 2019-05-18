@@ -24,12 +24,13 @@ public class JdbcTemplateInsertThread implements IInsertThread{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private boolean isRun = true;
+	private boolean isRun = false;
 	
 	
 	private LinkedBlockingQueue<DataInsertModel> QUEUE = new LinkedBlockingQueue<DataInsertModel>();
 	
 	public JdbcTemplateInsertThread(){
+		isRun = true;
 		new Thread(this).start();
 	}
 	
@@ -98,9 +99,12 @@ public class JdbcTemplateInsertThread implements IInsertThread{
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
-	
-	
-	
 
+	public boolean isRun() {
+		return isRun;
+	}
+
+	public void setRun(boolean run) {
+		isRun = run;
+	}
 }

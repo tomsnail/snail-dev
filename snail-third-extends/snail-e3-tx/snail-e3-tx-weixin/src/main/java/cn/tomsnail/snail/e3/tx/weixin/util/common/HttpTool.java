@@ -161,7 +161,8 @@ public class HttpTool {
 		int len = 0;
 		FileOutputStream fileOutputStream = null;
 		try {
-			fileOutputStream = new FileOutputStream("D:\\test1.jpg");
+		    String path = "D:\\test1.jpg";
+			fileOutputStream = new FileOutputStream(path);
 			while ((len = inputStream.read(data)) != -1) {
 				fileOutputStream.write(data, 0, len);
 

@@ -231,6 +231,9 @@ public class HttpClientFactory {
 	
 
 	public Response post(Request request) {
+		if(request==null){
+			return null;
+		}
 		HttpClient httpClient = getHttpClient();
 		httpClient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
 		HttpPost httpost = new HttpPost(request.getUri()); // 设置响应头信息
@@ -242,7 +245,7 @@ public class HttpClientFactory {
 		Response resp = new Response();
 		try {
 			String params = "";
-			if (request != null && request.getBody() != null) {
+			if (request.getBody() != null) {
 				params = OBJECT_MAPPER.writeValueAsString(request.getBody());
 			} else {
 				return null;
@@ -288,6 +291,9 @@ public class HttpClientFactory {
 	}
 	
 	public Response postNZ(Request request) {
+		if(request==null){
+			return null;
+		}
 		HttpClient httpClient = getHttpClient();
 		httpClient.getParams().setParameter(
 				ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
@@ -300,7 +306,7 @@ public class HttpClientFactory {
 		Response resp = new Response();
 		try {
 			String params = "";
-			if (request != null && request.getBody() != null) {
+			if ( request.getBody() != null) {
 				params = OBJECT_MAPPER.writeValueAsString(request.getBody());
 			} else {
 				return null;
@@ -367,13 +373,13 @@ public class HttpClientFactory {
 			int status = response.getStatusLine().getStatusCode();
 			if (status >= 200 && status < 300) {
 				HttpEntity entity = response.getEntity();
-				String resopnse = "";
+				String resopnse = null;
 				if (entity != null) {
 					resopnse = EntityUtils.toString(entity, "utf-8");
 				}
 				return entity != null ? resopnse : null;
 			} else {
-				HttpEntity entity = response.getEntity();
+//				HttpEntity entity = response.getEntity();
 				httpPost.abort();
 				logger.error(" status" + status + " url=" + url + " jsonstr="
 						+ params.toString());

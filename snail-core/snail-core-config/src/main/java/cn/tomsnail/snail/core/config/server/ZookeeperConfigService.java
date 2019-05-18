@@ -81,7 +81,9 @@ public class ZookeeperConfigService extends AConfigService  {
 			}
 		}
 		ZK_HELPER.writeNode(path, value);
-		if(configChangeListener!=null ) configChangeListener.changed(path, value, ChangeType.add);
+		if(configChangeListener!=null ) {
+			configChangeListener.changed(path, value, ChangeType.add);
+		}
 
 	}
 
@@ -91,16 +93,22 @@ public class ZookeeperConfigService extends AConfigService  {
 		System.out.println("refresh "+path);
 		if(ZK_HELPER.isExtisPath(path)){
 			ZK_HELPER.writeNode(path, value);
-			if(configChangeListener!=null )configChangeListener.changed(path, value, ChangeType.refresh);
+			if(configChangeListener!=null ){
+				configChangeListener.changed(path, value, ChangeType.refresh);
+			}
 		}else{
 			add(key,value);
 		}
 	}
 
 
+	public static void initZK(){
+		ZK_HELPER = ZkHelper.getInstance(ZooKeeperAddress.ZK_ADDRESS);
+	}
+
 	@Override
 	public void initConfigMap() {
-		ZK_HELPER = ZkHelper.getInstance(ZooKeeperAddress.ZK_ADDRESS);
+		initZK();
 		if(cacheMap==null){
 			cacheMap = new HashMap<String, String>();
 		}

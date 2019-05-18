@@ -39,7 +39,7 @@ public class AliyunProvider extends BaseProvider{
 	public OrcResult doPost(OrcContent orcContent) {
 		
 		if(providerConfig==null||orcContent==null){
-			return OrcResult.NullError();
+			return OrcResult.nullError();
 		}
 		
 		HttpApiClient.getInstance().init(providerConfig.getScheme(), providerConfig.getDomain(), providerConfig.getAppKey(), providerConfig.getAppSecret());
@@ -54,7 +54,7 @@ public class AliyunProvider extends BaseProvider{
 		if(orcResult.isSuccess()){
 			orcResult.setResult(JSON.parseObject(new String(apiResponse.getBody() , SdkConstant.CLOUDAPI_ENCODING), Map.class));
 		}else{
-			orcResult.setErrorDesc(StringUtils.join(apiResponse.getHeaders().get("X-Ca-Error-Message"),","));
+			orcResult.setErrorDesc(StringUtils.join(apiResponse.getHeaders().get("X-Ca-error-Message"),","));
 		}
 		
 		return orcResult;
@@ -71,7 +71,8 @@ public class AliyunProvider extends BaseProvider{
 	}
 	
 	public static void main(String[] args) {
-		File file = new File("C:/Users/yangsong/Desktop/idtest.png");
+		String path = "C:/Users/yangsong/Desktop/idtest.png";
+		File file = new File(path);
 		String file_data = "";
 		
 		try {
