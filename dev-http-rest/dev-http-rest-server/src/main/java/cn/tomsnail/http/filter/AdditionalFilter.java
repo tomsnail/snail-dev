@@ -19,7 +19,9 @@ public class AdditionalFilter implements RestfulFilter{
 		
 		BaseContext context = new BaseContext()
 				.addMapValue(BaseContext.USER_UUID, request.getParameter(BaseContext.USER_UUID))
-				.addMapValue(BaseContext.SYSTEM_CODE, request.getParameter(BaseContext.SYSTEM_CODE));
+				.addMapValue(BaseContext.SYSTEM_CODE, request.getParameter(BaseContext.SYSTEM_CODE))
+				.addMapValue("DEPT_CODE", request.getParameter("DEPT_CODE"))
+				.addMapValue("DEPT_SYS_CODE", request.getParameter("DEPT_SYS_CODE"));
 		
 		
 		BaseContextManager.LOCAL_CONTEXT.set(context);
