@@ -24,6 +24,11 @@
     	 <version>${dev.component.version}</version>
   	</dependency>
   	<dependency>
+  		 <groupId>cn.tomsnail</groupId>
+    	 <artifactId>dev-http-client</artifactId>
+    	 <version>${dev.component.version}</version>
+  	</dependency>
+  	<dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
         <version>1.3.3.RELEASE</version>

@@ -21,6 +21,7 @@ public class AdditionalFilter implements RestfulFilter{
 				.addMapValue(BaseContext.USER_UUID, request.getParameter(BaseContext.USER_UUID))
 				.addMapValue(BaseContext.SYSTEM_CODE, request.getParameter(BaseContext.SYSTEM_CODE))
 				.addMapValue("DEPT_CODE", request.getParameter("DEPT_CODE"))
+				.addMapValue("USER_TYPE", request.getParameter("USER_TYPE"))
 				.addMapValue("DEPT_SYS_CODE", request.getParameter("DEPT_SYS_CODE"));
 		
 		
